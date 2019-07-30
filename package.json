@@ -1,0 +1,25 @@
+{
+  "name": "marplacode-web",
+  "version": "0.0.1",
+  "description": "A custom made web design to offer interactive solutions/experiences",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js",
+    "build": "parcel build ./src/index.html",
+    "develop": "parcel ./src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chaucharian/marplacode.git"
+  },
+  "author": "AS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chaucharian/marplacode/issues"
+  },
+  "homepage": "https://github.com/Chaucharian/marplacode#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
