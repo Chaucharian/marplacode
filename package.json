@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Chaucharian/marplacode#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "parcel": "^1.12.3",
+    "parcel-bundler": "^1.12.3"
   }
 }
