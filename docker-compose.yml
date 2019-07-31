@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  marplacode-service:
+  marplacode-web:
     build: .
     volumes:
       - .:/usr/src/app
