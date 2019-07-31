@@ -4,9 +4,9 @@ services:
   marplacode-web:
     build: .
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/dist
-      - /usr/src/app/node_modules
+      - .:/home/node/app
+      - /home/node/app/dist
+      - /home/node/app/node_modules
     ports:
       - 1234:1234
     command: npm start

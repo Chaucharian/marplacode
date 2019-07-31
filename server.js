@@ -1,14 +1,19 @@
 const express = require('express');
-const port = process.env.PORT || 1234;
 const app = express();
-path = require("path");
+const router = express.Router();
+const path = __dirname + '/dist';
+const port = process.env.PORT || 1234;
 
-// the __dirname is the current directory from where the script is running
-app.use(express.static(__dirname + '/dist'));
-
-// send the user to index html page inspite of the url
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/dist/index.html'));
+router.use(function (req,res,next) {
+  console.log('/' + req.method);
+  next();
 });
+
+router.get('/', function(req,res){
+  res.sendFile(path + '/index.html');
+});
+
+app.use(express.static(path));
+app.use('/', router);
 
 app.listen(port, '0.0.0.0',() => console.log(`Serving UI at ${port}!`));
