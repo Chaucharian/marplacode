@@ -1,5 +1,13 @@
 import Matter from 'matter-js'
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+    canvas: {
+        zIndex: -999,
+        position: "absolute"
+    }
+};
 
 class Animation extends Component{
 
@@ -28,9 +36,9 @@ class Animation extends Component{
     }
 
     render() {
-        const { canvasSelector } = this.props;
+        const { canvasSelector, classes } = this.props;
         return (
-            <canvas className={canvasSelector} ></canvas>
+            <canvas className={ classes.canvas +' '+ canvasSelector} ></canvas>
         );
     }
 
@@ -141,4 +149,4 @@ class Animation extends Component{
     }
 }
 
-export default Animation;
+export default withStyles(styles)(Animation);

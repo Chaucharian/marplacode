@@ -16,11 +16,7 @@ const styles = {
         "& p": {
             fontFamily: 'Shadows Into Light, cursive',
             color: "white"
-        },
-        "& canvas": {
-            zIndex: -999,
-            position: "absolute"
-        }  
+        }
     },
     content: {
         display: 'block',
