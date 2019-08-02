@@ -91,16 +91,16 @@ class Animation extends Component{
             const y = event.accelerationIncludingGravity.y;
             // determing key by measuring aceleration axis
             if(x >= 0.5) {
-                engine.world.gravity.x = 1;
-            } else if(x <= -0.5) {
                 engine.world.gravity.x = -1;
+            } else if(x <= -0.5) {
+                engine.world.gravity.x = 1;
             } else {
                 engine.world.gravity.y = 0;
             }
             if(y >= 0.5) {
-                engine.world.gravity.y = -1;
-            } else if(y <= -0.5) {
                 engine.world.gravity.y = 1;
+            } else if(y <= -0.5) {
+                engine.world.gravity.y = -1;
             } else {
                 engine.world.gravity.y = 0;
             }
