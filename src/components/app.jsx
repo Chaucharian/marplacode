@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
 import Animation from './animation';
+import MarplaCodeSVG from './marplacodeSvg';
 
 const styles = {
     app: {
       display: 'flex',
+      height: '100%',
         "& h1": {
             display: "inline",
             height: "100%",
@@ -19,8 +21,11 @@ const styles = {
         }
     },
     content: {
-        display: 'block',
+        display: 'flex',
         width: "100%",
+        height: '100%',
+        flexDirection: 'column',
+        justifyContent: 'center',
         textAlign: 'center'
     },
 };  
@@ -35,8 +40,8 @@ class App extends Component {
         return (
             <div className={ classes.app } >
                 <div className={ classes.content } >
-                    <h1>MARPLACODE</h1>
-                    <p>Site still under construction. Meanwhile, play with this!</p>
+                    <MarplaCodeSVG></MarplaCodeSVG>
+                    <p>We bring interactiveness to the web.</p>
                 </div>
                 <Animation canvasSelector="mainAnimation"></Animation>
             </div>

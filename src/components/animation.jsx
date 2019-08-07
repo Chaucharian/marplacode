@@ -51,7 +51,8 @@ class Animation extends Component{
         Composites = Matter.Composites,
         Common = Matter.Common,
         World = Matter.World,
-        Bodies = Matter.Bodies;
+        Bodies = Matter.Bodies,
+        Events = Matter.Events;
 
         // create engine
         var engine = Engine.create(),
@@ -122,23 +123,11 @@ class Animation extends Component{
         });
         
         World.add(world, stack);
-
-        // // add mouse control
-        // var mouse = Mouse.create(render.canvas),
-        //     mouseConstraint = MouseConstraint.create(engine, {
-        //         mouse: mouse,
-        //         constraint: {
-        //             stiffness: 0.2,
-        //             render: {
-        //                 visible: false
-        //             }
-        //         }
-        //     });
-
-        // World.add(world, mouseConstraint);
-
-        // // keep the mouse in sync with rendering
-        // render.mouse = mouse;
+        
+        Events.on(runner, "afterTick", () => {
+            // world.composites[0].bodies[0].position.x
+            
+        });
 
         // fit the render viewport to the scene
         Render.lookAt(render, {
