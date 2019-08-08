@@ -14,10 +14,6 @@ const styles = {
             padding: "0px",
             color: "white",
             fontFamily: 'Abril Fatface, cursive'
-        },
-        "& p": {
-            fontFamily: 'Shadows Into Light, cursive',
-            color: "white"
         }
     },
     content: {
@@ -26,8 +22,11 @@ const styles = {
         height: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
-        textAlign: 'center'
-    },
+        textAlign: 'center',
+        "& svg > g": {
+            fill:'#000'
+        }
+    }
 };  
 
 class App extends Component {
@@ -41,7 +40,6 @@ class App extends Component {
             <div className={ classes.app } >
                 <div className={ classes.content } >
                     <MarplaCodeSVG></MarplaCodeSVG>
-                    <p>We bring interactiveness to the web.</p>
                 </div>
                 <Animation canvasSelector="mainAnimation"></Animation>
             </div>

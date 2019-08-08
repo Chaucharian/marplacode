@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
+    content: {
+        position: 'absolute',
+        display: 'flex',
+        '& p': {
+            margin: '0px',
+            color: 'white'
+        },
+        '& #first-smooke': { fontFamily: 'Fredericka the Great, cursive', fontSize: '25px' },
+        '& #second-smooke': { fontFamily: 'Cormorant, serif', fontSize: '15px' },
+        '& #third-smooke': { fontFamily: 'Belleza, sans-serif', fontSize: '30px' },
+        '& #fourth-smooke': { fontFamily: 'Gilda Display, serif', fontSize: '27px' }
+    },
     canvas: {
         zIndex: -999,
         position: "absolute"
@@ -38,14 +50,26 @@ class Animation extends Component{
     render() {
         const { canvasSelector, classes } = this.props;
         return (
-            <canvas className={ classes.canvas +' '+ canvasSelector} ></canvas>
+            <div className={ classes.content }>
+                <p id="first-smooke" >New web experiences</p>
+                <p id="second-smooke" >Innovation</p>
+                <p id="third-smooke" >User Experience</p>
+                <p id="fourth-smooke" >Top quality websites</p>
+                <canvas className={ classes.canvas +' '+ canvasSelector} ></canvas>
+            </div>
         );
     }
 
     initialize(width, height) {
         const { canvasSelector } = this.props;
+        const firstSmooke = document.getElementById('first-smooke');
+        const secondSmooke = document.getElementById('second-smooke');
+        const thirdSmooke = document.getElementById('third-smooke');
+        const fourthSmooke = document.getElementById('fourth-smooke');
 
-        var Engine = Matter.Engine,
+        document.querySelector('canvas').style.backgroundColor = 'rgb(12, 12, 12)'; // painting canvas since we just emulate physics not painting its bodies
+
+        const Engine = Matter.Engine,
         Render = Matter.Render,
         Runner = Matter.Runner,
         Composites = Matter.Composites,
@@ -55,7 +79,7 @@ class Animation extends Component{
         Events = Matter.Events;
 
         // create engine
-        var engine = Engine.create(),
+        const engine = Engine.create(),
             world = engine.world;
 
         // create renderer
@@ -65,23 +89,47 @@ class Animation extends Component{
             options: {
                 width: width,
                 height: height,
-                showVelocity: true,
-                showAngleIndicator: true
+                /*hasBounds: false,
+                enabled: false,
+                wireframes: false,
+                showSleeping: false,
+                showDebug: false,
+                showBroadphase: false,
+                showBounds: false,
+                showVelocity: false,
+                showCollisions: false,
+                showSeparations: false,
+                showAxes: false,
+                showPositions: false,
+                showAngleIndicator: false,
+                showIds: false,
+                showShadows: false,
+                showVertexNumbers: false,
+                showConvexHulls: false,
+                showInternalEdges: false,
+                showMousePosition: false*/
             }
         });
 
-        Render.run(render);
+//        Render.run(render);
 
         // create runner
-        var runner = Runner.create();
+        const runner = Runner.create();
         Runner.run(runner, engine);
 
+        const rest = 0.9;
         // add screen borders
         World.add(world, [
-            Bodies.rectangle(width/ 2, -50, 1000, 50, { isStatic: true }),
-            Bodies.rectangle(width / 2, height + 50, 900, 50.5, { isStatic: true }),
-            Bodies.rectangle(width + 50, 300, 50, 600, { isStatic: true }),
-            Bodies.rectangle(- 50, 300, 50, 600, { isStatic: true })
+            Bodies.rectangle(width/ 2, 100, width, 50, { isStatic: true }),
+            Bodies.rectangle(width / 2, height - 50, width, 50, { isStatic: true }),
+            Bodies.rectangle(width - 50, height / 2, 50, height, { isStatic: true }),
+            Bodies.rectangle(50, height / 2, 50, height, { isStatic: true }),
+
+            Bodies.rectangle( width / 2, height / 2, 50, 10,  { restitution:  rest }),
+            Bodies.rectangle( width / 2 + 50, height / 2, 50, 10, { restitution:  rest }),
+            Bodies.rectangle( width / 2 - 50, height / 2, 50, 10, { restitution:  rest }),
+            Bodies.rectangle( width / 2, height / 2 + 50, 50, 10, { restitution:  rest }),
+
         ]);
 
         
@@ -106,34 +154,23 @@ class Animation extends Component{
                 engine.world.gravity.y = 0;
             }
         }, false);
-
-        var stack = Composites.stack(10, 40, 5, 3, 0, 0, function(x, y) {
-            switch (Math.round(Common.random(0, 1))) {
-
-            case 0:
-                if (Common.random() < 0.8) {
-                    return Bodies.rectangle(x, y, Common.random(20, 50), Common.random(20, 50));
-                } else {
-                    return Bodies.rectangle(x, y, Common.random(80, 120), Common.random(20, 30));
-                }
-            case 1:
-                return Bodies.polygon(x, y, Math.round(Common.random(1, 8)), Common.random(20, 50));
-
-            }
-        });
-        
-        World.add(world, stack);
         
         Events.on(runner, "afterTick", () => {
             // world.composites[0].bodies[0].position.x
-            
+            // To degrees world.composites[0].bodies[0].angle * 180 / Math.PI 
+
+            firstSmooke.style.transform = 'translate('+  world.bodies[4].position.x +'px'+','+ world.bodies[4].position.y +'px) rotate('+  world.bodies[4].angle * 180 / Math.PI +'deg)';
+            secondSmooke.style.transform = 'translate('+  world.bodies[5].position.x +'px'+','+ world.bodies[5].position.y +'px) rotate('+  world.bodies[5].angle * 180 / Math.PI +'deg)';
+            thirdSmooke.style.transform = 'translate('+  world.bodies[6].position.x +'px'+','+ world.bodies[6].position.y +'px) rotate('+  world.bodies[6].angle * 180 / Math.PI +'deg)';
+            fourthSmooke.style.transform = 'translate('+  world.bodies[7].position.x +'px'+','+ world.bodies[7].position.y +'px) rotate('+  world.bodies[7].angle * 180 / Math.PI +'deg)';
+
         });
 
         // fit the render viewport to the scene
-        Render.lookAt(render, {
+        /*Render.lookAt(render, {
             min: { x: 0, y: 0 },
             max: { x: width, y: height }
-        });
+        });*/
 
     }
 }
