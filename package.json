@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Chaucharian/marplacode#readme",
   "dependencies": {
+    "@material-ui/core": "^4.3.1",
     "@material-ui/styles": "^4.3.0",
     "animejs": "^3.1.0",
     "express": "^4.17.1",

@@ -10,7 +10,7 @@ const styles = {
             margin: '0px',
             color: 'white'
         },
-        '& #first-smooke': { fontFamily: 'Fredericka the Great, cursive', fontSize: '25px' },
+        '& #first-smooke': { fontFamily: 'Belleza, sans-serif', fontSize: '25px' },
         '& #second-smooke': { fontFamily: 'Cormorant, serif', fontSize: '15px' },
         '& #third-smooke': { fontFamily: 'Belleza, sans-serif', fontSize: '30px' },
         '& #fourth-smooke': { fontFamily: 'Gilda Display, serif', fontSize: '27px' }
@@ -52,9 +52,6 @@ class Animation extends Component{
         return (
             <div className={ classes.content }>
                 <p id="first-smooke" >New web experiences</p>
-                <p id="second-smooke" >Innovation</p>
-                <p id="third-smooke" >User Experience</p>
-                <p id="fourth-smooke" >Top quality websites</p>
                 <canvas className={ classes.canvas +' '+ canvasSelector} ></canvas>
             </div>
         );
@@ -120,16 +117,15 @@ class Animation extends Component{
         const rest = 0.9;
         // add screen borders
         World.add(world, [
-            Bodies.rectangle(width/ 2, 100, width, 50, { isStatic: true }),
-            Bodies.rectangle(width / 2, height - 50, width, 50, { isStatic: true }),
-            Bodies.rectangle(width - 50, height / 2, 50, height, { isStatic: true }),
-            Bodies.rectangle(50, height / 2, 50, height, { isStatic: true }),
+            Bodies.rectangle(width/ 2, - 50, width, 50, { isStatic: true }),
+            Bodies.rectangle(width / 2, height + 50, width, 50, { isStatic: true }),
+            Bodies.rectangle(width + 50, height / 2, 50, height, { isStatic: true }),
+            Bodies.rectangle(-50, height / 2, 50, height, { isStatic: true }),
 
             Bodies.rectangle( width / 2, height / 2, 50, 10,  { restitution:  rest }),
             Bodies.rectangle( width / 2 + 50, height / 2, 50, 10, { restitution:  rest }),
             Bodies.rectangle( width / 2 - 50, height / 2, 50, 10, { restitution:  rest }),
             Bodies.rectangle( width / 2, height / 2 + 50, 50, 10, { restitution:  rest }),
-
         ]);
 
         
