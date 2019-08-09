@@ -5,14 +5,13 @@ import { withStyles } from '@material-ui/styles';
 const styles = { 
     svgContainer: {
         '& svg': { fill: '#000' },
-        "& svg @media only screen and (max-width: 768px)": {
-            width: '300px'
-        }
+        '& svg > g': { fill: '#000' }
     },
     mainSmookeText: {
-        transition: 'color 2s ',//cubic-bezier(0.19, 1, 0.22, 1)',
+        transition: 'color 2s ',
         color: '#000',
-        fontFamily: 'Belleza, sans-serif', 
+        fontFamily: 'Playfair Display, regular',
+        fontStyle: 'italic', 
         fontSize: '20px'
     }
 };  

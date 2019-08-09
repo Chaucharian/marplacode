@@ -7,14 +7,7 @@ const styles = {
     app: {
       display: 'flex',
       height: '100%',
-        "& h1": {
-            display: "inline",
-            height: "100%",
-            margin: "0px",
-            padding: "0px",
-            color: "white",
-            fontFamily: 'Abril Fatface, cursive'
-        }
+      backgroundColor: '#000'
     },
     content: {
         display: 'flex',
@@ -22,10 +15,7 @@ const styles = {
         height: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
-        textAlign: 'center',
-        "& svg > g": {
-            fill:'#000'
-        }
+        textAlign: 'center'
     }
 };  
 
@@ -41,7 +31,6 @@ class App extends Component {
                 <div className={ classes.content } >
                     <MarplaCodeSVG></MarplaCodeSVG>
                 </div>
-                <Animation canvasSelector="mainAnimation"></Animation>
             </div>
         );
     }
