@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
 import Animation from './animation';
 import MarplaCodeSVG from './marplacodeSvg';
+import { MorphIcon } from 'react-svg-buttons';
 
 const styles = {
     app: {
@@ -16,6 +17,12 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center'
+    },
+    arrow: {
+        '& svg': {
+            transition: 'all 1s', 
+            '&:hover' : { transform: 'translateY(20px)' }
+        }
     }
 };  
 
@@ -29,7 +36,10 @@ class App extends Component {
         return (
             <div className={ classes.app } >
                 <div className={ classes.content } >
-                    <MarplaCodeSVG></MarplaCodeSVG>
+                    <MarplaCodeSVG  ></MarplaCodeSVG>
+                    <div className={ classes.arrowContent } >
+                        <MorphIcon className={ classes.arrow } color="#FFF" type="arrowDown" />
+                    </div>
                 </div>
             </div>
         );

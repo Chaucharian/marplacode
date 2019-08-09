@@ -44,7 +44,7 @@ class MarplaCodeSVG extends Component {
 
         if(width >= 1200) {
             width = 600;
-        } else if(width <= 630) {
+        } else if(width <= 720) {
             width = 450;
         }
         return (

@@ -28,6 +28,7 @@
     "parcel": "^1.12.3",
     "parcel-bundler": "^1.12.3",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "react-svg-buttons": "^0.4.0"
   }
 }
