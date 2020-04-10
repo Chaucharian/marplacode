@@ -4,8 +4,7 @@
   "description": "A custom made web design to offer interactive solutions/experiences",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server.js",
+    "start": "pm2 start ./server.js --watch",
     "build": "parcel build ./src/index.html",
     "develop": "parcel ./src/index.html"
   },
