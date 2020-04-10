@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const port = process.env.PORT || 1234;
+const port = process.env.PORT || 8080;
 
 router.use((req,res,next) => {
   console.log('/' + req.method);
