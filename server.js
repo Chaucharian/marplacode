@@ -10,6 +10,7 @@ router.use((req,res,next) => {
 
 app.use(express.static('dist'));
 app.use('/examples', express.static('examples'));
+app.use('/not-gamp-machine', express.static('not-gamp-machine/dist'));
 app.use('/', router);
 
 app.listen(port, '0.0.0.0',() => console.log(`Serving UI at ${port}!`));
