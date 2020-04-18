@@ -81329,6 +81329,12 @@ var ShinyButton = function ShinyButton(props) {
     },
     onMouseUp: function onMouseUp() {
       return onClickUp && onClickUp();
+    },
+    onTouchStart: function onTouchStart() {
+      return onClick && onClick();
+    },
+    onTouchEnd: function onTouchEnd() {
+      return onClickUp && onClickUp();
     }
   }, /*#__PURE__*/_react.default.createElement("div", null, text && /*#__PURE__*/_react.default.createElement("a", null, text), icon, /*#__PURE__*/_react.default.createElement("div", {
     className: "mask"
@@ -95303,11 +95309,11 @@ exports.default = void 0;
 
 var _howler = require("howler");
 
-var _ambiente = _interopRequireDefault(require("./sounds/ambiente.mp3"));
+var _ambiente = _interopRequireDefault(require("/sounds/ambiente.mp3"));
 
-var _fuego = _interopRequireDefault(require("./sounds/fuego.mp3"));
+var _fuego = _interopRequireDefault(require("/sounds/fuego.mp3"));
 
-var _naturaleza = _interopRequireDefault(require("./sounds/naturaleza.mp3"));
+var _naturaleza = _interopRequireDefault(require("/sounds/naturaleza.mp3"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -95366,7 +95372,7 @@ var Sound = function Sound(x, y, soundPath) {
 
 var _default = Sound;
 exports.default = _default;
-},{"howler":"../node_modules/howler/dist/howler.js","./sounds/ambiente.mp3":"sounds/ambiente.mp3","./sounds/fuego.mp3":"sounds/fuego.mp3","./sounds/naturaleza.mp3":"sounds/naturaleza.mp3"}],"worldGame.js":[function(require,module,exports) {
+},{"howler":"../node_modules/howler/dist/howler.js","/sounds/ambiente.mp3":"sounds/ambiente.mp3","/sounds/fuego.mp3":"sounds/fuego.mp3","/sounds/naturaleza.mp3":"sounds/naturaleza.mp3"}],"worldGame.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -95456,13 +95462,17 @@ var WorldGame = function WorldGame(dispatcher) {
         });
       });
     }, false);
-    window.addEventListener('touchstart', function (_ref2) {
+    canvas.addEventListener('touchstart', function (_ref2) {
       var _ref2$touches = _slicedToArray(_ref2.touches, 1),
           _ref2$touches$ = _ref2$touches[0],
           clientX = _ref2$touches$.clientX,
           clientY = _ref2$touches$.clientY;
 
-      addAudio(clientX, clientY);
+      dispatcher.next(function (callback) {
+        return callback.then(function (data) {
+          addAudio(clientX, clientY, data);
+        });
+      });
     }, false);
   }; // create engine
 
@@ -102590,7 +102600,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55464" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61794" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
