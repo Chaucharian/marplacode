@@ -81434,7 +81434,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _styles = require("@material-ui/core/styles");
 
@@ -81447,6 +81447,22 @@ var _shinyButton = _interopRequireDefault(require("./shinyButton"));
 var _recordingButton = _interopRequireDefault(require("./recordingButton"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -81509,18 +81525,34 @@ var CustomModal = function CustomModal(_ref) {
   var open = _ref.open,
       title = _ref.title,
       content = _ref.content,
-      onAction = _ref.onAction,
-      onStartRecording = _ref.onStartRecording,
-      onStopRecording = _ref.onStopRecording;
+      onAction = _ref.onAction;
   var classes = useStyles();
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      selectionEnabled = _useState2[0],
+      enableSelection = _useState2[1];
+
+  var onActionHandler = function onActionHandler(action) {
+    return selectionEnabled && onAction(action);
+  };
+
+  (0, _react.useEffect)(function () {
+    // avoiding fast clicking
+    if (open) {
+      setTimeout(function () {
+        enableSelection(true);
+      }, 500);
+    } else {
+      enableSelection(false);
+    }
+  }, [open]);
   return /*#__PURE__*/_react.default.createElement(_core.Modal, {
     "aria-labelledby": "spring-modal-title",
     "aria-describedby": "spring-modal-description",
     className: classes.modal,
-    open: open,
-    onClose: function onClose() {
-      return onAction("close");
-    },
+    open: open // onClose={() => onAction("close")}
+    ,
     closeAfterTransition: true,
     BackdropComponent: _core.Backdrop,
     BackdropProps: {
@@ -81536,30 +81568,15 @@ var CustomModal = function CustomModal(_ref) {
     id: "spring-modal-description"
   }, content), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_recordingButton.default, {
     onClick: function onClick() {
-      return onAction("startRecording");
+      return onActionHandler("startRecording");
     },
     onClickUp: function onClickUp() {
       return onAction("stopRecording");
     }
   }), /*#__PURE__*/_react.default.createElement(_shinyButton.default, {
-    text: "Naturaleza",
-    onClick: function onClick() {
-      return onAction("Nature");
-    }
-  }), /*#__PURE__*/_react.default.createElement(_shinyButton.default, {
-    text: "Fuego",
-    onClick: function onClick() {
-      return onAction("Fire");
-    }
-  }), /*#__PURE__*/_react.default.createElement(_shinyButton.default, {
-    text: "Ambiente",
-    onClick: function onClick() {
-      return onAction("Ambient");
-    }
-  }), /*#__PURE__*/_react.default.createElement(_shinyButton.default, {
     text: "CERRAR",
     onClick: function onClick() {
-      return onAction("close");
+      return onActionHandler("close");
     }
   })))));
 };
@@ -81586,7 +81603,7 @@ var _default = function _default() {
       });
 
       var start = function start() {
-        mediaRecorder.start();
+        mediaRecorder.state === 'inactive' && mediaRecorder.start();
       };
 
       var stop = function stop() {
@@ -81606,7 +81623,7 @@ var _default = function _default() {
               play: play
             });
           });
-          mediaRecorder.stop();
+          mediaRecorder.state !== 'inactive' && mediaRecorder.stop();
         });
       };
 
@@ -81671,6 +81688,7 @@ var App = function App(_ref) {
 
   var onModalHandler = function onModalHandler(action) {
     if (action === 'close') {
+      modalResponse.resolve(action);
       showModal(false);
     } else if (action === 'startRecording') {
       audioRecorder.start();
@@ -81711,7 +81729,7 @@ var App = function App(_ref) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_modal.default, {
     open: isModalOpen,
-    title: "Graba un audio o elige una pista" // content={ "testing" }
+    title: "Manten presionado el microfono y graba una pista" // content={ "testing" }
     ,
     onAction: onModalHandler
   });
@@ -95451,14 +95469,19 @@ var WorldGame = function WorldGame(dispatcher) {
     }
   };
 
-  var loadListeners = function loadListeners(canvas) {
+  var loadListeners = function loadListeners(canvas, start, stop) {
     window.addEventListener('deviceorientation', updateGravity, false);
     canvas.addEventListener('mousedown', function (_ref) {
       var clientX = _ref.clientX,
           clientY = _ref.clientY;
+      stop();
       dispatcher.next(function (callback) {
         return callback.then(function (data) {
-          addAudio(clientX, clientY, data);
+          start();
+
+          if (data !== 'close') {
+            addAudio(clientX, clientY, data);
+          }
         });
       });
     }, false);
@@ -95468,9 +95491,14 @@ var WorldGame = function WorldGame(dispatcher) {
           clientX = _ref2$touches$.clientX,
           clientY = _ref2$touches$.clientY;
 
+      stop();
       dispatcher.next(function (callback) {
         return callback.then(function (data) {
-          addAudio(clientX, clientY, data);
+          start();
+
+          if (data !== 'close') {
+            addAudio(clientX, clientY, data);
+          }
         });
       });
     }, false);
@@ -95491,7 +95519,6 @@ var WorldGame = function WorldGame(dispatcher) {
     }
   });
 
-  loadListeners(render.canvas);
   var player = new _player.default(_matterJs.Bodies.circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20, {
     label: "player"
   }));
@@ -95549,33 +95576,34 @@ var WorldGame = function WorldGame(dispatcher) {
       x: SCREEN_WIDTH,
       y: SCREEN_HEIGHT
     }
-  }); // context for MatterTools.Demo
-  // setTimeout( () => onModalHandler(), 2000);
+  });
 
+  var start = function start() {
+    _matterJs.default.Render.run(render);
 
+    _matterJs.default.Runner.run(runner, engine);
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('deviceorientation', updateGravity);
+    }
+  };
+
+  var stop = function stop() {
+    _matterJs.default.Render.stop(render);
+
+    _matterJs.default.Runner.stop(runner);
+
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('deviceorientation', updateGravity);
+    }
+  };
+
+  loadListeners(render.canvas, start, stop);
   return {
     engine: engine,
     runner: runner,
     render: render,
-    canvas: render.canvas,
-    start: function start() {
-      _matterJs.default.Render.run(render);
-
-      _matterJs.default.Runner.run(runner, engine);
-
-      if (typeof window !== 'undefined') {
-        window.addEventListener('deviceorientation', updateGravity);
-      }
-    },
-    stop: function stop() {
-      _matterJs.default.Render.stop(render);
-
-      _matterJs.default.Runner.stop(runner);
-
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('deviceorientation', updateGravity);
-      }
-    }
+    canvas: render.canvas
   };
 };
 
@@ -102600,7 +102628,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61794" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
