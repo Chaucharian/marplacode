@@ -81710,11 +81710,17 @@ var state = {
   modalResponse: false,
   audioRecorder: false,
   showModal: false,
-  currentStep: 'INITIAL'
+  currentStep: 'INITIAL',
+  loading: false
 };
 
 var reducer = function reducer(state, action) {
   switch (action.type) {
+    case 'LOADING':
+      return _objectSpread({}, state, {
+        loading: action.payload
+      });
+
     case 'SET_MODAL_RESPONSE':
       return _objectSpread({}, state, {
         modalResponse: action.payload
@@ -81744,12 +81750,11 @@ var App = function App(_ref) {
       _useReducer2 = _slicedToArray(_useReducer, 2),
       _useReducer2$ = _useReducer2[0],
       showModal = _useReducer2$.showModal,
+      loading = _useReducer2$.loading,
       modalResponse = _useReducer2$.modalResponse,
       audioRecorder = _useReducer2$.audioRecorder,
       currentStep = _useReducer2$.currentStep,
       dispatch = _useReducer2[1];
-
-  console.log("statee ", state);
 
   var onModalHandler = function onModalHandler(action) {
     if (action === 'close') {
@@ -81781,23 +81786,31 @@ var App = function App(_ref) {
   var viewToRender = function viewToRender() {
     var view = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
 
-    if (currentStep === 'MOBILE_NEEDED') {
+    if (!loading) {
+      if (currentStep === 'MOBILE_NEEDED') {
+        view = /*#__PURE__*/_react.default.createElement(_modal.default, {
+          open: showModal,
+          title: "Esta experiencia esta dise\xF1ada para celulares",
+          content: "Por favor abrela desde uno \uD83D\uDCF1",
+          onAction: onModalHandler
+        });
+      } else if (currentStep === 'BETTER_DEVICE_NEEDED_BARAT') {
+        view = /*#__PURE__*/_react.default.createElement(_modal.default, {
+          open: showModal,
+          title: "A tu dispositivo le falta papa!",
+          onAction: onModalHandler
+        });
+      } else if (currentStep === 'RECORD_AUDIO') {
+        view = /*#__PURE__*/_react.default.createElement(_recordingModal.default, {
+          open: showModal,
+          title: "Manten presionado el microfono y graba una pista",
+          onAction: onModalHandler
+        });
+      }
+    } else {
       view = /*#__PURE__*/_react.default.createElement(_modal.default, {
         open: showModal,
-        title: "Esta experiencia esta dise\xF1ada para celulares",
-        content: "Por favor abrela desde uno \uD83D\uDCF1",
-        onAction: onModalHandler
-      });
-    } else if (currentStep === 'BETTER_DEVICE_NEEDED_BARAT') {
-      view = /*#__PURE__*/_react.default.createElement(_modal.default, {
-        open: showModal,
-        title: "A tu dispositivo le falta papa!",
-        onAction: onModalHandler
-      });
-    } else if (currentStep === 'RECORD_AUDIO') {
-      view = /*#__PURE__*/_react.default.createElement(_recordingModal.default, {
-        open: showModal,
-        title: "Manten presionado el microfono y graba una pista",
+        title: "LOADING...",
         onAction: onModalHandler
       });
     }
@@ -81810,15 +81823,28 @@ var App = function App(_ref) {
       next: function next(_ref3) {
         var callback = _ref3.callback,
             action = _ref3.action;
+        console.log(action);
+        dispatch({
+          type: "LOADING",
+          payload: false
+        });
 
         if (action === "MOBILE_NEEDED") {
+          dispatch({
+            type: "SHOW_MODAL",
+            payload: true
+          });
           dispatch({
             type: "CHANGE_STEP",
             payload: action
           });
         } else if (action === "RECORD_AUDIO") {
           dispatch({
-            type: "RECORD_AUDIO",
+            type: "SHOW_MODAL",
+            payload: true
+          });
+          dispatch({
+            type: "CHANGE_STEP",
             payload: action
           });
           (0, _audioRecording.default)().then(function (_ref4) {
@@ -81826,7 +81852,7 @@ var App = function App(_ref) {
                 stop = _ref4.stop;
             dispatch({
               type: 'INSTANCE_AUDIO_RECORDER',
-              paylaod: {
+              payload: {
                 start: start,
                 stop: stop
               }
@@ -81848,12 +81874,25 @@ var App = function App(_ref) {
             type: "CHANGE_STEP",
             payload: action
           });
+          dispatch({
+            type: "SHOW_MODAL",
+            payload: true
+          });
+        } else if (action === "LOADING") {
+          dispatch({
+            type: "LOADING",
+            payload: true
+          });
+          dispatch({
+            type: "SHOW_MODAL",
+            payload: true
+          });
+        } else if (action === "PLAY") {
+          dispatch({
+            type: "SHOW_MODAL",
+            payload: false
+          });
         }
-
-        dispatch({
-          type: "SHOW_MODAL",
-          payload: true
-        });
       }
     });
   }, []);
@@ -95553,218 +95592,225 @@ var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;
 
 var WorldGame = function WorldGame(dispatcher) {
-  var randomRgba = function randomRgba() {
-    var o = Math.round,
-        r = Math.random,
-        s = 255;
-    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+  var deviceValidation = function deviceValidation() {
+    return new Promise(function (resolve, reject) {
+      window.addEventListener('deviceorientation', function (event) {
+        var gamma = event.gamma,
+            beta = event.beta;
+        var gyroPresent = gamma || beta;
+
+        var isMobile = function (a) {
+          if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) return true;
+        }(navigator.userAgent || navigator.vendor || window.opera);
+
+        if (isMobile) {
+          if (gyroPresent) {
+            resolve("PLAY");
+          } else {
+            reject("BETTER_DEVICE_NEEDED_BARAT");
+          }
+        } else {
+          reject("MOBILE_NEEDED");
+        }
+      }, false);
+    });
   };
 
-  var addAudio = function addAudio(x, y, sound) {
-    new _sound.default(x, y, sound);
-
-    _matterJs.World.add(world, _matterJs.Bodies.circle(x, y, 20, {
-      label: "audio",
-      isStatic: true,
-      collisionFilter: {
-        category: null
-      },
-      render: {
-        fillStyle: "".concat(randomRgba())
-      }
-    }));
-  };
-
-  var updateGravity = function updateGravity(event) {
-    var orientation = typeof window.orientation !== 'undefined' ? window.orientation : 0,
-        gravity = engine.world.gravity;
-
-    if (event.beta || event.gamma) {
-      window.gyroPresent = true;
-    }
-
-    if (orientation === 0) {
-      gravity.x = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
-      gravity.y = _matterJs.Common.clamp(event.beta, -90, 90) / 90;
-    } else if (orientation === 180) {
-      gravity.x = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
-      gravity.y = _matterJs.Common.clamp(-event.beta, -90, 90) / 90;
-    } else if (orientation === 90) {
-      gravity.x = _matterJs.Common.clamp(event.beta, -90, 90) / 90;
-      gravity.y = _matterJs.Common.clamp(-event.gamma, -90, 90) / 90;
-    } else if (orientation === -90) {
-      gravity.x = _matterJs.Common.clamp(-event.beta, -90, 90) / 90;
-      gravity.y = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
-    }
-  };
-
-  var loadListeners = function loadListeners(canvas, start, stop) {
-    window.addEventListener('deviceorientation', updateGravity, false);
-    canvas.addEventListener('mousedown', function (_ref) {
-      var clientX = _ref.clientX,
-          clientY = _ref.clientY;
-      stop();
-      dispatcher.next({
-        callback: function callback(_callback) {
-          return _callback.then(function (data) {
-            start();
-
-            if (data !== 'close') {
-              addAudio(clientX, clientY, data);
-            }
-          });
-        },
-        action: "RECORD_AUDIO"
-      });
-    }, false);
-    canvas.addEventListener('touchstart', function (_ref2) {
-      var _ref2$touches = _slicedToArray(_ref2.touches, 1),
-          _ref2$touches$ = _ref2$touches[0],
-          clientX = _ref2$touches$.clientX,
-          clientY = _ref2$touches$.clientY;
-
-      stop();
-      dispatcher.next({
-        callback: function callback(_callback2) {
-          return _callback2.then(function (data) {
-            start();
-
-            if (data !== 'close') {
-              addAudio(clientX, clientY, data);
-            }
-          });
-        },
-        action: "RECORD_AUDIO"
-      });
-    }, false);
-
-    window.mobileCheck = function () {
-      var check = false;
-
-      (function (a) {
-        if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
-      })(navigator.userAgent || navigator.vendor || window.opera);
-
-      return check;
+  var createWorld = function createWorld() {
+    var randomRgba = function randomRgba() {
+      var o = Math.round,
+          r = Math.random,
+          s = 255;
+      return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
     };
-  }; // create engine
+
+    var addAudio = function addAudio(x, y, sound) {
+      new _sound.default(x, y, sound);
+
+      _matterJs.World.add(world, _matterJs.Bodies.circle(x, y, 20, {
+        label: "audio",
+        isStatic: true,
+        collisionFilter: {
+          category: null
+        },
+        render: {
+          fillStyle: "".concat(randomRgba())
+        }
+      }));
+    };
+
+    var updateGravity = function updateGravity(event) {
+      var orientation = typeof window.orientation !== 'undefined' ? window.orientation : 0,
+          gravity = engine.world.gravity;
+
+      if (orientation === 0) {
+        gravity.x = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
+        gravity.y = _matterJs.Common.clamp(event.beta, -90, 90) / 90;
+      } else if (orientation === 180) {
+        gravity.x = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
+        gravity.y = _matterJs.Common.clamp(-event.beta, -90, 90) / 90;
+      } else if (orientation === 90) {
+        gravity.x = _matterJs.Common.clamp(event.beta, -90, 90) / 90;
+        gravity.y = _matterJs.Common.clamp(-event.gamma, -90, 90) / 90;
+      } else if (orientation === -90) {
+        gravity.x = _matterJs.Common.clamp(-event.beta, -90, 90) / 90;
+        gravity.y = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
+      }
+    };
+
+    var loadListeners = function loadListeners(canvas, start, stop) {
+      window.addEventListener('deviceorientation', updateGravity, false);
+      canvas.addEventListener('mousedown', function (_ref) {
+        var clientX = _ref.clientX,
+            clientY = _ref.clientY;
+        stop();
+        dispatcher.next({
+          callback: function callback(_callback) {
+            return _callback.then(function (data) {
+              start();
+
+              if (data !== 'close') {
+                addAudio(clientX, clientY, data);
+              }
+            });
+          },
+          action: "RECORD_AUDIO"
+        });
+      }, false);
+      canvas.addEventListener('touchstart', function (_ref2) {
+        var _ref2$touches = _slicedToArray(_ref2.touches, 1),
+            _ref2$touches$ = _ref2$touches[0],
+            clientX = _ref2$touches$.clientX,
+            clientY = _ref2$touches$.clientY;
+
+        stop();
+        dispatcher.next({
+          callback: function callback(_callback2) {
+            return _callback2.then(function (data) {
+              start();
+
+              if (data !== 'close') {
+                addAudio(clientX, clientY, data);
+              }
+            });
+          },
+          action: "RECORD_AUDIO"
+        });
+      }, false);
+    }; // create engine
 
 
-  var engine = _matterJs.Engine.create(),
-      world = engine.world; // create renderer
+    var engine = _matterJs.Engine.create(),
+        world = engine.world;
+
+    var runner = _matterJs.Runner.create(); // create renderer
 
 
-  var render = _matterJs.Render.create({
-    element: document.body,
-    engine: engine,
-    options: {
-      width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT,
-      wireframes: false
-    }
-  });
+    var render = _matterJs.Render.create({
+      element: document.body,
+      engine: engine,
+      options: {
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT,
+        wireframes: false
+      }
+    });
 
-  var player = new _player.default(_matterJs.Bodies.circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20, {
-    label: "player"
-  }));
+    var player = new _player.default(_matterJs.Bodies.circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20, {
+      label: "player"
+    }));
 
-  _matterJs.Render.run(render); // create runner
+    _matterJs.Render.run(render);
+
+    _matterJs.Runner.run(runner, engine);
+
+    _matterJs.World.add(world, player.getBody());
+
+    _matterJs.Events.on(engine, 'beforeTick', function (event) {
+      var world = event.source.world;
+      var bodies = world.bodies;
+
+      var _player$getPosition = player.getPosition(),
+          playerX = _player$getPosition.x,
+          playerY = _player$getPosition.y;
+
+      if (playerX >= SCREEN_WIDTH) {
+        _matterJs.Body.setPosition(player.getBody(), {
+          x: 0,
+          y: playerY
+        });
+      } else if (playerX <= 0) {
+        _matterJs.Body.setPosition(player.getBody(), {
+          x: SCREEN_WIDTH,
+          y: playerY
+        });
+      } else if (playerY >= SCREEN_HEIGHT) {
+        _matterJs.Body.setPosition(player.getBody(), {
+          x: playerX,
+          y: 0
+        });
+      } else if (playerY <= 0) {
+        _matterJs.Body.setPosition(player.getBody(), {
+          x: playerX,
+          y: SCREEN_HEIGHT
+        });
+      }
+
+      player.update();
+    }); // fit the render viewport to the scene
 
 
-  var runner = _matterJs.Runner.create();
-
-  _matterJs.Runner.run(runner, engine); // add player
-
-
-  _matterJs.World.add(world, player.getBody());
-
-  _matterJs.Events.on(engine, 'beforeTick', function (event) {
-    var world = event.source.world;
-    var bodies = world.bodies;
-
-    var _player$getPosition = player.getPosition(),
-        playerX = _player$getPosition.x,
-        playerY = _player$getPosition.y;
-
-    if (playerX >= SCREEN_WIDTH) {
-      _matterJs.Body.setPosition(player.getBody(), {
+    _matterJs.Render.lookAt(render, {
+      min: {
         x: 0,
-        y: playerY
-      });
-    } else if (playerX <= 0) {
-      _matterJs.Body.setPosition(player.getBody(), {
-        x: SCREEN_WIDTH,
-        y: playerY
-      });
-    } else if (playerY >= SCREEN_HEIGHT) {
-      _matterJs.Body.setPosition(player.getBody(), {
-        x: playerX,
         y: 0
-      });
-    } else if (playerY <= 0) {
-      _matterJs.Body.setPosition(player.getBody(), {
-        x: playerX,
+      },
+      max: {
+        x: SCREEN_WIDTH,
         y: SCREEN_HEIGHT
+      }
+    });
+
+    var start = function start() {
+      _matterJs.default.Render.run(render);
+
+      _matterJs.default.Runner.run(runner, engine);
+
+      if (typeof window !== 'undefined') {
+        window.addEventListener('deviceorientation', updateGravity);
+      }
+    };
+
+    var stop = function stop() {
+      _matterJs.default.Render.stop(render);
+
+      _matterJs.default.Runner.stop(runner);
+
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('deviceorientation', updateGravity);
+      }
+    };
+
+    loadListeners(render.canvas, start, stop);
+  };
+
+  var init = function init() {
+    dispatcher.next({
+      action: "LOADING"
+    });
+    deviceValidation().then(function (action) {
+      return dispatcher.next({
+        action: action
       });
-    }
-
-    player.update();
-  }); // fit the render viewport to the scene
-
-
-  _matterJs.Render.lookAt(render, {
-    min: {
-      x: 0,
-      y: 0
-    },
-    max: {
-      x: SCREEN_WIDTH,
-      y: SCREEN_HEIGHT
-    }
-  });
-
-  var start = function start() {
-    _matterJs.default.Render.run(render);
-
-    _matterJs.default.Runner.run(runner, engine);
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('deviceorientation', updateGravity);
-    }
-  };
-
-  var stop = function stop() {
-    _matterJs.default.Render.stop(render);
-
-    _matterJs.default.Runner.stop(runner);
-
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('deviceorientation', updateGravity);
-    }
-  };
-
-  loadListeners(render.canvas, start, stop);
-
-  if (!window.mobileCheck()) {
-    stop();
-    dispatcher.next({
-      action: "MOBILE_NEEDED"
+    }).catch(function (action) {
+      return dispatcher.next({
+        action: action
+      });
     });
-  }
-
-  if (window.mobileCheck() && !window.gyroPresent) {
-    stop();
-    dispatcher.next({
-      action: "BETTER_DEVICE_NEEDED_BARAT"
-    });
-  }
-
-  return {
-    engine: engine,
-    runner: runner,
-    render: render,
-    canvas: render.canvas
+    createWorld();
   };
+
+  init();
 };
 
 var _default = WorldGame;
@@ -102788,7 +102834,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49738" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54525" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
