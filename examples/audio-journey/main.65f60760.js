@@ -81235,7 +81235,114 @@ exports.useTransition = useTransition;
 exports.useChain = useChain;
 exports.useSprings = useSprings;
 
-},{"@babel/runtime/helpers/extends":"../node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","react":"../node_modules/react/index.js","@babel/runtime/helpers/inheritsLoose":"../node_modules/@babel/runtime/helpers/inheritsLoose.js","@babel/runtime/helpers/assertThisInitialized":"../node_modules/@babel/runtime/helpers/assertThisInitialized.js"}],"components/shinyButton.jsx":[function(require,module,exports) {
+},{"@babel/runtime/helpers/extends":"../node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","react":"../node_modules/react/index.js","@babel/runtime/helpers/inheritsLoose":"../node_modules/@babel/runtime/helpers/inheritsLoose.js","@babel/runtime/helpers/assertThisInitialized":"../node_modules/@babel/runtime/helpers/assertThisInitialized.js"}],"components/modal.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styles = require("@material-ui/core/styles");
+
+var _core = require("@material-ui/core");
+
+var _web = require("react-spring/web.cjs");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+// web.cjs is required for IE 11 support
+var useStyles = (0, _styles.makeStyles)(function (theme) {
+  return {
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      "& div": {
+        outline: "none"
+      }
+    },
+    paper: {
+      textAlign: "center",
+      backgroundColor: "#000",
+      border: '2px solid #FFF',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3)
+    }
+  };
+});
+
+var Fade = _react.default.forwardRef(function Fade(props, ref) {
+  var open = props.in,
+      children = props.children,
+      onEnter = props.onEnter,
+      onExited = props.onExited,
+      other = _objectWithoutProperties(props, ["in", "children", "onEnter", "onExited"]);
+
+  var style = (0, _web.useSpring)({
+    from: {
+      opacity: 0
+    },
+    to: {
+      opacity: open ? 1 : 0
+    },
+    onStart: function onStart() {
+      if (open && onEnter) {
+        onEnter();
+      }
+    },
+    onRest: function onRest() {
+      if (!open && onExited) {
+        onExited();
+      }
+    }
+  });
+  return /*#__PURE__*/_react.default.createElement(_web.animated.div, _extends({
+    ref: ref,
+    style: style
+  }, other), children);
+});
+
+var CustomModal = function CustomModal(_ref) {
+  var children = _ref.children,
+      open = _ref.open,
+      title = _ref.title,
+      content = _ref.content,
+      onAction = _ref.onAction;
+  var classes = useStyles();
+  return /*#__PURE__*/_react.default.createElement(_core.Modal, {
+    "aria-labelledby": "spring-modal-title",
+    "aria-describedby": "spring-modal-description",
+    className: classes.modal,
+    open: open // onClose={() => onAction("close")}
+    ,
+    closeAfterTransition: true,
+    BackdropComponent: _core.Backdrop,
+    BackdropProps: {
+      timeout: 500
+    }
+  }, /*#__PURE__*/_react.default.createElement(Fade, {
+    in: open
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: classes.paper
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    id: "spring-modal-title"
+  }, title), /*#__PURE__*/_react.default.createElement("p", {
+    id: "spring-modal-description"
+  }, content), /*#__PURE__*/_react.default.createElement("div", null, children))));
+};
+
+var _default = CustomModal;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core":"../node_modules/@material-ui/core/esm/index.js","react-spring/web.cjs":"../node_modules/react-spring/web.cjs.js"}],"components/shinyButton.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81426,7 +81533,7 @@ var RecordingButton = function RecordingButton(props) {
 var _default = (0, _styles.withStyles)(styles)(RecordingButton);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js","./shinyButton":"components/shinyButton.jsx"}],"components/modal.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js","./shinyButton":"components/shinyButton.jsx"}],"components/recordingModal.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81436,15 +81543,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styles = require("@material-ui/core/styles");
-
-var _core = require("@material-ui/core");
-
-var _web = require("react-spring/web.cjs");
-
-var _shinyButton = _interopRequireDefault(require("./shinyButton"));
+var _modal = _interopRequireDefault(require("./modal"));
 
 var _recordingButton = _interopRequireDefault(require("./recordingButton"));
+
+var _shinyButton = _interopRequireDefault(require("./shinyButton"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -81464,69 +81567,11 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-var useStyles = (0, _styles.makeStyles)(function (theme) {
-  return {
-    modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      "& div": {
-        outline: "none"
-      }
-    },
-    paper: {
-      textAlign: "center",
-      backgroundColor: "#000",
-      border: '2px solid #FFF',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3)
-    }
-  };
-});
-
-var Fade = _react.default.forwardRef(function Fade(props, ref) {
-  var open = props.in,
-      children = props.children,
-      onEnter = props.onEnter,
-      onExited = props.onExited,
-      other = _objectWithoutProperties(props, ["in", "children", "onEnter", "onExited"]);
-
-  var style = (0, _web.useSpring)({
-    from: {
-      opacity: 0
-    },
-    to: {
-      opacity: open ? 1 : 0
-    },
-    onStart: function onStart() {
-      if (open && onEnter) {
-        onEnter();
-      }
-    },
-    onRest: function onRest() {
-      if (!open && onExited) {
-        onExited();
-      }
-    }
-  });
-  return /*#__PURE__*/_react.default.createElement(_web.animated.div, _extends({
-    ref: ref,
-    style: style
-  }, other), children);
-});
-
-var CustomModal = function CustomModal(_ref) {
+var RecordingModal = function RecordingModal(_ref) {
   var open = _ref.open,
       title = _ref.title,
       content = _ref.content,
       onAction = _ref.onAction;
-  var classes = useStyles();
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -81547,26 +81592,11 @@ var CustomModal = function CustomModal(_ref) {
       enableSelection(false);
     }
   }, [open]);
-  return /*#__PURE__*/_react.default.createElement(_core.Modal, {
-    "aria-labelledby": "spring-modal-title",
-    "aria-describedby": "spring-modal-description",
-    className: classes.modal,
-    open: open // onClose={() => onAction("close")}
-    ,
-    closeAfterTransition: true,
-    BackdropComponent: _core.Backdrop,
-    BackdropProps: {
-      timeout: 500
-    }
-  }, /*#__PURE__*/_react.default.createElement(Fade, {
-    in: open
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: classes.paper
-  }, /*#__PURE__*/_react.default.createElement("h2", {
-    id: "spring-modal-title"
-  }, title), /*#__PURE__*/_react.default.createElement("p", {
-    id: "spring-modal-description"
-  }, content), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_recordingButton.default, {
+  return /*#__PURE__*/_react.default.createElement(_modal.default, {
+    open: open,
+    title: title,
+    content: content
+  }, /*#__PURE__*/_react.default.createElement(_recordingButton.default, {
     onClick: function onClick() {
       return onActionHandler("startRecording");
     },
@@ -81578,12 +81608,12 @@ var CustomModal = function CustomModal(_ref) {
     onClick: function onClick() {
       return onActionHandler("close");
     }
-  })))));
+  }));
 };
 
-var _default = CustomModal;
+var _default = RecordingModal;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core":"../node_modules/@material-ui/core/esm/index.js","react-spring/web.cjs":"../node_modules/react-spring/web.cjs.js","./shinyButton":"components/shinyButton.jsx","./recordingButton":"components/recordingButton.jsx"}],"audioRecording.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./modal":"components/modal.jsx","./recordingButton":"components/recordingButton.jsx","./shinyButton":"components/shinyButton.jsx"}],"audioRecording.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81646,6 +81676,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _recordingModal = _interopRequireDefault(require("./recordingModal"));
+
 var _modal = _interopRequireDefault(require("./modal"));
 
 var _audioRecording = _interopRequireDefault(require("../audioRecording"));
@@ -81668,76 +81700,169 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var state = {
+  modalResponse: false,
+  audioRecorder: false,
+  showModal: false,
+  currentStep: 'INITIAL'
+};
+
+var reducer = function reducer(state, action) {
+  switch (action.type) {
+    case 'SET_MODAL_RESPONSE':
+      return _objectSpread({}, state, {
+        modalResponse: action.payload
+      });
+
+    case 'INSTANCE_AUDIO_RECORDER':
+      return _objectSpread({}, state, {
+        audioRecorder: action.payload
+      });
+
+    case 'SHOW_MODAL':
+      return _objectSpread({}, state, {
+        showModal: action.payload
+      });
+
+    case 'CHANGE_STEP':
+      return _objectSpread({}, state, {
+        currentStep: action.payload
+      });
+  }
+};
+
 var App = function App(_ref) {
   var game = _ref.game;
 
-  var _useState = (0, _react.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      modalResponse = _useState2[0],
-      setModalResponse = _useState2[1];
+  var _useReducer = (0, _react.useReducer)(reducer, state),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      _useReducer2$ = _useReducer2[0],
+      showModal = _useReducer2$.showModal,
+      modalResponse = _useReducer2$.modalResponse,
+      audioRecorder = _useReducer2$.audioRecorder,
+      currentStep = _useReducer2$.currentStep,
+      dispatch = _useReducer2[1];
 
-  var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      audioRecorder = _useState4[0],
-      setAudioRecorder = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isModalOpen = _useState6[0],
-      showModal = _useState6[1];
+  console.log("statee ", state);
 
   var onModalHandler = function onModalHandler(action) {
     if (action === 'close') {
       modalResponse.resolve(action);
-      showModal(false);
+      dispatch({
+        type: "SHOW_MODAL",
+        payload: false
+      });
     } else if (action === 'startRecording') {
       audioRecorder.start();
     } else if (action === 'stopRecording') {
       audioRecorder.stop().then(function (_ref2) {
         var audioUrl = _ref2.audioUrl;
         modalResponse.resolve(audioUrl);
-        showModal(false);
+        dispatch({
+          type: "SHOW_MODAL",
+          payload: false
+        });
       });
     } else {
       modalResponse.resolve(action);
-      showModal(false);
+      dispatch({
+        type: "SHOW_MODAL",
+        payload: false
+      });
     }
+  };
+
+  var viewToRender = function viewToRender() {
+    var view = /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
+
+    if (currentStep === 'MOBILE_NEEDED') {
+      view = /*#__PURE__*/_react.default.createElement(_modal.default, {
+        open: showModal,
+        title: "Esta experiencia esta dise\xF1ada para celulares",
+        content: "Por favor abrela desde uno \uD83D\uDCF1",
+        onAction: onModalHandler
+      });
+    } else if (currentStep === 'BETTER_DEVICE_NEEDED_BARAT') {
+      view = /*#__PURE__*/_react.default.createElement(_modal.default, {
+        open: showModal,
+        title: "A tu dispositivo le falta papa!",
+        onAction: onModalHandler
+      });
+    } else if (currentStep === 'RECORD_AUDIO') {
+      view = /*#__PURE__*/_react.default.createElement(_recordingModal.default, {
+        open: showModal,
+        title: "Manten presionado el microfono y graba una pista",
+        onAction: onModalHandler
+      });
+    }
+
+    return view;
   };
 
   (0, _react.useEffect)(function () {
     game.subscribe({
-      next: function next(callback) {
-        showModal(true);
-        (0, _audioRecording.default)().then(function (_ref3) {
-          var start = _ref3.start,
-              stop = _ref3.stop;
-          setAudioRecorder({
-            start: start,
-            stop: stop
+      next: function next(_ref3) {
+        var callback = _ref3.callback,
+            action = _ref3.action;
+
+        if (action === "MOBILE_NEEDED") {
+          dispatch({
+            type: "CHANGE_STEP",
+            payload: action
           });
+        } else if (action === "RECORD_AUDIO") {
+          dispatch({
+            type: "RECORD_AUDIO",
+            payload: action
+          });
+          (0, _audioRecording.default)().then(function (_ref4) {
+            var start = _ref4.start,
+                stop = _ref4.stop;
+            dispatch({
+              type: 'INSTANCE_AUDIO_RECORDER',
+              paylaod: {
+                start: start,
+                stop: stop
+              }
+            });
+          });
+          callback(new Promise(function (_resolve) {
+            var promiseResolver = {
+              resolve: function resolve(data) {
+                return _resolve(data);
+              }
+            };
+            dispatch({
+              type: 'SET_MODAL_RESPONSE',
+              payload: promiseResolver
+            });
+          }));
+        } else if (action === "BETTER_DEVICE_NEEDED_BARAT") {
+          dispatch({
+            type: "CHANGE_STEP",
+            payload: action
+          });
+        }
+
+        dispatch({
+          type: "SHOW_MODAL",
+          payload: true
         });
-        callback(new Promise(function (_resolve) {
-          var promiseResolver = {
-            resolve: function resolve(data) {
-              return _resolve(data);
-            }
-          };
-          setModalResponse(promiseResolver);
-        }));
       }
     });
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_modal.default, {
-    open: isModalOpen,
-    title: "Manten presionado el microfono y graba una pista" // content={ "testing" }
-    ,
-    onAction: onModalHandler
-  });
+  return viewToRender();
 };
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./modal":"components/modal.jsx","../audioRecording":"audioRecording.js"}],"../node_modules/matter-js/build/matter.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./recordingModal":"components/recordingModal.jsx","./modal":"components/modal.jsx","../audioRecording":"audioRecording.js"}],"../node_modules/matter-js/build/matter.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**
@@ -95454,6 +95579,10 @@ var WorldGame = function WorldGame(dispatcher) {
     var orientation = typeof window.orientation !== 'undefined' ? window.orientation : 0,
         gravity = engine.world.gravity;
 
+    if (event.beta || event.gamma) {
+      window.gyroPresent = true;
+    }
+
     if (orientation === 0) {
       gravity.x = _matterJs.Common.clamp(event.gamma, -90, 90) / 90;
       gravity.y = _matterJs.Common.clamp(event.beta, -90, 90) / 90;
@@ -95475,14 +95604,17 @@ var WorldGame = function WorldGame(dispatcher) {
       var clientX = _ref.clientX,
           clientY = _ref.clientY;
       stop();
-      dispatcher.next(function (callback) {
-        return callback.then(function (data) {
-          start();
+      dispatcher.next({
+        callback: function callback(_callback) {
+          return _callback.then(function (data) {
+            start();
 
-          if (data !== 'close') {
-            addAudio(clientX, clientY, data);
-          }
-        });
+            if (data !== 'close') {
+              addAudio(clientX, clientY, data);
+            }
+          });
+        },
+        action: "RECORD_AUDIO"
       });
     }, false);
     canvas.addEventListener('touchstart', function (_ref2) {
@@ -95492,16 +95624,29 @@ var WorldGame = function WorldGame(dispatcher) {
           clientY = _ref2$touches$.clientY;
 
       stop();
-      dispatcher.next(function (callback) {
-        return callback.then(function (data) {
-          start();
+      dispatcher.next({
+        callback: function callback(_callback2) {
+          return _callback2.then(function (data) {
+            start();
 
-          if (data !== 'close') {
-            addAudio(clientX, clientY, data);
-          }
-        });
+            if (data !== 'close') {
+              addAudio(clientX, clientY, data);
+            }
+          });
+        },
+        action: "RECORD_AUDIO"
       });
     }, false);
+
+    window.mobileCheck = function () {
+      var check = false;
+
+      (function (a) {
+        if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+      })(navigator.userAgent || navigator.vendor || window.opera);
+
+      return check;
+    };
   }; // create engine
 
 
@@ -95599,6 +95744,21 @@ var WorldGame = function WorldGame(dispatcher) {
   };
 
   loadListeners(render.canvas, start, stop);
+
+  if (!window.mobileCheck()) {
+    stop();
+    dispatcher.next({
+      action: "MOBILE_NEEDED"
+    });
+  }
+
+  if (window.mobileCheck() && !window.gyroPresent) {
+    stop();
+    dispatcher.next({
+      action: "BETTER_DEVICE_NEEDED_BARAT"
+    });
+  }
+
   return {
     engine: engine,
     runner: runner,
@@ -102628,7 +102788,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49738" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
