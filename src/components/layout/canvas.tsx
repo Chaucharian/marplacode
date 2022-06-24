@@ -37,11 +37,17 @@ const LCanvas = ({ children }) => {
     //   orthographic
     //   camera={{ position: [-10, 10, 10], zoom: 100 }}
     // >
+    // <Canvas
+    //   gl={{ antialias: false }}
+    //   dpr={[1, 1.5]}
+    //   onCreated={(state) => state.events.connect(dom.current)}
+    //   onPointerMissed={() => (state.clicked = null)}
+    // >
     <Canvas
-      gl={{ antialias: false }}
-      dpr={[1, 1.5]}
-      onCreated={(state) => state.events.connect(dom.current)}
-      onPointerMissed={() => (state.clicked = null)}
+      shadows
+      dpr={[1, 2]}
+      orthographic
+      camera={{ position: [-10, 10, 10], zoom: 100 }}
     >
       {/* <LControl /> */}
       <Preload all />

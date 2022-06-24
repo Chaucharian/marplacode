@@ -71,6 +71,10 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   })
   return (
     <>
+      <Html as='div' position={[position[0], 3, position[2]]}>
+        <h1>{index}</h1>
+      </Html>
+
       <Image
         ref={ref}
         {...props}
@@ -80,12 +84,6 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
         onPointerOver={over}
         onPointerOut={out}
       />
-
-      {clicked && (
-        <Html as='h1' position={position}>
-          <h1>ESSOO</h1>
-        </Html>
-      )}
     </>
   )
 }
@@ -110,12 +108,4 @@ function Items({ w = 0.7, gap = 0.15 }) {
   )
 }
 
-export default () => (
-  // <Canvas
-  //   gl={{ antialias: false }}
-  //   dpr={[1, 1.5]}
-  //   onPointerMissed={() => (state.clicked = null)}
-  // >
-  <Items />
-  // </Canvas>
-)
+export default () => <Items />

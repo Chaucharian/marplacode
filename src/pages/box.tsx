@@ -7,6 +7,7 @@ import {
   useCursor,
   Sky,
   useSelect,
+  OrbitControls,
 } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
@@ -38,14 +39,14 @@ function Cube({
   const selected = useSelect().map((sel) => sel.userData.store)
 
   const [materialProps, setMaterialProps] = useState({
-    color: { value: color },
-    roughness: { value: roughness, min: 0, max: 1 },
-    thickness: { value: thickness, min: -10, max: 10 },
-    envMapIntensity: { value: envMapIntensity, min: 0, max: 10 },
-    transmission: { value: transmission, min: 0, max: 1 },
-    ...(metalness !== undefined && {
-      metalness: { value: metalness, min: 0, max: 1 },
-    }),
+    color: color,
+    // roughness: { value: roughness, min: 0, max: 1 },
+    // thickness: { value: thickness, min: -10, max: 10 },
+    // envMapIntensity: { value: envMapIntensity, min: 0, max: 10 },
+    // transmission: { value: transmission, min: 0, max: 1 },
+    // ...(metalness !== undefined && {
+    //   metalness: { value: metalness, min: 0, max: 1 },
+    // }),
   })
   // useEffect(() => {
   //   document.addEventListener('mousemove', (event) => {
@@ -61,14 +62,13 @@ function Cube({
     <mesh
       {...props}
       // userData={{ store }}
+      receiveShadow
+      castShadow
       onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
       onPointerOut={(e) => setHover(false)}
     >
       <boxGeometry />
-      <meshPhysicalMaterial {...materialProps} />
-      <Edges visible={true} scale={1.1} renderOrder={1000}>
-        <meshBasicMaterial transparent color='#333' depthTest={false} />
-      </Edges>
+      <meshStandardMaterial attach='material' {...materialProps} />
     </mesh>
   )
 }
@@ -77,57 +77,74 @@ Page.r3f = (props) => (
   <>
     <pointLight position={[10, 10, 10]} />
     <Suspense fallback={null}>
-      {/* <Select multiple box onChange={() => {}}>
-        <Cube
-          scale={0.9}
-          position={[-1, 0, 0]}
-          color='orange'
-          transmission={1}
-          thickness={-2}
-          envMapIntensity={5}
-        />
-        <Cube
-          scale={0.9}
-          position={[0, 0, 0]}
-          color='#eb8686'
-          envMapIntensity={2}
-        />
-        <Cube
-          scale={0.9}
-          position={[0, 0, -1]}
-          color='hotpink'
-          transmission={1}
-          thickness={-2}
-          envMapIntensity={5}
-        />
-        <Cube
-          scale={[1, 0.9, 0.9]}
-          position={[0.05, 0, 1]}
-          color='aquamarine'
-          metalness={0}
-        />
-        <Cube
-          scale={[0.9, 0.9, 1.9]}
-          position={[1, 0, 0.5]}
-          color='aquamarine'
-          metalness={0}
-        />
-      </Select> */}
+      {/* <directionalLight position={[-10, -10, 2]} intensity={3} /> */}
+      <directionalLight
+        position={[1, 10, -2]}
+        intensity={1}
+        shadow-camera-far={70}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+        shadow-mapSize={[512, 512]}
+        castShadow
+      />
+
+      <Cube
+        scale={0.9}
+        position={[-1, 0, 0]}
+        color='orange'
+        transmission={1}
+        thickness={-2}
+        envMapIntensity={5}
+      />
+      <Cube
+        scale={0.9}
+        position={[0, 0, 0]}
+        color='#eb8686'
+        envMapIntensity={2}
+      />
+      <Cube
+        scale={0.9}
+        position={[0, 0, -1]}
+        color='hotpink'
+        transmission={1}
+        thickness={-2}
+        envMapIntensity={5}
+      />
+      <Cube
+        scale={[1, 0.9, 0.9]}
+        position={[0.05, 0, 1]}
+        color='aquamarine'
+        metalness={0}
+      />
       <Cube
         scale={[0.9, 0.9, 1.9]}
         position={[1, 0, 0.5]}
         color='aquamarine'
         metalness={0}
       />
+
+      <mesh receiveShadow rotation-x={-Math.PI / 2} position={[0, -0.75, 0]}>
+        <planeGeometry args={[20, 20]} />
+        <shadowMaterial opacity={0.2} />
+      </mesh>
+
       <Environment preset='city' />
-      {/* <ContactShadows
+      <ContactShadows
         frames={1}
         position={[0, -0.5, 0]}
         scale={10}
         opacity={0.4}
         far={1}
         blur={2}
-      /> */}
+      />
+      <OrbitControls
+        makeDefault
+        rotateSpeed={2}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2.5}
+      />
     </Suspense>
     {/* <OrbitControls
         makeDefault
