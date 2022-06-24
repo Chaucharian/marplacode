@@ -10,7 +10,7 @@ const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps = { title: 'index' } }) {
   const router = useRouter()
 
   useEffect(() => {
