@@ -1,7 +1,13 @@
 import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Image, ScrollControls, Scroll, useScroll } from '@react-three/drei'
+import {
+  Image,
+  ScrollControls,
+  Scroll,
+  useScroll,
+  Html,
+} from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import { Minimap } from './MiniMap'
 import { state, damp } from './utils'
@@ -64,15 +70,23 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
     )
   })
   return (
-    <Image
-      ref={ref}
-      {...props}
-      position={position}
-      scale={scale}
-      onClick={click}
-      onPointerOver={over}
-      onPointerOut={out}
-    />
+    <>
+      <Image
+        ref={ref}
+        {...props}
+        position={position}
+        scale={scale}
+        onClick={click}
+        onPointerOver={over}
+        onPointerOut={out}
+      />
+
+      {clicked && (
+        <Html as='h1' position={position}>
+          <h1>ESSOO</h1>
+        </Html>
+      )}
+    </>
   )
 }
 
