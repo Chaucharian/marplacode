@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useEffect, useRef } from 'react'
+import { state } from '../canvas/Galery/utils'
 
 const LControl = () => {
   const dom = useStore((state) => state.dom)
@@ -10,7 +11,7 @@ const LControl = () => {
   useEffect(() => {
     if (control.current) {
       const domElement = dom.current
-      const originalTouchAction = domElement.style['touch-action'] 
+      const originalTouchAction = domElement.style['touch-action']
       domElement.style['touch-action'] = 'none'
 
       return () => {
@@ -25,15 +26,24 @@ const LCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
+    // <Canvas
+    //   mode='concurrent'
+    //   style={{
+    //     position: 'absolute',
+    //     top: 0,
+    //   }}
+    //   onCreated={(state) => state.events.connect(dom.current)}
+    //   dpr={[1, 2]}
+    //   orthographic
+    //   camera={{ position: [-10, 10, 10], zoom: 100 }}
+    // >
     <Canvas
-      mode='concurrent'
-      style={{
-        position: 'absolute',
-        top: 0,
-      }}
+      gl={{ antialias: false }}
+      dpr={[1, 1.5]}
       onCreated={(state) => state.events.connect(dom.current)}
+      onPointerMissed={() => (state.clicked = null)}
     >
-      <LControl />
+      {/* <LControl /> */}
       <Preload all />
       {children}
     </Canvas>
