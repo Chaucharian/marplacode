@@ -8,6 +8,7 @@ import { Physics, usePlane } from '@react-three/cannon'
 import React from 'react'
 import { Chair, Table, Lamp } from '@/components/canvas/Furniture/Furniture'
 import { Cursor } from '@/components/canvas/Furniture/helpers/Drag'
+import { LoboMarino } from '@/components/canvas/models/LoboMarino'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -57,8 +58,10 @@ Page.r3f = (props) => {
       <Physics allowSleep={false} iterations={15} gravity={[0, -200, 0]}>
         <Cursor />
         <Floor position={[0, -5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-        <Chair position={[0, 0, -2.52]} />
-        <Table position={[8, 0, 0]} />
+        {/* <Chair position={[0, 0, -2.52]} /> */}
+        <Chair position={[10, 0, -2.52]} />
+        {/* <Table position={[8, 0, 0]} /> */}
+        <LoboMarino position={[0, -2, -2]} scale={0.06} />
         <Lamp position={[0, 15, 0]} />
       </Physics>
     </>

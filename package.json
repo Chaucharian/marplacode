@@ -16,6 +16,7 @@
     "@react-three/fiber": "^8.0.19",
     "babel-plugin-glsl": "^1.0.0",
     "glsl-random": "^0.0.5",
+    "lerp": "^1.0.3",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
