@@ -1,3 +1,4 @@
+import { MovingSpot } from '@/components/canvas'
 import MouseLight from '@/components/canvas/MouseLight'
 import Instructions from '@/components/dom/Instructions'
 import useStore from '@/helpers/store'
@@ -10,6 +11,8 @@ import {
   Sky,
   useSelect,
   OrbitControls,
+  useDepthBuffer,
+  MeshReflectorMaterial,
 } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
@@ -18,14 +21,13 @@ import React, { Suspense, useEffect, useState } from 'react'
 const Box = dynamic(() => import('@/components/canvas/Box'), {
   ssr: false,
 })
+const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
+  ssr: false,
+})
 
 // Step 5 - delete Instructions components
 const Page = (props) => {
-  return (
-    <>
-      <Instructions />
-    </>
-  )
+  return <></>
 }
 
 function Cube({
@@ -75,39 +77,44 @@ function Cube({
   )
 }
 
+const Scene = () => {
+  const depthBuffer = useDepthBuffer({ frames: 1 })
+
+  return (
+    <>
+      <MovingSpot
+        depthBuffer={depthBuffer}
+        color='white'
+        position={[0, 5, -1]}
+      />
+      <Cube
+        scale={0.9}
+        position={[0, 2, 0]}
+        color='orange'
+        transmission={1}
+        thickness={-2}
+        envMapIntensity={5}
+      />
+    </>
+  )
+}
+
 Page.canvasProps = {
   shadows: true,
   dpr: [1, 2],
   orthographic: true,
-  camera: { position: [-10, 10, 10], zoom: 100 },
+  camera: { position: [-10, 10, 10], zoom: 100, fov: 50, near: 1, far: 20 },
 }
 
 Page.r3f = (props) => {
   return (
     <>
-      {/* <MouseLight color='orange' intensity={1} position={[10, 10, 10]} /> */}
       <Suspense fallback={null}>
-        {/* <directionalLight position={[-10, -10, 2]} intensity={3} />
-    <directionalLight
-      position={[1, 10, -2]}
-      intensity={1}
-      shadow-camera-far={70}
-      shadow-camera-left={-10}
-      shadow-camera-right={10}
-      shadow-camera-top={10}
-      shadow-camera-bottom={-10}
-      shadow-mapSize={[512, a512]}
-      castShadow
-    /> */}
+        {/* <color attach='background' args={['#202020']} />
+        <fog attach='fog' args={['#202020', 5, 20]} />
+        <ambientLight intensity={0.015} />
+        <Scene /> */}
 
-        <Cube
-          scale={0.9}
-          position={[-1, 0, 0]}
-          color='orange'
-          transmission={1}
-          thickness={-2}
-          envMapIntensity={5}
-        />
         <Cube
           scale={0.9}
           position={[0, 0, 0]}
@@ -149,12 +156,6 @@ Page.r3f = (props) => {
       far={1}
       blur={2}
     /> */}
-        <OrbitControls
-          makeDefault
-          rotateSpeed={2}
-          minPolarAngle={0}
-          maxPolarAngle={Math.PI / 2.5}
-        />
       </Suspense>
       {/* <OrbitControls
       makeDefault
@@ -163,6 +164,7 @@ Page.r3f = (props) => {
       maxPolarAngle={Math.PI / 2.5}
     /> */}
       <Sky />
+      {/* </props.canvas> */}
     </>
   )
 }

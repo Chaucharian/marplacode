@@ -1,4 +1,5 @@
 import { useThree, useFrame } from '@react-three/fiber'
+import { Vector3 } from 'three'
 import React, { useRef } from 'react'
 import { useGLTF, SpotLight, useDepthBuffer } from '@react-three/drei'
 
@@ -8,8 +9,10 @@ function MovingSpot({ vec = new Vector3(), ...props }) {
   useFrame((state) => {
     light.current.target.position.lerp(
       vec.set(
-        (state.mouse.x * viewport.width) / 2,
-        (state.mouse.y * viewport.height) / 2,
+        // (state.mouse.x * viewport.width) / 2,
+        state.mouse.x,
+        state.mouse.y,
+        // (state.mouse.y * viewport.height) / 2,
         0
       ),
       0.1
@@ -30,3 +33,5 @@ function MovingSpot({ vec = new Vector3(), ...props }) {
     />
   )
 }
+
+export default MovingSpot

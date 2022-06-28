@@ -23,7 +23,7 @@ ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
 
 extend({ ColorShiftMaterial })
 
-const Shader = (props) => {
+const Shader = ({ children, ...props }) => {
   const meshRef = useRef(null)
   const [hovered, setHover] = useState(false)
   const router = useStore((state) => state.router)
@@ -49,7 +49,8 @@ const Shader = (props) => {
       onPointerOut={(e) => setHover(false)}
       {...props}
     >
-      <boxBufferGeometry args={[1, 1, 1]} />
+      {children}
+      {/* <boxBufferGeometry args={[1, 1, 1]} /> */}
       {/* @ts-ignore */}
       <colorShiftMaterial key={ColorShiftMaterial.key} time={3} />
     </mesh>
