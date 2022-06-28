@@ -1,4 +1,6 @@
+import MouseLight from '@/components/canvas/MouseLight'
 import Instructions from '@/components/dom/Instructions'
+import useStore from '@/helpers/store'
 import {
   Select,
   Environment,
@@ -73,88 +75,97 @@ function Cube({
   )
 }
 
-Page.r3f = (props) => (
-  <>
-    <pointLight position={[10, 10, 10]} />
-    <Suspense fallback={null}>
-      {/* <directionalLight position={[-10, -10, 2]} intensity={3} /> */}
-      <directionalLight
-        position={[1, 10, -2]}
-        intensity={1}
-        shadow-camera-far={70}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-        shadow-mapSize={[512, 512]}
-        castShadow
-      />
+Page.canvasProps = {
+  shadows: true,
+  dpr: [1, 2],
+  orthographic: true,
+  camera: { position: [-10, 10, 10], zoom: 100 },
+}
 
-      <Cube
-        scale={0.9}
-        position={[-1, 0, 0]}
-        color='orange'
-        transmission={1}
-        thickness={-2}
-        envMapIntensity={5}
-      />
-      <Cube
-        scale={0.9}
-        position={[0, 0, 0]}
-        color='#eb8686'
-        envMapIntensity={2}
-      />
-      <Cube
-        scale={0.9}
-        position={[0, 0, -1]}
-        color='hotpink'
-        transmission={1}
-        thickness={-2}
-        envMapIntensity={5}
-      />
-      <Cube
-        scale={[1, 0.9, 0.9]}
-        position={[0.05, 0, 1]}
-        color='aquamarine'
-        metalness={0}
-      />
-      <Cube
-        scale={[0.9, 0.9, 1.9]}
-        position={[1, 0, 0.5]}
-        color='aquamarine'
-        metalness={0}
-      />
+Page.r3f = (props) => {
+  return (
+    <>
+      {/* <MouseLight color='orange' intensity={1} position={[10, 10, 10]} /> */}
+      <Suspense fallback={null}>
+        {/* <directionalLight position={[-10, -10, 2]} intensity={3} />
+    <directionalLight
+      position={[1, 10, -2]}
+      intensity={1}
+      shadow-camera-far={70}
+      shadow-camera-left={-10}
+      shadow-camera-right={10}
+      shadow-camera-top={10}
+      shadow-camera-bottom={-10}
+      shadow-mapSize={[512, a512]}
+      castShadow
+    /> */}
 
-      <mesh receiveShadow rotation-x={-Math.PI / 2} position={[0, -0.75, 0]}>
-        <planeGeometry args={[20, 20]} />
-        <shadowMaterial opacity={0.2} />
-      </mesh>
+        <Cube
+          scale={0.9}
+          position={[-1, 0, 0]}
+          color='orange'
+          transmission={1}
+          thickness={-2}
+          envMapIntensity={5}
+        />
+        <Cube
+          scale={0.9}
+          position={[0, 0, 0]}
+          color='#eb8686'
+          envMapIntensity={2}
+        />
+        <Cube
+          scale={0.9}
+          position={[0, 0, -1]}
+          color='hotpink'
+          transmission={1}
+          thickness={-2}
+          envMapIntensity={5}
+        />
+        <Cube
+          scale={[1, 0.9, 0.9]}
+          position={[0.05, 0, 1]}
+          color='aquamarine'
+          metalness={0}
+        />
+        <Cube
+          scale={[0.9, 0.9, 1.9]}
+          position={[1, 0, 0.5]}
+          color='aquamarine'
+          metalness={0}
+        />
 
-      <Environment preset='city' />
-      <ContactShadows
-        frames={1}
-        position={[0, -0.5, 0]}
-        scale={10}
-        opacity={0.4}
-        far={1}
-        blur={2}
-      />
-      <OrbitControls
-        makeDefault
-        rotateSpeed={2}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2.5}
-      />
-    </Suspense>
-    {/* <OrbitControls
-        makeDefault
-        rotateSpeed={2}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2.5}
-      /> */}
-    <Sky />
-  </>
-)
+        {/* <mesh receiveShadow rotation-x={-Math.PI / 2} position={[0, -0.75, 0]}>
+      <planeGeometry args={[20, 20]} />
+      <shadowMaterial opacity={0.2} />
+    </mesh> */}
+
+        {/* <Environment preset='night' /> */}
+        {/* <ContactShadows
+      frames={1}
+      position={[0, -0.5, 0]}
+      scale={10}
+      opacity={0.4}
+      far={1}
+      blur={2}
+    /> */}
+        <OrbitControls
+          makeDefault
+          rotateSpeed={2}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI / 2.5}
+        />
+      </Suspense>
+      {/* <OrbitControls
+      makeDefault
+      rotateSpeed={2}
+      minPolarAngle={0}
+      maxPolarAngle={Math.PI / 2.5}
+    /> */}
+      <Sky />
+    </>
+  )
+}
 
 export default Page
 

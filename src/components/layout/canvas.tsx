@@ -22,33 +22,12 @@ const LControl = () => {
   // @ts-ignore
   return <OrbitControls ref={control} domElement={dom.current} />
 }
-const LCanvas = ({ children }) => {
+
+const LCanvas = ({ children, ...canvasProps }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    // <Canvas
-    //   mode='concurrent'
-    //   style={{
-    //     position: 'absolute',
-    //     top: 0,
-    //   }}
-    //   onCreated={(state) => state.events.connect(dom.current)}
-    //   dpr={[1, 2]}
-    //   orthographic
-    //   camera={{ position: [-10, 10, 10], zoom: 100 }}
-    // >
-    // <Canvas
-    //   gl={{ antialias: false }}
-    //   dpr={[1, 1.5]}
-    //   onCreated={(state) => state.events.connect(dom.current)}
-    //   onPointerMissed={() => (state.clicked = null)}
-    // >
-    <Canvas
-      shadows
-      dpr={[1, 2]}
-      orthographic
-      camera={{ position: [-10, 10, 10], zoom: 100 }}
-    >
+    <Canvas {...canvasProps}>
       {/* <LControl /> */}
       <Preload all />
       {children}

@@ -1,16 +1,29 @@
 import { useRouter } from 'next/router'
 import useStore from '@/helpers/store'
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import Header from '@/config'
 import Dom from '@/components/layout/dom'
 import '@/styles/index.css'
 import dynamic from 'next/dynamic'
+import { Props as CanvasProps } from '@react-three/fiber/dist/declarations/src/web/Canvas'
 
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
 
-function App({ Component, pageProps = { title: 'index' } }) {
+export interface R3FComponent {
+  canvasProps?: CanvasProps
+  r3f?: (props: any) => JSX.Element
+}
+
+export type R3FComponentType = React.Component<any> | R3FComponent
+
+interface AppProps {
+  Component: R3FComponent
+  pageProps: any
+}
+
+const App: FC<AppProps> = ({ Component, pageProps = { title: 'index' } }) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -21,9 +34,14 @@ function App({ Component, pageProps = { title: 'index' } }) {
     <>
       <Header title={pageProps.title} />
       <Dom>
+        {/* @ts-ignore */}
         <Component {...pageProps} />
       </Dom>
-      {Component?.r3f && <LCanvas>{Component.r3f(pageProps)}</LCanvas>}
+      {Component?.r3f && (
+        <LCanvas {...Component?.canvasProps}>
+          {Component.r3f(pageProps)}
+        </LCanvas>
+      )}
     </>
   )
 }

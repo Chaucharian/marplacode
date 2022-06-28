@@ -12,6 +12,7 @@ import {
 import { Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
 import React, { Suspense, useEffect, useState } from 'react'
+import useStore from '@/helpers/store'
 
 const Box = dynamic(() => import('@/components/canvas/Box'), {
   ssr: false,
@@ -68,12 +69,16 @@ const Page = (props) => {
   )
 }
 
-Page.r3f = (props) => (
-  <>
-    <Galery />
-    <Sky />
-  </>
-)
+Page.canvasProps = { gl: { antialias: false }, dpr: [1, 1.5] }
+
+Page.r3f = (props) => {
+  return (
+    <>
+      <Galery />
+      <Sky />
+    </>
+  )
+}
 
 export default Page
 
