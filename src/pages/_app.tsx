@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
 import useStore from '@/helpers/store'
-import { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import Header from '@/config'
 import Dom from '@/components/layout/dom'
-import '@/styles/index.css'
 import dynamic from 'next/dynamic'
 import { Props as CanvasProps } from '@react-three/fiber/dist/declarations/src/web/Canvas'
+import { GlobalCSS, theme } from '@/styles'
+import { ThemeProvider } from 'styled-components'
 
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
@@ -33,15 +34,19 @@ const App: FC<AppProps> = ({ Component, pageProps = { title: 'index' } }) => {
   return (
     <>
       <Header title={pageProps.title} />
-      <Dom>
-        {/* @ts-ignore */}
-        <Component {...pageProps} />
-      </Dom>
-      {Component?.r3f && (
-        <LCanvas {...Component?.canvasProps}>
-          {Component.r3f(pageProps)}
-        </LCanvas>
-      )}
+      {/* theme not work inside canvas */}
+      <ThemeProvider theme={theme}>
+        <Dom>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+        </Dom>
+        {Component?.r3f && (
+          <LCanvas {...Component?.canvasProps}>
+            {Component.r3f(pageProps)}
+          </LCanvas>
+        )}
+        <GlobalCSS />
+      </ThemeProvider>
     </>
   )
 }

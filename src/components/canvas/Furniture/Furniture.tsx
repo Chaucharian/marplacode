@@ -144,6 +144,14 @@ export function Lamp(props) {
     pivotA: [0, 0, 0],
     pivotB: [0, 2, 0],
   })
+  // useFrame((state) => {
+  //     // camera.position.z =
+  //     //   Math.sin(state.clock.elapsedTime * (state.mouse.x / 4)) * 20
+  //     // camera.position.x = Math.cos(state.mouse.x) * 10
+  //     camera.position.z = Math.sin(state.clock.elapsedTime) * 20
+  //     camera.position.x = Math.cos(state.clock.elapsedTime) * 10
+  //   })
+
   return (
     <mesh ref={lamp} {...bind}>
       <cylinderGeometry args={[0.5, 1.5, 2, 32]} />
@@ -158,7 +166,7 @@ export function Lamp(props) {
         angle={0.45}
         attenuation={20}
         anglePower={5}
-        intensity={1}
+        intensity={0.1}
         opacity={0.2}
       />
       <primitive object={target} position={[0, -1, 0]} />

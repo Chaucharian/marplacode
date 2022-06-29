@@ -3,12 +3,24 @@ import dynamic from 'next/dynamic'
 import Instructions from '@/components/dom/Instructions'
 // import Shader from '@/components/canvas/Shader/Shader'
 import { Canvas } from '@react-three/fiber'
-import { MeshReflectorMaterial } from '@react-three/drei'
+import {
+  Bounds,
+  Cloud,
+  Html,
+  MeshReflectorMaterial,
+  Scroll,
+  ScrollControls,
+  useBounds,
+} from '@react-three/drei'
 import { Physics, usePlane } from '@react-three/cannon'
 import React from 'react'
 import { Chair, Table, Lamp } from '@/components/canvas/Furniture/Furniture'
 import { Cursor } from '@/components/canvas/Furniture/helpers/Drag'
 import { LoboMarino } from '@/components/canvas/models/LoboMarino'
+import { useCameraEffect } from '@/components/canvas/hooks'
+import { Camera } from '@/components/canvas'
+import styled from 'styled-components'
+import { theme } from '@/styles'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -17,6 +29,15 @@ import { LoboMarino } from '@/components/canvas/models/LoboMarino'
 const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
   ssr: false,
 })
+
+const Title = styled.h1`
+  ${(theme) => console.log('EEEE', theme)};
+  position: absolute;
+  top: 0vh;
+  color: ${theme.colors?.primary ?? 'red'};
+  left: 10vw;
+  font-size: 90px;
+`
 
 // dom components goes here
 const Page = (props) => {
@@ -46,24 +67,63 @@ function Floor(props) {
 Page.canvasProps = {
   dpr: [1, 2],
   shadows: true,
-  camera: { position: [-40, 40, 40], fov: 25, near: 1, far: 100 },
+  shake: true,
+  camera: { position: [0, 0, 40], zoom: 0.5, fov: 25, near: 1, far: 100 },
 }
+
+function SelectToZoom({ children }) {
+  const api = useBounds()
+  return (
+    <group
+      onClick={(e) => (
+        e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
+      )}
+      onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+    >
+      {children}
+    </group>
+  )
+}
+
 Page.r3f = (props) => {
   return (
     <>
+      <Cloud position={[-4, -2, -25]} speed={0.2} opacity={0.01} />
+      <Cloud position={[4, 2, -15]} speed={0.2} opacity={0.01} />
+      <Cloud position={[-4, 2, -10]} speed={0.2} opacity={0.01} />
+      <Cloud position={[4, -2, -5]} speed={0.2} opacity={0.01} />
+      <Cloud position={[4, 2, 0]} speed={0.2} opacity={0.09} />
       <color attach='background' args={['#171720']} />
       <fog attach='fog' args={['#171720', 60, 90]} />
       <ambientLight intensity={0.2} />
       <pointLight position={[-20, -5, -20]} color='#FF7A00' />
       <Physics allowSleep={false} iterations={15} gravity={[0, -200, 0]}>
         <Cursor />
-        <Floor position={[0, -5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+        {/* <Floor position={[0, -5, 0]} rotation={[-Math.PI / 2, 0, 0]} /> */}
         {/* <Chair position={[0, 0, -2.52]} /> */}
         <Chair position={[10, 0, -2.52]} />
         {/* <Table position={[8, 0, 0]} /> */}
-        <LoboMarino position={[0, -2, -2]} scale={0.06} />
         <Lamp position={[0, 15, 0]} />
       </Physics>
+      <Bounds fit clip observe margin={1.2}>
+        <SelectToZoom>
+          <LoboMarino position={[0, -2, -2]} scale={0.06} />
+        </SelectToZoom>
+      </Bounds>
+      <ScrollControls damping={6} pages={5}>
+        <Scroll html style={{ width: '100%' }}>
+          <Title>We create</Title>
+          <Title style={{ position: 'absolute', top: '110vh', right: '10vw' }}>
+            We DO EVERYTHING
+          </Title>
+          <h1 style={{ position: 'absolute', top: '450vh', right: '10vw' }}>
+            her
+            <br />
+            mes.
+          </h1>
+        </Scroll>
+      </ScrollControls>
+      {/* <Camera /> */}
     </>
   )
 }

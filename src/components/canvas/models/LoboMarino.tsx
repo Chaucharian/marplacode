@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import lerp from 'lerp'
 
-export const useRotate = (factor = 0.5) => {
+export const useRotate = (factor = 0.01) => {
   const ref: any = useRef()
   useFrame((state) => {
     const nextY = state.clock.getElapsedTime() * Math.PI * factor
@@ -13,7 +13,7 @@ export const useRotate = (factor = 0.5) => {
 }
 
 export function LoboMarino(props) {
-  //   const group = useRef()
+  // const group = useRef()
   const group = useRotate()
   const { nodes, materials } = useGLTF('models/lobo_marino.glb')
   return (
