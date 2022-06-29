@@ -21,6 +21,11 @@ import { useCameraEffect } from '@/components/canvas/hooks'
 import { Camera } from '@/components/canvas'
 import styled from 'styled-components'
 import { theme } from '@/styles'
+import { Section } from '@/sections/Section'
+import Landing from '@/sections/Landing'
+import { Text } from '@/components'
+import WhyUs from '@/sections/Whyus'
+import { Works, Contact } from '@/sections'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -29,15 +34,6 @@ import { theme } from '@/styles'
 const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
   ssr: false,
 })
-
-const Title = styled.h1`
-  ${(theme) => console.log('EEEE', theme)};
-  position: absolute;
-  top: 0vh;
-  color: ${theme.colors?.primary ?? 'red'};
-  left: 10vw;
-  font-size: 90px;
-`
 
 // dom components goes here
 const Page = (props) => {
@@ -112,15 +108,20 @@ Page.r3f = (props) => {
       </Bounds>
       <ScrollControls damping={6} pages={5}>
         <Scroll html style={{ width: '100%' }}>
-          <Title>We create</Title>
-          <Title style={{ position: 'absolute', top: '110vh', right: '10vw' }}>
-            We DO EVERYTHING
-          </Title>
-          <h1 style={{ position: 'absolute', top: '450vh', right: '10vw' }}>
-            her
-            <br />
-            mes.
-          </h1>
+          <Section index={0} content={<Landing />} />
+          {/* <Section index={1} content={<WhyUs />} />
+          <Section index={2} content={<Works />} />
+          <Section index={3} content={<Contact />} /> */}
+          <Section
+            index={4}
+            content={
+              <h1>
+                her
+                <br />
+                mes.
+              </h1>
+            }
+          />
         </Scroll>
       </ScrollControls>
       {/* <Camera /> */}
