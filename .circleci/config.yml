@@ -46,6 +46,7 @@ jobs:
           name: Deploy Over SSH
           command: |
             rsync -avz -e 'ssh' ./out $SSH_USER@$SSH_HOST:/home/marplacode
+          no_output_timeout: 30m
 
 workflows:
   version: 2
