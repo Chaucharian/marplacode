@@ -74,7 +74,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
       <Html as='div' position={[position[0], 3, position[2]]}>
         <h1>{index}</h1>
       </Html>
-
+      {/* @ts-ignore */}
       <Image
         ref={ref}
         {...props}
@@ -108,4 +108,4 @@ function Items({ w = 0.7, gap = 0.15 }) {
   )
 }
 
-export default () => <Items />
+export default Items

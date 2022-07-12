@@ -1,6 +1,6 @@
-import { useGLTF } from '@react-three/drei'
+import { Sparkles, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import lerp from 'lerp'
 
 export const useRotate = (factor = 0.01) => {
@@ -25,7 +25,7 @@ export function LoboMarino(props) {
         material={nodes.mesh_0.material}
         rotation={[-Math.PI / 2, 0, 0]}
         color='white'
-      />
+      ></mesh>
     </group>
   )
 }

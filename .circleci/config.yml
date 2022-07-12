@@ -1,0 +1,66 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:16.13.2
+    steps:
+      - checkout
+      - run:
+          name: Update NPM
+          command: 'sudo npm install -g npm'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build React App
+          command: npm run export
+      - save_cache:
+          key: app-build-cache-{{ .Branch }}
+          paths:
+            - ./out
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install rsync to copy folder
+          command: 'sudo apt install rsync'
+      - run:
+          name: List files
+          command: ls
+      - run:
+          name: Deploy Over SSH
+          command: |
+            rsync -avz -e 'ssh' ./out $SSH_USER@$SSH_HOST:/home/marplacode
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          context: 'DigitalOcean'
+          requires:
+            - build # only deploy once build job has completed
+          filters:
+            branches:
+              only: main # only deploy on the main branch
+

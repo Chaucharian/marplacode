@@ -7,7 +7,6 @@ const withOffline = require('next-offline')
 
 const nextConfig = {
   webpack(config, { isServer }) {
-
     // audio support
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
@@ -70,6 +69,10 @@ module.exports = plugins(
         },
         async rewrites() {
           return [
+            // {
+            //   source: '/api',
+            //   destination: 'https://youtu.be/MLeIBFYY6UY',
+            // },
             {
               source: '/service-worker.js',
               destination: '/_next/static/service-worker.js',
@@ -80,5 +83,14 @@ module.exports = plugins(
     ],
     withBundleAnalyzer,
   ],
-  nextConfig
+  {
+    ...nextConfig,
+    typescript: {
+      // !! WARN !!
+      // Dangerously allow production builds to successfully complete even if
+      // your project has type errors.
+      // !! WARN !!
+      ignoreBuildErrors: true,
+    },
+  }
 )

@@ -12,7 +12,7 @@ const geometry = new THREE.BufferGeometry().setFromPoints([
 ])
 
 export function Minimap() {
-  const ref = useRef()
+  const ref = useRef<any>()
   const scroll = useScroll()
   const { urls } = useSnapshot(state)
   const { height } = useThree((state) => state.viewport)

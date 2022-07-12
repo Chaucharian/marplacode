@@ -3,6 +3,9 @@ import { OrbitControls, Preload } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useEffect, useRef } from 'react'
 import { state } from '../canvas/Galery/utils'
+import styled from 'styled-components'
+
+const StyledCanvas = styled(Canvas)``
 
 const LControl = () => {
   const dom = useStore((state) => state.dom)
@@ -27,11 +30,11 @@ const LCanvas = ({ children, ...canvasProps }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <Canvas {...canvasProps}>
+    <StyledCanvas {...canvasProps}>
       {/* <LControl /> */}
       <Preload all />
       {children}
-    </Canvas>
+    </StyledCanvas>
   )
 }
 

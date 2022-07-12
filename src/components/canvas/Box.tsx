@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { useRef, useState } from 'react'
 
 const BoxComponent = ({ route }) => {
-  const router = useStore((s) => s.router)
+  // const router = useStore((s) => s.router)
   // This reference will give us direct access to the THREE.Mesh object
   const mesh = useRef(null)
   // Set up state for the hovered and active state
@@ -19,7 +19,7 @@ const BoxComponent = ({ route }) => {
     <>
       <mesh
         ref={mesh}
-        onClick={() => router.push(route)}
+        // onClick={() => router.push(route)}
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
         scale={hovered ? 1.1 : 1}
