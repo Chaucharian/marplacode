@@ -25,7 +25,7 @@ jobs:
       - save_cache:
           key: app-build-cache-{{ .Branch }}
           paths:
-            - ./out
+            - ./testing
       - persist_to_workspace:
           root: .
           paths:
@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            rsync -htavzr -e 'ssh' ./out $SSH_USER@$SSH_HOST:/home/marplacode
+            rsync -htavzr -e 'ssh' ./testing $SSH_USER@$SSH_HOST:/home/marplacode
           no_output_timeout: 30m
 
 workflows:
