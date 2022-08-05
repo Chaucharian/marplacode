@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Scene, Controller } from 'react-scrollmagic'
 
 const Wrapper = styled.div`
   ${({ top }) => `

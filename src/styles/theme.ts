@@ -27,8 +27,10 @@ export const size = {
 
 export const fonts = {
   h1: {
-    desktop: '110px',
+    desktop: '20px',
     mobile: '80px',
+    family: 'LibreFranklin',
+    fontWeight: 'normal',
   },
   h2: {
     desktop: '65px',
@@ -41,8 +43,7 @@ export const fonts = {
   p: {
     desktop: '40px',
     mobile: '20px',
-    family: 'Raleway',
-    fontWeight: 'lighter',
+    family: 'LibreFranklin',
   },
   span: {
     mobile: '12px',

@@ -15,23 +15,12 @@ const LandingScene = () => {
 
   return (
     <>
-      {showDescription && (
-        <Text
-          hasVideo={false}
-          font={'/fonts/AkiraOutline.otf'}
-          position={[-0.1, 2, -4]}
-          fontSize={0.2}
-          color={textColor}
-        >
-          We make you grow
-        </Text>
-      )}
       {ready && (
         <>
           <Text
             font='/fonts/AkiraSuperBold.otf'
-            position={[0, 0.5, -4]}
-            fontSize={2.5}
+            position={[0, 1.4, -4]}
+            fontSize={2}
           >
             {bigLetter}
           </Text>
@@ -50,7 +39,7 @@ const LandingScene = () => {
         mixBlur={12}
         mixStrength={1.5}
         rotation={[-Math.PI / 2, 0, Math.PI / 2]}
-        position={[0, -0.5, -4]}
+        position={[0, 0.4, -4]}
       />
     </>
   )

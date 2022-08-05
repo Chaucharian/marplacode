@@ -3,7 +3,8 @@ import React, { useRef } from 'react'
 import useStore from '@/helpers/store'
 import { canvasProps } from '@/scenes/MarplaJourney'
 import Navigation from '@/components/dom/Navigation/Navigation'
-import { Logo, Transition } from '@/components'
+import { Logo, Section, Transition } from '@/components'
+import { Landing } from '@/sections'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -16,14 +17,9 @@ const Page = (props) => {
   return (
     <>
       <Navigation />
-      <video
-        src='/videos/drei.mp4#t=0,30'
-        loop
-        autoPlay
-        hidden
-        muted
-        ref={video}
-      />
+      <video loop autoPlay hidden muted ref={video}>
+        <source src='/videos/drei.mp4#t=0,30' type='video/mp4' />
+      </video>
     </>
   )
 }

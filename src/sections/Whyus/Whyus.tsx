@@ -38,18 +38,18 @@ const WhyUs = () => {
   return (
     <>
       <Container>
-        <FloatingTextContainer show={show}>
+        {/* <FloatingTextContainer show={show}>
           <Text fontWeight='lighter'>Why us</Text>
-        </FloatingTextContainer>
+        </FloatingTextContainer> */}
         <Content>
-          <Flex height={'150px'} />
+          {/* <Flex height={'150px'} /> */}
           <Text
             fontWeight='lighter'
             color={theme.colors.orange}
             type={theme.fonts.span}
             blendMode='normal'
           >
-            .what we do
+            .we are
           </Text>
           <Flex height={0} mT={theme.spacing.small} mB={theme.spacing.small}>
             <Line
@@ -57,12 +57,11 @@ const WhyUs = () => {
               color={theme.colors.orange}
             />
           </Flex>
-
-          <Text fontWeight='lighter' type={theme.fonts.p}>
-            marplacode is a high-quality product agency focused on developing
-            next generation web applications, transforming them into a
-            sustainable business while ensuring they stay true to their core
-            values.
+          <Text fontWeight={'bold'} fontSize={'40px'} type={theme.fonts.p}>
+            A creative development studio
+          </Text>
+          <Text fontSize='35px' type={theme.fonts.p}>
+            that builds
           </Text>
         </Content>
       </Container>

@@ -26,7 +26,7 @@ const StyledAndAnimatedText = ({
   blendMode = 'difference',
   color = theme.colors?.primary,
   fontWeight = 'bold',
-  fontFamily = 'Akira',
+  fontFamily = 'LibreFranklin',
   fontSize = fonts[type].mobile,
   animate = false,
   children,
@@ -35,10 +35,10 @@ const StyledAndAnimatedText = ({
   const StyledAndAnimated = animated(styled(type)`
     font-size: ${fontSize};
     color: ${color};
-    font-weight: ${fonts[type].fontWeight ?? fontWeight};
+    font-weight: ${fontWeight ?? fonts[type].fontWeight};
     margin: 0px;
     mix-blend-mode: ${blendMode};
-    font-family: ${fonts[type].family ?? fontFamily};
+    font-family: ${fontFamily ?? fonts[type].family};
 
     @media ${device.desktop} {
       font-size: ${fonts[type].desktop};

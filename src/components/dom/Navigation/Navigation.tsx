@@ -43,7 +43,7 @@ const Navigation = () => {
       <Flex
         justifyContent='space-between'
         height={'4em'}
-        pR={theme.spacing.small}
+        p={theme.spacing.small}
       >
         {/* <Logo open={show && !open}>marplacode;</Logo> */}
         <div style={{ width: '50px', height: '50px' }}></div>

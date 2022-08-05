@@ -19,6 +19,11 @@ export default createGlobalStyle`
   @font-face {
     font-family: 'Circular';
     src: url('/fonts/CircularLight.ttf');
+    font-weight: ligther;
+  }
+  @font-face {
+    font-family: 'Circular';
+    src: url('/fonts/CircularMedium.ttf');
     font-weight: bold;
   }
   @font-face {
@@ -31,7 +36,32 @@ export default createGlobalStyle`
     src: url('/fonts/Raleway-Bold.ttf');
     font-weight: bold;
   }
-  
+  @font-face {
+    font-family: 'LibreFranklin';
+    src: url('/fonts/LibreFranklin-Medium.ttf');
+    font-weight: 300;
+  }
+   @font-face {
+    font-family: 'LibreFranklin';
+    src: url('/fonts/LibreFranklin-Regular.ttf');
+    font-weight: bolder;
+  }
+   @font-face {
+    font-family: 'LibreFranklin';
+    src: url('/fonts/LibreFranklin-SemiBold.ttf');
+    font-weight: 600;
+  }  
+  @font-face {
+    font-family: 'LibreFranklin';
+    src: url('/fonts/LibreFranklin-Bold.ttf');
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: 'LibreFranklin';
+    src: url('/fonts/LibreFranklin-ExtraBold.ttf');
+    font-weight: normal;
+  }
+
   * {
    box-sizing: border-box;
   }
@@ -46,7 +76,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: 'Akira';
+    font-family: 'LibreFranklin';
     background-color: black;
   }
 `
