@@ -4,36 +4,19 @@ import { useSpring, UseSpringProps } from '@react-spring/core'
 import { animated } from '@react-spring/web'
 import styled from 'styled-components'
 
-// ${animate
-//   ? `
-// overflow: hidden;
-// transition: clip-path 1500ms ease;
-// &:hover::before {
-//   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-// }
-// &::before {
-//   position: absolute;
-//   content: '${animate}';
-//   color: ${theme.colors.orange};
-//   text-decoration: none;
-//   clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
-//   transition: clip-path 500ms ease;
-// }`
-//   : ''}
-
 const StyledAndAnimatedText = ({
   type = 'h1',
   blendMode = 'difference',
   color = theme.colors?.primary,
-  fontWeight = 'bold',
+  fontWeight,
   fontFamily = 'LibreFranklin',
-  fontSize = fonts[type].mobile,
+  fontSize,
   animate = false,
   children,
   ...props
 }) => {
   const StyledAndAnimated = animated(styled(type)`
-    font-size: ${fontSize};
+    font-size: ${fontSize ?? fonts[type].mobile};
     color: ${color};
     font-weight: ${fontWeight ?? fonts[type].fontWeight};
     margin: 0px;

@@ -87,6 +87,10 @@ const Button = styled.button`
   margin: 0;
 `
 
+const Svg = styled.svg`
+  mix-blend-mode: difference;
+`
+
 const Burger = ({ open, show, onClick }) => {
   const showAnimation = useSpring({
     width: show ? '100%' : '0%',
@@ -104,7 +108,7 @@ const Burger = ({ open, show, onClick }) => {
 
   return (
     <Button>
-      <svg
+      <Svg
         onClick={onClick}
         width='40'
         height='32'
@@ -125,7 +129,7 @@ const Burger = ({ open, show, onClick }) => {
           rx='2'
           style={{ ...third, ...showAnimation }}
         />
-      </svg>
+      </Svg>
     </Button>
   )
 }

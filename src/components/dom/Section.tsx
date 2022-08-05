@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   ${({ top }) => `
   position: absolute;
   right: 0;
   top: ${top}vh;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `}
 `
 const Section = ({ index, content, sceneOptions, controllerOptions }: any) => {

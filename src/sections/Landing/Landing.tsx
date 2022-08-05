@@ -36,7 +36,7 @@ const Landing = () => {
         p={theme.spacing.small}
         flexDirection='column'
         justifyContent={'flex-end'}
-        height={'100vh'}
+        height={'100%'}
       >
         <Flex>
           <Flex flexDirection='column'>

@@ -13,6 +13,7 @@ export default {
     span: 'span',
   },
   spacing: {
+    tiny: '0.5em',
     small: '1em',
     medium: '4em',
     large: '6em',
@@ -34,21 +35,26 @@ export const fonts = {
   },
   h2: {
     desktop: '65px',
-    mobile: '45px',
+    mobile: '40px',
+    family: 'LibreFranklin',
+    fontWeight: 'lighter',
   },
   h3: {
-    desktop: '8rem',
-    mobile: '6rem',
+    desktop: '65px',
+    mobile: '22px',
+    family: 'LibreFranklin',
+    fontWeight: 'lighter',
   },
   p: {
     desktop: '40px',
     mobile: '20px',
     family: 'LibreFranklin',
+    fontWeight: 'lighter',
   },
   span: {
     mobile: '12px',
-    family: 'Inter',
-    fontWeight: 'bold',
+    family: 'LibreFranklin',
+    fontWeight: 'lighter',
   },
 }
 
