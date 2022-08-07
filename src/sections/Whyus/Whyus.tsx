@@ -6,6 +6,7 @@ import React from 'react'
 import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
+import GlowText from '@/components/dom/GlowText'
 
 const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
@@ -22,8 +23,9 @@ const WhyUs = () => {
       <Flex height={theme.spacing.medium} />
       <Text type={theme.fonts.h3}>Why Us</Text>
       <Flex height={theme.spacing.medium} />
-      <Text type={theme.fonts.h2}>A createive development studio</Text>
-      <Flex height={theme.spacing.medium} />
+      <Text type={theme.fonts.h2}>A createive development</Text>
+      <GlowText>studio</GlowText>
+      <Flex height={theme.spacing.small} />
       <Text type={theme.fonts.p} color='#465764'>
         that build hand crafted web experiences delivering high quality digital
         products.
