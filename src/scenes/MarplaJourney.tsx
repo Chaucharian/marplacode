@@ -73,10 +73,10 @@ function MarplaJourney({ ...props }) {
         <directionalLight position={[-50, 0, -40]} intensity={0.7} />
       </Suspense>
       <Scroll html style={{ width: '100%' }}>
-        <Section index={0} content={<Landing />} />
-        <Section index={1} content={<Whyus />} />
-        <Section index={2} content={<Works />} />
-        <Section index={3} content={<Contact />} />
+        <Section index={0} content={<></>} />
+        <Section index={1} content={<></>} />
+        <Section index={2} content={<></>} />
+        <Section index={3} content={<></>} />
       </Scroll>
     </>
   )

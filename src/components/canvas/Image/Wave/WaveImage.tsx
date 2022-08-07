@@ -19,7 +19,7 @@ const WaveShaderMaterial = shaderMaterial(
 extend({ WaveShaderMaterial })
 
 const WaveImage = ({
-  position = [0, 1, 0],
+  position = [0, 1, -1],
   width = 1,
   height = 3,
   url,

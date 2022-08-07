@@ -15,28 +15,81 @@ const Shadow = styled.section`
   background-image: linear-gradient(#00000000, #000000);
 `
 
+const Colors = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 15;
+`
+
+const ColorContainer = styled.div`
+  ${({ rotation = 0 }) => `
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: rotate(${rotation}deg);
+  animation: rotation 10s ease-in-out 2s infinite alternate;
+  filter: blur(200px);
+
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`}
+`
+
+const ColorBall = styled.div`
+  ${({ color = '#9DE3D7' }) => `
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: ${color};
+  filter: blur(200px);
+`}
+`
+
 const IndicatorContainer = styled.div`
   width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 300000;
+  z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 `
 const Landing = () => {
   const show = useStore((state) => state.domReady)
-
+  const video = useStore((state) => state?.video)
   return (
     <>
-      <Shadow />
+      {/* <ColorContainer>
+        <ColorBall color='#9DE3D7' />
+      </ColorContainer>
+      <ColorContainer rotation={200}>
+        <ColorBall color='#318FC3' />
+      </ColorContainer>
+      <ColorContainer rotation={90}>
+        <ColorBall color='#027F70' />
+      </ColorContainer> */}
+
       <Flex
         p={theme.spacing.small}
         flexDirection='column'
         justifyContent={'flex-end'}
         height={'100%'}
+        style={{ zIndex: 300001 }}
       >
         <Flex>
           <Flex flexDirection='column'>
@@ -45,7 +98,14 @@ const Landing = () => {
               trough high quality design and development
             </Text>
             <Flex height='48px' />
-            <Button>Start project</Button>
+            <Button
+              onClick={() => {
+                console.log('asdsa')
+                video?.current?.play()
+              }}
+            >
+              Start project
+            </Button>
             <Flex height='48px' />
           </Flex>
 
@@ -56,6 +116,7 @@ const Landing = () => {
           </IndicatorContainer>
         </Flex>
       </Flex>
+      {/* <Shadow /> */}
     </>
   )
 }

@@ -4,7 +4,8 @@ import useStore from '@/helpers/store'
 import { canvasProps } from '@/scenes/MarplaJourney'
 import Navigation from '@/components/dom/Navigation/Navigation'
 import { Logo, Section, Transition } from '@/components'
-import { Landing } from '@/sections'
+import { Contact, Landing, Works } from '@/sections'
+import Whyus from '@/sections/Whyus/Whyus'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -17,6 +18,11 @@ const Page = (props) => {
   return (
     <>
       <Navigation />
+      <Section index={0} content={<Landing />} />
+      <Section index={1} content={<Whyus />} />
+      <Section index={2} content={<Works />} />
+      <Section index={3} content={<Contact />} />
+
       <video loop autoPlay hidden muted playsInline ref={video}>
         {/* <source src='/videos/drei.mp4#t=0,30' type='video/mp4' /> */}
         <source src='/videos/video.webm#t=0,30' type='video/webm' />

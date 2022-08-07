@@ -1,7 +1,7 @@
 import { Flex, Text, Line, Spacer, OpenButton } from '@/components/dom'
 import { theme } from '@/styles'
 import { lineGrow } from '@/helpers/animations'
-import { animated, useSpring } from '@react-spring/web'
+import { animated, config, useSpring, useTransition } from '@react-spring/web'
 import styled from 'styled-components'
 import { useState } from 'react'
 
@@ -27,13 +27,22 @@ const mock = [
   },
 ]
 
-const Content = styled.div`
+const Content = animated(styled.div`
   ${({ open }) => `
+  z-index: 100;
   transition: all ease-in 0.5s;
   height: ${open ? '80px' : '0px'};
-  opacity:  ${open ? '1' : '0'};
 `}
-`
+`)
+
+const Item = ({ open, delay, children }) => {
+  const animation = useSpring({
+    opacity: open ? 1 : 0,
+    delay,
+  })
+  return <animated.div style={animation}>{open && children}</animated.div>
+}
+
 const ServicesList = ({ play, services: initialServices = mock }) => {
   const [services, setServices] = useState(initialServices)
 
@@ -46,12 +55,13 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
       }
       return service
     })
+
     setServices(newServices)
   }
 
   return (
     <Flex flexDirection='column'>
-      {services.map(({ title, content, open }, index) => (
+      {services.map(({ title, open, content }, index) => (
         <Flex flexDirection='column'>
           <Flex justifyContent='space-between'>
             <Text type={theme.fonts.h3} fontWeight={'lighter'} fontSize='27px'>
@@ -68,11 +78,13 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
               flexWrap='wrap'
               flexDirection='column'
             >
-              {content.map((item) => (
-                <>
-                  <Text type={theme.fonts.span}>{item}</Text>
+              {content.map((item, index) => (
+                <Item open={open} delay={200 * index}>
+                  <Text color='#000' type={theme.fonts.span}>
+                    {item}
+                  </Text>
                   <Spacer vertical={theme.spacing.small} />
-                </>
+                </Item>
               ))}
             </Flex>
           </Content>

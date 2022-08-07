@@ -15,9 +15,9 @@ const StyledButton = styled.button`
   color: white;
 `
 
-const Button = ({ children }) => {
+const Button = ({ children, ...props }) => {
   return (
-    <StyledButton>
+    <StyledButton {...props}>
       <Text type={theme.fonts.p} fontWeight={'lighter'}>
         {children}
       </Text>

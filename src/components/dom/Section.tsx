@@ -7,6 +7,7 @@ const Wrapper = styled.section`
   top: ${top}vh;
   width: 100%;
   height: 100vh;
+  z-index: 9;
 `}
 `
 const Section = ({ index, content, sceneOptions, controllerOptions }: any) => {
