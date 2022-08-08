@@ -7,6 +7,7 @@ import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
+import AppearingEffect from '@/components/dom/AppearingEffect'
 
 const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
@@ -21,7 +22,10 @@ const WhyUs = () => {
       flexDirection='column'
     >
       <Flex height={theme.spacing.medium} />
-      <Text type={theme.fonts.h3}>Why Us</Text>
+      <AppearingEffect show={animate} effect='top'>
+        <Text type={theme.fonts.h3}>Why Us</Text>
+      </AppearingEffect>
+
       <Flex height={theme.spacing.medium} />
       <Text type={theme.fonts.h2}>A createive development</Text>
       <GlowText>studio</GlowText>

@@ -23,7 +23,7 @@ const Page = (props) => {
       <Section index={2} content={<Works />} />
       <Section index={3} content={<Contact />} />
 
-      <video loop autoPlay hidden muted playsInline ref={video}>
+      <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
         {/* <source src='/videos/drei.mp4#t=0,30' type='video/mp4' /> */}
         <source src='/videos/video.webm#t=0,30' type='video/webm' />
       </video>

@@ -15,10 +15,10 @@ function Text({
   const [on, setState] = useState(false)
   const [font, setFont] = useState('/fonts/AkiraOutline.otf')
 
-  // useEffect(() => {
-  //   const id = setTimeout(() => video.current?.play(), 1000)
-  //   return () => clearTimeout(id)
-  // }, [video])
+  useEffect(() => {
+    const id = setTimeout(() => video.current?.play(), 2000)
+    return () => clearTimeout(id)
+  }, [video])
 
   // useEffect(() => {
   //   if (on) {

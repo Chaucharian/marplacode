@@ -16,6 +16,7 @@ import {
 } from '@react-spring/core'
 import * as animations from '@/helpers/animations'
 import { animated } from '@react-spring/web'
+import AppearingEffect from '../AppearingEffect'
 
 const Nav = styled(animated.nav)`
   display: flex;
@@ -49,7 +50,7 @@ const Li = styled(animated.li)`
 
 const menuItems = [
   { name: 'HOME', link: 'home' },
-  { name: 'OUR SERVICES', link: 'services' },
+  { name: 'SERVICES', link: 'services' },
   { name: 'WHO WE ARE', link: 'history' },
   { name: 'CONTACT', link: 'contact' },
 ]
@@ -82,9 +83,24 @@ const Menu = ({ show }: any) => {
 
   return (
     // <Nav style={springProps}>
+
     <Nav>
       <ul>
-        {liTransitions((springAnimation, key, { item }, index) => {
+        {menuItems.map((item, index) => (
+          <Li key={index}>
+            <AppearingEffect
+              show={show}
+              effect='top'
+              animationProps={{ delay: 100 * index }}
+            >
+              <div>
+                <span>{index + 1}.</span>
+              </div>
+              <a href={item.link}>{item.name}</a>
+            </AppearingEffect>
+          </Li>
+        ))}
+        {/* {liTransitions((springAnimation, key, { item }, index) => {
           return (
             <>
               <Li key={key} style={springAnimation}>
@@ -95,7 +111,7 @@ const Menu = ({ show }: any) => {
               </Li>
             </>
           )
-        })}
+        })} */}
       </ul>
     </Nav>
   )

@@ -38,6 +38,12 @@ const Navigation = () => {
   const show = useStore((state) => state.domReady)
   const scroll = useStore((state) => state.scroll)
 
+  const openHandler = () => {
+    const navigationState = !open
+    setOpen(navigationState)
+    useStore.setState({ navigationState })
+  }
+
   return (
     <NavigationContainer show={show} showFull={scroll >= 0.06}>
       <Flex
@@ -47,7 +53,7 @@ const Navigation = () => {
       >
         {/* <Logo open={show && !open}>marplacode;</Logo> */}
         <div style={{ width: '50px', height: '50px' }}></div>
-        <BurgerButton open={open} show={show} onClick={() => setOpen(!open)} />
+        <BurgerButton open={open} show={show} onClick={openHandler} />
       </Flex>
       <Content open={open}>
         <Menu show={open} />
