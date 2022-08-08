@@ -52,8 +52,8 @@ function MarplaJourney({ ...props }) {
           <ContactScene /> */}
           {/* <EffectComposer>
             <Glitch columns={0.0001} strength={[0, 1]} />
-          </EffectComposer> */}
-          {/* <EffectComposer multisampling={8}>
+          </EffectComposer>
+          <EffectComposer multisampling={8}>
             <Bloom
               kernelSize={3}
               luminanceThreshold={0}

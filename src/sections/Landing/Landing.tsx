@@ -6,6 +6,8 @@ import useStore from '@/helpers/store'
 import * as animations from '@/helpers/animations'
 import Line from '@/components/dom/Line'
 import { fonts } from '@/styles/theme'
+import AppearingText from '@/components/dom/AppearingText'
+import AppearingEffect from '@/components/dom/AppearingText'
 
 const Shadow = styled.section`
   width: 100%;
@@ -93,25 +95,37 @@ const Landing = () => {
       >
         <Flex>
           <Flex flexDirection='column'>
-            <Text type={theme.fonts.h1}>Hand</Text>
-            <Text type={theme.fonts.p} fontWeight={'lighter'}>
-              trough high quality design and development
-            </Text>
+            <AppearingEffect show={show}>
+              <Text type={theme.fonts.h1}>Hand</Text>
+            </AppearingEffect>
+            <AppearingEffect animationProps={{ delay: 500 }} show={show}>
+              <Text type={theme.fonts.p} fontWeight={'lighter'}>
+                trough high quality design and development
+              </Text>
+            </AppearingEffect>
             <Flex height='48px' />
-            <Button
-              onClick={() => {
-                console.log('asdsa')
-                video?.current?.play()
-              }}
-            >
-              Start project
-            </Button>
+            <AppearingEffect animationProps={{ delay: 700 }} show={show}>
+              <Button
+                onClick={() => {
+                  console.log('asdsa')
+                  video?.current?.play()
+                }}
+              >
+                Start project
+              </Button>
+            </AppearingEffect>
             <Flex height='48px' />
           </Flex>
 
           <IndicatorContainer>
             <Flex justifyContent='end' pr={theme.spacing.small}>
-              <GoDownIndicator />
+              <AppearingEffect
+                animationProps={{ delay: 900 }}
+                effect='top'
+                show={show}
+              >
+                <GoDownIndicator />
+              </AppearingEffect>
             </Flex>
           </IndicatorContainer>
         </Flex>
