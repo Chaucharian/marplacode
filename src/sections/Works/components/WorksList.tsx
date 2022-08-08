@@ -7,8 +7,9 @@ import { animated } from '@react-spring/web'
 import useStore from '@/helpers/store'
 
 const Container = animated(styled.div`
-  overflow-x: auto;
+overflow: 
   display: flex;
+  flex-direction: column;
 `)
 
 export const WorksList = ({ works, onChange }: any) => {

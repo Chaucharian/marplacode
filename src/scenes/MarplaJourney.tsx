@@ -68,15 +68,19 @@ function MarplaJourney({ ...props }) {
             />
           </EffectComposer> */}
         </group>
+        <group position={[0, -0.4, -1]}>
+          <WaveImage />
+        </group>
+
         <ambientLight intensity={0.5} />
         <spotLight position={[0, 10, 0]} intensity={0.3} />
         <directionalLight position={[-50, 0, -40]} intensity={0.7} />
       </Suspense>
       <Scroll html style={{ width: '100%' }}>
-        <Section index={0} content={<></>} />
-        <Section index={1} content={<></>} />
-        <Section index={2} content={<></>} />
-        <Section index={3} content={<></>} />
+        <Section index={0} content={<div></div>} />
+        <Section index={1} content={<div></div>} />
+        <Section index={2} content={<div></div>} />
+        <Section index={3} content={<div></div>} />
       </Scroll>
     </>
   )

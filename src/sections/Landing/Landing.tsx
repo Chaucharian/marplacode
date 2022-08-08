@@ -66,7 +66,7 @@ const IndicatorContainer = styled.div`
   width: 100vw;
   height: 100vh;
   position: absolute;
-  top: 0;
+  top: -60px;
   left: 0;
   z-index: -1;
   display: flex;

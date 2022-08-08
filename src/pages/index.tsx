@@ -25,7 +25,7 @@ const Page = (props) => {
 
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
         {/* <source src='/videos/drei.mp4#t=0,30' type='video/mp4' /> */}
-        <source src='/videos/video.webm#t=0,30' type='video/webm' />
+        <source src='/videos/video.webm' type='video/webm' />
       </video>
     </>
   )

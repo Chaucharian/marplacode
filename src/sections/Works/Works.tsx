@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, LiquidEffect, Text } from '@/components/dom'
+import { Flex, LiquidEffect, Spacer, Text } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useMemo, useState } from 'react'
@@ -25,6 +25,23 @@ const FloatingTextContainer = styled.div`
   @media ${device.desktop} {
     top: -40px;
   }
+`}
+`
+
+const Box = styled.div`
+  ${({ top = 0 }) => `  
+  position: absolute;
+  top: -10px;
+  z-index: -20;
+  background-color: white;
+  width: 100px;
+  height: 30px;
+`}
+`
+const BoxC = styled.div`
+  ${({ top = 0 }) => `
+  position:relative;
+overflow: hidden;
 `}
 `
 
@@ -61,8 +78,16 @@ const Works = () => {
   }
 
   return (
-    <Container>
-      <Text type={theme.fonts.h2}>Selected works</Text>
+    <Flex flexDirection='column' p={theme.spacing.small}>
+      <Spacer vertical={theme.spacing.medium} />
+
+      <BoxC>
+        <Text type={theme.fonts.h1} fontFamily='Akira' fontSize={'30px'}>
+          Selected works
+        </Text>
+        <Box />
+      </BoxC>
+
       <Flex height={theme.spacing.small} />
       <WorksList
         works={works}
@@ -72,7 +97,7 @@ const Works = () => {
       <Flex mT={theme.spacing.small}>
         <Text type={theme.fonts.p}>{selectedWork?.description}</Text>
       </Flex>
-    </Container>
+    </Flex>
   )
 }
 export default Works
