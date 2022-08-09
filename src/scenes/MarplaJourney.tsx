@@ -22,6 +22,7 @@ import WhyusScene from '@/sections/Whyus/Whyus.r3f'
 import WorksScene from '@/sections/Works/Works.r3f'
 import ContactScene from '@/sections/Contact/Contact.r3f'
 import Whyus from '@/sections/Whyus/Whyus'
+import Galery from '@/components/canvas/WorksGalery/Galery'
 
 export const canvasProps = {
   gl: { alpha: false },
@@ -50,11 +51,11 @@ function MarplaJourney({ ...props }) {
           {/* <WhyusScene />
           <WorksScene />
           <ContactScene /> */}
-          {/* <EffectComposer>
+          <EffectComposer>
             <Glitch columns={0.0001} strength={[0, 1]} />
           </EffectComposer>
           <EffectComposer multisampling={8}>
-            <Bloom
+            {/* <Bloom
               kernelSize={3}
               luminanceThreshold={0}
               luminanceSmoothing={0.4}
@@ -65,11 +66,11 @@ function MarplaJourney({ ...props }) {
               luminanceThreshold={0}
               luminanceSmoothing={0}
               intensity={0.5}
-            />
-          </EffectComposer> */}
+            /> */}
+          </EffectComposer>
         </group>
         <group position={[0, -0.4, -1]}>
-          <WaveImage />
+          <Galery />
         </group>
 
         <ambientLight intensity={0.5} />
