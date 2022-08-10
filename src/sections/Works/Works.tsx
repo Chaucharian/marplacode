@@ -4,6 +4,7 @@ import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useMemo, useState } from 'react'
 import { WorksList } from './components/WorksList'
+import { useSpring } from '@react-spring/core'
 
 const Container = styled.section`
   width: 100%;
@@ -29,9 +30,10 @@ const FloatingTextContainer = styled.div`
 `
 
 const Box = styled.div`
-  ${({ top = 0 }) => `  
+  ${({ top = 0, left = 100 }) => `  
   position: absolute;
   top: -10px;
+  left: ${left}px;
   z-index: -20;
   background-color: white;
   width: 100px;
@@ -77,6 +79,11 @@ const Works = () => {
     setWorks(newWorks)
   }
 
+  // const [show, ]
+  // useSpring({
+  //   left: show ? '-100%' : '50%'
+  // })
+
   return (
     <Flex flexDirection='column' p={theme.spacing.small}>
       <Spacer vertical={theme.spacing.medium} />
@@ -85,6 +92,7 @@ const Works = () => {
         <Text type={theme.fonts.h1} fontFamily='Akira' fontSize={'30px'}>
           Selected works
         </Text>
+        <Box />
         <Box />
       </BoxC>
 

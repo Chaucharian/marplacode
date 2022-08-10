@@ -4,6 +4,7 @@ import { Canvas, extend, useFrame, useLoader } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
 import vertex from './shaders/shader.vert'
 import fragment from './shaders/shader.frag'
+import lerp from 'lerp'
 
 const WaveShaderMaterial = shaderMaterial(
   // Uniform
@@ -31,6 +32,16 @@ const WaveImage = ({
     url ??
       'https://images.unsplash.com/photo-1604011092346-0b4346ed714e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80',
   ])
+
+  useFrame(() => {
+    // const { pages, top } = state
+    // image.scale = lerp(
+    //   material.current.scale,
+    //   offsetFactor - top.current / ((pages - 1) * viewportHeight),
+    //   0.1
+    // )
+    image.shift = lerp(image.shift, 2, 200)
+  })
 
   return (
     <group position={position}>

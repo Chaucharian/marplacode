@@ -69,9 +69,9 @@ function MarplaJourney({ ...props }) {
             /> */}
           </EffectComposer>
         </group>
-        <group position={[0, -0.4, -1]}>
+        {/* <group position={[0, -0.4, -1]}>
           <Galery />
-        </group>
+        </group> */}
 
         <ambientLight intensity={0.5} />
         <spotLight position={[0, 10, 0]} intensity={0.3} />

@@ -53,7 +53,7 @@ function Text({
           <videoTexture
             attach='map'
             args={[video.current]}
-            encoding={THREE.sRGBEncoding}
+            // encoding={THREE.sRGBEncoding}
           />
         </meshBasicMaterial>
       )}

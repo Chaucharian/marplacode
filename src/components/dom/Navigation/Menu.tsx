@@ -48,6 +48,24 @@ const Li = styled(animated.li)`
   }
 `
 
+const Filter = styled(animated.span)`
+  ${({ filter }) => `
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  background: currentColor;
+  bottom: 5px;
+  filter: none;
+    color: currentColor;
+
+  &:hover{ 
+
+    filter: url(#filter-6);
+  }
+
+`}
+`
+
 const menuItems = [
   { name: 'HOME', link: 'home' },
   { name: 'SERVICES', link: 'services' },
@@ -93,10 +111,13 @@ const Menu = ({ show }: any) => {
               effect='top'
               animationProps={{ delay: 100 * index }}
             >
-              <div>
-                <span>{index + 1}.</span>
-              </div>
-              <a href={item.link}>{item.name}</a>
+              <Flex position='relative' flexDirection='column'>
+                <div>
+                  <span>{index + 1}.</span>
+                </div>
+                <a href={item.link}>{item.name}</a>
+                <Filter />
+              </Flex>
             </AppearingEffect>
           </Li>
         ))}
