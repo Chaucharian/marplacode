@@ -7,6 +7,7 @@ import * as animations from '@/helpers/animations'
 import Line from '@/components/dom/Line'
 import { fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
+import { useChangeDescription } from './hooks/useChangeDescription'
 
 const Shadow = styled.div`
   width: 100%;
@@ -73,7 +74,21 @@ const IndicatorContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
 `
+
+const options = [
+  { title: 'Hand', description: 'trough high quality design and development' },
+  { title: 'Design', description: 'desiging everything from scratch' },
+  { title: 'Making', description: 'making any dream possible' },
+]
+
 const Landing = () => {
+  const { title, description } = useChangeDescription({
+    time: 4000,
+    options,
+    onChange: ({ title }) => {
+      useStore.setState({ letter: title[0] })
+    },
+  })
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
   const show = !navigationState
@@ -99,7 +114,7 @@ const Landing = () => {
               animationProps={{ delay: 500 }}
               show={show}
             >
-              <Text type={theme.fonts.h1}>Hand</Text>
+              <Text type={theme.fonts.h1}>{title}</Text>
             </AppearingEffect>
             <AppearingEffect
               animationProps={{ delay: 1000 }}
@@ -107,7 +122,7 @@ const Landing = () => {
               show={show}
             >
               <Text type={theme.fonts.p} fontWeight={'lighter'}>
-                trough high quality design and development
+                {description}
               </Text>
             </AppearingEffect>
             <Flex height='48px' />
@@ -118,8 +133,7 @@ const Landing = () => {
             >
               <Button
                 onClick={() => {
-                  console.log('asdsa')
-                  video?.current?.play()
+                  // video?.current?.play()
                 }}
               >
                 Start project
