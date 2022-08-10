@@ -6,7 +6,7 @@ import BurgerButton from '../BurgerButton'
 import Logo from '../Logo'
 import useStore from '@/helpers/store'
 import Line from '../Line'
-import { Text } from '@/components/dom/'
+import { Link, Text } from '@/components/dom/'
 import {
   config,
   useChain,
@@ -17,15 +17,26 @@ import {
 import * as animations from '@/helpers/animations'
 import { animated } from '@react-spring/web'
 import AppearingEffect from '../AppearingEffect'
+import { Spacer } from '@/components'
+
+const Container = styled(animated.div)`
+  padding: ${theme.spacing.small};
+`
 
 const Nav = styled(animated.nav)`
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-left: 1em;
+
   ul {
     margin: 0;
     padding: 0;
+  }
+
+  span {
+    color: white;
+    font-size: 8px;
+    font-family: Inter;
+    font-weight: 100;
   }
 `
 
@@ -41,12 +52,6 @@ const Li = styled(animated.li)`
     text-transform: uppercase;
     text-decoration: none;
     line-height: 1.3;
-  }
-  span {
-    color: white;
-    font-size: 8px;
-    font-family: Inter;
-    font-weight: 100;
   }
 
   .a {
@@ -89,66 +94,48 @@ const menuItems = [
 ]
 
 const Menu = ({ show }: any) => {
-  // Set refs - required for useChain
-  const navRef = useSpringRef()
-  const liRef = useSpringRef()
-
-  // Setup animation for nav element
-  const navAnimation = useSpring<any>({
-    ref: navRef,
-    config: config.default,
-    from: { width: '0%' },
-    to: { width: show ? '100%' : '0%' },
-  })
-  const transitionConfig: any = {
-    ref: liRef,
-    trail: 400 / menuItems.length,
-    from: { opacity: 0, transform: 'translateY(20px)' },
-    enter: { opacity: 1, transform: 'translateY(0)' },
-    leave: { opacity: 0, transform: 'translateY(20px)' },
-  }
-  // Setup animations for nav items
-  const liTransitions = useTransition(show ? menuItems : [], transitionConfig)
-
-  // On showMenu, start with nav animationm then nav items
-  const animationOrder: any = show ? [navRef, liRef] : [liRef, navRef]
-  useChain(animationOrder, [0, show ? 0.4 : 0.6])
-
   return (
-    // <Nav style={springProps}>
-
-    <Nav>
-      <ul>
-        {menuItems.map((item, index) => (
-          <Li key={index}>
-            <AppearingEffect
-              show={show}
-              effect='top'
-              animationProps={{ delay: 100 * index }}
-            >
-              <div>
-                <span>{index + 1}.</span>
-              </div>
-              <a href={item.link}>{item.name}</a>
-              <div className='a'></div>
-              <div className='b'></div>
-            </AppearingEffect>
-          </Li>
-        ))}
-        {/* {liTransitions((springAnimation, key, { item }, index) => {
-          return (
-            <>
-              <Li key={key} style={springAnimation}>
+    <Container>
+      <AppearingEffect show={show} effect='top' blendMode='difference'>
+        <Spacer vertical={theme.spacing.medium} />
+        <Text type={theme.fonts.span}>Menu</Text>
+        <Spacer vertical={theme.spacing.small} />
+      </AppearingEffect>
+      <Nav>
+        <ul>
+          {menuItems.map((item, index) => (
+            <Li key={index}>
+              <AppearingEffect
+                show={show}
+                effect='top'
+                animationProps={{ delay: 50 * index }}
+              >
                 <div>
                   <span>{index + 1}.</span>
                 </div>
-                <a href={item.link}>{item.name}</a>
-              </Li>
-            </>
-          )
-        })} */}
-      </ul>
-    </Nav>
+                <a>{item.name}</a>
+                <div className='a'></div>
+                <div className='b'></div>
+              </AppearingEffect>
+            </Li>
+          ))}
+        </ul>
+      </Nav>
+      <Spacer vertical={theme.spacing.large} />
+      <AppearingEffect
+        show={show}
+        animationProps={{ delay: show ? 350 : 0 }}
+        effect='top'
+        blendMode='difference'
+      >
+        <Text type={theme.fonts.span}>Get in touch</Text>
+        <Link show={show}>
+          <Text type={theme.fonts.span} fontSize={'16px'}>
+            hello@marplacode.com
+          </Text>
+        </Link>
+      </AppearingEffect>
+    </Container>
   )
 }
 

@@ -6,6 +6,7 @@ export interface AppearingEffectProps {
   effect?: 'left' | 'right' | 'top' | 'bottom'
   rotation?: number
   animationProps?: UseSpringProps
+  blendMode?: string
   children: any
 }
 
@@ -13,9 +14,10 @@ const AppearingEffect: FC<AppearingEffectProps> = ({
   show = false,
   effect = 'left',
   rotation = 0,
+  blendMode = 'normal',
   animationProps,
   children,
-}: any) => {
+}) => {
   const xEffect =
     effect === 'left' ? '-100%' : effect === 'right' ? '100%' : '0%'
   const yEffect =
@@ -29,7 +31,9 @@ const AppearingEffect: FC<AppearingEffectProps> = ({
   })
 
   return (
-    <animated.div style={{ color: 'white', overflow: 'hidden' }}>
+    <animated.div
+      style={{ color: 'white', overflow: 'hidden', mixBlendMode: blendMode }}
+    >
       <animated.div style={animation}>{children}</animated.div>
     </animated.div>
   )
