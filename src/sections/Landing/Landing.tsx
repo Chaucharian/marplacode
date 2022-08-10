@@ -80,7 +80,7 @@ const Landing = () => {
 
   console.log(show)
   const domReady = () => {
-    setTimeout(() => useStore.setState({ domReady: true }), 2000)
+    setTimeout(() => useStore.setState({ domReady: true }), 1000)
     // useStore.setState({ domReady: true })
   }
 

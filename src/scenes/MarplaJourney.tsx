@@ -20,7 +20,7 @@ function MarplaJourney({ ...props }) {
 
   return (
     <>
-      {/* <fog attach='fog' color='black' near={5} far={7} /> */}
+      <fog attach='fog' color='black' near={5} far={7} />
       {/* <color attach='background' args={['black']} /> */}
       <ambientLight />
       <Suspense fallback={null}>

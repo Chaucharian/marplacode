@@ -1,14 +1,13 @@
 import useStore from '@/helpers/store'
 import { useScroll } from '@react-three/drei'
 import { useThree, useFrame } from '@react-three/fiber'
-
 import { useState } from 'react'
 import * as THREE from 'three'
 
 export const useCameraEffect = ({ mouseMove, scrollMove }) => {
-  const camera = useThree((state) => state.camera)
+  // const camera = useThree((state) => state.camera)
   const [vec] = useState(() => new THREE.Vector3())
-  const scroll = useScroll()
+  const domReady = useStore((state) => state.domReady)
 
   return useFrame((state) => {
     // if user scroll a little
@@ -16,7 +15,7 @@ export const useCameraEffect = ({ mouseMove, scrollMove }) => {
 
     // }
     // dispatch current scroll
-    useStore.setState(() => ({ scroll: Number(scroll.offset.toFixed(2)) }))
+    // useStore.setState(() => ({ scroll: Number(scroll.offset.toFixed(2)) }))
 
     // if (mouseMove) {
     //   const scrollDelta = scroll.range(0, 1) * 10
@@ -35,17 +34,18 @@ export const useCameraEffect = ({ mouseMove, scrollMove }) => {
     //   // }
     // }
 
-    // camera movement
-    // state.camera.position.lerp(
-    //   vec.set(state.mouse.x * 0.2, 3 + state.mouse.y * 2, 14),
-    //   0.05
-    // )
+    // initial animation
+    state.camera.position.lerp(vec.set(0, 0.2, domReady ? 0.001 : 3), 0.05)
+
     // state.camera.lookAt(0, 0, 0)
     // camera.position.z =
     //   Math.sin(state.clock.elapsedTime * (state.mouse.x / 4)) * 20
     // camera.position.x = Math.cos(state.mouse.x) * 10
-    camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
-    camera.position.x = Math.sin(state.clock.elapsedTime) * 0.1
-    // camera.position.x = Math.cos(state.clock.elapsedTime) * 10
+    // state.camera.position.lerp(vec.set(0.2, 0.2, 14), 0.05)
+    // camera.position.z = 3
+    if (state.clock.elapsedTime >= 6) {
+      state.camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
+      state.camera.position.x = Math.sin(state.clock.elapsedTime) * 0.1
+    }
   })
 }
