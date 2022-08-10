@@ -35,7 +35,6 @@ const Content = styled.div`
 
 const Navigation = () => {
   const [open, setOpen] = useState(false)
-  const show = useStore((state) => state.domReady)
   const scroll = useStore((state) => state.scroll)
 
   const openHandler = () => {
@@ -45,7 +44,7 @@ const Navigation = () => {
   }
 
   return (
-    <NavigationContainer show={show} open={open} showFull={scroll >= 0.06}>
+    <NavigationContainer show={true} open={open} showFull={scroll >= 0.06}>
       <Flex
         justifyContent='space-between'
         height={'4em'}
@@ -53,21 +52,12 @@ const Navigation = () => {
       >
         {/* <Logo open={show && !open}>marplacode;</Logo> */}
         <div style={{ width: '50px', height: '50px' }}></div>
-        <BurgerButton open={open} show={show} onClick={openHandler} />
+        <BurgerButton open={open} onClick={openHandler} />
       </Flex>
       <Content open={open}>
         <Menu show={open} />
       </Content>
-      <Line
-        animation={{
-          ...animations.lineGrow,
-          // to: { width: `${scroll * 100}%` },
-          to: { width: show ? '100%' : '0%' },
-          // pause: false,
-          // reverse: !show,
-        }}
-        play={show}
-      />
+      <Line />
     </NavigationContainer>
   )
 }

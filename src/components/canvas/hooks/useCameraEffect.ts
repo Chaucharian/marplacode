@@ -18,22 +18,22 @@ export const useCameraEffect = ({ mouseMove, scrollMove }) => {
     // dispatch current scroll
     useStore.setState(() => ({ scroll: Number(scroll.offset.toFixed(2)) }))
 
-    if (mouseMove) {
-      const scrollDelta = scroll.range(0, 1) * 10
-      const scrollVelocity = 2
-      // camera.position.y = Math.sin((state.mouse.x / 4) * 0.1)
-      // let cameraPosition = scrollVelocity * scrollDelta
-      let cameraPositionZ = Math.sin((scrollVelocity * scrollDelta) / 4)
-      let cameraPositionY = Math.sin((scrollVelocity * scrollDelta) / 8)
+    // if (mouseMove) {
+    //   const scrollDelta = scroll.range(0, 1) * 10
+    //   const scrollVelocity = 2
+    //   // camera.position.y = Math.sin((state.mouse.x / 4) * 0.1)
+    //   // let cameraPosition = scrollVelocity * scrollDelta
+    //   let cameraPositionZ = Math.sin((scrollVelocity * scrollDelta) / 4)
+    //   let cameraPositionY = Math.sin((scrollVelocity * scrollDelta) / 8)
 
-      camera.position.z = cameraPositionZ <= 0.15 ? 0.15 : cameraPositionZ
-      // camera.position.y = cameraPositionY
+    //   camera.position.z = cameraPositionZ <= 0.15 ? 0.15 : cameraPositionZ
+    //   // camera.position.y = cameraPositionY
 
-      // const selectedWorksVisible = scroll.visible(2 / 4, 1 / 4)
-      // if (selectedWorksVisible) {
-      //   camera.position.z = -(scrollVelocity * scrollDelta)
-      // }
-    }
+    //   // const selectedWorksVisible = scroll.visible(2 / 4, 1 / 4)
+    //   // if (selectedWorksVisible) {
+    //   //   camera.position.z = -(scrollVelocity * scrollDelta)
+    //   // }
+    // }
 
     // camera movement
     // state.camera.position.lerp(
@@ -44,7 +44,8 @@ export const useCameraEffect = ({ mouseMove, scrollMove }) => {
     // camera.position.z =
     //   Math.sin(state.clock.elapsedTime * (state.mouse.x / 4)) * 20
     // camera.position.x = Math.cos(state.mouse.x) * 10
-    // camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
+    camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
+    camera.position.x = Math.sin(state.clock.elapsedTime) * 0.1
     // camera.position.x = Math.cos(state.clock.elapsedTime) * 10
   })
 }

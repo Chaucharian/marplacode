@@ -91,10 +91,22 @@ const Svg = styled.svg`
   mix-blend-mode: difference;
 `
 
-const Burger = ({ open, show, onClick }) => {
-  const showAnimation = useSpring({
-    width: show ? '100%' : '0%',
-  })
+const useAnimation = ({ play }) => {
+  const [animation, start] = useSpring(() => ({
+    width: '0%',
+  }))
+
+  if (play) {
+    start({ width: '100%', delay: 2000 })
+  } else {
+    start({ width: '0%' })
+  }
+
+  return animation
+}
+
+const Burger = ({ open, show = true, onClick }) => {
+  const animation = useAnimation({ play: show })
   const second = useSpring({
     transform: open
       ? 'translate(10px, 4px) rotate(45deg)'
@@ -121,14 +133,10 @@ const Burger = ({ open, show, onClick }) => {
           rx='2'
           style={{
             ...second,
-            ...showAnimation,
+            ...animation,
           }}
         />
-        <animated.rect
-          height='4'
-          rx='2'
-          style={{ ...third, ...showAnimation }}
-        />
+        <animated.rect height='4' rx='2' style={{ ...third, ...animation }} />
       </Svg>
     </Button>
   )

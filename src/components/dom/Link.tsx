@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const Link = ({ show, children }) => {
   const [hover, setHover] = useState(false)
-  console.log(hover)
+
   return (
     <div>
       <Container

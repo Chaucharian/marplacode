@@ -1,17 +1,21 @@
 import { animated, useSpring, UseSpringProps } from '@react-spring/web'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 
 export interface AppearingEffectProps {
   show?: boolean
   effect?: 'left' | 'right' | 'top' | 'bottom'
   rotation?: number
-  animationProps?: UseSpringProps
+  animationProps?: any
   blendMode?: string
   children: any
 }
 
+// const Container = styled.div`
+//   translate: (${xEffect}, ${yEffect}) rotate(${rotation}deg);
+// `
+
 const AppearingEffect: FC<AppearingEffectProps> = ({
-  show = false,
+  show = true,
   effect = 'left',
   rotation = 0,
   blendMode = 'normal',
@@ -23,12 +27,26 @@ const AppearingEffect: FC<AppearingEffectProps> = ({
   const yEffect =
     effect === 'top' ? '-100%' : effect === 'bottom' ? '100%' : '0%'
 
-  const animation = useSpring({
-    transform: show
-      ? 'translate(0px, 0px)  rotate(0deg)'
-      : `translate(${xEffect},${yEffect} ) rotate(${rotation}deg)`,
+  const [animation, start] = useSpring(() => ({
+    from: {
+      transform: `translate(${xEffect},${yEffect} ) rotate(${rotation}deg)`,
+    },
     ...animationProps,
-  })
+  }))
+
+  useEffect(() => {
+    if (show) {
+      start({
+        transform: 'translate(0px, 0px)  rotate(0deg)',
+        ...animationProps,
+      })
+    } else {
+      start({
+        transform: `translate(${xEffect},${yEffect} ) rotate(${rotation}deg)`,
+        ...animationProps,
+      })
+    }
+  }, [show, start])
 
   return (
     <animated.div

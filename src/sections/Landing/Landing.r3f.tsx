@@ -1,38 +1,26 @@
 import Text from '@/components/canvas/Text'
-import { useNeonStartingEffect } from '@/components/canvas/hooks/useNeonStartingEffect'
-import { LoboMarino } from '@/components/canvas/models/LoboMarino'
 import { ReflectionGround } from '@/components/canvas/ReflectionGround'
-import { Html } from '@react-three/drei'
 import React, { useEffect, useState } from 'react'
 import useStore from '@/helpers/store'
 
 const LandingScene = () => {
-  const { finished: ready, color: textColor } = useNeonStartingEffect()
-  useStore.setState({ domReady: ready })
-  const scroll = useStore((state) => state.scroll)
+  const domReady = useStore((state) => state.domReady)
+  // const scroll = useStore((state) => state.scroll)
   const bigLetter = useStore((state) => state.letter)
-  const showDescription = scroll < 0.4
 
   return (
     <>
-      {ready && (
-        <>
-          <Text
-            font='/fonts/AkiraSuperBold.otf'
-            position={[0, 1.4, -4]}
-            fontSize={2}
-          >
-            {bigLetter}
-          </Text>
-          {/* <Text
-            font='/fonts/AkiraSuperBold.otf'
-            position={[0, -2, -4]}
-            fontSize={0.5}
-          >
-            WEB
-          </Text> */}
-        </>
+      {domReady && (
+        <Text
+          font='/fonts/AkiraSuperBold.otf'
+          position={[0, 1.4, -4]}
+          fontSize={2}
+          play={domReady}
+        >
+          {bigLetter}
+        </Text>
       )}
+
       <ReflectionGround
         mirror={1}
         blur={[500, 100]}

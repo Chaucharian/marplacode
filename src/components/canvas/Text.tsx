@@ -6,6 +6,7 @@ import useStore from '@/helpers/store'
 function Text({
   hasVideo = true,
   interactive,
+  play = false,
   children = 'TEXT',
   onLeave = () => {},
   onHover = () => {},
@@ -16,18 +17,10 @@ function Text({
   const [font, setFont] = useState('/fonts/AkiraOutline.otf')
 
   useEffect(() => {
-    const id = setTimeout(() => video.current?.play(), 2000)
-    return () => clearTimeout(id)
-  }, [video])
-
-  // useEffect(() => {
-  //   if (on) {
-  //     console.log('EEEE', video.current)
-  //     video.current.pause()
-  //   } else {
-  //     video.current.play()
-  //   }
-  // }, [on])
+    if (play) {
+      video.current?.play()
+    }
+  }, [play, video])
 
   return (
     <DreiText

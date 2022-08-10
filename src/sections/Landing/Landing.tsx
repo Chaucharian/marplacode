@@ -1,6 +1,6 @@
 import { Button, Flex, GoDownIndicator, Text } from '@/components'
 import styled from 'styled-components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { theme } from '@/styles'
 import useStore from '@/helpers/store'
 import * as animations from '@/helpers/animations'
@@ -76,19 +76,16 @@ const IndicatorContainer = styled.div`
 const Landing = () => {
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
-  const show = useStore((state) => state.domReady) && !navigationState
+  const show = !navigationState
+
+  console.log(show)
+  const domReady = () => {
+    setTimeout(() => useStore.setState({ domReady: true }), 2000)
+    // useStore.setState({ domReady: true })
+  }
 
   return (
     <>
-      {/* <ColorContainer>
-        <ColorBall color='#9DE3D7' />
-      </ColorContainer>
-      <ColorContainer rotation={200}>
-        <ColorBall color='#318FC3' />
-      </ColorContainer>
-      <ColorContainer rotation={90}>
-        <ColorBall color='#027F70' />
-      </ColorContainer> */}
       <Flex
         p={theme.spacing.small}
         flexDirection='column'
@@ -99,16 +96,16 @@ const Landing = () => {
         <Flex>
           <Flex flexDirection='column'>
             <AppearingEffect
-              show={show}
               effect={show ? 'left' : 'top'}
-              animationProps={{ delay: 200 }}
+              animationProps={{ delay: 500 }}
+              show={show}
             >
               <Text type={theme.fonts.h1}>Hand</Text>
             </AppearingEffect>
             <AppearingEffect
-              animationProps={{ delay: 400 }}
-              show={show}
+              animationProps={{ delay: 1000 }}
               effect={show ? 'left' : 'top'}
+              show={show}
             >
               <Text type={theme.fonts.p} fontWeight={'lighter'}>
                 trough high quality design and development
@@ -116,9 +113,9 @@ const Landing = () => {
             </AppearingEffect>
             <Flex height='48px' />
             <AppearingEffect
-              animationProps={{ delay: 600 }}
-              show={show}
+              animationProps={{ delay: 1500 }}
               effect={show ? 'left' : 'top'}
+              show={show}
             >
               <Button
                 onClick={() => {
@@ -135,7 +132,10 @@ const Landing = () => {
           <IndicatorContainer>
             <Flex justifyContent='end' pr={theme.spacing.small}>
               <AppearingEffect
-                animationProps={{ delay: 900 }}
+                animationProps={{
+                  delay: show ? 2000 : 600,
+                  onResolve: () => domReady(),
+                }}
                 effect={show ? 'right' : 'bottom'}
                 show={show}
               >
