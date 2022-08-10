@@ -88,13 +88,16 @@ const Works = () => {
     <Flex flexDirection='column' p={theme.spacing.small}>
       <Spacer vertical={theme.spacing.medium} />
 
-      <BoxC>
+      {/* <BoxC>
         <Text type={theme.fonts.h1} fontFamily='Akira' fontSize={'30px'}>
           Selected works
         </Text>
         <Box />
         <Box />
-      </BoxC>
+      </BoxC> */}
+      <Text type={theme.fonts.h3}>
+        <Text type={theme.fonts.h3}>Selected</Text> works
+      </Text>
 
       <Flex height={theme.spacing.small} />
       <WorksList

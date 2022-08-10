@@ -91,7 +91,6 @@ const Landing = () => {
         flexDirection='column'
         justifyContent={'flex-end'}
         height={'100%'}
-        style={{ zIndex: 10 }}
       >
         <Flex>
           <Flex flexDirection='column'>

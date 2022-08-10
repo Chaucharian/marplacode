@@ -1,6 +1,5 @@
 export { default as Text } from './Text'
 export { default as Flex } from './Flex'
-export { default as Transition } from './Transition'
 export { default as Logo } from './Logo'
 export { default as Section } from './Section'
 export { default as LiquidEffect } from './LiquidEffect'

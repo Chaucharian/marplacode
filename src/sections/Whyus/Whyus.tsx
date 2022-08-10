@@ -12,7 +12,7 @@ import AppearingEffect from '@/components/dom/AppearingEffect'
 const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
   const show = useStore((state) => state.domReady)
-  const animate = scroll >= 0.15
+  // const animate = scroll >= 0.15
 
   return (
     <Flex
@@ -22,9 +22,7 @@ const WhyUs = () => {
       flexDirection='column'
     >
       <Flex height={theme.spacing.medium} />
-      <AppearingEffect show={animate} effect='top'>
-        <Text type={theme.fonts.h3}>Why Us</Text>
-      </AppearingEffect>
+      <Text type={theme.fonts.h3}>Why Us</Text>
 
       <Flex height={theme.spacing.medium} />
       <Text type={theme.fonts.h2}>A createive development</Text>
@@ -35,7 +33,7 @@ const WhyUs = () => {
         products.
       </Text>
       <Spacer vertical={theme.spacing.large} />
-      <ServicesList play={animate} />
+      <ServicesList play={true} />
     </Flex>
   )
 }

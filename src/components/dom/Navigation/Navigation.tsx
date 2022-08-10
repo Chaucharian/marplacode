@@ -21,7 +21,6 @@ const NavigationContainer = styled.header`
   width: 100%;
   min-height: 4em;
   max-height: 100%;
-  visibility:  ${show ? 'visible' : 'hidden'};
 `}
 `
 
@@ -30,6 +29,7 @@ const Content = styled.div`
   transition: all ease-in 0.5s;
   width: 100%;
   height: ${open ? '100vh' : '0px'};
+  visibility:  ${open ? 'visible' : 'hidden'};
 `}
 `
 
@@ -44,7 +44,7 @@ const Navigation = () => {
   }
 
   return (
-    <NavigationContainer show={true} open={open} showFull={scroll >= 0.06}>
+    <NavigationContainer open={open} showFull={scroll >= 0.06}>
       <Flex
         justifyContent='space-between'
         height={'4em'}

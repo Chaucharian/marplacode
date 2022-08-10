@@ -2,6 +2,7 @@ import Text from '@/components/canvas/Text'
 import { ReflectionGround } from '@/components/canvas/ReflectionGround'
 import React, { useEffect, useState } from 'react'
 import useStore from '@/helpers/store'
+import { useCameraEffect } from '@/components/canvas/hooks'
 
 const LandingScene = () => {
   const domReady = useStore((state) => state.domReady)

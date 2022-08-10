@@ -34,8 +34,15 @@ const Content = animated(styled.div`
   height: ${open ? '80px' : '0px'};
 `}
 `)
+const Item = animated(styled.div`
+  ${({ open }) => `
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+`}
+`)
 
-const Item = ({ open, delay, children }) => {
+const ItemContent = ({ open, delay, children }) => {
   const animation = useSpring({
     opacity: open ? 1 : 0,
     delay,
@@ -47,9 +54,11 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
   const [services, setServices] = useState(initialServices)
 
   const openItem = (itemIndex: number) => {
+    console.log('EEEE')
     const newServices = [...services].map((service, index) => {
       if (index === itemIndex) {
         service.open = service.open ? false : true
+        console.log(service.open)
       } else {
         service.open = false
       }
@@ -63,12 +72,12 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
     <Flex flexDirection='column'>
       {services.map(({ title, open, content }, index) => (
         <Flex flexDirection='column'>
-          <Flex justifyContent='space-between'>
+          <Item onClick={() => openItem(index)}>
             <Text type={theme.fonts.h3} fontWeight={'lighter'} fontSize='27px'>
               {title}
             </Text>
-            <OpenButton open={open} onClick={() => openItem(index)} />
-          </Flex>
+            <OpenButton open={open} />
+          </Item>
           <Spacer vertical={theme.spacing.tiny} />
           <Line delay={500} play={play} />
           <Content open={open}>
@@ -79,12 +88,12 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
               flexDirection='column'
             >
               {content.map((item, index) => (
-                <Item open={open} delay={200 * index}>
+                <ItemContent open={open} delay={200 * index}>
                   <Text color='#000' type={theme.fonts.span}>
                     {item}
                   </Text>
                   <Spacer vertical={theme.spacing.small} />
-                </Item>
+                </ItemContent>
               ))}
             </Flex>
           </Content>

@@ -4,7 +4,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { useState } from 'react'
 import * as THREE from 'three'
 
-export const useCameraEffect = ({ mouseMove, scrollMove }) => {
+export const useCameraEffect = () => {
   // const camera = useThree((state) => state.camera)
   const [vec] = useState(() => new THREE.Vector3())
   const domReady = useStore((state) => state.domReady)
@@ -44,7 +44,8 @@ export const useCameraEffect = ({ mouseMove, scrollMove }) => {
     // state.camera.position.lerp(vec.set(0.2, 0.2, 14), 0.05)
     // camera.position.z = 3
     if (state.clock.elapsedTime >= 6) {
-      state.camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
+      state.camera.position.z = 6
+      // state.camera.position.z = Math.sin(state.clock.elapsedTime) * 0.1
       state.camera.position.x = Math.sin(state.clock.elapsedTime) * 0.1
     }
   })

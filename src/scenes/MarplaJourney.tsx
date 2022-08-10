@@ -16,11 +16,11 @@ export const canvasProps = {
 }
 
 function MarplaJourney({ ...props }) {
-  useCameraEffect({ mouseMove: true, scrollMove: true })
+  useCameraEffect()
 
   return (
     <>
-      <fog attach='fog' color='black' near={5} far={7} />
+      <fog attach='fog' color='black' near={5} far={15} />
       {/* <color attach='background' args={['black']} /> */}
       <ambientLight />
       <Suspense fallback={null}>
