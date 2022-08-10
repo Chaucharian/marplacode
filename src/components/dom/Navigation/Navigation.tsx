@@ -10,12 +10,12 @@ import Menu from './Menu'
 import * as animations from '@/helpers/animations'
 
 const NavigationContainer = styled.header`
-  ${({ show, showFull }) => `
+  ${({ show, open }) => `
     position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
-  background: ${showFull ? 'rgb(255 255 255 / 6%)' : 'transparent'};
+  background: ${open ? '#0f6dc5d6' : 'transparent'};
   backdrop-filter: blur(10px);
   transition: all ease-in 0.5s;
   width: 100%;
@@ -45,7 +45,7 @@ const Navigation = () => {
   }
 
   return (
-    <NavigationContainer show={show} showFull={scroll >= 0.06}>
+    <NavigationContainer show={show} open={open} showFull={scroll >= 0.06}>
       <Flex
         justifyContent='space-between'
         height={'4em'}
@@ -61,9 +61,12 @@ const Navigation = () => {
       <Line
         animation={{
           ...animations.lineGrow,
-          to: { width: `${scroll * 100}%` },
-          reverse: !show,
+          // to: { width: `${scroll * 100}%` },
+          to: { width: show ? '100%' : '0%' },
+          // pause: false,
+          // reverse: !show,
         }}
+        play={show}
       />
     </NavigationContainer>
   )

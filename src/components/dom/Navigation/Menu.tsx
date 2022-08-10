@@ -31,9 +31,11 @@ const Nav = styled(animated.nav)`
 
 const Li = styled(animated.li)`
   list-style: none;
+  position: relative;
 
   a {
     color: #fff;
+    font-family: Akira;
     font-size: 50px;
     font-weight: bold;
     text-transform: uppercase;
@@ -46,30 +48,43 @@ const Li = styled(animated.li)`
     font-family: Inter;
     font-weight: 100;
   }
-`
 
-const Filter = styled(animated.span)`
-  ${({ filter }) => `
-  height: 3px;
-  width: 100%;
-  position: absolute;
-  background: currentColor;
-  bottom: 5px;
-  filter: none;
-    color: currentColor;
-
-  &:hover{ 
-
-    filter: url(#filter-6);
+  .a {
+    position: absolute;
+    transition: all ease-in 0.5s;
+    top: 30%;
+    left: -100%;
+    height: 50px;
+    width: 150px;
+    background: white;
+    mix-blend-mode: difference;
   }
 
-`}
+  .b {
+    position: absolute;
+    transition: all ease-in 0.5s;
+    top: 60%;
+    left: 100%;
+    height: 10px;
+    width: 80px;
+    background: white;
+    mix-blend-mode: difference;
+  }
+
+  &:hover {
+    .a {
+      left: 50%;
+    }
+    .b {
+      left: -100%;
+    }
+  }
 `
 
 const menuItems = [
   { name: 'HOME', link: 'home' },
   { name: 'SERVICES', link: 'services' },
-  { name: 'WHO WE ARE', link: 'history' },
+  { name: 'WHY US', link: 'history' },
   { name: 'CONTACT', link: 'contact' },
 ]
 
@@ -111,13 +126,12 @@ const Menu = ({ show }: any) => {
               effect='top'
               animationProps={{ delay: 100 * index }}
             >
-              <Flex position='relative' flexDirection='column'>
-                <div>
-                  <span>{index + 1}.</span>
-                </div>
-                <a href={item.link}>{item.name}</a>
-                <Filter />
-              </Flex>
+              <div>
+                <span>{index + 1}.</span>
+              </div>
+              <a href={item.link}>{item.name}</a>
+              <div className='a'></div>
+              <div className='b'></div>
             </AppearingEffect>
           </Li>
         ))}

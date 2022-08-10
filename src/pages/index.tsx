@@ -150,7 +150,6 @@ const Page = (props) => {
       <Section index={3} content={<Contact />} />
 
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
-        {/* <source src='/videos/drei.mp4#t=0,30' type='video/mp4' /> */}
         <source src='/videos/short.mp4' type='video/mp4' />
       </video>
     </div>
