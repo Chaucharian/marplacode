@@ -21,8 +21,7 @@ const Page = (props) => {
   return (
     <>
       <Navigation />
-
-      <Parallax pages={2}>
+      <Parallax pages={4}>
         <ParallaxLayer
           offset={0}
           speed={2.5}
@@ -41,6 +40,8 @@ const Page = (props) => {
           }}
         >
           <Whyus />
+          <Works />
+          <Contact />
         </ParallaxLayer>
       </Parallax>
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>

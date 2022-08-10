@@ -8,6 +8,24 @@ import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
 import AppearingEffect from '@/components/dom/AppearingEffect'
+import { config, useSpring } from '@react-spring/core'
+import { animated } from '@react-spring/web'
+
+// const MovingTextContainer = styled(animated.div)`
+//   position: absolute;
+//   top: 0;
+//   left: 0%;
+// `
+
+// const MovingText = ({ children }) => {
+//   return (
+//     <Flex>
+//       <MovingTextContainer>
+//         <Text fontFamily='Akira'>{children}</Text>
+//       </MovingTextContainer>
+//     </Flex>
+//   )
+// }
 
 const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
@@ -20,7 +38,9 @@ const WhyUs = () => {
       bg='white'
       p={theme.spacing.small}
       flexDirection='column'
+      position='relative'
     >
+      {/* <MovingText>MARPLACODE</MovingText> */}
       <Flex height={theme.spacing.medium} />
       <Text type={theme.fonts.h3}>Why Us</Text>
 

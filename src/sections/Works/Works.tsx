@@ -95,11 +95,14 @@ const Works = () => {
         <Box />
         <Box />
       </BoxC> */}
-      <Text type={theme.fonts.h3}>
-        <Text type={theme.fonts.h3}>Selected</Text> works
+      <Text fontSize='50px' fontFamily='Akira'>
+        <Text fontSize='30px' fontFamily='Akira' fontWeight='bold'>
+          Selected
+        </Text>{' '}
+        works
       </Text>
 
-      <Flex height={theme.spacing.small} />
+      <Spacer vertical='300px' />
       <WorksList
         works={works}
         onChange={onSelectWork}
