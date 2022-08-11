@@ -8,6 +8,7 @@ export interface FormTextFieldProps extends SpectrumTextFieldProps {
   control: any
   rules?: any
   defaultValue?: any
+  [x: string]: any
 }
 
 const FormTextField: FC<FormTextFieldProps> = ({

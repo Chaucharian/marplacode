@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, LiquidEffect, Spacer, Text } from '@/components/dom'
+import { Flex, LiquidEffect, Spacer, Text, Shadow } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useMemo, useState } from 'react'
@@ -10,41 +10,6 @@ const Container = styled.section`
   width: 100%;
   height: 100vh;
   padding-left: ${theme.spacing.small};
-`
-const Content = styled.div`
-  background-color: white;
-  height: 100vh;
-  padding: ${theme.spacing.small};
-`
-
-const FloatingTextContainer = styled.div`
-  ${({ top = 0 }) => `
-  position: absolute;
-  top: -30px;
-  left: 30px;
-
-  @media ${device.desktop} {
-    top: -40px;
-  }
-`}
-`
-
-const Box = styled.div`
-  ${({ top = 0, left = 100 }) => `  
-  position: absolute;
-  top: -10px;
-  left: ${left}px;
-  z-index: -20;
-  background-color: white;
-  width: 100px;
-  height: 30px;
-`}
-`
-const BoxC = styled.div`
-  ${({ top = 0 }) => `
-  position:relative;
-overflow: hidden;
-`}
 `
 
 const list = [
@@ -85,22 +50,23 @@ const Works = () => {
   // })
 
   return (
-    <Flex flexDirection='column' p={theme.spacing.small}>
+    <Flex
+      flexDirection='column'
+      p={theme.spacing.small}
+      height='100%'
+      position='relative'
+    >
       <Spacer vertical={theme.spacing.medium} />
-
-      {/* <BoxC>
-        <Text type={theme.fonts.h1} fontFamily='Akira' fontSize={'30px'}>
-          Selected works
-        </Text>
-        <Box />
-        <Box />
-      </BoxC> */}
-      <Text fontSize='50px' fontFamily='Akira'>
+      <Flex flexDirection='column'>
         <Text fontSize='30px' fontFamily='Akira' fontWeight='bold'>
           Selected
-        </Text>{' '}
-        works
-      </Text>
+        </Text>
+        <Flex pl={theme.spacing.small}>
+          <Text fontSize='50px' fontFamily='Akira'>
+            works
+          </Text>
+        </Flex>
+      </Flex>
 
       <Spacer vertical='300px' />
       <WorksList
@@ -108,9 +74,8 @@ const Works = () => {
         onChange={onSelectWork}
         selectedWork={selectedWork}
       />
-      <Flex mT={theme.spacing.small}>
-        <Text type={theme.fonts.p}>{selectedWork?.description}</Text>
-      </Flex>
+
+      <Shadow />
     </Flex>
   )
 }

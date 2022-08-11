@@ -90,15 +90,18 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
               p={theme.spacing.small}
               height='100%'
               flexWrap='wrap'
-              flexDirection='column'
+              // flexDirection='column'
             >
               {content.map((item, index) => (
-                <ItemContent open={open} delay={200 * index}>
-                  <Text color='#000' type={theme.fonts.span}>
-                    {item}
-                  </Text>
-                  <Spacer vertical={theme.spacing.small} />
-                </ItemContent>
+                <>
+                  <ItemContent open={open} delay={200 * index}>
+                    <Text color='#000' type={theme.fonts.span}>
+                      {item}
+                    </Text>
+                    <Spacer vertical={theme.spacing.small} />
+                  </ItemContent>
+                  <Spacer horizontal={theme.spacing.small} />
+                </>
               ))}
             </Flex>
           </Content>

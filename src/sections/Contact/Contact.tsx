@@ -44,16 +44,29 @@ const Contact = () => {
             control={control}
             name='name'
             placeholder="What's your name/company"
+            enterkeyhint='next'
           />
           <Spacer vertical={theme.spacing.small} />
-          <FormTextField control={control} name='name' placeholder='Budget' />
+          <FormTextField
+            control={control}
+            name='name'
+            placeholder='Budget'
+            enterkeyhint='next'
+          />
           <Spacer vertical={theme.spacing.small} />
-          <FormTextField control={control} name='email' placeholder='Email' />
+          <FormTextField
+            control={control}
+            name='email'
+            inputmode='email'
+            placeholder='Email'
+            enterkeyhint='next'
+          />
           <Spacer vertical={theme.spacing.small} />
           <FormTextField
             control={control}
             name='message'
             placeholder='Message'
+            enterkeyhint='next'
           />
           <Spacer vertical={theme.spacing.medium} />
           <Flex width='100%' justifyContent='flex-end'>

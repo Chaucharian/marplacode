@@ -1,4 +1,4 @@
-import { Button, Flex, GoDownIndicator, Text } from '@/components'
+import { Button, Flex, GoDownIndicator, Shadow, Text } from '@/components'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { theme } from '@/styles'
@@ -8,60 +8,6 @@ import Line from '@/components/dom/Line'
 import { fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
-
-const Shadow = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  backdrop-filter: blur(3px);
-  top: 0;
-  left: 0;
-  z-index: -2;
-  background-image: linear-gradient(#00000000, #000000);
-`
-
-const Colors = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  z-index: 15;
-`
-
-const ColorContainer = styled.div`
-  ${({ rotation = 0 }) => `
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  top: 0;
-  left: 0;
-  transform: rotate(${rotation}deg);
-  animation: rotation 10s ease-in-out 2s infinite alternate;
-  filter: blur(200px);
-
-
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`}
-`
-
-const ColorBall = styled.div`
-  ${({ color = '#9DE3D7' }) => `
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: ${color};
-  filter: blur(200px);
-`}
-`
 
 const IndicatorContainer = styled.div`
   width: 100vw;
@@ -93,7 +39,6 @@ const Landing = () => {
   const navigationState = useStore((state) => state?.navigationState)
   const show = !navigationState
 
-  console.log(show)
   const domReady = () => {
     setTimeout(() => useStore.setState({ domReady: true }), 1000)
     // useStore.setState({ domReady: true })
@@ -106,6 +51,7 @@ const Landing = () => {
         flexDirection='column'
         justifyContent={'flex-end'}
         height={'100%'}
+        position='relative'
       >
         <Flex>
           <Flex flexDirection='column'>
