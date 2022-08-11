@@ -43,6 +43,17 @@ const Page = (props) => {
           <Works />
           <Contact />
         </ParallaxLayer>
+        {/* <ParallaxLayer
+          offset={3}
+          speed={2.5}
+          factor={1}
+          sticky={{ start: 3, end: 4 }}
+          style={{
+            zIndex: -1,
+          }}
+        >
+          <Contact />
+        </ParallaxLayer> */}
       </Parallax>
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
         <source src='/videos/cuberto.mp4' type='video/mp4' />
@@ -60,7 +71,7 @@ export default Page
 export async function getStaticProps() {
   return {
     props: {
-      title: 'Index',
+      title: 'Marplacode - beauty designs',
     },
   }
 }

@@ -3,11 +3,6 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
   @font-face {
     font-family: 'Akira';
-    src: url('/fonts/AkiraSuperBold.otf');
-    font-weight: bolder;
-  }
-  @font-face {
-    font-family: 'Akira';
     src: url('/fonts/AkiraBold.otf');
     font-weight: bold;
   }
@@ -15,6 +10,11 @@ export default createGlobalStyle`
     font-family: 'Akira';
     src: url('/fonts/AkiraOutline.otf');
     font-weight: lighter;
+  }
+  @font-face {
+    font-family: 'Akira';
+    src: url('/fonts/AkiraSuperBold.otf');
+    font-weight: 900;
   }
   @font-face {
     font-family: 'Circular';
@@ -44,7 +44,7 @@ export default createGlobalStyle`
    @font-face {
     font-family: 'LibreFranklin';
     src: url('/fonts/LibreFranklin-Regular.ttf');
-    font-weight: bolder;
+    font-weight: 200;
   }
    @font-face {
     font-family: 'LibreFranklin';

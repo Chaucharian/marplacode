@@ -42,10 +42,13 @@ const WhyUs = () => {
     >
       {/* <MovingText>MARPLACODE</MovingText> */}
       <Flex height={theme.spacing.medium} />
-      <Text type={theme.fonts.h3}>Why Us</Text>
-
+      <Text type={theme.fonts.h3} color='#000'>
+        Why Us
+      </Text>
       <Flex height={theme.spacing.medium} />
-      <Text type={theme.fonts.h2}>A createive development</Text>
+      <Text type={theme.fonts.h2} color='#000'>
+        A createive development
+      </Text>
       <GlowText>studio</GlowText>
       <Flex height={theme.spacing.small} />
       <Text type={theme.fonts.p} color='#465764'>

@@ -3,16 +3,18 @@ import styled from 'styled-components'
 import Text from './Text'
 
 const StyledButton = styled.button`
-  background: black;
+  ${({ width = 250 }) => `
+background: black;
   padding: 20px;
   color: inherit;
   border-radius: 35px;
   border: 1px solid white;
   font: inherit;
   cursor: pointer;
-  width: 250px;
+  width: ${width}px;
   outline: inherit;
   color: white;
+`}
 `
 
 const Button = ({ children, ...props }) => {

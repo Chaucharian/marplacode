@@ -73,7 +73,12 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
       {services.map(({ title, open, content }, index) => (
         <Flex flexDirection='column'>
           <Item onClick={() => openItem(index)}>
-            <Text type={theme.fonts.h3} fontWeight={'lighter'} fontSize='27px'>
+            <Text
+              type={theme.fonts.h3}
+              fontWeight={'lighter'}
+              fontSize='27px'
+              color='#000'
+            >
               {title}
             </Text>
             <OpenButton open={open} />

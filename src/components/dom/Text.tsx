@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const StyledAndAnimatedText = ({
   type = 'h1',
-  blendMode = 'difference',
+  blendMode = 'normal',
   color = theme.colors?.primary,
   fontWeight,
   fontFamily = 'LibreFranklin',
