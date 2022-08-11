@@ -64,6 +64,11 @@ export default createGlobalStyle`
 
   * {
    box-sizing: border-box;
+   -webkit-tap-highlight-color: transparent;
+
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
   }
 
   html,

@@ -27,21 +27,14 @@ const list = [
 const Works = () => {
   const scroll = useStore((state) => state.scroll)
   const [works, setWorks] = useState(list)
-  const selectedWork = useMemo(
-    () => works.find(({ isSelected }) => isSelected),
-    [works]
-  )
+  const [selectedWork, setSelection] = useState(null)
+  // const selectedWork = useMemo(
+  //   () => works.find(({ isSelected }) => isSelected),
+  //   [works]
+  // )
   const onSelectWork = (selection) => {
     useStore.setState({ letter: selection.name[0] })
-    const newWorks = [...works].map((work) => {
-      work.isSelected = false
-      if (work.name === selection.name) {
-        work.isSelected = true
-      }
-
-      return work
-    })
-    setWorks(newWorks)
+    setSelection(selection)
   }
 
   // const [show, ]
@@ -72,7 +65,7 @@ const Works = () => {
       <WorksList
         works={works}
         onChange={onSelectWork}
-        selectedWork={selectedWork}
+        selected={selectedWork}
       />
 
       <Shadow />
