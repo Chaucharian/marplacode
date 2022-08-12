@@ -43,7 +43,10 @@ export const WorksList = ({ works, selected, onChange }: any) => {
         position = index
       }
     })
-    return position
+
+    const percentage =
+      selected === null ? -30 : position * (position >= 2 ? 3 : 25)
+    return percentage
   }, [selected])
 
   console.log(effectPosition)
@@ -82,9 +85,7 @@ export const WorksList = ({ works, selected, onChange }: any) => {
           <Spacer vertical={theme.spacing.small} />
         </Flex>
       ))}
-      <SelectionEffect
-        top={`${effectPosition * (effectPosition >= 2 ? 30 : 25)}%`}
-      />
+      <SelectionEffect top={`${effectPosition}%`} />
     </Container>
   )
 }

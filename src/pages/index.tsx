@@ -8,6 +8,7 @@ import { Contact, Landing, Works } from '@/sections'
 import Whyus from '@/sections/Whyus/Whyus'
 import { useScroll } from '@/helpers/hooks/useScroll'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import Footer from '@/sections/Footer/Footer'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -21,7 +22,7 @@ const Page = (props) => {
   return (
     <>
       <Navigation />
-      <Parallax pages={4}>
+      <Parallax pages={4.5}>
         <ParallaxLayer
           offset={0}
           speed={2.5}
@@ -43,17 +44,17 @@ const Page = (props) => {
           <Works />
           <Contact />
         </ParallaxLayer>
-        {/* <ParallaxLayer
-          offset={3}
-          speed={2.5}
-          factor={1}
-          sticky={{ start: 3, end: 4 }}
+        <ParallaxLayer
+          // offset={3.5}
+          // speed={1.3}
+          factor={2}
+          sticky={{ start: 3, end: 4.5 }}
           style={{
             zIndex: -1,
           }}
         >
-          <Contact />
-        </ParallaxLayer> */}
+          <Footer />
+        </ParallaxLayer>
       </Parallax>
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
         <source src='/videos/cuberto.mp4' type='video/mp4' />

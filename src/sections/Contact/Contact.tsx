@@ -76,14 +76,14 @@ const Contact = () => {
       </form>
 
       <Spacer vertical={theme.spacing.medium} />
-      <Flex flexDirection='column' alignItems='center'>
+      {/* <Flex flexDirection='column' alignItems='center'>
         <Text type={theme.fonts.span}>Drop us a line!</Text>
         <Link show={show}>
           <Text type={theme.fonts.span} fontSize={'16px'}>
             hello@marplacode.com
           </Text>
         </Link>
-      </Flex>
+      </Flex> */}
     </Flex>
   )
 }

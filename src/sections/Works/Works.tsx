@@ -61,7 +61,7 @@ const Works = () => {
         </Flex>
       </Flex>
 
-      <Spacer vertical='300px' />
+      <Spacer vertical='500px' />
       <WorksList
         works={works}
         onChange={onSelectWork}

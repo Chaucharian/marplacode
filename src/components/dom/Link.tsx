@@ -8,7 +8,7 @@ const Container = styled.div`
   display: inline-block;
 `
 
-const Link = ({ show, children }) => {
+const Link = ({ show, color1 = 'white', color2 = 'black', children }) => {
   const [hover, setHover] = useState(false)
 
   return (
@@ -18,9 +18,9 @@ const Link = ({ show, children }) => {
         onMouseLeave={() => setHover(false)}
       >
         {children}
-        <Line color='white' play={show} />
+        <Line color={color1} play={show} />
         <Flex position='absolute' bottom={0} width='100%'>
-          <Line color='black' height={2} play={hover} />
+          <Line color={color2} height={2} play={hover} />
         </Flex>
       </Container>
     </div>
