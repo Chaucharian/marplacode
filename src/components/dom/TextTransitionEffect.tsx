@@ -8,6 +8,7 @@ export interface AppearingEffectProps {
   animationProps?: any
   blendMode?: string
   texts: any
+  height?: number
   position?: number
 }
 
@@ -17,6 +18,7 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
   rotation = 0,
   blendMode = 'normal',
   animationProps,
+  height = 200,
   position = 0,
   texts,
 }) => {
@@ -24,31 +26,24 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
     effect === 'left' ? '-100%' : effect === 'right' ? '100%' : '0%'
   const yEffect =
     effect === 'top' ? '-100%' : effect === 'bottom' ? '100%' : '0%'
-  // const [prevChildren, setPrevChildren] = useState(null)
-  const [currentPosition, setCurrentPosition] = useState(0)
 
   const [animation, start] = useSpring(() => ({
     from: {
       transform: `translate(${xEffect},-${
-        texts.length * 100
+        texts.length * height
       }px ) rotate(${rotation}deg)`,
     },
     ...animationProps,
   }))
 
-  // useEffect(() => {
-  //   const id = setTimeout(() => {
-  //     const newPosition = currentPosition + 1
-  //     setCurrentPosition(newPosition)
-  //   }, 6000)
-  //   return () => clearTimeout(id)
-  // }, [currentPosition])
-
   useEffect(() => {
     const newPosition =
       position === null
-        ? -texts.length * 100
-        : (texts.length * 100 - position * 100) * -1
+        ? texts.length * height
+        : position === 0
+        ? 0
+        : -(position * height)
+
     console.log(newPosition)
 
     start({
@@ -64,12 +59,12 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
         overflow: 'hidden',
         mixBlendMode: blendMode,
         position: 'relative',
-        height: '100px',
+        height: `${height}px`,
       }}
     >
       <animated.div style={{ ...animation, position: 'absolute' }}>
         {texts.map((text, index) => (
-          <animated.div>{text}</animated.div>
+          <animated.div style={{ height: `${height}px` }}>{text}</animated.div>
         ))}
       </animated.div>
     </animated.div>

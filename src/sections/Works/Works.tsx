@@ -25,25 +25,27 @@ const list = [
   {
     name: 'pianucci',
     video: '',
-    description: 'appointment',
+    description:
+      'booking platform aimed to improve daily customer experience making the whole process fast and easy',
     isSelected: true,
   },
   {
     name: 'turnate',
     video: '',
-    description: 'turnos papa',
+    description:
+      'booking platform aimed to improve daily customer experience making the whole process fast and easy',
     isSelected: false,
   },
   {
     name: 'abrirchat',
     video: '',
-    description: 'solo chats',
+    description: 'mobile application to open whatsapp conversations fast',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
     video: '',
-    description: 'dibujitos',
+    description: 'drawing portfolio web page using custom design system',
     isSelected: false,
   },
 ]
@@ -52,7 +54,7 @@ const Works = () => {
   const scroll = useStore((state) => state.scroll)
   const [works, setWorks] = useState(list)
   const worksDescriptions = works.map(({ description }) => (
-    <Text type={theme.fonts.h1}>{description}</Text>
+    <Text type={theme.fonts.p}>{description}</Text>
   ))
   const [currentDescription, setCurrentDescription] = useState(null)
 
