@@ -9,7 +9,7 @@ import useStore from '@/helpers/store'
 const Container = animated(styled.div`
   overflow: scroll;
   overflow-x: hidden;
-  height: 200px;
+  height: 300px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,8 @@ const SelectionEffect = animated(styled.span`
 
 export const WorksList = ({ works, selected, onChange }: any) => {
   const [list, setList] = useState(works)
+  const [hoverItem, setHoverItem] = useState(null)
+
   const effectPosition = useMemo(() => {
     let position = 0
     list.forEach((item, index) => {
@@ -45,43 +47,37 @@ export const WorksList = ({ works, selected, onChange }: any) => {
     })
 
     const percentage =
-      selected === null ? -30 : position * (position >= 2 ? 3 : 25)
+      selected === null ? -50 : position * (position >= 2 ? 30 : 25)
     return percentage
   }, [selected])
 
-  console.log(effectPosition)
-
-  const setHover = (state: boolean, itemIndex: number) => {
-    const newList = [...list].map((item, index) => {
-      if (index === itemIndex) {
-        item.hover = state
-      } else {
-        item.hover = false
-      }
-      return item
-    })
-    setList(newList)
-  }
+  // const setHover = (state: boolean, itemIndex: number) => {
+  //   const newList = [...list].map((item, index) => {
+  //     if (index === itemIndex) {
+  //       item.hover = state
+  //     } else {
+  //       item.hover = false
+  //     }
+  //     return item
+  //   })
+  //   setList(newList)
+  // }
 
   return (
     <Container>
       {works.map((work, index) => (
         <Flex flexDirection='column'>
-          <Text
-            key={work.name}
-            // fontWeight={selected?.name === work.name ? '900' : 'lighter'}
-            // fontWeight={'lighter'}
-            fontSize='35px'
-            fontFamily='Akira'
-            // color={work.isSelected ? theme.colors.orange : theme.colors.primary}
-            onClick={() => onChange(work)}
-            onMouseOver={() => setHover(true, index)}
-            onMouseLeave={() => setHover(false, index)}
+          <div
+            onClick={() => onChange(work, index)}
+            onMouseOver={() => setHoverItem(index)}
+            onMouseLeave={() => setHoverItem(null)}
           >
-            {work.name}
-          </Text>
-          <Line color='grey' height={2} play={true} />
-          <Line color='white' height={2} play={work?.hover} />
+            <Text key={work.name} fontSize='35px' fontFamily='Akira'>
+              {work.name}
+            </Text>
+            <Line color='grey' height={2} play={true} />
+            <Line color='white' height={2} play={index === hoverItem} />
+          </div>
           <Spacer vertical={theme.spacing.small} />
         </Flex>
       ))}

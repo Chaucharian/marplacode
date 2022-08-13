@@ -25,25 +25,48 @@ const list = [
   {
     name: 'pianucci',
     video: '',
-    description: 'appointment custom website aimed to improve user flow',
+    description: 'appointment',
     isSelected: true,
   },
-  { name: 'turnate', video: '', description: '', isSelected: false },
-  { name: 'abrirchat', video: '', description: '', isSelected: false },
-  { name: 'firpodrawing', video: '', description: '', isSelected: false },
+  {
+    name: 'turnate',
+    video: '',
+    description: 'turnos papa',
+    isSelected: false,
+  },
+  {
+    name: 'abrirchat',
+    video: '',
+    description: 'solo chats',
+    isSelected: false,
+  },
+  {
+    name: 'firpodrawing',
+    video: '',
+    description: 'dibujitos',
+    isSelected: false,
+  },
 ]
 
 const Works = () => {
   const scroll = useStore((state) => state.scroll)
   const [works, setWorks] = useState(list)
+  const worksDescriptions = works.map(({ description }) => (
+    <Text type={theme.fonts.h1}>{description}</Text>
+  ))
+  const [currentDescription, setCurrentDescription] = useState(null)
+
   const [selectedWork, setSelection] = useState(null)
   // const selectedWork = useMemo(
   //   () => works.find(({ isSelected }) => isSelected),
   //   [works]
   // )
-  const onSelectWork = (selection) => {
-    useStore.setState({ letter: selection.name[0] })
+  const onSelectWork = (selection, index) => {
+    console.log(selection)
+    useStore.setState({ letter: selection.name[0], changeCameraEffect: true })
     setSelection(selection)
+    console.log(index)
+    setCurrentDescription(index)
   }
 
   // const [show, ]
@@ -72,14 +95,10 @@ const Works = () => {
       <Spacer vertical='500px' />
       <TextTransitionEffect
         animationProps={{ delay: 500 }}
-        texts={[
-          <Text type={theme.fonts.h1}>asdasdasds</Text>,
-          <Text type={theme.fonts.h1}>EEEAAA</Text>,
-          <Text type={theme.fonts.h1}>PAPA</Text>,
-          <Text type={theme.fonts.h1}>QUEONDA</Text>,
-        ]}
+        position={currentDescription}
+        texts={worksDescriptions}
       ></TextTransitionEffect>
-      <Spacer vertical={theme.spacing.small} />
+      <Spacer vertical={theme.spacing.medium} />
       <WorksList
         works={works}
         onChange={onSelectWork}

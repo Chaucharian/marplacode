@@ -8,6 +8,7 @@ const useStore = create((set): any => {
     // videos: [{ name: 'marplacode', video: '/'}],
     domReady: false,
     scroll: null,
+    changeCameraEffect: false,
     letter: 'h',
     navigationOpen: false,
   }

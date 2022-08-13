@@ -7,9 +7,8 @@ export interface AppearingEffectProps {
   rotation?: number
   animationProps?: any
   blendMode?: string
-  next?: boolean
   texts: any
-  controller?: any
+  position?: number
 }
 
 const TextTransitionEffect: FC<AppearingEffectProps> = ({
@@ -18,9 +17,8 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
   rotation = 0,
   blendMode = 'normal',
   animationProps,
-  next = true,
+  position = 0,
   texts,
-  controller,
 }) => {
   const xEffect =
     effect === 'left' ? '-100%' : effect === 'right' ? '100%' : '0%'
@@ -38,23 +36,26 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
     ...animationProps,
   }))
 
-  useEffect(() => {
-    const id = setTimeout(() => {
-      const newPosition = currentPosition + 1
-      setCurrentPosition(newPosition)
-    }, 6000)
-    return () => clearTimeout(id)
-  }, [currentPosition])
+  // useEffect(() => {
+  //   const id = setTimeout(() => {
+  //     const newPosition = currentPosition + 1
+  //     setCurrentPosition(newPosition)
+  //   }, 6000)
+  //   return () => clearTimeout(id)
+  // }, [currentPosition])
 
   useEffect(() => {
-    const position = (texts.length * 100 - currentPosition * 100) * -1
-    console.log(position)
+    const newPosition =
+      position === null
+        ? -texts.length * 100
+        : (texts.length * 100 - position * 100) * -1
+    console.log(newPosition)
 
     start({
-      transform: `translate(0px, ${position}px)  rotate(0deg)`,
+      transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
       ...animationProps,
     })
-  }, [currentPosition])
+  }, [position])
 
   return (
     <animated.div
