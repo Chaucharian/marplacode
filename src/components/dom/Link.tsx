@@ -8,12 +8,19 @@ const Container = styled.div`
   display: inline-block;
 `
 
-const Link = ({ show, color1 = 'white', color2 = 'black', children }) => {
+const Link = ({
+  show,
+  color1 = 'white',
+  color2 = 'black',
+  onClick = () => {},
+  children,
+}) => {
   const [hover, setHover] = useState(false)
 
   return (
     <div>
       <Container
+        onClick={onClick}
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >

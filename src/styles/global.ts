@@ -65,10 +65,11 @@ export default createGlobalStyle`
   * {
    box-sizing: border-box;
    -webkit-tap-highlight-color: transparent;
+   -webkit-font-smoothing: antialiased;
 
-    &::-webkit-scrollbar {
-      display: none; /* Safari and Chrome */
-    }
+    // &::-webkit-scrollbar {
+    //   display: none; /* Safari and Chrome */
+    // }
   }
 
   html,

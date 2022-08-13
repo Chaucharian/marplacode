@@ -1,12 +1,10 @@
 import dynamic from 'next/dynamic'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useStore from '@/helpers/store'
 import { canvasProps } from '@/scenes/MarplaJourney'
 import Navigation from '@/components/dom/Navigation/Navigation'
-import { Logo, Section, Transition } from '@/components'
 import { Contact, Landing, Works } from '@/sections'
 import Whyus from '@/sections/Whyus/Whyus'
-import { useScroll } from '@/helpers/hooks/useScroll'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Footer from '@/sections/Footer/Footer'
 
@@ -14,15 +12,40 @@ const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
 
-// dom components goes here
 const Page = (props) => {
   const video = useRef(null)
+  const scroll = useRef(null)
   useStore.setState({ video })
+
+  // env(keyboard-inset-height, 0px);
+
+  useEffect(() => {
+    if (scroll.current?.container) {
+      useStore.setState({ scroll: scroll.current.container.current })
+    }
+
+    // if ('virtualKeyboard' in navigator) {
+    //   console.log('EEEEEEE')
+    //   window.navigator.virtualKeyboard.overlaysContent = true
+    //   window.navigator.virtualKeyboard?.addEventListener(
+    //     'geometrychange',
+    //     (event) => {
+    //       const { x, y, width, height } = event.target.boundingRect
+    //       console.log('Virtual keyboard geometry changed:', x, y, width, height)
+    //       scroll.current?.container.current.addEventListener('scroll', (a) => {
+    //         console.log(a)
+    //         scroll.current.container.current.scrollTop =
+    //           scroll.current.container.current.scrollTop - height
+    //       })
+    //     }
+    //   )
+    // }
+  }, [])
 
   return (
     <>
       <Navigation />
-      <Parallax pages={4.5}>
+      <Parallax pages={4.5} ref={scroll}>
         <ParallaxLayer
           offset={0}
           speed={2.5}
@@ -34,19 +57,12 @@ const Page = (props) => {
         >
           <Landing />
         </ParallaxLayer>
-        <ParallaxLayer
-          offset={1}
-          style={{
-            zIndex: 0,
-          }}
-        >
+        <ParallaxLayer offset={1}>
           <Whyus />
           <Works />
           <Contact />
         </ParallaxLayer>
         <ParallaxLayer
-          // offset={3.5}
-          // speed={1.3}
           factor={2}
           sticky={{ start: 3, end: 4.5 }}
           style={{

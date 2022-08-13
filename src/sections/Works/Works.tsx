@@ -1,10 +1,19 @@
 import styled from 'styled-components'
-import { Flex, LiquidEffect, Spacer, Text, Shadow } from '@/components/dom'
+import {
+  Flex,
+  LiquidEffect,
+  Spacer,
+  Text,
+  Shadow,
+  TextTransitionEffect,
+} from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useMemo, useState } from 'react'
 import { WorksList } from './components/WorksList'
 import { useSpring } from '@react-spring/core'
+import AppearingEffect from '@/components/dom/AppearingEffect'
+import { title } from 'process'
 
 const Container = styled.section`
   width: 100%;
@@ -60,8 +69,17 @@ const Works = () => {
           </Text>
         </Flex>
       </Flex>
-
       <Spacer vertical='500px' />
+      <TextTransitionEffect
+        animationProps={{ delay: 500 }}
+        texts={[
+          <Text type={theme.fonts.h1}>asdasdasds</Text>,
+          <Text type={theme.fonts.h1}>EEEAAA</Text>,
+          <Text type={theme.fonts.h1}>PAPA</Text>,
+          <Text type={theme.fonts.h1}>QUEONDA</Text>,
+        ]}
+      ></TextTransitionEffect>
+      <Spacer vertical={theme.spacing.small} />
       <WorksList
         works={works}
         onChange={onSelectWork}

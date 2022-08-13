@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Flex, Spacer, Text, Button, Link } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { FormTextField } from '@/components/dom/Form'
@@ -19,11 +19,31 @@ const Content = styled.section`
   background: ${theme.colors.primary};
 `
 
+// if ('virtualKeyboard' in navigator) {
+//   navigator.virtualKeyboard.overlaysContent = true
+//   navigator.virtualKeyboard?.addEventListener('geometrychange', (event) => {
+//     const { x, y, width, height } = event.target.boundingRect
+//     console.log('Virtual keyboard geometry changed:', x, y, width, height)
+//   })
+// }
+
 const Contact = () => {
   const scroll = useStore((state) => state.scroll)
   const show = useStore((state) => state.domReady)
   const animate = scroll >= 0.15
   const { control, handleSubmit, formState } = useForm({})
+
+  const [focus, setFocus] = useState(false)
+
+  // useEffect(() => {
+  //   if (focus) {
+  //     console.log({ scroll })
+  //     scroll.style.bottom = 270
+  //     // scroll.scrollTop = scroll.scrollHeight - scroll.clientHeight
+  //   } else {
+  //     scroll.style.bottom = 0
+  //   }
+  // }, [focus])
 
   return (
     <Flex
@@ -31,14 +51,15 @@ const Contact = () => {
       bg='#E48157'
       p={theme.spacing.small}
       flexDirection='column'
-      position='relative'
+      position={focus ? 'fixed' : 'relative'}
+      width='100%'
     >
       <Spacer vertical={theme.spacing.large} />
       <Text fontFamily='Akira' fontSize='40px' fontWeight='900' color='#000'>
         CONTACT
       </Text>
       <Spacer vertical={theme.spacing.small} />
-      <form>
+      <form onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
         <Flex flexDirection='column'>
           <FormTextField
             control={control}
@@ -84,6 +105,7 @@ const Contact = () => {
           </Text>
         </Link>
       </Flex> */}
+      <Spacer vertical={focus ? '300px' : '0px'} />
     </Flex>
   )
 }
