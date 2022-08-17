@@ -44,8 +44,6 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
         ? 0
         : -(position * height)
 
-    console.log(newPosition)
-
     start({
       transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
       ...animationProps,

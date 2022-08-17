@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, Spacer, Text, Button, Link } from '@/components/dom'
+import { Flex, Spacer, Text, Button, Link, TextButton } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useEffect, useState } from 'react'
@@ -58,8 +58,8 @@ const Contact = () => {
       <Text fontFamily='Akira' fontSize='40px' fontWeight='900' color='#000'>
         CONTACT
       </Text>
-      <Spacer vertical={theme.spacing.small} />
-      <form onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
+      <Spacer vertical={theme.spacing.large} />
+      <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
         <Flex flexDirection='column'>
           <FormTextField
             control={control}
@@ -91,21 +91,12 @@ const Contact = () => {
           />
           <Spacer vertical={theme.spacing.medium} />
           <Flex width='100%' justifyContent='flex-end'>
-            <Button onClick={() => {}}>Submit</Button>
+            <TextButton onClick={() => {}}>Submit</TextButton>
           </Flex>
         </Flex>
-      </form>
+      </div>
 
       <Spacer vertical={theme.spacing.medium} />
-      {/* <Flex flexDirection='column' alignItems='center'>
-        <Text type={theme.fonts.span}>Drop us a line!</Text>
-        <Link show={show}>
-          <Text type={theme.fonts.span} fontSize={'16px'}>
-            hello@marplacode.com
-          </Text>
-        </Link>
-      </Flex> */}
-      <Spacer vertical={focus ? '300px' : '0px'} />
     </Flex>
   )
 }

@@ -1,4 +1,4 @@
-import { Button, Flex, GoDownIndicator, Shadow, Text } from '@/components'
+import { Button, Flex, ArrowButton, Shadow, Text } from '@/components'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { theme } from '@/styles'
@@ -98,7 +98,7 @@ const Landing = () => {
                 effect={show ? 'right' : 'bottom'}
                 show={show}
               >
-                <GoDownIndicator />
+                <ArrowButton />
               </AppearingEffect>
             </Flex>
           </IndicatorContainer>

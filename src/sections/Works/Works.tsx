@@ -6,6 +6,7 @@ import {
   Text,
   Shadow,
   TextTransitionEffect,
+  ArrowButton,
 } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
@@ -22,13 +23,6 @@ const Container = styled.section`
 `
 
 const list = [
-  {
-    name: 'pianucci',
-    video: '',
-    description:
-      'booking platform aimed to improve daily customer experience making the whole process fast and easy',
-    isSelected: true,
-  },
   {
     name: 'turnate',
     video: '',
@@ -48,33 +42,53 @@ const list = [
     description: 'drawing portfolio web page using custom design system',
     isSelected: false,
   },
+  {
+    name: 'audiojourney',
+    video: '',
+    description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
+    in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
+    isSelected: false,
+  },
 ]
 
 const Works = () => {
   const scroll = useStore((state) => state.scroll)
   const [works, setWorks] = useState(list)
-  const worksDescriptions = works.map(({ description }) => (
-    <Text type={theme.fonts.p}>{description}</Text>
-  ))
   const [currentDescription, setCurrentDescription] = useState(null)
+  const [workIndex, setWorkIndex] = useState(0)
 
-  const [selectedWork, setSelection] = useState(null)
+  const worksDescriptions = works.map(({ description }) => (
+    <Text type={theme.fonts.p} color='grey'>
+      {description}
+    </Text>
+  ))
+  const worksTitles = works.map(({ name }) => (
+    <Text fontFamily='Akira' fontWeight='900' fontSize='30px'>
+      {name}
+    </Text>
+  ))
+
   // const selectedWork = useMemo(
   //   () => works.find(({ isSelected }) => isSelected),
   //   [works]
   // )
-  const onSelectWork = (selection, index) => {
-    console.log(selection)
-    useStore.setState({ letter: selection.name[0], changeCameraEffect: true })
-    setSelection(selection)
-    console.log(index)
-    setCurrentDescription(index)
+  // const onSelectWork = (selection, index) => {
+  //   console.log(selection)
+  //   useStore.setState({ letter: selection.name[0], changeCameraEffect: true })
+  //   setSelection(selection)
+  //   console.log(index)
+  //   setCurrentDescription(index)
+  // }
+  const onSelectWork = (index) => {
+    const newIndex =
+      index >= works.length - 1 ? 0 : index === -1 ? works.length - 1 : index
+    console.log(newIndex)
+    useStore.setState({
+      letter: works[newIndex]?.name[0],
+      changeCameraEffect: true,
+    })
+    setWorkIndex(newIndex)
   }
-
-  // const [show, ]
-  // useSpring({
-  //   left: show ? '-100%' : '50%'
-  // })
 
   return (
     <Flex
@@ -85,27 +99,69 @@ const Works = () => {
     >
       <Spacer vertical={theme.spacing.medium} />
       <Flex flexDirection='column'>
-        <Text fontSize='30px' fontFamily='Akira' fontWeight='bold'>
+        <Text fontSize='20px' fontFamily='Akira' fontWeight='bold'>
           Selected
         </Text>
         <Flex pl={theme.spacing.small}>
-          <Text fontSize='50px' fontFamily='Akira'>
+          <Text fontSize='30px' fontFamily='Akira'>
             works
           </Text>
         </Flex>
       </Flex>
-      <Spacer vertical='500px' />
+      <Flex height='500px' justifyContent='center' alignItems='center'>
+        <Flex width='100%' justifyContent='space-between'>
+          <ArrowButton
+            rotation='90'
+            arrowAnimationProps={{
+              loop: false,
+            }}
+            circleAnimationProps={{
+              delay: 2000,
+              from: {
+                border: '0.5px solid rgb(255 255 255 / 61%)',
+              },
+              to: {
+                border: '0.5px solid rgb(255 255 255 / 100%)',
+              },
+            }}
+            onClick={() => onSelectWork(workIndex + 1)}
+          />
+          <ArrowButton
+            rotation='-90'
+            arrowAnimationProps={{
+              loop: false,
+            }}
+            circleAnimationProps={{
+              delay: 2000,
+              from: {
+                border: '0.5px solid rgb(255 255 255 / 61%)',
+              },
+              to: {
+                border: '0.5px solid rgb(255 255 255 / 100%)',
+              },
+            }}
+            onClick={() => onSelectWork(workIndex - 1)}
+          />
+        </Flex>
+      </Flex>
       <TextTransitionEffect
         animationProps={{ delay: 500 }}
-        position={currentDescription}
+        position={workIndex}
+        texts={worksTitles}
+        height={72}
+      ></TextTransitionEffect>
+      {/* <Spacer vertical={theme.spacing.small} /> */}
+      <TextTransitionEffect
+        animationProps={{ delay: 500 }}
+        position={workIndex}
         texts={worksDescriptions}
       ></TextTransitionEffect>
-      <Spacer vertical={theme.spacing.medium} />
-      <WorksList
+
+      {/* <WorksList
         works={works}
         onChange={onSelectWork}
         selected={selectedWork}
-      />
+      /> */}
 
       <Shadow />
     </Flex>
