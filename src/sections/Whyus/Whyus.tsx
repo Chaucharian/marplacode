@@ -40,8 +40,7 @@ const WhyUs = () => {
       flexDirection='column'
       position='relative'
     >
-      {/* <MovingText>MARPLACODE</MovingText> */}
-      <Flex height={theme.spacing.medium} />
+      <Flex height={theme.spacing.large} />
       <Text type={theme.fonts.h3} color='#000'>
         Why Us
       </Text>
@@ -57,6 +56,7 @@ const WhyUs = () => {
       </Text>
       <Spacer vertical={theme.spacing.large} />
       <ServicesList play={true} />
+      <Spacer vertical={theme.spacing.large} />
     </Flex>
   )
 }

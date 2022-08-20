@@ -28,11 +28,12 @@ const options = [
 ]
 
 const Landing = () => {
+  const workSelected = useStore((state) => state?.changeCameraEffect)
   const { title, description } = useChangeDescription({
     time: 4000,
     options,
     onChange: ({ title }) => {
-      useStore.setState({ letter: title[0] })
+      !workSelected && useStore.setState({ letter: title[0] })
     },
   })
   const video = useStore((state) => state?.video)

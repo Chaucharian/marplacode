@@ -1,7 +1,7 @@
 import useStore from '@/helpers/store'
 import { useScroll } from '@react-three/drei'
 import { useThree, useFrame } from '@react-three/fiber'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
 
 export const useCameraEffect = () => {
@@ -9,6 +9,8 @@ export const useCameraEffect = () => {
   const [vec] = useState(() => new THREE.Vector3())
   const domReady = useStore((state) => state.domReady)
   const changeCameraEffect = useStore((state) => state.changeCameraEffect)
+  const letter = useStore((state) => state.letter)
+  const animationState: any = useRef({ endTime: 0 })
 
   return useFrame((state) => {
     // if user scroll a little
@@ -49,14 +51,42 @@ export const useCameraEffect = () => {
 
       if (changeCameraEffect) {
         // once a work option is selected
+        // state.camera.position.lerp(
+        //   vec.set(
+        //     Math.cos(state.clock.elapsedTime) * 0.5,
+        //     state.camera.position.y,
+        //     Math.sin(state.clock.elapsedTime) * 2
+        //   ),
+        //   0.05
+        // )
         state.camera.position.lerp(
           vec.set(
-            Math.cos(state.clock.elapsedTime) * 0.5,
+            state.camera.position.x,
             state.camera.position.y,
-            Math.sin(state.clock.elapsedTime) * 2
+            Math.sin(state.clock.elapsedTime) * 4
           ),
           0.05
         )
+        // if (
+        //   Math.round(state.clock.elapsedTime) <
+        //   Math.round(state.clock.elapsedTime) + 2
+        // ) {
+        //   state.camera.position.lerp(
+        //     vec.set(state.camera.position.x, state.camera.position.y, 10),
+        //     0.05
+        //   )
+        // } else {
+        //   state.camera.position.lerp(
+        //     vec.set(state.camera.position.x, state.camera.position.y, 1),
+        //     0.05
+        //   )
+        // }
+        // animationState.current.endTime = Math.round(state.clock.elapsedTime) + 2
+        // if (
+        //   animationState.current.endTime === Math.round(state.clock.elapsedTime)
+        // ) {
+        //   console.log(console.log('PASARON 2!'))
+        // }
       } else {
         // idle effect
         state.camera.position.lerp(
@@ -69,5 +99,7 @@ export const useCameraEffect = () => {
         )
       }
     }
+
+    animationState.current.prevLetter = letter
   })
 }

@@ -41,9 +41,9 @@ const TextField = ({ ...props }) => {
         onMouseLeave={() => setHover(false)}
         {...props}
       />
-      <Line color='white' play={true} />
+      <Line color='rgb(255,255,255,25%)' play={true} />
       <Flex position='absolute' bottom={0} width='100%'>
-        <Line color='black' height={2} play={hover} />
+        <Line color='rgb(255,255,255,35%)' height={2} play={hover} />
       </Flex>
     </Flex>
   )

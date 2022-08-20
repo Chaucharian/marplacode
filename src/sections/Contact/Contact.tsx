@@ -48,33 +48,33 @@ const Contact = () => {
   return (
     <Flex
       height='100%'
-      bg='#E48157'
+      bg='#000'
       p={theme.spacing.small}
       flexDirection='column'
       position={focus ? 'fixed' : 'relative'}
       width='100%'
     >
       <Spacer vertical={theme.spacing.large} />
-      <Text fontFamily='Akira' fontSize='40px' fontWeight='900' color='#000'>
+      <Text fontFamily='Akira' fontSize='40px' fontWeight='900' color='#FFF'>
         CONTACT
       </Text>
       <Spacer vertical={theme.spacing.large} />
       <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
-        <Flex flexDirection='column'>
+        <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
           <FormTextField
             control={control}
             name='name'
             placeholder="What's your name/company"
             enterkeyhint='next'
           />
-          <Spacer vertical={theme.spacing.small} />
+          <Spacer vertical={'32px'} />
           <FormTextField
             control={control}
             name='name'
             placeholder='Budget'
             enterkeyhint='next'
           />
-          <Spacer vertical={theme.spacing.small} />
+          <Spacer vertical={'32px'} />
           <FormTextField
             control={control}
             name='email'
@@ -82,7 +82,7 @@ const Contact = () => {
             placeholder='Email'
             enterkeyhint='next'
           />
-          <Spacer vertical={theme.spacing.small} />
+          <Spacer vertical={'32px'} />
           <FormTextField
             control={control}
             name='message'

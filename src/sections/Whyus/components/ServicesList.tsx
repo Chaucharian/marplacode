@@ -7,13 +7,19 @@ import { useState } from 'react'
 
 const mock = [
   {
+    title: 'Web3',
+    content: ['ERC20 tokens', 'deploy on any network', 'smart contracts'],
+    open: false,
+  },
+  {
     title: 'Product design',
     content: ['Research', 'Ideation', 'Prototyping'],
     open: false,
   },
   {
-    title: 'Fron-end dev',
+    title: 'Web/Mobile',
     content: [
+      'be visible with next gen SEO',
       'Creative development',
       '3D interactive projects',
       'Cutting edge UI/UX',
@@ -22,7 +28,7 @@ const mock = [
   },
   {
     title: 'Consulting',
-    content: ['Creative strrategy', 'MVP validation', 'Business strategy'],
+    content: ['Creative strategy', 'MVP validation', 'Business strategy'],
     open: false,
   },
 ]
