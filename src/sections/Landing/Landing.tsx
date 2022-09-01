@@ -5,7 +5,7 @@ import { theme } from '@/styles'
 import useStore from '@/helpers/store'
 import * as animations from '@/helpers/animations'
 import Line from '@/components/dom/Line'
-import { fonts } from '@/styles/theme'
+import { device, fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
 
@@ -14,17 +14,26 @@ const IndicatorContainer = styled.div`
   height: 100vh;
   position: absolute;
   top: -60px;
-  left: 0;
+  left: -50%;
   z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 `
 
+const Content = styled.div`
+  @media ${device.desktop} {
+    min-width: ${theme.sizes.desktop.contentWidth};
+  }
+`
+
 const options = [
-  { title: 'Hand', description: 'trough high quality design and development' },
-  { title: 'Design', description: 'desiging everything from scratch' },
-  { title: 'Making', description: 'making any dream possible' },
+  {
+    title: 'Hand',
+    description: 'we aimed for handcrafted and polish products',
+  },
+  { title: 'Detail', description: 'we are detail oriented' },
+  { title: 'Making', description: 'uniques design pieces' },
 ]
 
 const Landing = () => {
@@ -54,8 +63,8 @@ const Landing = () => {
         height={'100%'}
         position='relative'
       >
-        <Flex>
-          <Flex flexDirection='column'>
+        <Flex justifyContent='center'>
+          <Content>
             <AppearingEffect
               effect={show ? 'left' : 'top'}
               animationProps={{ delay: 500 }}
@@ -87,7 +96,7 @@ const Landing = () => {
               </Button>
             </AppearingEffect>
             <Flex height='48px' />
-          </Flex>
+          </Content>
 
           <IndicatorContainer>
             <Flex justifyContent='end' pr={theme.spacing.small}>

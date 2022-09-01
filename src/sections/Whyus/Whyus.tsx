@@ -7,25 +7,25 @@ import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
-import AppearingEffect from '@/components/dom/AppearingEffect'
-import { config, useSpring } from '@react-spring/core'
-import { animated } from '@react-spring/web'
 
-// const MovingTextContainer = styled(animated.div)`
-//   position: absolute;
-//   top: 0;
-//   left: 0%;
-// `
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  background-color: white;
+  padding: ${theme.spacing.small};
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
 
-// const MovingText = ({ children }) => {
-//   return (
-//     <Flex>
-//       <MovingTextContainer>
-//         <Text fontFamily='Akira'>{children}</Text>
-//       </MovingTextContainer>
-//     </Flex>
-//   )
-// }
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media ${device.desktop} {
+    flex-direction: row;
+  }
+`
 
 const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
@@ -33,31 +33,34 @@ const WhyUs = () => {
   // const animate = scroll >= 0.15
 
   return (
-    <Flex
-      height='100%'
-      bg='white'
-      p={theme.spacing.small}
-      flexDirection='column'
-      position='relative'
-    >
-      <Flex height={theme.spacing.large} />
-      <Text type={theme.fonts.h3} color='#000'>
-        Why Us
-      </Text>
-      <Flex height={theme.spacing.medium} />
-      <Text type={theme.fonts.h2} color='#000'>
-        A createive development
-      </Text>
-      <GlowText>studio</GlowText>
-      <Flex height={theme.spacing.small} />
-      <Text type={theme.fonts.p} color='#465764'>
-        that build hand crafted web experiences delivering high quality digital
-        products.
-      </Text>
-      <Spacer vertical={theme.spacing.large} />
-      <ServicesList play={true} />
-      <Spacer vertical={theme.spacing.large} />
-    </Flex>
+    <Container>
+      <Content>
+        <Flex flexDirection='column' maxWidth='560px'>
+          <Text type={theme.fonts.p} color='#000'>
+            Our approach
+          </Text>
+          <Flex height={theme.spacing.small} />
+          <Text type={theme.fonts.h2} color='#000'>
+            Creative
+          </Text>
+          <Text type={theme.fonts.h3} color='#000'>
+            development
+          </Text>
+          <GlowText>studio</GlowText>
+          <Flex height={theme.spacing.small} />
+          <Text type={theme.fonts.p} color='#465764'>
+            We focus on making the essence of your project visible through
+            high-level design and development.
+          </Text>
+        </Flex>
+        <Spacer horizontal={theme.spacing.large} />
+        <Flex maxWidth='500px' flexDirection='column' justifyContet='center'>
+          <Spacer vertical={theme.spacing.large} />
+          <ServicesList play={true} />
+          <Spacer vertical={theme.spacing.large} />
+        </Flex>
+      </Content>
+    </Container>
   )
 }
 export default WhyUs

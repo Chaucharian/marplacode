@@ -6,11 +6,11 @@ import styled from 'styled-components'
 import { useState } from 'react'
 
 const mock = [
-  {
-    title: 'Web3',
-    content: ['ERC20 tokens', 'deploy on any network', 'smart contracts'],
-    open: false,
-  },
+  // {
+  //   title: 'Web3',
+  //   content: ['ERC20 tokens', 'deploy on any network', 'smart contracts'],
+  //   open: false,
+  // },
   {
     title: 'Product design',
     content: ['Research', 'Ideation', 'Prototyping'],
@@ -60,7 +60,6 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
   const [services, setServices] = useState(initialServices)
 
   const openItem = (itemIndex: number) => {
-    console.log('EEEE')
     const newServices = [...services].map((service, index) => {
       if (index === itemIndex) {
         service.open = service.open ? false : true
@@ -75,13 +74,13 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
   }
 
   return (
-    <Flex flexDirection='column'>
+    <Flex flexDirection='column' width='100%'>
       {services.map(({ title, open, content }, index) => (
         <Flex flexDirection='column'>
           <Item onClick={() => openItem(index)}>
             <Text
               type={theme.fonts.h3}
-              fontWeight={'lighter'}
+              fontWeight={'600'}
               fontSize='27px'
               color='#000'
             >

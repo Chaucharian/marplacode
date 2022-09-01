@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import Text from './Text'
 
 const StyledButton = styled.button`
-  ${({ width = 250 }) => `
+  ${({ width = 200 }) => `
 background: black;
   padding: 20px;
   color: inherit;
-  border-radius: 35px;
+  border-radius: 50px;
   border: 1px solid white;
   font: inherit;
   cursor: pointer;
@@ -20,7 +20,7 @@ background: black;
 const Button = ({ children, ...props }) => {
   return (
     <StyledButton {...props}>
-      <Text type={theme.fonts.p} fontWeight={'lighter'}>
+      <Text type={theme.fonts.p} fontSize={'16px'} fontWeight={'lighter'}>
         {children}
       </Text>
     </StyledButton>

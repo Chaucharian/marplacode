@@ -97,6 +97,17 @@ export const useCameraEffect = () => {
           ),
           0.05
         )
+        // works section move to the right
+        // state.camera.position.lerp(
+        //   vec.set(
+        //     state.camera.position.x -
+        //       2 +
+        //       Math.sin(state.clock.elapsedTime) * 0.3,
+        //     state.camera.position.y,
+        //     Math.sin(state.clock.elapsedTime) * 0.3
+        //   ),
+        //   0.05
+        // )
       }
     }
 

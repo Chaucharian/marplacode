@@ -48,53 +48,63 @@ const Contact = () => {
   return (
     <Flex
       height='100%'
-      bg='#000'
+      bg='#1A1D22'
       p={theme.spacing.small}
-      flexDirection='column'
-      position={focus ? 'fixed' : 'relative'}
       width='100%'
+      justifyContent='center'
     >
-      <Spacer vertical={theme.spacing.large} />
-      <Text fontFamily='Akira' fontSize='40px' fontWeight='900' color='#FFF'>
-        CONTACT
-      </Text>
-      <Spacer vertical={theme.spacing.large} />
-      <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
-        <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
-          <FormTextField
-            control={control}
-            name='name'
-            placeholder="What's your name/company"
-            enterkeyhint='next'
-          />
-          <Spacer vertical={'32px'} />
-          <FormTextField
-            control={control}
-            name='name'
-            placeholder='Budget'
-            enterkeyhint='next'
-          />
-          <Spacer vertical={'32px'} />
-          <FormTextField
-            control={control}
-            name='email'
-            inputmode='email'
-            placeholder='Email'
-            enterkeyhint='next'
-          />
-          <Spacer vertical={'32px'} />
-          <FormTextField
-            control={control}
-            name='message'
-            placeholder='Message'
-            enterkeyhint='next'
-          />
-          <Spacer vertical={theme.spacing.medium} />
-          <Flex width='100%' justifyContent='flex-end'>
-            <TextButton onClick={() => {}}>Submit</TextButton>
-          </Flex>
+      <Flex minWidth={{ lg: theme.sizes.desktop.contentWidth }}>
+        <Spacer vertical={theme.spacing.large} />
+        <Flex flexDirection='column'>
+          <Text type={theme.fonts.h1}>Say hi!</Text>
+          <Spacer vertical={theme.spacing.tiny} />
+          <Text
+            fontFamily='LibreFranklin'
+            fontSize='40px'
+            fontWeight='300'
+            color='#808690'
+          >
+            tell us about your idea
+          </Text>
+          <Spacer vertical={theme.spacing.large} />
+          <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
+            <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
+              <FormTextField
+                control={control}
+                name='name'
+                placeholder="What's your name/company"
+                enterkeyhint='next'
+              />
+              <Spacer vertical={'32px'} />
+              <FormTextField
+                control={control}
+                name='name'
+                placeholder='Budget'
+                enterkeyhint='next'
+              />
+              <Spacer vertical={'32px'} />
+              <FormTextField
+                control={control}
+                name='email'
+                inputmode='email'
+                placeholder='Email'
+                enterkeyhint='next'
+              />
+              <Spacer vertical={'32px'} />
+              <FormTextField
+                control={control}
+                name='message'
+                placeholder='Message'
+                enterkeyhint='next'
+              />
+              <Spacer vertical={theme.spacing.medium} />
+              <Flex width='100%' justifyContent='flex-end'>
+                <TextButton onClick={() => {}}>Submit</TextButton>
+              </Flex>
+            </Flex>
+          </div>
         </Flex>
-      </div>
+      </Flex>
 
       <Spacer vertical={theme.spacing.medium} />
     </Flex>

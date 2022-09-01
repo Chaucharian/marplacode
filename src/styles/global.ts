@@ -36,6 +36,7 @@ export default createGlobalStyle`
     src: url('/fonts/Raleway-Bold.ttf');
     font-weight: bold;
   }
+
   @font-face {
     font-family: 'LibreFranklin';
     src: url('/fonts/LibreFranklin-Medium.ttf');
@@ -61,15 +62,16 @@ export default createGlobalStyle`
     src: url('/fonts/LibreFranklin-ExtraBold.ttf');
     font-weight: normal;
   }
+    @font-face {
+    font-family: 'Newake';
+    src: url('/fonts/Newake-Font-Regular.ttf');
+    font-weight: normal;
+  }
 
   * {
    box-sizing: border-box;
    -webkit-tap-highlight-color: transparent;
    -webkit-font-smoothing: antialiased;
-
-    // &::-webkit-scrollbar {
-    //   display: none; /* Safari and Chrome */
-    // }
   }
 
   html,
@@ -82,7 +84,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: 'LibreFranklin';
+    font-family: 'Newake';
     background-color: black;
   }
 `

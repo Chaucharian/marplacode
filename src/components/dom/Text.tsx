@@ -9,7 +9,7 @@ const StyledAndAnimatedText = ({
   blendMode = 'normal',
   color = theme.colors?.primary,
   fontWeight,
-  fontFamily = 'LibreFranklin',
+  fontFamily,
   fontSize,
   animate = false,
   children,
@@ -24,7 +24,7 @@ const StyledAndAnimatedText = ({
     font-family: ${fontFamily ?? fonts[type].family};
 
     @media ${device.desktop} {
-      font-size: ${fonts[type].desktop};
+      font-size: ${fontSize ?? fonts[type].desktop};
     }
   `)
   return <StyledAndAnimated {...props}>{children}</StyledAndAnimated>
@@ -37,12 +37,6 @@ interface TextProps {
 }
 
 const Text = ({ animation, children, ...props }: TextProps) => {
-  const animationProps = useSpring(animation)
-
-  return (
-    <StyledAndAnimatedText style={animation ? animationProps : {}} {...props}>
-      {children}
-    </StyledAndAnimatedText>
-  )
+  return <StyledAndAnimatedText {...props}>{children}</StyledAndAnimatedText>
 }
 export default Text
