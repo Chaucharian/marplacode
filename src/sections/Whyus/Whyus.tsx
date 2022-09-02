@@ -7,16 +7,7 @@ import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
-
-const Container = styled.div`
-  height: 100%;
-  display: flex;
-  background-color: white;
-  padding: ${theme.spacing.small};
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
+import { Container } from '../components'
 
 const Content = styled.div`
   display: flex;
@@ -33,7 +24,7 @@ const WhyUs = () => {
   // const animate = scroll >= 0.15
 
   return (
-    <Container>
+    <Container bg='white'>
       <Content>
         <Flex flexDirection='column' maxWidth='560px'>
           <Text type={theme.fonts.p} color='#000'>
@@ -54,7 +45,11 @@ const WhyUs = () => {
           </Text>
         </Flex>
         <Spacer horizontal={theme.spacing.large} />
-        <Flex maxWidth='500px' flexDirection='column' justifyContet='center'>
+        <Flex
+          minWidth={{ md: '400px' }}
+          flexDirection='column'
+          justifyContet='center'
+        >
           <Spacer vertical={theme.spacing.large} />
           <ServicesList play={true} />
           <Spacer vertical={theme.spacing.large} />

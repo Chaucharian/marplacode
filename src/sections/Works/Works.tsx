@@ -15,12 +15,7 @@ import { WorksList } from './components/WorksList'
 import { useSpring } from '@react-spring/core'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { title } from 'process'
-
-const Container = styled.section`
-  width: 100%;
-  height: 100vh;
-  padding-left: ${theme.spacing.small};
-`
+import { Container } from '../components'
 
 const list = [
   {
@@ -91,12 +86,7 @@ const Works = () => {
   }
 
   return (
-    <Flex
-      flexDirection='column'
-      p={theme.spacing.small}
-      height='100%'
-      position='relative'
-    >
+    <Container>
       <Spacer vertical={theme.spacing.medium} />
       <Flex flexDirection='column'>
         <Text fontSize='20px' fontFamily='Akira' fontWeight='bold'>
@@ -144,19 +134,20 @@ const Works = () => {
           />
         </Flex>
       </Flex>
-      <TextTransitionEffect
-        animationProps={{ delay: 500 }}
-        position={workIndex}
-        texts={worksTitles}
-        height={72}
-      ></TextTransitionEffect>
-      {/* <Spacer vertical={theme.spacing.small} /> */}
-      <TextTransitionEffect
-        animationProps={{ delay: 500 }}
-        position={workIndex}
-        texts={worksDescriptions}
-      ></TextTransitionEffect>
-
+      <div>
+        <TextTransitionEffect
+          animationProps={{ delay: 500 }}
+          position={workIndex}
+          texts={worksTitles}
+          height={72}
+        ></TextTransitionEffect>
+        {/* <Spacer vertical={theme.spacing.small} /> */}
+        <TextTransitionEffect
+          animationProps={{ delay: 500 }}
+          position={workIndex}
+          texts={worksDescriptions}
+        ></TextTransitionEffect>
+      </div>
       {/* <WorksList
         works={works}
         onChange={onSelectWork}
@@ -164,7 +155,7 @@ const Works = () => {
       /> */}
 
       <Shadow />
-    </Flex>
+    </Container>
   )
 }
 export default Works

@@ -68,6 +68,10 @@ export default {
     span: 'span',
   },
   spacing: {
+    horizontal: {
+      desktop: '15%',
+      mobile: '2%',
+    },
     tiny: '0.5em',
     small: '1em',
     medium: '4em',

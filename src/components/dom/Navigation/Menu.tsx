@@ -33,7 +33,7 @@ const Nav = styled(animated.nav)`
   }
 
   span {
-    color: white;
+    color: #000;
     font-size: 8px;
     font-family: Inter;
     font-weight: 100;
@@ -45,11 +45,10 @@ const Li = styled(animated.li)`
   position: relative;
 
   a {
-    color: #fff;
-    font-family: Akira;
+    color: #000;
+    font-family: Newake;
     font-size: 50px;
     font-weight: bold;
-    text-transform: uppercase;
     text-decoration: none;
     line-height: 1.3;
   }
@@ -59,20 +58,20 @@ const Li = styled(animated.li)`
     transition: all ease-in 0.5s;
     top: 30%;
     left: -100%;
-    height: 50px;
+    height: 0.5px;
     width: 150px;
-    background: white;
+    background: #0f6dc5d6;
     mix-blend-mode: difference;
   }
 
   .b {
     position: absolute;
     transition: all ease-in 0.5s;
-    top: 60%;
+    top: 90%;
     left: 100%;
-    height: 10px;
+    height: 1px;
     width: 80px;
-    background: white;
+    background: #0f6dc5d6;
     mix-blend-mode: difference;
   }
 
@@ -87,10 +86,10 @@ const Li = styled(animated.li)`
 `
 
 const menuItems = [
-  { name: 'HOME', link: 'home' },
-  { name: 'SERVICES', link: 'services' },
-  { name: 'WHY US', link: 'history' },
-  { name: 'CONTACT', link: 'contact' },
+  { name: 'Home', link: 'home' },
+  { name: 'Services', link: 'services' },
+  { name: 'Why Us', link: 'history' },
+  { name: 'Contact', link: 'contact' },
 ]
 
 const Menu = ({ show }: any) => {

@@ -17,13 +17,11 @@ const Page = (props) => {
   const scroll = useRef(null)
   useStore.setState({ video })
 
-  // env(keyboard-inset-height, 0px);
-
   useEffect(() => {
     if (scroll.current?.container) {
       useStore.setState({ scroll: scroll.current.container.current })
     }
-
+    // env(keyboard-inset-height, 0px);
     // if ('virtualKeyboard' in navigator) {
     //   console.log('EEEEEEE')
     //   window.navigator.virtualKeyboard.overlaysContent = true
@@ -40,12 +38,18 @@ const Page = (props) => {
     //     }
     //   )
     // }
-  }, [])
+  }, [scroll])
 
   return (
     <>
       <Navigation />
-      <Parallax pages={4.5} ref={scroll}>
+      <Parallax
+        pages={4.5}
+        ref={scroll}
+        // onScrollCapture={({ currentTarget }) =>
+        //   useStore.setState({ scroll: currentTarget.scrollTop })
+        // }
+      >
         <ParallaxLayer
           offset={0}
           speed={2.5}

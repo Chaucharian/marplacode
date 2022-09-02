@@ -7,17 +7,8 @@ import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { FormTextField } from '@/components/dom/Form'
 import { useForm } from 'react-hook-form'
-
-const Container = styled.section`
-  width: 100%;
-  height: 100vh;
-`
-
-const Content = styled.section`
-  width: 100%;
-  height: 50%;
-  background: ${theme.colors.primary};
-`
+import { Container } from '../components'
+import { useScroll } from '@/helpers/hooks/useScroll'
 
 // if ('virtualKeyboard' in navigator) {
 //   navigator.virtualKeyboard.overlaysContent = true
@@ -29,10 +20,10 @@ const Content = styled.section`
 
 const Contact = () => {
   const scroll = useStore((state) => state.scroll)
+  const scrollPercentage = useScroll(scroll)
   const show = useStore((state) => state.domReady)
   const animate = scroll >= 0.15
   const { control, handleSubmit, formState } = useForm({})
-
   const [focus, setFocus] = useState(false)
 
   // useEffect(() => {
@@ -46,68 +37,64 @@ const Contact = () => {
   // }, [focus])
 
   return (
-    <Flex
-      height='100%'
-      bg='#1A1D22'
-      p={theme.spacing.small}
-      width='100%'
-      justifyContent='center'
-    >
-      <Flex minWidth={{ lg: theme.sizes.desktop.contentWidth }}>
-        <Spacer vertical={theme.spacing.large} />
-        <Flex flexDirection='column'>
-          <Text type={theme.fonts.h1}>Say hi!</Text>
-          <Spacer vertical={theme.spacing.tiny} />
-          <Text
-            fontFamily='LibreFranklin'
-            fontSize='40px'
-            fontWeight='300'
-            color='#808690'
-          >
-            tell us about your idea
-          </Text>
+    <Container bg='#1A1D22'>
+      <Flex>
+        <Flex>
           <Spacer vertical={theme.spacing.large} />
-          <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
-            <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
-              <FormTextField
-                control={control}
-                name='name'
-                placeholder="What's your name/company"
-                enterkeyhint='next'
-              />
-              <Spacer vertical={'32px'} />
-              <FormTextField
-                control={control}
-                name='name'
-                placeholder='Budget'
-                enterkeyhint='next'
-              />
-              <Spacer vertical={'32px'} />
-              <FormTextField
-                control={control}
-                name='email'
-                inputmode='email'
-                placeholder='Email'
-                enterkeyhint='next'
-              />
-              <Spacer vertical={'32px'} />
-              <FormTextField
-                control={control}
-                name='message'
-                placeholder='Message'
-                enterkeyhint='next'
-              />
-              <Spacer vertical={theme.spacing.medium} />
-              <Flex width='100%' justifyContent='flex-end'>
-                <TextButton onClick={() => {}}>Submit</TextButton>
+          <Flex flexDirection='column'>
+            <Text type={theme.fonts.h1}>Say hi!</Text>
+            <Spacer vertical={theme.spacing.tiny} />
+            <Text
+              fontFamily='LibreFranklin'
+              fontSize='40px'
+              fontWeight='300'
+              color='#808690'
+            >
+              tell us about your idea
+            </Text>
+            <Spacer vertical={theme.spacing.large} />
+            <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
+              <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
+                <FormTextField
+                  control={control}
+                  name='name'
+                  placeholder="What's your name/company"
+                  enterkeyhint='next'
+                />
+                <Spacer vertical={'32px'} />
+                <FormTextField
+                  control={control}
+                  name='name'
+                  placeholder='Budget'
+                  enterkeyhint='next'
+                />
+                <Spacer vertical={'32px'} />
+                <FormTextField
+                  control={control}
+                  name='email'
+                  inputmode='email'
+                  placeholder='Email'
+                  enterkeyhint='next'
+                />
+                <Spacer vertical={'32px'} />
+                <FormTextField
+                  control={control}
+                  name='message'
+                  placeholder='Message'
+                  enterkeyhint='next'
+                />
+                <Spacer vertical={theme.spacing.medium} />
+                <Flex width='100%' justifyContent='flex-end'>
+                  <TextButton onClick={() => {}}>Submit</TextButton>
+                </Flex>
               </Flex>
-            </Flex>
-          </div>
+            </div>
+          </Flex>
+          <Spacer vertical={theme.spacing.medium} />
         </Flex>
+        {/* <Flex bg='white' width='50%' height='100%'></Flex> */}
       </Flex>
-
-      <Spacer vertical={theme.spacing.medium} />
-    </Flex>
+    </Container>
   )
 }
 export default Contact

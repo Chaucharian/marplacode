@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react'
 export const useScroll = (ref) => {
   const [scroll, setScroll] = useState(0)
   useEffect(() => {
-    const winScroll = ref.current.scrollTop
-    const height = ref.current.scrollHeight - ref.current.clientHeight
+    ref?.addEventListener('scroll', ({ currentTarget }) => {
+      const winScroll = currentTarget?.scrollTop
+      const height = currentTarget?.scrollHeight - currentTarget?.clientHeight
 
-    setScroll(winScroll / height)
-  }, [])
+      setScroll((winScroll * 100) / height)
+    })
+  }, [ref])
+
   return scroll
 }

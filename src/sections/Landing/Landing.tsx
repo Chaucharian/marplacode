@@ -8,6 +8,7 @@ import Line from '@/components/dom/Line'
 import { device, fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
+import { Container } from '../components'
 
 const IndicatorContainer = styled.div`
   width: 100vw;
@@ -55,7 +56,7 @@ const Landing = () => {
   }
 
   return (
-    <>
+    <Container>
       <Flex
         p={theme.spacing.small}
         flexDirection='column'
@@ -63,8 +64,8 @@ const Landing = () => {
         height={'100%'}
         position='relative'
       >
-        <Flex justifyContent='center'>
-          <Content>
+        <Flex>
+          <Flex flexDirection='column'>
             <AppearingEffect
               effect={show ? 'left' : 'top'}
               animationProps={{ delay: 500 }}
@@ -96,7 +97,7 @@ const Landing = () => {
               </Button>
             </AppearingEffect>
             <Flex height='48px' />
-          </Content>
+          </Flex>
 
           <IndicatorContainer>
             <Flex justifyContent='end' pr={theme.spacing.small}>
@@ -115,7 +116,7 @@ const Landing = () => {
         </Flex>
         <Shadow />
       </Flex>
-    </>
+    </Container>
   )
 }
 export default Landing
