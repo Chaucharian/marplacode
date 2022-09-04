@@ -49,6 +49,19 @@ const Content = styled.div`
 `}
 `
 
+const Backdrop = styled.div`
+  ${({ open }) => `
+  transition: all ease-in 0.5s;
+  background: white;
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: ${open ? '50%' : '100%'};
+  
+`}
+`
+
 const ProgressLine = animated(styled.div`
   ${({
     color = '#FFF',
@@ -135,6 +148,7 @@ const Navigation = () => {
           onClick={openHandler}
         />
       </Flex>
+      {/* <Backdrop open={open} /> */}
       <Content open={open}>
         <Menu show={open} />
       </Content>
