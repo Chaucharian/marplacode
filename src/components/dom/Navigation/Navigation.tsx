@@ -156,12 +156,15 @@ const Navigation = () => {
       {/* <Content open={open}>
         <Menu show={open} />
       </Content> */}
-      <ProgressLine
-        color={whiteSection ? 'black' : 'white'}
-        // width={scrollPercentage > 20 ? 100 : 0}
-        width={100}
-        opacity={domReady ? 35 : 0}
-      />
+      {!open && (
+        <ProgressLine
+          color={whiteSection ? 'black' : 'white'}
+          // width={scrollPercentage > 20 ? 100 : 0}
+          width={100}
+          opacity={domReady ? 35 : 0}
+        />
+      )}
+
       {open && <Shadow />}
     </NavigationContainer>
   )
