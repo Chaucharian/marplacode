@@ -46,6 +46,7 @@ const Landing = () => {
       !workSelected && useStore.setState({ letter: title[0] })
     },
   })
+  const scrollTo = useStore((state) => state?.scroll?.scrollTo)
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
   const show = !navigationState
@@ -60,22 +61,23 @@ const Landing = () => {
       <Flex
         p={theme.spacing.small}
         flexDirection='column'
-        justifyContent={'flex-end'}
+        justifyContent={'center'}
         height={'100%'}
         position='relative'
+        zIndex={1}
       >
         <Flex>
           <Flex flexDirection='column'>
             <AppearingEffect
-              effect={show ? 'left' : 'top'}
+              effect={show ? 'bottom' : 'top'}
               animationProps={{ delay: 500 }}
               show={show}
             >
               <Text type={theme.fonts.h1}>{title}</Text>
             </AppearingEffect>
             <AppearingEffect
-              animationProps={{ delay: 1000 }}
-              effect={show ? 'left' : 'top'}
+              animationProps={{ delay: 700 }}
+              effect={show ? 'bottom' : 'top'}
               show={show}
             >
               <Text type={theme.fonts.p} fontWeight={'lighter'}>
@@ -84,12 +86,13 @@ const Landing = () => {
             </AppearingEffect>
             <Flex height='48px' />
             <AppearingEffect
-              animationProps={{ delay: 1500 }}
-              effect={show ? 'left' : 'top'}
+              animationProps={{ delay: 900 }}
+              effect={show ? 'top' : 'top'}
               show={show}
             >
               <Button
                 onClick={() => {
+                  scrollTo(2)
                   // video?.current?.play()
                 }}
               >
@@ -100,7 +103,7 @@ const Landing = () => {
           </Flex>
 
           <IndicatorContainer>
-            <Flex justifyContent='end' pr={theme.spacing.small}>
+            <Flex justifyContent='center' pr={theme.spacing.small}>
               <AppearingEffect
                 animationProps={{
                   delay: show ? 2000 : 600,

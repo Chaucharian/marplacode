@@ -14,7 +14,7 @@ const Text = styled.h1`
     color: black;
     margin: 0;
     font-weight: normal;
-    font-size: 50px
+    font-size: 60px
 `}
 `
 
@@ -22,6 +22,7 @@ const GlowText = ({
   colors1 = ['#23393E', '#A7D5FF'],
   colors2 = ['#097BE4', '#3AE2EC'],
   children,
+  ...props
 }) => {
   const a1 = useSpring({
     from: {
@@ -56,7 +57,7 @@ const GlowText = ({
 
   return (
     <Container style={a1}>
-      <Text type={theme.fonts.h1}>{children}</Text>
+      <Text {...props}>{children}</Text>
     </Container>
   )
 }

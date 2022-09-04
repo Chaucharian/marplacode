@@ -1,43 +1,17 @@
-import { Flex, Text, Line, Spacer, OpenButton } from '@/components/dom'
+import { Flex, Text, Line, Spacer, OpenButton, Button } from '@/components/dom'
 import { theme } from '@/styles'
 import { lineGrow } from '@/helpers/animations'
 import { animated, config, useSpring, useTransition } from '@react-spring/web'
 import styled from 'styled-components'
 import { useState } from 'react'
-
-const mock = [
-  // {
-  //   title: 'Web3',
-  //   content: ['ERC20 tokens', 'deploy on any network', 'smart contracts'],
-  //   open: false,
-  // },
-  {
-    title: 'Product design',
-    content: ['Research', 'Ideation', 'Prototyping'],
-    open: false,
-  },
-  {
-    title: 'Web/Mobile',
-    content: [
-      'be visible with next gen SEO',
-      'Creative development',
-      '3D interactive projects',
-      'Cutting edge UI/UX',
-    ],
-    open: false,
-  },
-  {
-    title: 'Consulting',
-    content: ['Creative strategy', 'MVP validation', 'Business strategy'],
-    open: false,
-  },
-]
+import AppearingEffect from '@/components/dom/AppearingEffect'
 
 const Content = animated(styled.div`
   ${({ open }) => `
   z-index: 100;
-  transition: all ease-in 0.5s;
-  height: ${open ? '80px' : '0px'};
+  transition: all ease-in-out 0.5s;
+  height: ${open ? '200px' : '0px'};
+  // display: ${open ? 'block' : 'none'};
 `}
 `)
 const Item = animated(styled.div`
@@ -56,7 +30,7 @@ const ItemContent = ({ open, delay, children }) => {
   return <animated.div style={animation}>{open && children}</animated.div>
 }
 
-const ServicesList = ({ play, services: initialServices = mock }) => {
+const ServicesList = ({ play, services: initialServices }) => {
   const [services, setServices] = useState(initialServices)
 
   const openItem = (itemIndex: number) => {
@@ -74,8 +48,12 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
   }
 
   return (
-    <Flex flexDirection='column' width='100%'>
-      {services.map(({ title, open, content }, index) => (
+    <Flex
+      flexDirection='column'
+      minWidth={{ md: '500px' }}
+      maxWidth={{ md: '500px' }}
+    >
+      {services.map(({ title, open, content, description = '' }, index) => (
         <Flex flexDirection='column'>
           <Item onClick={() => openItem(index)}>
             <Text
@@ -97,12 +75,39 @@ const ServicesList = ({ play, services: initialServices = mock }) => {
               flexWrap='wrap'
               // flexDirection='column'
             >
+              <div>
+                {/* <AppearingEffect
+                  effect={open ? 'bottom' : 'top'}
+                  animationProps={{ delay: 200 }}
+                  show={open}
+                > */}
+                {open && (
+                  <Text
+                    fontSize='16px'
+                    fontFamily='Circular'
+                    fontWeight='normal'
+                    color='#777777'
+                  >
+                    {description}
+                  </Text>
+                )}
+
+                {/* </AppearingEffect> */}
+                <Spacer vertical={theme.spacing.small} />
+              </div>
               {content.map((item, index) => (
                 <>
-                  <ItemContent open={open} delay={200 * index}>
-                    <Text color='#000' type={theme.fonts.span}>
+                  <ItemContent open={open} delay={100 * index}>
+                    <Button
+                      background='#FFF'
+                      borderColor='#D7D7D7'
+                      textProps={{ color: '#000', fontSize: '13px' }}
+                      width='100%'
+                      padding='10px'
+                      type={theme.fonts.span}
+                    >
                       {item}
-                    </Text>
+                    </Button>
                     <Spacer vertical={theme.spacing.small} />
                   </ItemContent>
                   <Spacer horizontal={theme.spacing.small} />

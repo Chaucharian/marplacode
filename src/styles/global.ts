@@ -23,8 +23,8 @@ export default createGlobalStyle`
   }
   @font-face {
     font-family: 'Circular';
-    src: url('/fonts/CircularMedium.ttf');
-    font-weight: bold;
+    src: url('/fonts/CircularStd-Book.ttf');
+    font-weight: normal;
   }
   @font-face {
     font-family: 'Raleway';
@@ -67,6 +67,7 @@ export default createGlobalStyle`
     src: url('/fonts/Newake-Font-Regular.ttf');
     font-weight: normal;
   }
+
 
   * {
    box-sizing: border-box;

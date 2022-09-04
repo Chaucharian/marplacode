@@ -20,7 +20,7 @@ const NavigationContainer = styled.header`
     z-index: 10;
     background: ${open ? '#FFF' : 'transparent'};
     backdrop-filter: blur(10px);
-    transition: all ease-in 0.5s;
+    transition: all cubic-bezier(0, 0, 0.2, 1) 0.5s;
     width: 100%;
     min-height: 4em;
     max-height: 100%;
@@ -48,7 +48,7 @@ const Content = styled.div`
 `
 
 const ProgressLine = animated(styled.div`
-  ${({ color = '#FFF', height = 1, width = 0, blendMode = 'normal' }) => `
+  ${({ color = '#FFF', height = 0.5, width = 0, blendMode = 'normal' }) => `
     background-color: ${color};
     width: ${width}%;
     transition: all ease-in 0.5s;

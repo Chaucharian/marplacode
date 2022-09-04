@@ -53,7 +53,7 @@ const Page = (props) => {
         <ParallaxLayer
           offset={0}
           speed={2.5}
-          factor={1}
+          // factor={1}
           sticky={{ start: 0, end: 1 }}
           style={{
             zIndex: -1,
@@ -63,6 +63,8 @@ const Page = (props) => {
         </ParallaxLayer>
         <ParallaxLayer offset={1}>
           <Whyus />
+        </ParallaxLayer>
+        <ParallaxLayer offset={2}>
           <Works />
           <Contact />
         </ParallaxLayer>
