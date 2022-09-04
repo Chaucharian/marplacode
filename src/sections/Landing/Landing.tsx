@@ -13,9 +13,9 @@ import { Container } from '../components'
 const IndicatorContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  position: absolute;
-  top: -60px;
-  left: -50%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
   z-index: -1;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ const Landing = () => {
   return (
     <Container>
       <Flex
-        p={theme.spacing.small}
+        m={theme.spacing.small}
         flexDirection='column'
         justifyContent={'center'}
         height={'100%'}
@@ -103,13 +103,17 @@ const Landing = () => {
           </Flex>
 
           <IndicatorContainer>
-            <Flex justifyContent='center' pr={theme.spacing.small}>
+            <Flex
+              justifyContent='center'
+              pr={theme.spacing.small}
+              pb={{ _: '20%', md: '10%' }}
+            >
               <AppearingEffect
                 animationProps={{
                   delay: show ? 2000 : 600,
                   onResolve: () => domReady(),
                 }}
-                effect={show ? 'right' : 'bottom'}
+                effect={show ? 'bottom' : 'bottom'}
                 show={show}
               >
                 <ArrowButton />
@@ -117,8 +121,8 @@ const Landing = () => {
             </Flex>
           </IndicatorContainer>
         </Flex>
-        <Shadow />
       </Flex>
+      <Shadow />
     </Container>
   )
 }

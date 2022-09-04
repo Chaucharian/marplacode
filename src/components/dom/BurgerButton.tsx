@@ -85,10 +85,12 @@ const Button = styled.button`
   border: none;
   padding: 0;
   margin: 0;
+  transition: all ease-in-out 1s;
 `
 
 const Svg = styled.svg`
   mix-blend-mode: difference;
+  transition: all ease-in-out 1s;
 `
 
 const useAnimation = ({ play }) => {
@@ -105,7 +107,7 @@ const useAnimation = ({ play }) => {
   return animation
 }
 
-const Burger = ({ open, show = true, onClick }) => {
+const Burger = ({ open, show = true, color = '#fafafa', onClick }) => {
   const animation = useAnimation({ play: show })
   const second = useSpring({
     transform: open
@@ -125,7 +127,7 @@ const Burger = ({ open, show = true, onClick }) => {
         width='40'
         height='32'
         viewBox='0 0 44 44'
-        fill='#fafafa'
+        fill={color}
         xmlns='http://www.w3.org/2000/svg'
       >
         <animated.rect

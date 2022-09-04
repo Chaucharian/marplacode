@@ -9,16 +9,6 @@ import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
 import { Container } from '../components'
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  @media ${device.desktop} {
-    flex-direction: row;
-  }
-`
-
 const servicesData = [
   // {
   //   title: 'Web3',
@@ -57,7 +47,12 @@ const WhyUs = () => {
 
   return (
     <Container bg='white'>
-      <Content>
+      <Flex
+        flexDirection={{ _: 'column', md: 'row' }}
+        justifyContent='space-between'
+        pb={{ _: '180px', md: '360px' }}
+        pt={{ _: '180px', md: '360px' }}
+      >
         <Flex flexDirection='column' maxWidth='560px'>
           <Text type={theme.fonts.p} color='#000'>
             Our approach
@@ -74,17 +69,19 @@ const WhyUs = () => {
             high-level design and development.
           </Text>
         </Flex>
-        <Spacer horizontal={theme.spacing.large} />
+        <Flex
+          width={{ md: theme.spacing.large }}
+          // height={{ _: theme.spacing.large }}
+        />
         <Flex
           minWidth={{ md: '400px' }}
           height='500px'
           flexDirection='column'
-          justifyContet='center'
+          justifyContent='center'
         >
-          <Spacer vertical={theme.spacing.large} />
           <ServicesList play={true} services={servicesData} />
         </Flex>
-      </Content>
+      </Flex>
     </Container>
   )
 }

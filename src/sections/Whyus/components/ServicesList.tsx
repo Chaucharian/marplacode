@@ -50,6 +50,7 @@ const ServicesList = ({ play, services: initialServices }) => {
   return (
     <Flex
       flexDirection='column'
+      justifyContent='center'
       minWidth={{ md: '500px' }}
       maxWidth={{ md: '500px' }}
     >
@@ -104,7 +105,6 @@ const ServicesList = ({ play, services: initialServices }) => {
                       textProps={{ color: '#000', fontSize: '13px' }}
                       width='100%'
                       padding='10px'
-                      type={theme.fonts.span}
                     >
                       {item}
                     </Button>

@@ -58,26 +58,14 @@ const Works = () => {
     </Text>
   ))
   const worksTitles = works.map(({ name }) => (
-    <Text fontFamily='Akira' fontWeight='900' fontSize='30px'>
+    <Text fontFamily='LibreFranklin' fontWeight='lighter' fontSize='42px'>
       {name}
     </Text>
   ))
 
-  // const selectedWork = useMemo(
-  //   () => works.find(({ isSelected }) => isSelected),
-  //   [works]
-  // )
-  // const onSelectWork = (selection, index) => {
-  //   console.log(selection)
-  //   useStore.setState({ letter: selection.name[0], changeCameraEffect: true })
-  //   setSelection(selection)
-  //   console.log(index)
-  //   setCurrentDescription(index)
-  // }
   const onSelectWork = (index) => {
     const newIndex =
       index >= works.length - 1 ? 0 : index === -1 ? works.length - 1 : index
-    console.log(newIndex)
     useStore.setState({
       letter: works[newIndex]?.name[0],
       changeCameraEffect: true,
@@ -88,12 +76,12 @@ const Works = () => {
   return (
     <Container>
       <Spacer vertical={theme.spacing.medium} />
-      <Flex flexDirection='column'>
-        <Text fontSize='20px' fontFamily='Akira' fontWeight='bold'>
+      <Flex flexDirection='column' width='300px'>
+        <Text fontSize='70px' fontFamily='Newake' fontWeight='bold'>
           Selected
         </Text>
-        <Flex pl={theme.spacing.small}>
-          <Text fontSize='30px' fontFamily='Akira'>
+        <Flex pl={theme.spacing.small} justifyContent='end'>
+          <Text fontSize='50px' fontFamily='LibreFranklin' fontWeight='lighter'>
             works
           </Text>
         </Flex>
@@ -148,12 +136,6 @@ const Works = () => {
           texts={worksDescriptions}
         ></TextTransitionEffect>
       </div>
-      {/* <WorksList
-        works={works}
-        onChange={onSelectWork}
-        selected={selectedWork}
-      /> */}
-
       <Shadow />
     </Container>
   )
