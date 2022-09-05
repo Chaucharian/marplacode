@@ -61,7 +61,7 @@ const Landing = () => {
       <Flex
         m={theme.spacing.small}
         flexDirection='column'
-        justifyContent={'center'}
+        justifyContent={{ _: 'flex-end', md: 'center' }}
         height={'100%'}
         position='relative'
         zIndex={1}
@@ -104,7 +104,7 @@ const Landing = () => {
 
           <IndicatorContainer>
             <Flex
-              justifyContent='center'
+              justifyContent={{ _: 'flex-end', md: 'center' }}
               pr={theme.spacing.small}
               pb={{ _: '20%', md: '10%' }}
             >

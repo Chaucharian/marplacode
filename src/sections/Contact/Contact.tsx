@@ -39,8 +39,7 @@ const Contact = () => {
   return (
     <Container bg='#1A1D22'>
       <Flex>
-        <Flex>
-          <Spacer vertical={theme.spacing.large} />
+        <Flex pt={'110px'}>
           <Flex flexDirection='column'>
             <Text type={theme.fonts.h1}>Say hi!</Text>
             <Spacer vertical={theme.spacing.tiny} />
@@ -50,7 +49,7 @@ const Contact = () => {
               fontWeight='300'
               color='#808690'
             >
-              tell us about your idea
+              Tell us about your idea
             </Text>
             <Spacer vertical={theme.spacing.large} />
             <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>

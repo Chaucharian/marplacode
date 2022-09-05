@@ -58,6 +58,7 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
         mixBlendMode: blendMode,
         position: 'relative',
         height: `${height}px`,
+        width: '100%',
       }}
     >
       <animated.div style={{ ...animation, position: 'absolute' }}>

@@ -17,8 +17,8 @@ export const size = {
 
 export const fonts = {
   h1: {
-    desktop: '80px',
-    mobile: '80px',
+    desktop: '70px',
+    mobile: '50px',
     family: 'Newake',
     fontWeight: 'normal',
   },

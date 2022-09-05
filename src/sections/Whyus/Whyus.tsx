@@ -35,6 +35,8 @@ With that data in mind, we’re able to design a structurally, visually and tech
   },
   {
     title: 'Consulting',
+    description:
+      'diving into your business is what we best know about how to generate the best strategy for your optimal grow',
     content: ['Creative strategy', 'MVP validation', 'Business strategy'],
     open: false,
   },
@@ -49,7 +51,7 @@ const WhyUs = () => {
     <Container bg='white'>
       <Flex
         flexDirection={{ _: 'column', md: 'row' }}
-        justifyContent='space-between'
+        // justifyContent='space-between'
         pb={{ _: '180px', md: '360px' }}
         pt={{ _: '180px', md: '360px' }}
       >
@@ -75,7 +77,8 @@ const WhyUs = () => {
         />
         <Flex
           minWidth={{ md: '400px' }}
-          height='500px'
+          pt={theme.spacing.small}
+          height='400px'
           flexDirection='column'
           justifyContent='center'
         >

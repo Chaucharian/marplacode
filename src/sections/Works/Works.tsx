@@ -79,7 +79,7 @@ const Works = () => {
 
   return (
     <Container>
-      <Spacer vertical={theme.spacing.medium} />
+      <Spacer vertical={theme.spacing.large} />
       <Flex flexDirection='column' width='300px'>
         <Text fontSize='70px' fontFamily='Newake' fontWeight='bold'>
           Selected
@@ -147,7 +147,11 @@ const Works = () => {
       ) : (
         <>
           <Flex height='500px' justifyContent='center' alignItems='center'>
-            <Flex width='100%' justifyContent='space-between'>
+            <Flex
+              width='100%'
+              justifyContent='space-between'
+              alignItems='center'
+            >
               <ArrowButton
                 rotation='90'
                 arrowAnimationProps={{
@@ -164,20 +168,22 @@ const Works = () => {
                 }}
                 onClick={() => onSelectWork(workIndex + 1)}
               />
-              <div>
-                <TextTransitionEffect
-                  animationProps={{ delay: 500 }}
-                  position={workIndex}
-                  texts={worksTitles}
-                  height={72}
-                ></TextTransitionEffect>
-                {/* <Spacer vertical={theme.spacing.small} /> */}
-                <TextTransitionEffect
-                  animationProps={{ delay: 500 }}
-                  position={workIndex}
-                  texts={worksDescriptions}
-                ></TextTransitionEffect>
-              </div>
+              <Flex width='100%' pl={{ md: '100px' }}>
+                <Flex width='400px' flexDirection='column'>
+                  <TextTransitionEffect
+                    animationProps={{ delay: 500 }}
+                    position={workIndex}
+                    texts={worksTitles}
+                    height={72}
+                  ></TextTransitionEffect>
+                  {/* <Spacer vertical={theme.spacing.small} /> */}
+                  <TextTransitionEffect
+                    animationProps={{ delay: 500 }}
+                    position={workIndex}
+                    texts={worksDescriptions}
+                  ></TextTransitionEffect>
+                </Flex>
+              </Flex>
               <ArrowButton
                 rotation='-90'
                 arrowAnimationProps={{
