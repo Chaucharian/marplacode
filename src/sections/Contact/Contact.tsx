@@ -37,7 +37,7 @@ const Contact = () => {
   // }, [focus])
 
   return (
-    <Container bg='#1A1D22'>
+    <Container bg='#1A1D22' minHeight='800px'>
       <Flex>
         <Flex pt={'110px'}>
           <Flex flexDirection='column'>

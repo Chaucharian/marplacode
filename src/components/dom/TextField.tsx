@@ -7,8 +7,8 @@ const StyledTextField = styled.input`
   font-weight: 200;
   font-size: 16px;
   outline: 0;
-  color: #000;
-  padding: 15px 0;
+  color: #fff;
+  padding: 15px 0px 15px 8px;
   border: 0px;
   background: none;
   margin: 0px;
@@ -19,6 +19,7 @@ const StyledTextField = styled.input`
   transition: all ease-in 3s;
 
   &::placeholder {
+    padding: 15px 0px 15px 8px;
     color: #fff;
     opacity: 0.8;
   }
