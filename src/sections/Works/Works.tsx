@@ -57,7 +57,7 @@ const Works = () => {
   const isMobile = width < 834
 
   const worksDescriptions = works.map(({ description }) => (
-    <Text type={theme.fonts.p} color='grey'>
+    <Text type={theme.fonts.p} fontSize='17px' color='grey'>
       {description}
     </Text>
   ))
