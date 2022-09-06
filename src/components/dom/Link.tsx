@@ -2,10 +2,11 @@ import { Flex, Line } from '.'
 import styled from 'styled-components'
 import { useState } from 'react'
 
-const Container = styled.div`
+const Container = styled.a`
   position: relative;
   cursor: pointer;
   display: inline-block;
+  text-decoration: none;
 `
 
 const Link = ({
@@ -14,6 +15,7 @@ const Link = ({
   color2 = 'black',
   onClick = () => {},
   children,
+  ...props
 }) => {
   const [hover, setHover] = useState(false)
 
@@ -23,6 +25,7 @@ const Link = ({
         onClick={onClick}
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        {...props}
       >
         {children}
         <Line color={color1} play={show} />

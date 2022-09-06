@@ -87,12 +87,16 @@ const Li = styled(animated.li)`
 
 const menuItems = [
   { name: 'Home', link: 'home' },
-  { name: 'Services', link: 'services' },
   { name: 'Why Us', link: 'history' },
+  { name: 'Works', link: 'works' },
   { name: 'Contact', link: 'contact' },
 ]
 
-const Menu = ({ show }: any) => {
+const Menu = ({ show, onClick }: any) => {
+  const itemClick = (index) => {
+    onClick(index)
+  }
+
   return (
     <Container>
       <AppearingEffect show={show} effect='top' blendMode='difference'>
@@ -112,7 +116,7 @@ const Menu = ({ show }: any) => {
                 <div>
                   <span>{index + 1}.</span>
                 </div>
-                <a>{item.name}</a>
+                <a onClick={() => itemClick(index)}>{item.name}</a>
                 <div className='a'></div>
                 <div className='b'></div>
               </AppearingEffect>
@@ -128,7 +132,7 @@ const Menu = ({ show }: any) => {
         blendMode='difference'
       >
         <Text type={theme.fonts.span}>Get in touch</Text>
-        <Link show={show}>
+        <Link show={show} href='mailto:hello@marplacode.com'>
           <Text type={theme.fonts.span} fontSize={'16px'}>
             hello@marplacode.com
           </Text>

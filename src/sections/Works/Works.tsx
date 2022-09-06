@@ -10,13 +10,14 @@ import {
 } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { WorksList } from './components/WorksList'
 import { useSpring } from '@react-spring/core'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { title } from 'process'
 import { Container } from '../components'
 import { useWindowSize } from 'usehooks-ts'
+import { useScroll } from '@/helpers/hooks/useScroll'
 
 const list = [
   {
@@ -52,6 +53,8 @@ const Works = () => {
   const [works, setWorks] = useState(list)
   const [currentDescription, setCurrentDescription] = useState(null)
   const [workIndex, setWorkIndex] = useState(0)
+  const scrollPercentage = useScroll(scroll)
+  const sectionActive = scrollPercentage >= 28
 
   const { width, height } = useWindowSize()
   const isMobile = width < 834
@@ -76,6 +79,15 @@ const Works = () => {
     })
     setWorkIndex(newIndex)
   }
+
+  useEffect(() => {
+    // once the user reaches this section, set first work letter
+    if (sectionActive) {
+      useStore.setState({
+        letter: works[0]?.name[0],
+      })
+    }
+  }, [sectionActive])
 
   return (
     <Container>

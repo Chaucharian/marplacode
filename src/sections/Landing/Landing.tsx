@@ -9,6 +9,7 @@ import { device, fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
 import { Container } from '../components'
+import { useScroll } from '@/helpers/hooks/useScroll'
 
 const IndicatorContainer = styled.div`
   width: 100vw;
@@ -38,22 +39,22 @@ const options = [
 ]
 
 const Landing = () => {
-  const workSelected = useStore((state) => state?.changeCameraEffect)
+  const scroll = useStore((state) => state.scroll)
+  const scrollPercentage = useScroll(scroll)
   const { title, description } = useChangeDescription({
     time: 4000,
     options,
     onChange: ({ title }) => {
-      !workSelected && useStore.setState({ letter: title[0] })
+      scrollPercentage <= 20 && useStore.setState({ letter: title[0] })
     },
   })
-  const scrollTo = useStore((state) => state?.scroll?.scrollTo)
+
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
   const show = !navigationState
 
   const domReady = () => {
     setTimeout(() => useStore.setState({ domReady: true }), 1000)
-    // useStore.setState({ domReady: true })
   }
 
   return (

@@ -15,11 +15,14 @@ const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
 const Page = (props) => {
   const video = useRef(null)
   const scroll = useRef(null)
-  useStore.setState({ video })
 
   useEffect(() => {
     if (scroll.current?.container) {
-      useStore.setState({ scroll: scroll.current.container.current })
+      useStore.setState({
+        video,
+        scroll: scroll.current.container.current,
+        scrollTo: scroll.current.scrollTo,
+      })
     }
     // env(keyboard-inset-height, 0px);
     // if ('virtualKeyboard' in navigator) {

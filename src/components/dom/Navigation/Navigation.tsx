@@ -62,8 +62,8 @@ const Backdrop = styled.div`
   z-index: -1;
 
   @media ${device.desktop} {
-    width: 50%;
-    left: ${open ? '50%' : '100%'};
+    width: 100%;
+    left: ${open ? '55%' : '100%'};
   }
 
 `}
@@ -94,6 +94,7 @@ const Path = styled.path`
 const Navigation = () => {
   const [open, setOpen] = useState(false)
   const scroll = useStore((state) => state.scroll)
+  const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
   const scrollPercentage = useScroll(scroll)
   const whiteSection = scrollPercentage >= 25 && scrollPercentage <= 55
@@ -102,6 +103,11 @@ const Navigation = () => {
     const navigationState = !open
     setOpen(navigationState)
     useStore.setState({ navigationState })
+  }
+
+  const onMenuClick = (page) => {
+    openHandler()
+    scrollTo(page)
   }
 
   const logo = useRef()
@@ -125,7 +131,7 @@ const Navigation = () => {
     <NavigationContainer open={open} showFull={true}>
       <Backdrop open={open}>
         <Flex pl={{ _: '45px', md: '98px' }} pr={{ _: '30px', md: '98px' }}>
-          <Menu show={open} />
+          <Menu show={open} onClick={onMenuClick} />
         </Flex>
       </Backdrop>
       <Flex

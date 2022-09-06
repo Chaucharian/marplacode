@@ -10,37 +10,60 @@ export const useCameraEffect = () => {
   const domReady = useStore((state) => state.domReady)
   const changeCameraEffect = useStore((state) => state.changeCameraEffect)
   const letter = useStore((state) => state.letter)
-  const animationState: any = useRef({ endTime: 0 })
+  const animationState: any = useRef({ state: 'front' })
 
   const { size, viewport } = useThree()
   const mobile = size.width < 700
 
   return useFrame((state) => {
     // initial animation
-    state.camera.position.lerp(vec.set(0, 0.2, domReady ? 0.001 : 3), 0.05)
+    if (state.clock.elapsedTime < 6) {
+      state.camera.position.lerp(
+        vec.set(mobile ? 0 : -1.3, 0.2, domReady ? 0.001 : 3),
+        0.05
+      )
+    }
 
     if (state.clock.elapsedTime >= 6) {
       // state.camera.position.z = 6
 
+      // if (mobile) {
+      //   state.camera.position.lerp(
+      //     vec.set(
+      //       state.camera.position.x,
+      //       state.camera.position.y,
+      //       Math.sin(state.clock.elapsedTime) * 4
+      //     ),
+      //     0.05
+      //   )
+      // } else {
+      //   state.camera.position.lerp(
+      //     vec.set(
+      //       state.camera.position.x - 1.3,
+      //       state.camera.position.y + 0.5,
+      //       -1
+      //     ),
+      //     0.05
+      //   )
+      // }
+
       if (changeCameraEffect) {
-        if (mobile) {
+        // push letter back
+        if (state.camera.position.z < 17) {
           state.camera.position.lerp(
             vec.set(
               state.camera.position.x,
               state.camera.position.y,
-              Math.sin(state.clock.elapsedTime) * 4
+              state.camera.position.z + 17
             ),
             0.05
           )
-        } else {
-          state.camera.position.lerp(
-            vec.set(
-              state.camera.position.x - 1.3,
-              state.camera.position.y + 0.5,
-              -1
-            ),
-            0.05
-          )
+        }
+        // pull letter to the front
+        if (state.camera.position.z >= 16) {
+          useStore.setState({
+            changeCameraEffect: false,
+          })
         }
       } else {
         // idle effect
@@ -54,7 +77,5 @@ export const useCameraEffect = () => {
         )
       }
     }
-
-    animationState.current.prevLetter = letter
   })
 }
