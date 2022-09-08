@@ -3,13 +3,11 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { theme } from '@/styles'
 import useStore from '@/helpers/store'
-import * as animations from '@/helpers/animations'
-import Line from '@/components/dom/Line'
 import { device, fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
 import { Container } from '../components'
-import { useScroll } from '@/helpers/hooks/useScroll'
+import { useScroll } from '@/helpers/hooks'
 
 const IndicatorContainer = styled.div`
   width: 100vw;

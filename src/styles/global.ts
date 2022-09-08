@@ -77,11 +77,17 @@ export default createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   }
 
+  ::selection {
+    color: #fff;
+    background: #000;
+  }
+
   html,
   body,
   #__next {
     width: 100%;
     height: 100%;
+    min-height: -webkit-fill-available; 
     margin: 0;
     padding: 0;
   }

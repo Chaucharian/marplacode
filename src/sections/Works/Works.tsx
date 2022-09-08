@@ -18,7 +18,7 @@ import AppearingEffect from '@/components/dom/AppearingEffect'
 import { title } from 'process'
 import { Container } from '../components'
 import { useWindowSize } from 'usehooks-ts'
-import { useScroll } from '@/helpers/hooks/useScroll'
+import { useScroll } from '@/helpers/hooks'
 
 const list = [
   {

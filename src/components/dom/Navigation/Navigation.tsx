@@ -7,10 +7,9 @@ import Logo from '../Logo'
 import useStore from '@/helpers/store'
 import Line from '../Line'
 import Menu from './Menu'
-import * as animations from '@/helpers/animations'
 import { device } from '@/styles/theme'
 import { animated } from 'react-spring'
-import { useScroll } from '@/helpers/hooks/useScroll'
+import { useScroll, useHover } from '@/helpers/hooks'
 import AppearingEffect from '../AppearingEffect'
 import Lottie from 'react-lottie-player'
 import animationLogo from 'public/marplacodeanimation.json'
@@ -24,7 +23,7 @@ const NavigationContainer = styled.header`
     left: 0;
     z-index: 10;
     // background: ${open ? '#FFF' : 'transparent'};
-    backdrop-filter: blur(10px);
+    // backdrop-filter: blur(10px);
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.5s;
     width: 100%;
     min-height: 4em;
@@ -138,6 +137,20 @@ const Navigation = () => {
     }
   }, [scrollPercentage, open])
 
+  const [buttonRef, isHovered] = useHover()
+
+  useEffect(() => {
+    if (isHovered) {
+      useStore.setState({
+        menuHover: true,
+      })
+    } else {
+      useStore.setState({
+        menuHover: false,
+      })
+    }
+  }, [isHovered, buttonRef])
+
   return (
     <NavigationContainer open={open} showFull={true}>
       <Backdrop open={open}>
@@ -156,7 +169,6 @@ const Navigation = () => {
           _: theme.spacing.horizontal.mobile,
           md: theme.spacing.horizontal.desktop,
         }}
-        zIndex={10}
       >
         <Flex alignItems='center' pl={'20px'}>
           <AppearingEffect animationProps={{ delay: 500 }}>
@@ -174,6 +186,7 @@ const Navigation = () => {
           color={whiteSection || open ? 'black' : 'white'}
           open={open}
           onClick={openHandler}
+          ref={buttonRef}
         />
       </Flex>
 

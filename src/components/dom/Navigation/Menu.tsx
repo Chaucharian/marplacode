@@ -14,7 +14,6 @@ import {
   useSpringRef,
   useTransition,
 } from '@react-spring/core'
-import * as animations from '@/helpers/animations'
 import { animated } from '@react-spring/web'
 import AppearingEffect from '../AppearingEffect'
 import { Spacer } from '@/components'

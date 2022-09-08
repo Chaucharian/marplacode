@@ -1,7 +1,9 @@
+import { useHover } from '@/helpers/hooks'
 import create from 'zustand'
 
 const useStore = create((set): any => {
   return {
+    menuHover: false,
     router: null,
     dom: null,
     video: null,

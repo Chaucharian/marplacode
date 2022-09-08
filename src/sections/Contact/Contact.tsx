@@ -4,11 +4,10 @@ import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React, { useEffect, useState } from 'react'
 import Line from '@/components/dom/Line'
-import { lineGrow } from '@/helpers/animations'
 import { FormTextField } from '@/components/dom/Form'
 import { useForm } from 'react-hook-form'
 import { Container } from '../components'
-import { useScroll } from '@/helpers/hooks/useScroll'
+import { useScroll } from '@/helpers/hooks'
 
 // if ('virtualKeyboard' in navigator) {
 //   navigator.virtualKeyboard.overlaysContent = true

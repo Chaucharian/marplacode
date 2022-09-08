@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useScroll = (ref) => {
+const useScroll = (ref) => {
   const [scroll, setScroll] = useState(0)
   useEffect(() => {
     ref?.addEventListener('scroll', ({ currentTarget }) => {
@@ -13,3 +13,5 @@ export const useScroll = (ref) => {
 
   return scroll
 }
+
+export default useScroll

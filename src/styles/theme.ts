@@ -82,5 +82,9 @@ export default {
       contentWidth: '1100px',
     },
   },
+  transitions: {
+    easeOutExpo: 'cubic-bezier(0.19, 1, 0.22, 1)',
+    easeOutCirc: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+  },
   breakpoints,
 }

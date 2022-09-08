@@ -1,7 +1,9 @@
 import { useWindowSize } from 'usehooks-ts'
 
-export const useIsMobile = () => {
+const useIsMobile = () => {
   const { width } = useWindowSize()
   const isMobile = width < 834
   return isMobile
 }
+
+export default useIsMobile

@@ -8,7 +8,8 @@ import Whyus from '@/sections/Whyus/Whyus'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Footer from '@/sections/Footer/Footer'
 import { useWindowSize } from 'usehooks-ts'
-import { useIsMobile } from '@/helpers/hooks/useIsMobile'
+import { useIsMobile } from '@/helpers/hooks'
+import Cursor from '@/components/dom/Cursor'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -17,7 +18,10 @@ const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
 const Page = (props) => {
   const video = useRef(null)
   const scroll = useRef(null)
+  const isMobile = useIsMobile()
+  const menuHover = useStore((state) => state.menuHover)
 
+  console.log(menuHover)
   useEffect(() => {
     if (scroll.current?.container) {
       useStore.setState({
@@ -26,26 +30,7 @@ const Page = (props) => {
         scrollTo: scroll.current.scrollTo,
       })
     }
-    // env(keyboard-inset-height, 0px);
-    // if ('virtualKeyboard' in navigator) {
-    //   console.log('EEEEEEE')
-    //   window.navigator.virtualKeyboard.overlaysContent = true
-    //   window.navigator.virtualKeyboard?.addEventListener(
-    //     'geometrychange',
-    //     (event) => {
-    //       const { x, y, width, height } = event.target.boundingRect
-    //       console.log('Virtual keyboard geometry changed:', x, y, width, height)
-    //       scroll.current?.container.current.addEventListener('scroll', (a) => {
-    //         console.log(a)
-    //         scroll.current.container.current.scrollTop =
-    //           scroll.current.container.current.scrollTop - height
-    //       })
-    //     }
-    //   )
-    // }
   }, [scroll])
-
-  const isMobile = useIsMobile()
 
   return (
     <>
@@ -84,6 +69,7 @@ const Page = (props) => {
           <Footer />
         </ParallaxLayer>
       </Parallax>
+      <Cursor hover={menuHover} />
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
         <source src='/videos/cuberto.mp4' type='video/mp4' />
       </video>
