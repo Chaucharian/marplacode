@@ -8,13 +8,13 @@ import { GlobalCSS, theme } from '@/styles'
 import { ThemeProvider } from 'styled-components'
 import Head from 'next/head'
 
-const titleDefault = 'React Three Next Starter'
-const url = 'https://react-three-next.vercel.app/'
+const defaultTitle = 'Marplacode - beauty experiences'
+const url = 'https://marplacode.com'
 const description =
-  'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS'
-const author = 'Author'
+  'Digital agency focused on building high quality digital products. We develop handcrafted websites, IOS/Android mobile applications'
+const author = 'Marplacode'
 
-const Header = ({ title = titleDefault }) => {
+const Header = ({ title = defaultTitle }) => {
   return (
     <>
       <Head>
@@ -31,12 +31,12 @@ const Header = ({ title = titleDefault }) => {
         <meta name='description' content={description} />
         <meta
           name='keywords'
-          content='Software Engineer,Product Manager,Project Manager,Data Scientist,Computer Scientist'
+          content='Software Engineer,Product Manager,Project Manager,Digital Agency, UI/UX, web development, developers, budget designs, budget development'
         />
         <meta name='robots' content='index,follow' />
         <meta name='distribution' content='web' />
         {/* 
-      Facebook Open Graph meta tags
+      Social Media Facebook Open Graph meta tags
         documentation: https://developers.facebook.com/docs/sharing/opengraph */}
         <meta name='og:title' content={title} />
         <meta name='og:type' content='site' />
@@ -79,12 +79,21 @@ const Header = ({ title = titleDefault }) => {
         <meta name='theme-color' content='#000' />
         <link rel='shortcut icon' href='/icons/favicon.ico' />
 
-        {/* 
-      Twitter Summary card
-        documentation: https://dev.twitter.com/cards/getting-started
-        Be sure validate your Twitter card markup on the documentation site. */}
-        <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='@onirenaud' />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              <!-- Hotjar Tracking Code for my site -->
+                  (function(h,o,t,j,a,r){
+                      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                      h._hjSettings={hjid:3149587,hjsv:6};
+                      a=o.getElementsByTagName('head')[0];
+                      r=o.createElement('script');r.async=1;
+                      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                      a.appendChild(r);
+                  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+                  `,
+          }}
+        />
       </Head>
     </>
   )
@@ -106,7 +115,10 @@ interface AppProps {
   pageProps: any
 }
 
-const App: FC<AppProps> = ({ Component, pageProps = { title: 'index' } }) => {
+const App: FC<AppProps> = ({
+  Component,
+  pageProps = { title: defaultTitle },
+}) => {
   const router = useRouter()
 
   useEffect(() => {
