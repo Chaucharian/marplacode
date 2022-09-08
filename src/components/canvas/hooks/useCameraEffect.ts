@@ -69,7 +69,7 @@ export const useCameraEffect = () => {
         // idle effect
         state.camera.position.lerp(
           vec.set(
-            Math.sin(state.clock.elapsedTime) * 0.3,
+            mobile ? Math.sin(state.clock.elapsedTime) * 0.3 : -1.7,
             state.camera.position.y,
             Math.sin(state.clock.elapsedTime) * 0.3
           ),

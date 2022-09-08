@@ -69,8 +69,8 @@ export default {
   },
   spacing: {
     horizontal: {
-      desktop: '15%',
-      mobile: '2%',
+      desktop: '10%',
+      mobile: '5%',
     },
     tiny: '0.5em',
     small: '1em',

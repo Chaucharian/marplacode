@@ -72,7 +72,9 @@ export default createGlobalStyle`
   * {
    box-sizing: border-box;
    -webkit-tap-highlight-color: transparent;
-   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   }
 
   html,

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 const Shadow = styled.div`
-  ${({ blur = 3, zIndex = -2 }) => `
+  ${({ blur = 3, zIndex = -2, height = '100%' }) => `
   width: 100%;
-  height: 100vh;
+  height: ${height};
   position: absolute;
   backdrop-filter: blur(${blur}px);
   top: 0;

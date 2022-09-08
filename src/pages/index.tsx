@@ -7,6 +7,8 @@ import { Contact, Landing, Works } from '@/sections'
 import Whyus from '@/sections/Whyus/Whyus'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Footer from '@/sections/Footer/Footer'
+import { useWindowSize } from 'usehooks-ts'
+import { useIsMobile } from '@/helpers/hooks/useIsMobile'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -43,16 +45,12 @@ const Page = (props) => {
     // }
   }, [scroll])
 
+  const isMobile = useIsMobile()
+
   return (
     <>
       <Navigation />
-      <Parallax
-        pages={4.5}
-        ref={scroll}
-        // onScrollCapture={({ currentTarget }) =>
-        //   useStore.setState({ scroll: currentTarget.scrollTop })
-        // }
-      >
+      <Parallax pages={isMobile ? 5.5 : 4.5} ref={scroll}>
         <ParallaxLayer
           offset={0}
           speed={2.5}
@@ -64,16 +62,21 @@ const Page = (props) => {
         >
           <Landing />
         </ParallaxLayer>
-        <ParallaxLayer offset={1}>
+        <ParallaxLayer offset={1} factor={isMobile ? 1.3 : 1}>
           <Whyus />
         </ParallaxLayer>
-        <ParallaxLayer offset={2}>
+        <ParallaxLayer offset={2.3} factor={isMobile ? 1.3 : 1}>
           <Works />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={isMobile ? 3.6 : 3.3}
+          factor={isMobile ? 1.3 : 1.2}
+        >
           <Contact />
         </ParallaxLayer>
         <ParallaxLayer
-          factor={2}
-          sticky={{ start: 3, end: 4.5 }}
+          factor={1.5}
+          sticky={{ start: isMobile ? 4 : 3.6, end: isMobile ? 5.5 : 4.5 }}
           style={{
             zIndex: -1,
           }}

@@ -5,6 +5,7 @@ import { animated } from '@react-spring/web'
 import styled from 'styled-components'
 
 const StyledAndAnimatedText = ({
+  transition,
   type = 'h1',
   blendMode = 'normal',
   color = theme.colors?.primary,
@@ -12,10 +13,12 @@ const StyledAndAnimatedText = ({
   fontFamily,
   fontSize,
   animate = false,
+  hover,
   children,
   ...props
-}) => {
+}: any) => {
   const StyledAndAnimated = animated(styled(type)`
+    transition: ${transition};
     font-size: ${fontSize ?? fonts[type].mobile};
     color: ${color};
     font-weight: ${fontWeight ?? fonts[type].fontWeight};
@@ -26,17 +29,20 @@ const StyledAndAnimatedText = ({
     @media ${device.desktop} {
       font-size: ${fontSize ?? fonts[type].desktop};
     }
+
+    &:hover {
+      ${hover}
+    }
   `)
   return <StyledAndAnimated {...props}>{children}</StyledAndAnimated>
 }
 
 interface TextProps {
-  animation?: UseSpringProps
   children: string
   [x: string]: any
 }
 
-const Text = ({ animation, children, ...props }: TextProps) => {
+const Text = ({ children, ...props }: TextProps) => {
   return <StyledAndAnimatedText {...props}>{children}</StyledAndAnimatedText>
 }
 export default Text

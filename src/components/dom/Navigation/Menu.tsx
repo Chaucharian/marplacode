@@ -30,6 +30,7 @@ const Nav = styled(animated.nav)`
   ul {
     margin: 0;
     padding: 0;
+    cursor: pointer;
   }
 
   span {
@@ -45,28 +46,41 @@ const Li = styled(animated.li)`
   position: relative;
 
   a {
-    color: #000;
-    font-family: Newake;
+    transition: all 0.5s cubic-bezier(0, 0, 0.2, 1);
+    color: rgba(164, 167, 183, 1);
+    font-family: LibreFranklin;
     font-size: 50px;
-    font-weight: bold;
+    font-weight: 200;
     text-decoration: none;
     line-height: 1.3;
+
+    &:after {
+      content: attr(data-text);
+      display: block;
+      position: absolute;
+      font-weight: 100;
+      color: #fff;
+      transform: skewY(7deg);
+      transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+      transform-origin: left top;
+      top: 105%;
+    }
+
+    &:hover {
+      // color: #000;
+      font-weight: 900;
+
+      :after {
+        color: #000;
+        top: 10%;
+        transform: skewY(0deg);
+      }
+    }
   }
 
-  .a {
+  .line {
     position: absolute;
-    transition: all ease-in 0.5s;
-    top: 30%;
-    left: -100%;
-    height: 0.5px;
-    width: 150px;
-    background: #0f6dc5d6;
-    mix-blend-mode: difference;
-  }
-
-  .b {
-    position: absolute;
-    transition: all ease-in 0.5s;
+    transition: all ease-in-out 0.3s;
     top: 90%;
     left: 100%;
     height: 1px;
@@ -76,11 +90,8 @@ const Li = styled(animated.li)`
   }
 
   &:hover {
-    .a {
-      left: 50%;
-    }
-    .b {
-      left: -100%;
+    .line {
+      left: -50%;
     }
   }
 `
@@ -116,9 +127,12 @@ const Menu = ({ show, onClick }: any) => {
                 <div>
                   <span>{index + 1}.</span>
                 </div>
-                <a onClick={() => itemClick(index)}>{item.name}</a>
-                <div className='a'></div>
-                <div className='b'></div>
+                <a onClick={() => itemClick(index)} data-text={item.name}>
+                  {item.name}
+                </a>
+
+                {/* <div className='a'></div> */}
+                <div className='line'></div>
               </AppearingEffect>
             </Li>
           ))}

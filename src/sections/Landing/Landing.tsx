@@ -51,7 +51,7 @@ const Landing = () => {
 
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
-  const show = !navigationState
+  const show = true
 
   const domReady = () => {
     setTimeout(() => useStore.setState({ domReady: true }), 1000)

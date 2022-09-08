@@ -48,12 +48,7 @@ const ServicesList = ({ play, services: initialServices }) => {
   }
 
   return (
-    <Flex
-      flexDirection='column'
-      justifyContent='center'
-      minWidth={{ md: '500px' }}
-      maxWidth={{ md: '500px' }}
-    >
+    <Flex flexDirection='column' justifyContent='center'>
       {services.map(({ title, open, content, description = '' }, index) => (
         <Flex flexDirection='column'>
           <Item onClick={() => openItem(index)}>

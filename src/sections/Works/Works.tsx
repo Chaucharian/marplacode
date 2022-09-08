@@ -7,6 +7,7 @@ import {
   Shadow,
   TextTransitionEffect,
   ArrowButton,
+  Link,
 } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
@@ -60,9 +61,23 @@ const Works = () => {
   const isMobile = width < 834
 
   const worksDescriptions = works.map(({ description }) => (
-    <Text type={theme.fonts.p} fontSize='17px' color='grey'>
-      {description}
-    </Text>
+    <>
+      <Text type={theme.fonts.p} fontSize='17px' color='grey'>
+        {description}
+      </Text>
+      <Spacer vertical={theme.spacing.small} />
+      <Link show={true} href='' color1='grey' color2='white'>
+        <Text
+          type={theme.fonts.span}
+          color='grey'
+          hover={{ color: 'white' }}
+          fontSize={'16px'}
+          transition='all .5s cubic-bezier(0.45, 0.05, 0.55, 0.95)'
+        >
+          Ver sitio
+        </Text>
+      </Link>
+    </>
   ))
   const worksTitles = works.map(({ name }) => (
     <Text fontFamily='LibreFranklin' fontWeight='lighter' fontSize='42px'>
@@ -91,13 +106,16 @@ const Works = () => {
 
   return (
     <Container>
-      <Spacer vertical={theme.spacing.large} />
       <Flex flexDirection='column' width='300px'>
-        <Text fontSize='70px' fontFamily='Newake' fontWeight='bold'>
+        <Text type={theme.fonts.h1} fontWeight='bold'>
           Selected
         </Text>
-        <Flex pl={theme.spacing.small} justifyContent='end'>
-          <Text fontSize='50px' fontFamily='LibreFranklin' fontWeight='lighter'>
+        <Flex justifyContent='space-around'>
+          <Text
+            type={theme.fonts.h2}
+            fontFamily='LibreFranklin'
+            fontWeight='lighter'
+          >
             works
           </Text>
         </Flex>
@@ -105,7 +123,7 @@ const Works = () => {
 
       {isMobile ? (
         <>
-          <Flex height='500px' justifyContent='center' alignItems='center'>
+          <Flex height='350px' justifyContent='center' alignItems='center'>
             <Flex width='100%' justifyContent='space-between'>
               <ArrowButton
                 rotation='90'

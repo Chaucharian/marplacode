@@ -55,7 +55,7 @@ const WhyUs = () => {
         pb={{ _: '180px', md: '360px' }}
         pt={{ _: '180px', md: '360px' }}
       >
-        <Flex flexDirection='column' maxWidth='560px'>
+        <Flex flexDirection='column' width={{ md: '560px' }}>
           <Text type={theme.fonts.p} color='#000'>
             Our approach
           </Text>
@@ -76,7 +76,8 @@ const WhyUs = () => {
           // height={{ _: theme.spacing.large }}
         />
         <Flex
-          minWidth={{ md: '400px' }}
+          // minWidth={{ md: '400px' }}
+          width={{ md: '50%' }}
           pt={theme.spacing.small}
           height='400px'
           flexDirection='column'

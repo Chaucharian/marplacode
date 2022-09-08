@@ -27,7 +27,7 @@ const Link = ({
         onMouseLeave={() => setHover(false)}
         {...props}
       >
-        {children}
+        {typeof children === 'function' ? children({ hover }) : children}
         <Line color={color1} play={show} />
         <Flex position='absolute' bottom={0} width='100%'>
           <Line color={color2} height={2} play={hover} />
