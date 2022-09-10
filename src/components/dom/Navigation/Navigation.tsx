@@ -59,12 +59,13 @@ const Backdrop = styled.div`
   height: 100vh;
   position: absolute;
   top: 0px;
-  left: ${open ? '0%' : '100%'};
+  transform: ${open ? 'translateX(0%)' : 'translateX(100%)'};  
+  will-change: transform;
   z-index: -1;
 
   @media ${device.desktop} {
     width: 100%;
-    left: ${open ? '55%' : '100%'};
+    transform: ${open ? 'translateX(55%)' : 'translateX(100%)'};  
   }
 
 `}
@@ -101,7 +102,7 @@ const Navigation = () => {
   const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
   const scrollPercentage = useScroll(scroll)
-  const whiteSection = scrollPercentage >= 25 && scrollPercentage <= 55
+  const whiteSection = scrollPercentage >= 20.5 && scrollPercentage <= 41
 
   const openHandler = () => {
     const navigationState = !open

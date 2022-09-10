@@ -17,9 +17,9 @@ const Button = styled.button`
 const Svg = styled.svg`
   transition: all ease-in-out 1s;
 
-  &:hover {
-    fill: #000;
-  }
+  // &:hover {
+  //   fill: #000;
+  // }
 `
 
 const useAnimation = ({ play }) => {

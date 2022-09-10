@@ -9,12 +9,11 @@ export const useCameraEffect = () => {
   const [vec] = useState(() => new THREE.Vector3())
   const domReady = useStore((state) => state.domReady)
   const changeCameraEffect = useStore((state) => state.changeCameraEffect)
-  const letter = useStore((state) => state.letter)
-  const animationState: any = useRef({ state: 'front' })
 
   const { size, viewport } = useThree()
   const mobile = size.width < 700
 
+  // use this render to all
   return useFrame((state) => {
     // initial animation
     if (state.clock.elapsedTime < 6) {

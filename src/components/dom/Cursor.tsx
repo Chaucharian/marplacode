@@ -18,11 +18,13 @@ const Style = styled.svg`
     opacity: 1;
     pointer-events: none;
     backface-visibility: hidden;
-    transform: translate3d(-1em, -1em, 0);
-    transition: all 0.5s ${theme.transitions.easeOutExpo};
+    // transform: translate3d(-1em, -1em, 0);
+    // transition: all 0.5s ;
+    transition: transform 300ms ease-out;
+    will-change: transform;
 
     circle {
-      fill: #000000;
+      fill: #fff;
     }
   }
 
@@ -40,22 +42,26 @@ const Style = styled.svg`
 
 const Cursor = ({ hover = false }) => {
   const cursorRef: any = useRef()
-  const { mouseX, mouseY } = useMousePosition()
-  const hasMovedCursor =
-    typeof mouseX === 'number' && typeof mouseY === 'number'
+  // const { mouseX, mouseY } = useMousePosition()
+  // const hasMovedCursor =
+  //   typeof mouseX === 'number' && typeof mouseY === 'number'
   const hoverScale = 4
 
   useEffect(() => {
-    if (hasMovedCursor) {
+    const updateMousePosition = ({ clientX, clientY }) => {
       const bounds = cursorRef.current.getBoundingClientRect()
-      const x = mouseX - bounds.width / (hover ? hoverScale * 2 : 2)
-      const y = mouseY - bounds.height / (hover ? hoverScale * 2 : 2)
+      const x = clientX - bounds.width / (hover ? hoverScale * 2 : 2)
+      const y = clientY - bounds.height / (hover ? hoverScale * 2 : 2)
 
-      cursorRef.current.style.transform = `translate(${x}px,${y}px) scale(${
-        hover ? hoverScale : 1
-      })`
+      cursorRef.current.style[
+        '-webkit-transform'
+      ] = `translate(${x}px,${y}px) scale(${hover ? hoverScale : 1})`
     }
-  }, [hover, mouseX, mouseY, hasMovedCursor])
+
+    window.addEventListener('mousemove', updateMousePosition)
+
+    return () => window.removeEventListener('mousemove', updateMousePosition)
+  }, [hover])
 
   return (
     <Style
