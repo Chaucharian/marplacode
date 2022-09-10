@@ -23,7 +23,7 @@ const NavigationContainer = styled.header`
     left: 0;
     z-index: 10;
     // background: ${open ? '#FFF' : 'transparent'};
-    // backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     transition: all cubic-bezier(0, 0, 0.2, 1) 0.5s;
     width: 100%;
     min-height: 4em;
@@ -32,6 +32,7 @@ const NavigationContainer = styled.header`
     @media ${device.desktop} {
       // width: ${open ? '50vh' : '0px'}; 
     }
+
 `}
 `
 
@@ -95,8 +96,10 @@ const Path = styled.path`
 `
 const Navigation = () => {
   const [open, setOpen] = useState(false)
-  const [direction, setDirection] = useState<any>(1)
-  const [play, setPlay] = useState<any>(false)
+  const [lottie, setLottie] = useState<any>({
+    animationData: animationLogo,
+    loop: false,
+  })
 
   const scroll = useStore((state) => state.scroll)
   const scrollTo = useStore((state) => state.scrollTo)
@@ -115,42 +118,21 @@ const Navigation = () => {
     scrollTo(page)
   }
 
-  // const logo = useRef()
-
   useEffect(() => {
-    // lottie.loadAnimation({
-    //   container: logo.current, // the dom element that will contain the animation
-    //   renderer: 'svg',
-    //   name: 'logo',
-    //   loop: false,
-    //   autoplay: true,
-    //   path: '/marplacodeanimation.json', // the path to the animation json
-    // })
-  }, [])
+    let lottieState = { ...lottie }
+    if (scrollPercentage > 5) {
+      lottieState = {
+        ...lottie,
+        play: true,
+      }
 
-  useEffect(() => {
-    if (open) {
-      setDirection(-1)
-      setPlay(true)
-    } else {
-      setDirection(1)
-      setPlay(true)
+      if (open) {
+        lottieState = { ...lottie, play: true, direction: -1 }
+      }
     }
+
+    setLottie(lottieState)
   }, [scrollPercentage, open])
-
-  const [buttonRef, isHovered] = useHover()
-
-  useEffect(() => {
-    if (isHovered) {
-      useStore.setState({
-        menuHover: true,
-      })
-    } else {
-      useStore.setState({
-        menuHover: false,
-      })
-    }
-  }, [isHovered, buttonRef])
 
   return (
     <NavigationContainer open={open} showFull={true}>
@@ -174,12 +156,9 @@ const Navigation = () => {
         <Flex alignItems='center' pl={'20px'}>
           <AppearingEffect animationProps={{ delay: 500 }}>
             <Lottie
-              animationData={animationLogo}
-              play={play}
-              // loop={true}
-              goTo={20}
-              direction={direction}
-              style={{ width: 150, height: 150 }}
+              {...lottie}
+              onLoopComplete={() => setLottie({ ...lottie, loop: false })}
+              style={{ width: 150, height: 150, color: '#000' }}
             />
           </AppearingEffect>
         </Flex>
@@ -187,7 +166,6 @@ const Navigation = () => {
           color={whiteSection || open ? 'black' : 'white'}
           open={open}
           onClick={openHandler}
-          ref={buttonRef}
         />
       </Flex>
 
