@@ -26,9 +26,9 @@ With that data in mind, we’re able to design a structurally, visually and tech
     title: 'Web/Mobile',
     description: `Once your digital product is designed and validated, in example, a website, we move forward with the development process using the newest and most optimized technologies.`,
     content: [
-      'be visible with next gen SEO',
+      'Next gen SEO',
       'Creative development',
-      '3D interactive projects',
+      'NextJS, Vercel',
       'Cutting edge UI/UX',
     ],
     open: false,

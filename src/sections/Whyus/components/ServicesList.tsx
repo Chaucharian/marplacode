@@ -65,18 +65,8 @@ const ServicesList = ({ play, services: initialServices }) => {
           <Spacer vertical={theme.spacing.tiny} />
           <Line delay={500} play={play} />
           <Content open={open}>
-            <Flex
-              p={theme.spacing.small}
-              height='100%'
-              flexWrap='wrap'
-              // flexDirection='column'
-            >
+            <Flex p={theme.spacing.small} height='100%' flexWrap='wrap'>
               <div>
-                {/* <AppearingEffect
-                  effect={open ? 'bottom' : 'top'}
-                  animationProps={{ delay: 200 }}
-                  show={open}
-                > */}
                 {open && (
                   <Text
                     fontSize='16px'
@@ -100,6 +90,7 @@ const ServicesList = ({ play, services: initialServices }) => {
                       textProps={{ color: '#000', fontSize: '13px' }}
                       width='100%'
                       padding='10px'
+                      disabled
                     >
                       {item}
                     </Button>

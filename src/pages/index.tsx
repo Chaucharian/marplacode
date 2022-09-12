@@ -63,7 +63,7 @@ const Page = (props) => {
           factor={1.5}
           sticky={{ start: isMobile ? 4 : 3.6, end: isMobile ? 5.5 : 4.5 }}
           style={{
-            zIndex: -1,
+            zIndex: -2,
           }}
         >
           <Footer />
@@ -71,7 +71,7 @@ const Page = (props) => {
       </Parallax>
       {/* <Cursor hover={menuHover} /> */}
       <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
-        <source src='/videos/cuberto.mp4' type='video/mp4' />
+        <source src='/videos/marplacode.mp4' type='video/mp4' />
       </video>
     </>
   )

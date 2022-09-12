@@ -8,6 +8,8 @@ import { FormTextField } from '@/components/dom/Form'
 import { useForm } from 'react-hook-form'
 import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
+import Grid from '@/components/dom/Grid'
+import { ChipButton } from './components'
 
 // if ('virtualKeyboard' in navigator) {
 //   navigator.virtualKeyboard.overlaysContent = true
@@ -75,6 +77,31 @@ const Contact = () => {
                   enterkeyhint='next'
                 />
                 <Spacer vertical={'32px'} />
+                <Flex flexDirection='column'>
+                  <ChipButton>Web development</ChipButton>
+
+                  <Text type={theme.fonts.span}> What's in your mind?</Text>
+                  <Spacer vertical={'32px'} />
+
+                  <Grid gridGap={10} gridAutoFlow='column' alignItems='center'>
+                    <ChipButton>Web development</ChipButton>
+                    <ChipButton>Mobile development</ChipButton>
+                    <ChipButton>Creative landing page</ChipButton>
+                    <ChipButton>Product design</ChipButton>
+                  </Grid>
+                  <Spacer vertical={'32px'} />
+                  <Line play={true} />
+                </Flex>
+                <Spacer vertical={'32px'} />
+                <Text type={theme.fonts.span}> Budget</Text>
+                <Spacer vertical={'32px'} />
+
+                <Grid gridGap={10} gridAutoFlow='column' alignItems='center'>
+                  <ChipButton> 5k </ChipButton>
+                  <ChipButton>10k</ChipButton>
+                  <ChipButton>20k</ChipButton>
+                  <ChipButton>${`>30k`}</ChipButton>
+                </Grid>
                 <FormTextField
                   control={control}
                   name='message'
