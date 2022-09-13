@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form'
 import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
 import Grid from '@/components/dom/Grid'
-import { ChipButton } from './components'
 import FormCheckbox from '@/components/dom/Form/FormCheckbox'
 
 // if ('virtualKeyboard' in navigator) {
@@ -39,9 +38,9 @@ const Contact = () => {
   // }, [focus])
 
   return (
-    <Container bg='#1A1D22' minHeight='800px'>
+    <Container bg='#1A1D22' minHeight='1000px' display='block'>
       <Flex>
-        <Flex pt={'110px'}>
+        <Flex pt={'110px'} width={{ md: '50%' }}>
           <Flex flexDirection='column'>
             <Text type={theme.fonts.h1}>Say hi!</Text>
             <Spacer vertical={theme.spacing.tiny} />
@@ -77,23 +76,11 @@ const Contact = () => {
                   placeholder='Email'
                   enterkeyhint='next'
                 />
-                <Spacer vertical={'32px'} />
+                <Spacer vertical={'62px'} />
                 <Flex flexDirection='column'>
                   <Text type={theme.fonts.span}> What's in your mind?</Text>
                   <Spacer vertical={'32px'} />
-                  <Grid
-                    gridGap={10}
-                    // alignItems='center'
-                    // placeItems='center'
-                    justifyContent='start'
-                    gridAutoFlow={{ _: 'row', md: 'column' }}
-                    // gridAutoFlow={{ _: 'row', md: 'column' }}
-                    gridTemplateColumns={{
-                      // _: '1fr 1fr',
-                      md: 'repeat(auto-fit, minmax(auto-fit,1fr))',
-                    }}
-                    // gridTemplateColumns='repeat(auto-fill, minmax(auto-fit,1fr))'
-                  >
+                  <div>
                     <FormCheckbox
                       name='ideas.web'
                       label='Web development'
@@ -114,7 +101,7 @@ const Contact = () => {
                       label='Product Design'
                       control={control}
                     />
-                  </Grid>
+                  </div>
                   <Spacer vertical={'32px'} />
                   <Line play={true} />
                 </Flex>
@@ -122,12 +109,12 @@ const Contact = () => {
                 <Text type={theme.fonts.span}> Budget</Text>
                 <Spacer vertical={'32px'} />
 
-                <Grid gridGap={10} gridAutoFlow='column' alignItems='center'>
+                <div>
                   <FormCheckbox name='budget' label='5k' control={control} />
                   <FormCheckbox name='budget' label='10k' control={control} />
                   <FormCheckbox name='budget' label='20k' control={control} />
                   <FormCheckbox name='budget' label='>30k' control={control} />
-                </Grid>
+                </div>
                 <FormTextField
                   control={control}
                   name='message'

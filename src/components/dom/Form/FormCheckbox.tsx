@@ -3,14 +3,17 @@ import { SpectrumTextFieldProps } from '@react-types/textfield'
 import { useController } from 'react-hook-form'
 import Button from '../Button'
 import styled from 'styled-components'
+import { space, compose } from 'styled-system'
 
-const Container = styled.span`
-  ${({}) => `
+const Container = styled.div`
+  display: inline-block;
   input {
     display: none;
-  } 
-`}
+  }
+
+  ${compose(space)}
 `
+
 export interface FormButtonProps extends SpectrumTextFieldProps {
   name: string
   label: string
@@ -38,7 +41,7 @@ const FormCheckbox: FC<FormButtonProps> = ({
   })
 
   return (
-    <Container>
+    <Container m={{ _: '6px', md: '12px' }}>
       <input value={value} name={name} type='checkbox' />
       <Button selected={value} onClick={() => onChange(!value)} {...props}>
         {label}

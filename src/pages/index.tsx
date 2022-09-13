@@ -7,7 +7,7 @@ import { Contact, Landing, Works } from '@/sections'
 import Whyus from '@/sections/Whyus/Whyus'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Footer from '@/sections/Footer/Footer'
-import { useWindowSize } from 'usehooks-ts'
+import { useScreen, useWindowSize } from 'usehooks-ts'
 import { useIsMobile } from '@/helpers/hooks'
 import Cursor from '@/components/dom/Cursor'
 
@@ -20,8 +20,9 @@ const Page = (props) => {
   const scroll = useRef(null)
   const isMobile = useIsMobile()
   const menuHover = useStore((state) => state.menuHover)
+  const screen = useScreen()
 
-  console.log(menuHover)
+  console.log(screen)
   useEffect(() => {
     if (scroll.current?.container) {
       useStore.setState({
@@ -35,7 +36,7 @@ const Page = (props) => {
   return (
     <>
       <Navigation />
-      <Parallax pages={isMobile ? 5.5 : 4.5} ref={scroll}>
+      <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
         <ParallaxLayer
           offset={0}
           speed={2.5}
@@ -55,16 +56,23 @@ const Page = (props) => {
         </ParallaxLayer>
         <ParallaxLayer
           offset={isMobile ? 3.6 : 3.3}
-          factor={isMobile ? 1.4 : 1.4}
+          // factor={isMobile ? 1.6 : 1.4}
+          style={{
+            height: '100%',
+          }}
         >
           <Contact />
         </ParallaxLayer>
         <ParallaxLayer
+          offset={5}
           factor={1.5}
-          sticky={{ start: isMobile ? 4 : 3.6, end: isMobile ? 5.5 : 4.5 }}
-          style={{
-            zIndex: -2,
-          }}
+          speed={2.3}
+          // sticky={{ start: isMobile ? 4 : 3.6, end: isMobile ? 5.5 : 4.5 }}
+          style={
+            {
+              // zIndex: -2,
+            }
+          }
         >
           <Footer />
         </ParallaxLayer>

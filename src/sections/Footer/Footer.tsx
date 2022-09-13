@@ -30,7 +30,7 @@ const Footer = () => {
 
   return (
     <Flex
-      height='150%'
+      height='100%'
       bg='#FFF'
       p={theme.spacing.small}
       flexDirection='column'
