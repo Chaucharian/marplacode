@@ -1,93 +1,12 @@
-// import { theme } from '@/styles'
-// import styled from 'styled-components'
-// import Text from './Text'
-
-// const StyledButton = styled.button`
-//   ${({
-//     width = 200,
-//     height = 100,
-//     background = 'transparent',
-//     borderColor = 'white',
-//     color = 'white',
-//     padding = '20px',
-//   }) => `
-//   background: ${background};
-//   padding: ${padding};
-//   border-radius: 50px;
-//   border: 1px solid ${borderColor};
-//   font: inherit;
-//   width: ${width};
-//   height: ${height};
-//   max-width: 200px;
-//   outline: inherit;
-//   color: ${color};
-//   transition: all .5s ease-in;
-//   position: relative;
-//   overflow: hidden;
-
-//     .backdrop {
-//       transition: transform .5s cubic-bezier(.4,0,0,1),border-radius .5s cubic-bezier(.4,0,0,1);
-//       position:absolute;
-//       left: 0;
-//       display:block;
-//       bottom: 0;
-//       width: 100%;
-//       height: 100%;
-//       background: #000;
-//       transform: translateY(100%);
-//     }
-
-//     .text {
-//       z-index: 2;
-//       display: block;
-//       font-size: 14px;
-//       text-align: center;
-
-//       &:after {
-//         content: attr(data-text);
-//         display: block;
-//         position: absolute;
-//         width: 100%;
-//         left: 0;
-//         color: #000;
-//         transition: transform .5s cubic-bezier(.4,0,0,1);
-//         transform: translateY(100%);
-//       }
-//     }
-
-//     &:hover {
-//       &.text:after {
-//       transform: translateY(0%);
-
-//       }
-//     }
-
-// `}
-// `
-
-// const Button = ({ children, textProps, ...props }) => {
-//   return (
-//     <StyledButton {...props}>
-//       <div>
-//         <span className='backdrop'></span>
-//         <span className='text' data-text={children}>
-//           {children}
-//         </span>
-//       </div>
-//     </StyledButton>
-//   )
-// }
-
-// export default Button
-
 import React, { useRef, forwardRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import useMousePosition from '../utils/useMousePosition'
 import { distance } from '@/helpers/math'
-import { useIsMobile, useMousePosition } from '@/helpers/hooks'
+import { useHover, useIsMobile } from '@/helpers/hooks'
 import { theme } from '@/styles'
 
 const Text = styled.span`
+  ${({ primaryColor, secondaryColor }) => `
+
   display: block;
 
   &::before,
@@ -96,32 +15,43 @@ const Text = styled.span`
     position: absolute;
     top: 50%;
     left: 50%;
-    color: ${({ theme }) => '#FFF'};
+    color: ${primaryColor ?? theme.colors.primary};
     white-space: nowrap;
     transform: translate3d(-50%, -50%, 0);
-    transition: all 0.65s ${({}) => theme.transitions.easeOutCirc};
+    transition: all 0.65s ${theme.transitions.easeOutCirc};
   }
 
   &::after {
-    color: ${({}) => '#000'};
+    color: ${secondaryColor ?? theme.colors.secondary};
     transform: translate3d(-50%, 140%, 0);
   }
+`}
 `
 
-const Style = styled.a`
+const Link = styled.a`
+  ${({
+    primaryColor,
+    secondaryColor,
+    fontSize = '15px',
+    isHover,
+    isActive,
+    checkboxMode,
+    buttonStyles,
+  }) => `
+  font-family: LibreFranklin;
+  font-size: ${fontSize};
   position: relative;
   display: inline-flex;
   justify-content: center;
-  margin: 1em;
   padding: 1em 2em;
   max-width: 300px;
-  font-size: 1.25em;
-  font-weight: 500;
+  max-height: 75px;
+  font-weight: 200;
   line-height: 1.25;
   letter-spacing: 0.025em;
-  color: ${({ theme }) => '#FFF'};
-  background: ${({ theme }) => '#000'};
-  border: 2px solid ${({ theme }) => '#cccccc'};
+  color: ${primaryColor ?? theme.colors.primary};
+  background: ${secondaryColor ?? theme.colors.secondary};
+  border: 0.5px solid #cccccc;
   border-radius: 50px;
   user-select: none;
   cursor: pointer;
@@ -135,8 +65,10 @@ const Style = styled.a`
     color: transparent;
   }
 
-  &:hover {
-    border-color: ${({ theme }) => '#cccccc'};
+  ${
+    isHover
+      ? `
+    border-color: #cccccc;
 
     ${Text} {
       &::before {
@@ -144,15 +76,44 @@ const Style = styled.a`
       }
 
       &::after {
-        color: ${({ theme }) => '#000'};
+        color: ${
+          checkboxMode
+            ? primaryColor ?? theme.colors.primary
+            : secondaryColor ?? theme.colors.secondary
+        };
         transform: translate3d(-50%, -50%, 0);
       }
     }
+  `
+      : ``
   }
+
+  ${
+    isActive
+      ? `
+    border-color: #cccccc;
+
+    ${Text} {
+      &::before {
+        transform: translate3d(-50%, -300%, 0);
+      }
+
+      &::after {
+        color: ${secondaryColor ?? theme.colors.secondary};
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+  `
+      : ``
+  }
+
+
+  ${buttonStyles}
+`}
 `
 
 const Fill = styled.div`
-  ${({ y = '80%' }) => `
+  ${({ primaryColor, isActive }) => `
   z-index: 10;
   position: absolute;
   top: -50%;
@@ -161,91 +122,115 @@ const Fill = styled.div`
   height: 250%;
   display: block;
   border-radius: 50%;
-  background: #FFF;
+  background: ${primaryColor ?? theme.colors.primary};
   pointer-events: none;
-  transform: translate3d(0, ${y}, 0);
+  transform: translate3d(0, ${isActive ? 10 : 80}%, 0);
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 `}
 `
 
-const Button = forwardRef((props, reff) => {
-  // const { mouseX, mouseY } = useMousePosition()
-  const textRef: any = useRef()
-  const ref: any = useRef()
-  const [fillProps, setFillProps] = useState({})
-  const isDesktop = !useIsMobile()
-
-  useEffect(() => {
-    const node = ref.current
-    let x = 0
-    let y = 0
-
-    const updateMousePosition = ({ clientX: mouseX, clientY: mouseY }) => {
-      if (ref) {
-        // New values for the translations
-        const rect = node.getBoundingClientRect()
-        const distanceToTrigger = rect.width * 0.7
-        const distanceMouseButton = distance(
-          mouseX + window.scrollX,
-          mouseY + window.scrollY,
-          rect.left + rect.width / 2,
-          rect.top + rect.height / 2
-        )
-
-        // Handle magnetic effect
-        if (distanceMouseButton < distanceToTrigger) {
-          // Translate button position on hover
-          x = (mouseX + window.scrollX - (rect.left + rect.width / 2)) * 0.2
-          y = (mouseY + window.scrollY - (rect.top + rect.height / 2)) * 0.2
-          node.style.transform = `translate3d(${x}px, ${y}px, 0)`
-          textRef.current.style.transform = `translate3d(${x / 4}px, ${
-            y / 4
-          }px, 0)`
-        } else {
-          // Restore initial position
-          node.style.transform = `translate3d(0, 0, 0)`
-          textRef.current.style.transform = `translate3d(0, 0, 0)`
-        }
-      }
-    }
+const Button = forwardRef(
+  (
+    {
+      href,
+      children,
+      primaryColor,
+      secondaryColor,
+      selected,
+      fontSize,
+      onClick,
+    }: any,
+    ref: any
+  ) => {
+    const textRef: any = useRef()
+    const [buttonRef, isHover] = useHover()
+    const backdropRef: any = useRef()
+    const isDesktop = !useIsMobile()
+    const checkboxMode = typeof selected === 'boolean'
 
     const handleMouseEnter = () => {
       // Handle background color animation
-      setFillProps({
-        y: '10%',
-      })
+      backdropRef.current.style.transform = `translate3d(0, 10%, 0)`
     }
 
     const handleMouseLeave = () => {
-      setFillProps({
-        y: '-80%',
-      })
+      backdropRef.current.style.transform = `translate3d(0, -100%, 0)`
     }
 
-    if (node) {
-      ref.current?.addEventListener('mouseenter', handleMouseEnter)
-      ref.current?.addEventListener('mouseleave', handleMouseLeave)
-      // magnetic effect only in Desktop
-      isDesktop &&
-        ref.current?.addEventListener('mousemove', updateMousePosition)
+    const magneticEffect = ({ containerRef, textRef, mouseX, mouseY }) => {
+      let x = 0
+      let y = 0
+      // New values for the translations
+      const rect = containerRef.getBoundingClientRect()
+      const distanceToTrigger = rect.width * 0.6
+      const distanceMouseButton = distance(
+        mouseX + window.scrollX,
+        mouseY + window.scrollY,
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2
+      )
 
-      return () => {
-        isDesktop &&
-          ref.current?.removeEventListener('mousemove', updateMousePosition)
-        ref.current?.removeEventListener('mouseenter', handleMouseEnter)
-        ref.current?.removeEventListener('mouseleave', handleMouseLeave)
+      // Handle magnetic effect
+      if (distanceMouseButton < distanceToTrigger) {
+        // Translate button position on hover
+        x = (mouseX + window.scrollX - (rect.left + rect.width / 2)) * 0.2
+        y = (mouseY + window.scrollY - (rect.top + rect.height / 2)) * 0.2
+        containerRef.style.transform = `translate3d(${x}px, ${y}px, 0)`
+        textRef.current.style.transform = `translate3d(${x / 4}px, ${
+          y / 4
+        }px, 0)`
+      } else {
+        // Restore initial position
+        containerRef.style.transform = `translate3d(0, 0, 0)`
+        textRef.current.style.transform = `translate3d(0, 0, 0)`
       }
     }
-  }, [ref, textRef, isDesktop])
 
-  return (
-    <Style ref={ref} href={props.href}>
-      <span ref={textRef}>
-        <Text data-text={props.children}>{props.children}</Text>
-      </span>
-      <Fill {...fillProps} />
-    </Style>
-  )
-})
+    useEffect(() => {
+      const node = ref?.current ?? buttonRef.current
+
+      const updateMousePosition = ({ clientX: mouseX, clientY: mouseY }) => {
+        magneticEffect({ containerRef: node, textRef, mouseX, mouseY })
+      }
+
+      if (node) {
+        !checkboxMode && node?.addEventListener('mouseenter', handleMouseEnter)
+        !checkboxMode && node?.addEventListener('mouseleave', handleMouseLeave)
+        // magnetic effect only in Desktop
+        isDesktop && node?.addEventListener('mousemove', updateMousePosition)
+
+        return () => {
+          isDesktop &&
+            node?.removeEventListener('mousemove', updateMousePosition)
+          node?.removeEventListener('mouseenter', handleMouseEnter)
+          node?.removeEventListener('mouseleave', handleMouseLeave)
+        }
+      }
+    }, [buttonRef, textRef, isDesktop])
+
+    return (
+      <Link
+        ref={buttonRef}
+        href={href}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        isHover={isHover}
+        isActive={selected}
+        fontSize={fontSize}
+        checkboxMode={checkboxMode}
+        onClick={onClick}
+      >
+        <span ref={textRef}>
+          <Text data-text={children}>{children}</Text>
+        </span>
+        <Fill
+          ref={backdropRef}
+          isActive={selected}
+          primaryColor={primaryColor}
+        />
+      </Link>
+    )
+  }
+)
 
 export default Button

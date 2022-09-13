@@ -55,7 +55,7 @@ const Page = (props) => {
         </ParallaxLayer>
         <ParallaxLayer
           offset={isMobile ? 3.6 : 3.3}
-          factor={isMobile ? 1.3 : 1.2}
+          factor={isMobile ? 1.4 : 1.4}
         >
           <Contact />
         </ParallaxLayer>

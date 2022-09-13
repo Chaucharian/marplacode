@@ -10,7 +10,7 @@ function useHover() {
 
   useEffect(() => {
     const node = ref.current
-    console.log('asdasd', node)
+
     if (node) {
       node.addEventListener('mouseover', handleMouseOver)
       node.addEventListener('mouseout', handleMouseOut)

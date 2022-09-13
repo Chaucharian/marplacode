@@ -10,6 +10,7 @@ import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
 import Grid from '@/components/dom/Grid'
 import { ChipButton } from './components'
+import FormCheckbox from '@/components/dom/Form/FormCheckbox'
 
 // if ('virtualKeyboard' in navigator) {
 //   navigator.virtualKeyboard.overlaysContent = true
@@ -24,7 +25,7 @@ const Contact = () => {
   const scrollPercentage = useScroll(scroll)
   const show = useStore((state) => state.domReady)
   const animate = scroll >= 0.15
-  const { control, handleSubmit, formState } = useForm({})
+  const { control, handleSubmit, formState, getValues } = useForm({})
   const [focus, setFocus] = useState(false)
 
   // useEffect(() => {
@@ -53,7 +54,7 @@ const Contact = () => {
               Tell us about your idea
             </Text>
             <Spacer vertical={theme.spacing.large} />
-            <div onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
+            <form onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
               <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
                 <FormTextField
                   control={control}
@@ -78,16 +79,41 @@ const Contact = () => {
                 />
                 <Spacer vertical={'32px'} />
                 <Flex flexDirection='column'>
-                  <ChipButton>Web development</ChipButton>
-
                   <Text type={theme.fonts.span}> What's in your mind?</Text>
                   <Spacer vertical={'32px'} />
-
-                  <Grid gridGap={10} gridAutoFlow='column' alignItems='center'>
-                    <ChipButton>Web development</ChipButton>
-                    <ChipButton>Mobile development</ChipButton>
-                    <ChipButton>Creative landing page</ChipButton>
-                    <ChipButton>Product design</ChipButton>
+                  <Grid
+                    gridGap={10}
+                    // alignItems='center'
+                    // placeItems='center'
+                    justifyContent='start'
+                    gridAutoFlow={{ _: 'row', md: 'column' }}
+                    // gridAutoFlow={{ _: 'row', md: 'column' }}
+                    gridTemplateColumns={{
+                      // _: '1fr 1fr',
+                      md: 'repeat(auto-fit, minmax(auto-fit,1fr))',
+                    }}
+                    // gridTemplateColumns='repeat(auto-fill, minmax(auto-fit,1fr))'
+                  >
+                    <FormCheckbox
+                      name='ideas.web'
+                      label='Web development'
+                      control={control}
+                    />
+                    <FormCheckbox
+                      name='ideas.mobile'
+                      label='Mobile'
+                      control={control}
+                    />
+                    <FormCheckbox
+                      name='ideas.landing'
+                      label='Creative Landing'
+                      control={control}
+                    />
+                    <FormCheckbox
+                      name='ideas.product'
+                      label='Product Design'
+                      control={control}
+                    />
                   </Grid>
                   <Spacer vertical={'32px'} />
                   <Line play={true} />
@@ -97,10 +123,10 @@ const Contact = () => {
                 <Spacer vertical={'32px'} />
 
                 <Grid gridGap={10} gridAutoFlow='column' alignItems='center'>
-                  <ChipButton> 5k </ChipButton>
-                  <ChipButton>10k</ChipButton>
-                  <ChipButton>20k</ChipButton>
-                  <ChipButton>${`>30k`}</ChipButton>
+                  <FormCheckbox name='budget' label='5k' control={control} />
+                  <FormCheckbox name='budget' label='10k' control={control} />
+                  <FormCheckbox name='budget' label='20k' control={control} />
+                  <FormCheckbox name='budget' label='>30k' control={control} />
                 </Grid>
                 <FormTextField
                   control={control}
@@ -113,7 +139,7 @@ const Contact = () => {
                   <TextButton onClick={() => {}}>Submit</TextButton>
                 </Flex>
               </Flex>
-            </div>
+            </form>
           </Flex>
           <Spacer vertical={theme.spacing.medium} />
         </Flex>

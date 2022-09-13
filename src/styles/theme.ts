@@ -59,6 +59,9 @@ export default {
     secondary: 'black',
     lightGrey: '#5050502b',
     orange: '#FF4B0E',
+    // grey50: 'rgba(255, 255, 255, 0.05)',
+    grey50: 'rgba(255, 255, 255, 0.005)',
+    grey40: 'rgb(49 49 49 / 39%)',
   },
   fonts: {
     h1: 'h1',

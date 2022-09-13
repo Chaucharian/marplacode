@@ -90,6 +90,7 @@ const Landing = () => {
               show={show}
             >
               <Button
+                fontSize='20px'
                 onClick={() => {
                   scrollTo(2)
                   // video?.current?.play()
