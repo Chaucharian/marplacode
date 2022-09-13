@@ -55,25 +55,20 @@ const Contact = () => {
             <Spacer vertical={theme.spacing.large} />
             <form onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
               <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
+                <Text type={theme.fonts.span}>Name/ Company name</Text>
                 <FormTextField
                   control={control}
                   name='name'
-                  placeholder="What's your name/company"
+                  placeholder='Hello...'
                   enterkeyhint='next'
                 />
                 <Spacer vertical={'32px'} />
-                <FormTextField
-                  control={control}
-                  name='name'
-                  placeholder='Budget'
-                  enterkeyhint='next'
-                />
-                <Spacer vertical={'32px'} />
+                <Text type={theme.fonts.span}>Email</Text>
                 <FormTextField
                   control={control}
                   name='email'
                   inputmode='email'
-                  placeholder='Email'
+                  placeholder='Where can we reply?'
                   enterkeyhint='next'
                 />
                 <Spacer vertical={'62px'} />
@@ -108,17 +103,18 @@ const Contact = () => {
                 <Spacer vertical={'32px'} />
                 <Text type={theme.fonts.span}> Budget</Text>
                 <Spacer vertical={'32px'} />
-
                 <div>
                   <FormCheckbox name='budget' label='5k' control={control} />
                   <FormCheckbox name='budget' label='10k' control={control} />
                   <FormCheckbox name='budget' label='20k' control={control} />
                   <FormCheckbox name='budget' label='>30k' control={control} />
                 </div>
+                <Spacer vertical={'32px'} />
+                <Text type={theme.fonts.span}>Message</Text>
                 <FormTextField
                   control={control}
                   name='message'
-                  placeholder='Message'
+                  placeholder='I want to build something something beatiful'
                   enterkeyhint='next'
                 />
                 <Spacer vertical={theme.spacing.medium} />
