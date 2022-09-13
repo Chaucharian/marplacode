@@ -51,7 +51,7 @@ const Page = (props) => {
         >
           <Contact />
         </ParallaxLayer>
-        <ParallaxLayer offset={4.8} factor={1} speed={2.3}>
+        <ParallaxLayer offset={5} factor={1.5} speed={2.3}>
           <Footer />
         </ParallaxLayer>
       </Parallax>

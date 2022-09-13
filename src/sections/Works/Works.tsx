@@ -18,7 +18,7 @@ import AppearingEffect from '@/components/dom/AppearingEffect'
 import { title } from 'process'
 import { Container } from '../components'
 import { useWindowSize } from 'usehooks-ts'
-import { useScroll } from '@/helpers/hooks'
+import { useIsMobile, useScroll } from '@/helpers/hooks'
 
 const list = [
   {
@@ -59,12 +59,10 @@ const list = [
 const Works = () => {
   const scroll = useStore((state) => state.scroll)
   const [works, setWorks] = useState(list)
-  const [currentDescription, setCurrentDescription] = useState(null)
   const [workIndex, setWorkIndex] = useState(0)
   const scrollPercentage = useScroll(scroll)
   const sectionActive = scrollPercentage >= 28
-  const { width, height } = useWindowSize()
-  const isMobile = width < 834
+  const isMobile = useIsMobile()
 
   const worksDescriptions = works.map(({ description, url }) => (
     <>
