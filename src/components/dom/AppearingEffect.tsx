@@ -7,6 +7,7 @@ export interface AppearingEffectProps {
   rotation?: number
   animationProps?: any
   blendMode?: string
+  containerProps?: any
   children: any
 }
 
@@ -16,6 +17,7 @@ const AppearingEffect: FC<AppearingEffectProps> = ({
   rotation = 0,
   blendMode = 'normal',
   animationProps,
+  containerProps,
   children,
 }) => {
   const xEffect =
@@ -47,6 +49,7 @@ const AppearingEffect: FC<AppearingEffectProps> = ({
   return (
     <animated.div
       style={{ color: 'white', overflow: 'hidden', mixBlendMode: blendMode }}
+      {...containerProps}
     >
       <animated.div style={animation}>{children}</animated.div>
     </animated.div>

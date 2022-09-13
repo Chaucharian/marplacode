@@ -40,6 +40,7 @@ const Landing = () => {
   const scroll = useStore((state) => state.scroll)
   const scrollPercentage = useScroll(scroll)
   const scrollTo = useStore((state) => state.scrollTo)
+  const [buttonEffect, setButtonEffect] = useState(false)
   const { title, description } = useChangeDescription({
     time: 4000,
     options,
@@ -86,7 +87,13 @@ const Landing = () => {
             </AppearingEffect>
             <Flex height='48px' />
             <AppearingEffect
-              animationProps={{ delay: 900 }}
+              animationProps={{
+                delay: 900,
+                onResolve: () => setButtonEffect(true),
+              }}
+              containerProps={{
+                style: { overflow: buttonEffect ? 'visible' : 'hidden' },
+              }}
               effect={show ? 'top' : 'top'}
               show={show}
             >
@@ -108,7 +115,7 @@ const Landing = () => {
           <IndicatorContainer>
             <Flex
               justifyContent={{ _: 'flex-end', md: 'center' }}
-              pr={theme.spacing.small}
+              pr={{ _: theme.spacing.small }}
               pb={{ _: '20%', md: '10%' }}
             >
               <AppearingEffect

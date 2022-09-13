@@ -20,7 +20,7 @@ function Text({
     if (play) {
       video.current?.play()
     }
-  }, [play, video])
+  }, [children, video, play])
 
   return (
     <DreiText

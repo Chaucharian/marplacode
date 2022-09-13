@@ -17,7 +17,7 @@ const Page = (props) => {
   const video = useRef(null)
   const scroll = useRef(null)
   const isMobile = useIsMobile()
-  const menuHover = useStore((state) => state.menuHover)
+  const videoUrl = useStore((state) => state.videoUrl)
 
   useEffect(() => {
     if (scroll.current?.container) {
@@ -29,6 +29,7 @@ const Page = (props) => {
     }
   }, [scroll])
 
+  console.log(videoUrl)
   return (
     <>
       <Navigation />
@@ -45,19 +46,26 @@ const Page = (props) => {
         <ParallaxLayer
           offset={isMobile ? 3.6 : 3.3}
           style={{
-            height: '100%',
+            height: '90%',
           }}
         >
           <Contact />
         </ParallaxLayer>
-        <ParallaxLayer offset={5} factor={1.5} speed={2.3}>
+        <ParallaxLayer offset={4.8} factor={1} speed={2.3}>
           <Footer />
         </ParallaxLayer>
       </Parallax>
       {/* <Cursor hover={menuHover} /> */}
-      <video loop autoPlay hidden muted preload='auto' playsInline ref={video}>
-        <source src='/videos/marplacode.mp4' type='video/mp4' />
-      </video>
+      <video
+        loop
+        autoPlay
+        hidden
+        muted
+        preload='auto'
+        playsInline
+        ref={video}
+        src={videoUrl}
+      ></video>
     </>
   )
 }

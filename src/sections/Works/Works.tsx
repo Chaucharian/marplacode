@@ -23,28 +23,35 @@ import { useScroll } from '@/helpers/hooks'
 const list = [
   {
     name: 'turnate',
-    video: '',
+    videoUrl: '',
     description:
       'booking platform aimed to improve daily customer experience making the whole process fast and easy',
     isSelected: false,
   },
   {
     name: 'abrirchat',
-    video: '',
+    videoUrl: '/videos/marplacode.mp4',
     description: 'mobile application to open whatsapp conversations fast',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
-    video: '',
+    videoUrl: '/videos/firpo.mp4',
     description: 'drawing portfolio web page using custom design system',
     isSelected: false,
   },
   {
     name: 'audiojourney',
-    video: '',
+    videoUrl: '/videos/cuberto.mp4',
     description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
     in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
+    isSelected: false,
+  },
+  {
+    name: 'clean-app',
+    videoUrl: '/videos/dreii.mp4',
+    url: 'https://www.behance.net/gallery/126504683/Cleanapp-UX-UI-Case-Study',
+    description: `Design and development of Mobile/Web digital platform`,
     isSelected: false,
   },
 ]
@@ -56,17 +63,16 @@ const Works = () => {
   const [workIndex, setWorkIndex] = useState(0)
   const scrollPercentage = useScroll(scroll)
   const sectionActive = scrollPercentage >= 28
-
   const { width, height } = useWindowSize()
   const isMobile = width < 834
 
-  const worksDescriptions = works.map(({ description }) => (
+  const worksDescriptions = works.map(({ description, url }) => (
     <>
       <Text type={theme.fonts.p} fontSize='17px' color='grey'>
         {description}
       </Text>
       <Spacer vertical={theme.spacing.small} />
-      <Link show={true} href='' color1='grey' color2='white'>
+      <Link show={true} color1='grey' color2='white' href={url} target='_blank'>
         <Text
           type={theme.fonts.span}
           color='grey'
@@ -90,6 +96,7 @@ const Works = () => {
       index >= works.length - 1 ? 0 : index === -1 ? works.length - 1 : index
     useStore.setState({
       letter: works[newIndex]?.name[0],
+      videoUrl: works[newIndex]?.videoUrl,
       changeCameraEffect: true,
     })
     setWorkIndex(newIndex)
