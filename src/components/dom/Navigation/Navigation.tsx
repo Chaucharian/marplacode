@@ -115,7 +115,7 @@ const Navigation = () => {
 
   const onMenuClick = (page) => {
     openHandler()
-    scrollTo(page)
+    scrollTo(page > 0 ? page + 0.3 : page)
   }
 
   useEffect(() => {

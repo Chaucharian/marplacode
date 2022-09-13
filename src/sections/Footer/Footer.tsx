@@ -42,7 +42,13 @@ const Footer = () => {
           Have an idea?
         </Text>
         <Spacer vertical={theme.spacing.tiny} />
-        <Link show={show} color1='grey' color2='black'>
+
+        <Link
+          show={show}
+          href='mailto:hello@marplacode.com'
+          color1='grey'
+          color2='black'
+        >
           <Text type={theme.fonts.span} color='#000' fontSize={'16px'}>
             hello@marplacode.com
           </Text>
