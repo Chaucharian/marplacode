@@ -39,6 +39,7 @@ const options = [
 const Landing = () => {
   const scroll = useStore((state) => state.scroll)
   const scrollPercentage = useScroll(scroll)
+  const scrollTo = useStore((state) => state.scrollTo)
   const { title, description } = useChangeDescription({
     time: 4000,
     options,
@@ -89,15 +90,17 @@ const Landing = () => {
               effect={show ? 'top' : 'top'}
               show={show}
             >
-              <Button
-                fontSize='20px'
-                onClick={() => {
-                  scrollTo(2)
-                  // video?.current?.play()
-                }}
-              >
-                Start project
-              </Button>
+              <Flex p={{ md: 10 }}>
+                <Button
+                  fontSize='20px'
+                  onClick={() => {
+                    scrollTo(3.5)
+                    // video?.current?.play()
+                  }}
+                >
+                  Start project
+                </Button>
+              </Flex>
             </AppearingEffect>
             <Flex height='48px' />
           </Flex>
@@ -116,7 +119,7 @@ const Landing = () => {
                 effect={show ? 'bottom' : 'bottom'}
                 show={show}
               >
-                <ArrowButton />
+                <ArrowButton onClick={() => scrollTo(1)} />
               </AppearingEffect>
             </Flex>
           </IndicatorContainer>

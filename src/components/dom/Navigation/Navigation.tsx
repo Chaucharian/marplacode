@@ -119,7 +119,7 @@ const Navigation = () => {
   }
 
   useEffect(() => {
-    let lottieState = { ...lottie, play: true, direction: -1 }
+    let lottieState = { ...lottie }
     if (scrollPercentage > 5) {
       lottieState = {
         ...lottie,

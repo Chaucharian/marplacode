@@ -37,6 +37,7 @@ const Link = styled.a`
     isActive,
     checkboxMode,
     buttonStyles,
+    selectedTextColor,
   }) => `
   font-family: LibreFranklin;
   font-size: ${fontSize};
@@ -99,7 +100,7 @@ const Link = styled.a`
       }
 
       &::after {
-        color: ${secondaryColor ?? theme.colors.secondary};
+        color: ${selectedTextColor ?? secondaryColor ?? theme.colors.secondary};
         transform: translate3d(-50%, -50%, 0);
       }
     }
@@ -139,6 +140,7 @@ const Button = forwardRef(
       selected,
       fontSize,
       onClick,
+      ...props
     }: any,
     ref: any
   ) => {
@@ -219,6 +221,7 @@ const Button = forwardRef(
         fontSize={fontSize}
         checkboxMode={checkboxMode}
         onClick={onClick}
+        {...props}
       >
         <span ref={textRef}>
           <Text data-text={children}>{children}</Text>

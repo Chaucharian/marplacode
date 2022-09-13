@@ -10,10 +10,6 @@ export interface AppearingEffectProps {
   children: any
 }
 
-// const Container = styled.div`
-//   translate: (${xEffect}, ${yEffect}) rotate(${rotation}deg);
-// `
-
 const AppearingEffect: FC<AppearingEffectProps> = ({
   show = true,
   effect = 'left',

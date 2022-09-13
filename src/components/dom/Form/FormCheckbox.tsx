@@ -43,7 +43,13 @@ const FormCheckbox: FC<FormButtonProps> = ({
   return (
     <Container m={{ _: '6px', md: '12px' }}>
       <input value={value} name={name} type='checkbox' />
-      <Button selected={value} onClick={() => onChange(!value)} {...props}>
+      <Button
+        selected={value}
+        onClick={() => onChange(!value)}
+        selectedTextColor='black'
+        secondaryColor='rgba(255, 255, 255, 0.06)'
+        {...props}
+      >
         {label}
       </Button>
     </Container>

@@ -39,12 +39,12 @@ const Page = (props) => {
       <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
         <ParallaxLayer
           offset={0}
-          speed={2.5}
+
           // factor={1}
-          sticky={{ start: 0, end: 1 }}
-          style={{
-            zIndex: -1,
-          }}
+          // sticky={{ start: 0, end: 1 }}
+          // style={{
+          //   zIndex: -1,
+          // }}
         >
           <Landing />
         </ParallaxLayer>
