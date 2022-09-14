@@ -116,6 +116,7 @@ const Contact = () => {
                   name='message'
                   placeholder='I want to build something something beatiful'
                   enterkeyhint='next'
+                  type='textarea'
                 />
                 <Spacer vertical={theme.spacing.medium} />
                 <Flex width='100%' justifyContent='flex-end'>

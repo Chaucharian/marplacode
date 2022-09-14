@@ -34,7 +34,7 @@ const Footer = () => {
       bg='#FFF'
       p={theme.spacing.small}
       flexDirection='column'
-      justifyContent='center'
+      pt={theme.spacing.medium}
       position='relative'
     >
       <Flex flexDirection='column' alignItems='center'>

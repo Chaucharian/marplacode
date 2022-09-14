@@ -1,4 +1,12 @@
-import { Flex, Text, Line, Spacer, OpenButton, Button } from '@/components/dom'
+import {
+  Flex,
+  Text,
+  Line,
+  Spacer,
+  OpenButton,
+  Button,
+  Chip,
+} from '@/components/dom'
 import { theme } from '@/styles'
 import { lineGrow } from '@/helpers/animations'
 import { animated, config, useSpring, useTransition } from '@react-spring/web'
@@ -54,7 +62,7 @@ const ServicesList = ({ play, services: initialServices }) => {
           <Item onClick={() => openItem(index)}>
             <Text
               type={theme.fonts.h3}
-              fontWeight={'600'}
+              fontWeight={'200'}
               fontSize='27px'
               color='#000'
             >
@@ -84,16 +92,7 @@ const ServicesList = ({ play, services: initialServices }) => {
               {content.map((item, index) => (
                 <>
                   <ItemContent open={open} delay={100 * index}>
-                    <Button
-                      background='#FFF'
-                      borderColor='#D7D7D7'
-                      textProps={{ color: '#000', fontSize: '13px' }}
-                      width='100%'
-                      padding='10px'
-                      disabled
-                    >
-                      {item}
-                    </Button>
+                    <Chip>{item}</Chip>
                     <Spacer vertical={theme.spacing.small} />
                   </ItemContent>
                   <Spacer horizontal={theme.spacing.small} />

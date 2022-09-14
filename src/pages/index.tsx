@@ -12,7 +12,7 @@ import { useIsMobile } from '@/helpers/hooks'
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
-
+//min-height: calc(100vh - 4.1666666667vw);
 const Page = (props) => {
   const video = useRef(null)
   const scroll = useRef(null)
@@ -51,7 +51,7 @@ const Page = (props) => {
         >
           <Contact />
         </ParallaxLayer>
-        <ParallaxLayer offset={5} factor={1.5} speed={2.3}>
+        <ParallaxLayer offset={5.2} factor={1.5} speed={2.3}>
           <Footer />
         </ParallaxLayer>
       </Parallax>

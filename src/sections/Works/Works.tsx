@@ -110,7 +110,7 @@ const Works = () => {
   }, [sectionActive])
 
   return (
-    <Container>
+    <Container minHeight='750px'>
       <Flex flexDirection='column' width='300px'>
         <Text type={theme.fonts.h1} fontWeight='bold'>
           Selected
