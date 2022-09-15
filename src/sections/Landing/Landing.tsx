@@ -10,9 +10,9 @@ import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
 
 const IndicatorContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0px;
   left: 0px;
   z-index: -1;
@@ -58,12 +58,17 @@ const Landing = () => {
   }
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundImage: 'linear-gradient(#00000000, #000000)',
+        backdropFilter: 'blur(3px)',
+      }}
+    >
       <Flex
         m={theme.spacing.small}
         flexDirection='column'
         justifyContent={{ _: 'flex-end', md: 'center' }}
-        height={'100%'}
+        height={'100vh'}
         position='relative'
         zIndex={1}
       >
@@ -132,7 +137,6 @@ const Landing = () => {
           </IndicatorContainer>
         </Flex>
       </Flex>
-      <Shadow />
     </Container>
   )
 }

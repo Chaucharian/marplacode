@@ -35,6 +35,7 @@ const Footer = () => {
       p={theme.spacing.small}
       flexDirection='column'
       pt={theme.spacing.medium}
+      pb={theme.spacing.medium}
       position='relative'
     >
       <Flex flexDirection='column' alignItems='center'>

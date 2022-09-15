@@ -20,12 +20,15 @@ const FormTextField: FC<FormTextFieldProps> = ({
 }) => {
   const {
     field: { value, onChange },
+    fieldState: { error },
   } = useController({
     name,
     control,
     rules,
     defaultValue,
   })
+
+  console.log({ error, rules })
   return <TextField name={name} value={value} onChange={onChange} {...props} />
 }
 

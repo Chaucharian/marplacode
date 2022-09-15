@@ -45,7 +45,7 @@ function Text({
         <meshBasicMaterial toneMapped={false}>
           <videoTexture
             attach='map'
-            args={[video.current]}
+            args={[video?.current]}
             encoding={THREE.sRGBEncoding}
           />
         </meshBasicMaterial>

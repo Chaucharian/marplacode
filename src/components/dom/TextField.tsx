@@ -19,7 +19,6 @@ const StyledTextField = styled.input`
   transition: all ease-in 3s;
 
   &::placeholder {
-    padding: 15px 0px 15px 8px;
     color: #fff;
     opacity: 0.8;
   }

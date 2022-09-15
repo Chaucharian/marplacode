@@ -8,6 +8,8 @@ import Whyus from '@/sections/Whyus/Whyus'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Footer from '@/sections/Footer/Footer'
 import { useIsMobile } from '@/helpers/hooks'
+import { useWindowSize } from 'usehooks-ts'
+import styled from 'styled-components'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -20,20 +22,47 @@ const Page = (props) => {
   const videoUrl = useStore((state) => state.videoUrl)
 
   useEffect(() => {
-    if (scroll.current?.container) {
+    // if (scroll.current?.container) {
+    //   useStore.setState({
+    //     video,
+    //     scroll: scroll.current.container.current,
+    //     scrollTo: scroll.current.scrollTo,
+    //   })
+    // }
+    if (scroll.current) {
       useStore.setState({
         video,
-        scroll: scroll.current.container.current,
-        scrollTo: scroll.current.scrollTo,
+        scroll: scroll.current,
+        scrollTo: () => {},
       })
     }
   }, [scroll])
 
-  console.log(videoUrl)
+  const Wrapper = styled.main`
+    ${({ height = '100vh' }) => `
+    overflow: hidden;
+    display:block;
+`}
+  `
+
+  const Section = styled.section`
+    ${({ height = '100vh' }) => `
+  height:100%;
+
+`}
+  `
+  const PageContainer = styled.div`
+    ${({ height = '100vh' }) => `
+    position:absolute;
+    height:100%;
+    width: 100%;
+`}
+  `
+
   return (
-    <>
+    <PageContainer>
       <Navigation />
-      <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
+      {/* <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
         <ParallaxLayer offset={0}>
           <Landing />
         </ParallaxLayer>
@@ -46,15 +75,36 @@ const Page = (props) => {
         <ParallaxLayer
           offset={isMobile ? 3.6 : 3.3}
           style={{
-            height: '90%',
+            height: '100%',
           }}
         >
           <Contact />
         </ParallaxLayer>
-        <ParallaxLayer offset={5.2} factor={1.5} speed={2.3}>
-          <Footer />
-        </ParallaxLayer>
-      </Parallax>
+        {!isMobile ? (
+          <ParallaxLayer offset={5.2} factor={1.5} speed={2.3}>
+            <Footer />
+          </ParallaxLayer>
+        ) : (
+          <></>
+        )}
+      </Parallax> */}
+      <Wrapper ref={scroll}>
+        <Section>
+          <Landing />
+        </Section>
+        <Section>
+          <Whyus />
+        </Section>
+
+        <Section>
+          <Works />
+        </Section>
+
+        <Section>
+          <Contact />
+        </Section>
+      </Wrapper>
+
       {/* <Cursor hover={menuHover} /> */}
       <video
         loop
@@ -66,7 +116,7 @@ const Page = (props) => {
         ref={video}
         src={videoUrl}
       ></video>
-    </>
+    </PageContainer>
   )
 }
 

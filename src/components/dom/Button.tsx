@@ -80,7 +80,7 @@ const Link = styled.a`
         color: ${
           checkboxMode
             ? primaryColor ?? theme.colors.primary
-            : secondaryColor ?? theme.colors.secondary
+            : selectedTextColor ?? secondaryColor ?? theme.colors.secondary
         };
         transform: translate3d(-50%, -50%, 0);
       }
@@ -139,6 +139,7 @@ const Button = forwardRef(
       secondaryColor,
       selected,
       fontSize,
+      selectedTextColor,
       onClick,
       ...props
     }: any,
@@ -216,6 +217,7 @@ const Button = forwardRef(
         href={href}
         primaryColor={primaryColor}
         secondaryColor={secondaryColor}
+        selectedTextColor={selectedTextColor}
         isHover={isHover}
         isActive={selected}
         fontSize={fontSize}

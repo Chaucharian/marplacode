@@ -130,10 +130,8 @@ const App: FC<AppProps> = ({
       <Header title={pageProps.title} />
       {/* theme not work inside canvas */}
       <ThemeProvider theme={theme}>
-        <Dom>
-          {/* @ts-ignore */}
-          <Component {...pageProps} />
-        </Dom>
+        {/* @ts-ignore */}
+        <Component {...pageProps} />
         {Component?.r3f && (
           <LCanvas {...Component?.canvasProps}>
             {Component.r3f(pageProps)}
