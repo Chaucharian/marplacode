@@ -61,10 +61,8 @@ const Works = () => {
   const [works, setWorks] = useState(list)
   const [workIndex, setWorkIndex] = useState(0)
   const scrollPercentage = useScroll(scroll)
-  const sectionActive = scrollPercentage >= 28
-  // const isMobile = useIsMobile()
+  const sectionActive = scrollPercentage >= 22
 
-  // console.log(scrollPercentage)
   const worksDescriptions = works.map(({ description, url }) => (
     <>
       <Text type={theme.fonts.p} fontSize='17px' color='grey'>

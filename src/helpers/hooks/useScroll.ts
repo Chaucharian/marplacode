@@ -10,15 +10,17 @@ const useScroll = (ref) => {
 
         setScroll((winScroll * 100) / height)
       })
+    } else {
+      document.addEventListener(
+        'scroll',
+        ({ target: { documentElement } }: any) => {
+          const winScroll = documentElement?.scrollTop
+          const height =
+            documentElement?.scrollHeight - documentElement?.clientHeight
+          setScroll((winScroll * 100) / height)
+        }
+      )
     }
-    //  else {
-    //   window.document.addEventListener('scroll', ({ currentTarget }) => {
-    //     const winScroll = currentTarget?.scrollTop
-    //     const height = currentTarget?.scrollHeight - currentTarget?.clientHeight
-    //     console.log('EEAA', currentTarget)
-    //     setScroll((winScroll * 100) / height)
-    //   })
-    // }
   }, [ref])
 
   return scroll

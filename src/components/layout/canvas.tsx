@@ -30,7 +30,10 @@ const LCanvas = ({ children, ...canvasProps }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <StyledCanvas {...canvasProps} style={{ position: 'fixed', zIndex: -10 }}>
+    <StyledCanvas
+      {...canvasProps}
+      style={{ position: 'fixed', top: 0, zIndex: -10 }}
+    >
       {/* <LControl /> */}
       <Preload all />
       {children}

@@ -15,24 +15,19 @@ const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
 
-const Wrapper = styled.main`
-  ${({ height = '100vh' }) => `
-    overflow: hidden;
-    display:block;
-`}
-`
+// const Wrapper = styled.main`
+//   ${({ height = '100vh' }) => `
+//     overflow: hidden;
+//     display:block;
+// `}
+// `
 
 const Section = styled.section`
   ${({ height = '100vh' }) => `
-  height:100%;
-
 `}
 `
 const PageContainer = styled.div`
   ${({ height = '100vh' }) => `
-    position:absolute;
-    height:100%;
-    width: 100%;
 `}
 `
 
@@ -65,7 +60,7 @@ const Page = (props) => {
   }, [scroll])
 
   return (
-    <PageContainer>
+    <PageContainer ref={scroll}>
       <Navigation />
       {/* <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
         <ParallaxLayer offset={0}>
@@ -93,22 +88,22 @@ const Page = (props) => {
           <></>
         )}
       </Parallax> */}
-      <Wrapper ref={scroll}>
-        <Section>
-          <Landing />
-        </Section>
-        <Section>
-          <Whyus />
-        </Section>
+      {/* <Wrapper ref={scroll}> */}
+      <Section>
+        <Landing />
+      </Section>
+      <Section>
+        <Whyus />
+      </Section>
 
-        <Section>
-          <Works />
-        </Section>
+      <Section>
+        <Works />
+      </Section>
 
-        <Section>
-          <Contact />
-        </Section>
-      </Wrapper>
+      <Section>
+        <Contact />
+      </Section>
+      {/* </Wrapper> */}
 
       {/* <Cursor hover={menuHover} /> */}
       <video
