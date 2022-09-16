@@ -20,13 +20,7 @@ import Footer from '../Footer/Footer'
 // }
 
 const Contact = () => {
-  const scroll = useStore((state) => state.scroll)
-  const scrollPercentage = useScroll(scroll)
-  const show = useStore((state) => state.domReady)
-  const animate = scroll >= 0.15
   const { control, handleSubmit, formState, getValues } = useForm({})
-  const [focus, setFocus] = useState(false)
-  const isMobile = useIsMobile()
 
   // useEffect(() => {
   //   if (focus) {
@@ -66,7 +60,7 @@ const Contact = () => {
               <Spacer vertical={theme.spacing.large} />
               <form onSubmit={handleSubmit(submit)}>
                 <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
-                  <Text type={theme.fonts.span}>Name/ Company name</Text>
+                  <Text type={theme.fonts.span}>Name*</Text>
                   <FormTextField
                     control={control}
                     name='name'
@@ -78,7 +72,19 @@ const Contact = () => {
                     }}
                   />
                   <Spacer vertical={'62px'} />
-                  <Text type={theme.fonts.span}>Email</Text>
+                  <Text type={theme.fonts.span}>Company name</Text>
+                  <FormTextField
+                    control={control}
+                    name='company'
+                    placeholder='or website?'
+                    enterkeyhint='next'
+                    rules={{
+                      required: 'EEE',
+                      maxLength: 8,
+                    }}
+                  />
+                  <Spacer vertical={'62px'} />
+                  <Text type={theme.fonts.span}>Email*</Text>
                   <FormTextField
                     control={control}
                     name='email'
@@ -121,7 +127,7 @@ const Contact = () => {
                     <Line play={true} />
                   </Flex>
                   <Spacer vertical={'62px'} />
-                  <Text type={theme.fonts.span}>Budget</Text>
+                  <Text type={theme.fonts.span}>Budget*</Text>
                   <Spacer vertical={'32px'} />
                   <div>
                     <FormRadio
@@ -152,7 +158,7 @@ const Contact = () => {
                   <Spacer vertical={'16px'} />
                   <Line play={true} />
                   <Spacer vertical={'62px'} />
-                  <Text type={theme.fonts.span}>Message</Text>
+                  <Text type={theme.fonts.span}>Message*</Text>
                   <FormTextField
                     control={control}
                     name='message'

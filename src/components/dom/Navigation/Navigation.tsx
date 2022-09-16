@@ -9,9 +9,13 @@ import Line from '../Line'
 import Menu from './Menu'
 import { device } from '@/styles/theme'
 import { animated } from 'react-spring'
-import { useScroll, useHover, useIsMobile } from '@/helpers/hooks'
+import {
+  useScroll,
+  useHover,
+  useIsMobile,
+  useLogoAnimation,
+} from '@/helpers/hooks'
 import AppearingEffect from '../AppearingEffect'
-import Lottie from 'react-lottie-player'
 import animationLogo from 'public/marplacodeanimation.json'
 
 import { Shadow } from '@/components'
@@ -94,12 +98,20 @@ const Svg = styled.svg`
 const Path = styled.path`
   transition: all ease-in-out 1s;
 `
+
+const Lottie = styled.div`
+  ${({ open }) => `
+
+  &>path {
+transition: all ease-in 0.5s;
+  }
+  
+ 
+`}
+`
+
 const Navigation = () => {
   const [open, setOpen] = useState(false)
-  const [lottie, setLottie] = useState<any>({
-    animationData: animationLogo,
-    loop: false,
-  })
 
   const scroll = useStore((state) => state.scroll)
   const scrollTo = useStore((state) => state.scrollTo)
@@ -107,6 +119,8 @@ const Navigation = () => {
   const isMobile = useIsMobile()
   const scrollPercentage = useScroll(scroll)
   const whiteSection = scrollPercentage >= 20.5 && scrollPercentage <= 41
+  const lottieRef = useRef()
+  useLogoAnimation({ lottieRef })
 
   const openHandler = () => {
     const navigationState = !open
@@ -118,21 +132,6 @@ const Navigation = () => {
     openHandler()
     scrollTo(page > 0 ? page + 0.3 : page)
   }
-
-  useEffect(() => {
-    let lottieState = { ...lottie }
-    if (scrollPercentage > 5) {
-      lottieState = {
-        ...lottie,
-        play: true,
-      }
-
-      if (open) {
-        lottieState = { ...lottie, play: true, direction: -1 }
-      }
-    }
-    setLottie(lottieState)
-  }, [scrollPercentage, open])
 
   return (
     <NavigationContainer open={open} showFull={true}>
@@ -156,8 +155,7 @@ const Navigation = () => {
         <Flex alignItems='center'>
           <AppearingEffect animationProps={{ delay: 500 }}>
             <Lottie
-              {...lottie}
-              onLoopComplete={() => setLottie({ ...lottie, loop: false })}
+              ref={lottieRef}
               style={{
                 width: isMobile ? 100 : 150,
                 height: isMobile ? 30 : 100,
@@ -173,13 +171,9 @@ const Navigation = () => {
         />
       </Flex>
 
-      {/* <Content open={open}>
-        <Menu show={open} />
-      </Content> */}
       {!open && (
         <ProgressLine
           color={whiteSection ? 'black' : 'white'}
-          // width={scrollPercentage > 20 ? 100 : 0}
           width={100}
           opacity={domReady ? 35 : 0}
         />

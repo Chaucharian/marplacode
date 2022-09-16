@@ -62,50 +62,18 @@ const Page = (props) => {
   return (
     <PageContainer ref={scroll}>
       <Navigation />
-      {/* <Parallax pages={isMobile ? 6 : 4.5} ref={scroll}>
-        <ParallaxLayer offset={0}>
-          <Landing />
-        </ParallaxLayer>
-        <ParallaxLayer offset={1} factor={isMobile ? 1.3 : 1}>
-          <Whyus />
-        </ParallaxLayer>
-        <ParallaxLayer offset={2.3} factor={isMobile ? 1.3 : 1}>
-          <Works />
-        </ParallaxLayer>
-        <ParallaxLayer
-          offset={isMobile ? 3.6 : 3.3}
-          style={{
-            height: '100%',
-          }}
-        >
-          <Contact />
-        </ParallaxLayer>
-        {!isMobile ? (
-          <ParallaxLayer offset={5.2} factor={1.5} speed={2.3}>
-            <Footer />
-          </ParallaxLayer>
-        ) : (
-          <></>
-        )}
-      </Parallax> */}
-      {/* <Wrapper ref={scroll}> */}
       <Section>
         <Landing />
       </Section>
       <Section>
         <Whyus />
       </Section>
-
       <Section>
         <Works />
       </Section>
-
       <Section>
         <Contact />
       </Section>
-      {/* </Wrapper> */}
-
-      {/* <Cursor hover={menuHover} /> */}
       <video
         loop
         autoPlay
