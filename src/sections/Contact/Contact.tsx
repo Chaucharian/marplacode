@@ -40,8 +40,6 @@ const Contact = () => {
 
   const submit = () => {}
 
-  console.log(isMobile)
-
   return (
     <div style={{ height: '100%' }}>
       <Container

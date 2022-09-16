@@ -28,7 +28,6 @@ const FormTextField: FC<FormTextFieldProps> = ({
     defaultValue,
   })
 
-  console.log({ error, rules })
   return <TextField name={name} value={value} onChange={onChange} {...props} />
 }
 

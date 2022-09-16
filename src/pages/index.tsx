@@ -14,6 +14,28 @@ import styled from 'styled-components'
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
+
+const Wrapper = styled.main`
+  ${({ height = '100vh' }) => `
+    overflow: hidden;
+    display:block;
+`}
+`
+
+const Section = styled.section`
+  ${({ height = '100vh' }) => `
+  height:100%;
+
+`}
+`
+const PageContainer = styled.div`
+  ${({ height = '100vh' }) => `
+    position:absolute;
+    height:100%;
+    width: 100%;
+`}
+`
+
 //min-height: calc(100vh - 4.1666666667vw);
 const Page = (props) => {
   const video = useRef(null)
@@ -33,31 +55,14 @@ const Page = (props) => {
       useStore.setState({
         video,
         scroll: scroll.current,
-        scrollTo: () => {},
+        scrollTo: (page) =>
+          window.scrollTo({
+            top: page * 1000,
+            behavior: 'smooth',
+          }),
       })
     }
   }, [scroll])
-
-  const Wrapper = styled.main`
-    ${({ height = '100vh' }) => `
-    overflow: hidden;
-    display:block;
-`}
-  `
-
-  const Section = styled.section`
-    ${({ height = '100vh' }) => `
-  height:100%;
-
-`}
-  `
-  const PageContainer = styled.div`
-    ${({ height = '100vh' }) => `
-    position:absolute;
-    height:100%;
-    width: 100%;
-`}
-  `
 
   return (
     <PageContainer>

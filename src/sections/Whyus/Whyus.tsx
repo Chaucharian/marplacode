@@ -78,8 +78,8 @@ const WhyUs = () => {
         <Flex
           // minWidth={{ md: '400px' }}
           width={{ md: '50%' }}
-          pt={theme.spacing.small}
-          height='400px'
+          pt={'100px'}
+          // height='400px'
           flexDirection='column'
           justifyContent='center'
         >

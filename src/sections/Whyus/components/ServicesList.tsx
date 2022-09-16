@@ -16,9 +16,10 @@ import AppearingEffect from '@/components/dom/AppearingEffect'
 
 const Content = animated(styled.div`
   ${({ open }) => `
-  z-index: 100;
+  z-index:  ${open ? '1' : '-1'};
   transition: all ease-in-out 0.5s;
   height: ${open ? '200px' : '0px'};
+  opacity: ${open ? '100%' : '0%'};
   // display: ${open ? 'block' : 'none'};
 `}
 `)
@@ -75,17 +76,14 @@ const ServicesList = ({ play, services: initialServices }) => {
           <Content open={open}>
             <Flex p={theme.spacing.small} height='100%' flexWrap='wrap'>
               <div>
-                {open && (
-                  <Text
-                    fontSize='16px'
-                    fontFamily='Circular'
-                    fontWeight='normal'
-                    color='#777777'
-                  >
-                    {description}
-                  </Text>
-                )}
-
+                <Text
+                  fontSize='16px'
+                  fontFamily='Circular'
+                  fontWeight='normal'
+                  color='#777777'
+                >
+                  {description}
+                </Text>
                 {/* </AppearingEffect> */}
                 <Spacer vertical={theme.spacing.small} />
               </div>

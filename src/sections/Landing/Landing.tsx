@@ -29,11 +29,11 @@ const Content = styled.div`
 
 const options = [
   {
-    title: 'Hand',
+    title: 'Hand Crafted',
     description: 'we aimed for handcrafted and polish products',
   },
-  { title: 'Detail', description: 'we are detail oriented' },
-  { title: 'Making', description: 'uniques design pieces' },
+  { title: 'Detail Oriented', description: 'obsed with tiny pixels' },
+  { title: 'Making Experiences', description: 'uniques design pieces' },
 ]
 
 const Landing = () => {
@@ -58,12 +58,7 @@ const Landing = () => {
   }
 
   return (
-    <Container
-      style={{
-        backgroundImage: 'linear-gradient(#00000000, #000000)',
-        backdropFilter: 'blur(3px)',
-      }}
-    >
+    <Container shadow>
       <Flex
         m={theme.spacing.small}
         flexDirection='column'
@@ -131,7 +126,11 @@ const Landing = () => {
                 effect={show ? 'bottom' : 'bottom'}
                 show={show}
               >
-                <ArrowButton onClick={() => scrollTo(1)} />
+                <ArrowButton
+                  height={55}
+                  width={55}
+                  onClick={() => scrollTo(1)}
+                />
               </AppearingEffect>
             </Flex>
           </IndicatorContainer>

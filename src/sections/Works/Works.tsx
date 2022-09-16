@@ -62,8 +62,9 @@ const Works = () => {
   const [workIndex, setWorkIndex] = useState(0)
   const scrollPercentage = useScroll(scroll)
   const sectionActive = scrollPercentage >= 28
-  const isMobile = useIsMobile()
+  // const isMobile = useIsMobile()
 
+  // console.log(scrollPercentage)
   const worksDescriptions = works.map(({ description, url }) => (
     <>
       <Text type={theme.fonts.p} fontSize='17px' color='grey'>
@@ -110,8 +111,8 @@ const Works = () => {
   }, [sectionActive])
 
   return (
-    <Container minHeight='750px' pt='200px' pb='180px'>
-      <Flex flexDirection='column' width='300px'>
+    <Container minHeight='750px' pt='200px' pb='180px' shadow blur={0}>
+      <Flex flexDirection='column' width='300px' pb='125px'>
         <Text type={theme.fonts.h1} fontWeight='bold'>
           Selected
         </Text>
@@ -126,121 +127,72 @@ const Works = () => {
         </Flex>
       </Flex>
 
-      {isMobile ? (
-        <>
-          <Flex height='350px' justifyContent='center' alignItems='center'>
-            <Flex width='100%' justifyContent='space-between'>
-              <ArrowButton
-                rotation='90'
-                arrowAnimationProps={{
-                  loop: false,
-                }}
-                circleAnimationProps={{
-                  delay: 2000,
-                  from: {
-                    border: '0.5px solid rgb(255 255 255 / 61%)',
-                  },
-                  to: {
-                    border: '0.5px solid rgb(255 255 255 / 100%)',
-                  },
-                }}
-                onClick={() => onSelectWork(workIndex + 1)}
-              />
-              <ArrowButton
-                rotation='-90'
-                arrowAnimationProps={{
-                  loop: false,
-                }}
-                circleAnimationProps={{
-                  delay: 2000,
-                  from: {
-                    border: '0.5px solid rgb(255 255 255 / 61%)',
-                  },
-                  to: {
-                    border: '0.5px solid rgb(255 255 255 / 100%)',
-                  },
-                }}
-                onClick={() => onSelectWork(workIndex - 1)}
-              />
-            </Flex>
-          </Flex>
-          <div>
-            <TextTransitionEffect
-              animationProps={{ delay: 500 }}
-              position={workIndex}
-              texts={worksTitles}
-              height={72}
-            ></TextTransitionEffect>
-            {/* <Spacer vertical={theme.spacing.small} /> */}
-            <TextTransitionEffect
-              animationProps={{ delay: 500 }}
-              position={workIndex}
-              texts={worksDescriptions}
-            ></TextTransitionEffect>
-          </div>
-        </>
-      ) : (
-        <>
-          <Flex height='500px' justifyContent='center' alignItems='center'>
-            <Flex
-              width='100%'
-              justifyContent='space-between'
-              alignItems='center'
-            >
-              <ArrowButton
-                rotation='90'
-                arrowAnimationProps={{
-                  loop: false,
-                }}
-                circleAnimationProps={{
-                  delay: 2000,
-                  from: {
-                    border: '0.5px solid rgb(255 255 255 / 61%)',
-                  },
-                  to: {
-                    border: '0.5px solid rgb(255 255 255 / 100%)',
-                  },
-                }}
-                onClick={() => onSelectWork(workIndex + 1)}
-              />
-              <Flex width='100%' pl={{ md: '100px' }}>
-                <Flex width='400px' flexDirection='column'>
-                  <TextTransitionEffect
-                    animationProps={{ delay: 500 }}
-                    position={workIndex}
-                    texts={worksTitles}
-                    height={72}
-                  ></TextTransitionEffect>
-                  {/* <Spacer vertical={theme.spacing.small} /> */}
-                  <TextTransitionEffect
-                    animationProps={{ delay: 500 }}
-                    position={workIndex}
-                    texts={worksDescriptions}
-                  ></TextTransitionEffect>
-                </Flex>
+      <Flex position='relative'>
+        <Flex
+          position='absolute'
+          width='100%'
+          height='100%'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <ArrowButton
+            rotation='90'
+            arrowAnimationProps={{
+              loop: false,
+            }}
+            circleAnimationProps={{
+              delay: 2000,
+              from: {
+                border: '0.5px solid rgb(255 255 255 / 61%)',
+              },
+              to: {
+                border: '0.5px solid rgb(255 255 255 / 100%)',
+              },
+            }}
+            onClick={() => onSelectWork(workIndex + 1)}
+          />
+          <Flex></Flex>
+          <ArrowButton
+            rotation='-90'
+            arrowAnimationProps={{
+              loop: false,
+            }}
+            circleAnimationProps={{
+              delay: 2000,
+              from: {
+                border: '0.5px solid rgb(255 255 255 / 61%)',
+              },
+              to: {
+                border: '0.5px solid rgb(255 255 255 / 100%)',
+              },
+            }}
+            onClick={() => onSelectWork(workIndex - 1)}
+          />
+        </Flex>
+        <Flex height='500px' justifyContent='center' alignItems='center'>
+          <Flex
+            width='100%'
+            pl={{ md: '160px' }}
+            pt={{ _: '500px', md: '50px' }}
+          >
+            <Flex width='100%'>
+              <Flex width='400px' flexDirection='column'>
+                <TextTransitionEffect
+                  animationProps={{ delay: 500 }}
+                  position={workIndex}
+                  texts={worksTitles}
+                  height={72}
+                ></TextTransitionEffect>
+                <TextTransitionEffect
+                  animationProps={{ delay: 500 }}
+                  position={workIndex}
+                  texts={worksDescriptions}
+                ></TextTransitionEffect>
               </Flex>
-              <ArrowButton
-                rotation='-90'
-                arrowAnimationProps={{
-                  loop: false,
-                }}
-                circleAnimationProps={{
-                  delay: 2000,
-                  from: {
-                    border: '0.5px solid rgb(255 255 255 / 61%)',
-                  },
-                  to: {
-                    border: '0.5px solid rgb(255 255 255 / 100%)',
-                  },
-                }}
-                onClick={() => onSelectWork(workIndex - 1)}
-              />
             </Flex>
           </Flex>
-        </>
-      )}
-
-      <Shadow />
+        </Flex>
+      </Flex>
     </Container>
   )
 }

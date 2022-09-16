@@ -9,7 +9,7 @@ import Line from '../Line'
 import Menu from './Menu'
 import { device } from '@/styles/theme'
 import { animated } from 'react-spring'
-import { useScroll, useHover } from '@/helpers/hooks'
+import { useScroll, useHover, useIsMobile } from '@/helpers/hooks'
 import AppearingEffect from '../AppearingEffect'
 import Lottie from 'react-lottie-player'
 import animationLogo from 'public/marplacodeanimation.json'
@@ -104,6 +104,7 @@ const Navigation = () => {
   const scroll = useStore((state) => state.scroll)
   const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
+  const isMobile = useIsMobile()
   const scrollPercentage = useScroll(scroll)
   const whiteSection = scrollPercentage >= 20.5 && scrollPercentage <= 41
 
@@ -152,12 +153,16 @@ const Navigation = () => {
           md: theme.spacing.horizontal.desktop,
         }}
       >
-        <Flex alignItems='center' pl={'20px'}>
+        <Flex alignItems='center'>
           <AppearingEffect animationProps={{ delay: 500 }}>
             <Lottie
               {...lottie}
               onLoopComplete={() => setLottie({ ...lottie, loop: false })}
-              style={{ width: 150, height: 150, color: '#000' }}
+              style={{
+                width: isMobile ? 100 : 150,
+                height: isMobile ? 30 : 100,
+                color: '#000',
+              }}
             />
           </AppearingEffect>
         </Flex>

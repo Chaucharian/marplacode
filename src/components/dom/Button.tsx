@@ -172,7 +172,7 @@ const Button = forwardRef(
         rect.left + rect.width / 2,
         rect.top + rect.height / 2
       )
-
+      console.log(window.scrollY)
       // Handle magnetic effect
       if (distanceMouseButton < distanceToTrigger) {
         // Translate button position on hover
@@ -190,7 +190,7 @@ const Button = forwardRef(
     }
 
     useEffect(() => {
-      const node = ref?.current ?? buttonRef.current
+      const node = buttonRef.current
 
       const updateMousePosition = ({ clientX: mouseX, clientY: mouseY }) => {
         magneticEffect({ containerRef: node, textRef, mouseX, mouseY })

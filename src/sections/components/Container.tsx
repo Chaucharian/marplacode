@@ -3,9 +3,27 @@ import { Flex, Spacer, Text } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import React from 'react'
 
+const ContainerStyled = styled(Flex)`
+  ${({
+    shadow,
+    blur = 3,
+    gradient = 'linear-gradient(#00000000, #000000)',
+  }) => `
+
+  ${
+    shadow
+      ? `
+    background-image: ${gradient};
+    backdrop-filter: blur(${blur}px);`
+      : ``
+  }
+  
+`}
+`
+
 const Container = ({ children, ...props }) => {
   return (
-    <Flex
+    <ContainerStyled
       flexDirection='column'
       justifyContent='center'
       pl={{
@@ -17,11 +35,10 @@ const Container = ({ children, ...props }) => {
         md: theme.spacing.horizontal.desktop,
       }}
       height='100%'
-      // height={{ _: '110vh', md: '100%' }}
       {...props}
     >
       {children}
-    </Flex>
+    </ContainerStyled>
   )
 }
 export default Container

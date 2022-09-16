@@ -6,13 +6,13 @@ import { animated } from '@react-spring/web'
 import { FC } from 'react'
 
 const Container = styled(animated.div)`
-  ${({ rotation = 0 }) => `
+  ${({ rotation = 0, width = 72, height = 72 }) => `
   position: relative;
   color: inherit;
   border-radius: 100px;
   cursor: pointer;
-  width: 55px;
-  height: 55px;
+  width: ${width}px;
+  height: ${height}px;
   display: flex;
   justify-content: center;
   mix-blend-mode: difference;
