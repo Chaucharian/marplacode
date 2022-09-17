@@ -121,7 +121,7 @@ const Menu = ({ show, onClick }: any) => {
               <AppearingEffect
                 show={show}
                 effect='top'
-                animationProps={{ delay: 50 * index }}
+                animationProps={{ delay: 200 * index }}
               >
                 <div>
                   <span>{index + 1}.</span>

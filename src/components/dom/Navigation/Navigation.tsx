@@ -112,7 +112,6 @@ const Lottie = styled.div`
 
 const Navigation = () => {
   const [open, setOpen] = useState(false)
-
   const scroll = useStore((state) => state.scroll)
   const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
@@ -153,7 +152,7 @@ const Navigation = () => {
         }}
       >
         <Flex alignItems='center'>
-          <AppearingEffect animationProps={{ delay: 500 }}>
+          <AppearingEffect animationProps={{ delay: 3000 }}>
             <Lottie
               ref={lottieRef}
               style={{
@@ -167,6 +166,7 @@ const Navigation = () => {
         <BurgerButton
           color={whiteSection || open ? 'black' : 'white'}
           open={open}
+          animationProps={{ delay: 2800 }}
           onClick={openHandler}
         />
       </Flex>

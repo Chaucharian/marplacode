@@ -66,9 +66,7 @@ const Link = styled.a`
     color: transparent;
   }
 
-  ${
-    isHover
-      ? `
+  &:hover {
     border-color: #cccccc;
 
     ${Text} {
@@ -85,8 +83,6 @@ const Link = styled.a`
         transform: translate3d(-50%, -50%, 0);
       }
     }
-  `
-      : ``
   }
 
   ${
@@ -146,7 +142,8 @@ const Button = forwardRef(
     ref: any
   ) => {
     const textRef: any = useRef()
-    const [buttonRef, isHover] = useHover()
+    const buttonRef: any = useRef()
+    // const [buttonRef, isHover] = useHover()
     const backdropRef: any = useRef()
     const isDesktop = !useIsMobile()
     const checkboxMode = typeof selected === 'boolean'
@@ -218,7 +215,7 @@ const Button = forwardRef(
         primaryColor={primaryColor}
         secondaryColor={secondaryColor}
         selectedTextColor={selectedTextColor}
-        isHover={isHover}
+        // isHover={isHover}
         isActive={selected}
         fontSize={fontSize}
         checkboxMode={checkboxMode}

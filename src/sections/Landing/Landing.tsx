@@ -71,13 +71,13 @@ const Landing = () => {
           <Flex flexDirection='column'>
             <AppearingEffect
               effect={show ? 'bottom' : 'top'}
-              animationProps={{ delay: 500 }}
+              animationProps={{ delay: 2000 }}
               show={show}
             >
               <Text type={theme.fonts.h1}>{title}</Text>
             </AppearingEffect>
             <AppearingEffect
-              animationProps={{ delay: 700 }}
+              animationProps={{ delay: 2200 }}
               effect={show ? 'bottom' : 'top'}
               show={show}
             >
@@ -88,12 +88,12 @@ const Landing = () => {
             <Flex height='48px' />
             <AppearingEffect
               animationProps={{
-                delay: 900,
+                delay: 2400,
                 onResolve: () => setButtonEffect(true),
               }}
-              containerProps={{
-                style: { overflow: buttonEffect ? 'visible' : 'hidden' },
-              }}
+              // containerProps={{
+              //   style: { overflow: buttonEffect ? 'visible' : 'hidden' },
+              // }}
               effect={show ? 'top' : 'top'}
               show={show}
             >
@@ -102,7 +102,6 @@ const Landing = () => {
                   fontSize='20px'
                   onClick={() => {
                     scrollTo(3.5)
-                    // video?.current?.play()
                   }}
                 >
                   Start project
@@ -122,7 +121,7 @@ const Landing = () => {
                 animationProps={{
                   from: { opacity: 0, transform: `translate(0,-100%)` },
                   to: { opacity: 1, transform: `translate(0,0%)` },
-                  delay: show ? 2000 : 600,
+                  delay: show ? 2600 : 600,
                   onResolve: () => domReady(),
                 }}
                 effect={show ? 'top' : 'bottom'}

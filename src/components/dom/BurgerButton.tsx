@@ -22,23 +22,34 @@ const Svg = styled.svg`
   // }
 `
 
-const useAnimation = ({ play }) => {
+const useAnimation = ({ play, animationProps }) => {
   const [animation, start] = useSpring(() => ({
     width: '0%',
+    ...animationProps,
   }))
 
   if (play) {
-    start({ width: '100%', delay: 2000 })
+    start({ width: '100%', delay: 2000, ...animationProps })
   } else {
-    start({ width: '0%' })
+    start({ width: '0%', ...animationProps })
   }
 
   return animation
 }
 
 const Burger = forwardRef(
-  ({ open, show = true, color = '#fafafa', onClick, ...props }: any, ref) => {
-    const animation = useAnimation({ play: show })
+  (
+    {
+      open,
+      show = true,
+      color = '#fafafa',
+      onClick,
+      animationProps,
+      ...props
+    }: any,
+    ref
+  ) => {
+    const animation = useAnimation({ play: show, animationProps })
     const second = useSpring({
       transform: open
         ? 'translate(10px, 4px) rotate(45deg)'

@@ -10,6 +10,7 @@ import Footer from '@/sections/Footer/Footer'
 import { useIsMobile } from '@/helpers/hooks'
 import { useWindowSize } from 'usehooks-ts'
 import styled from 'styled-components'
+import ColorLoader from '@/components/dom/ColorLoader'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -61,6 +62,7 @@ const Page = (props) => {
 
   return (
     <PageContainer ref={scroll}>
+      <ColorLoader isLoading={false} />
       <Navigation />
       <Section>
         <Landing />
