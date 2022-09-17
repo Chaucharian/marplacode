@@ -120,10 +120,12 @@ const Landing = () => {
             >
               <AppearingEffect
                 animationProps={{
+                  from: { opacity: 0, transform: `translate(0,-100%)` },
+                  to: { opacity: 1, transform: `translate(0,0%)` },
                   delay: show ? 2000 : 600,
                   onResolve: () => domReady(),
                 }}
-                effect={show ? 'bottom' : 'bottom'}
+                effect={show ? 'top' : 'bottom'}
                 show={show}
               >
                 <ArrowButton

@@ -102,8 +102,8 @@ const Path = styled.path`
 const Lottie = styled.div`
   ${({ open }) => `
 
-  &>path {
-transition: all ease-in 0.5s;
+  path {
+    transition: all ease-in 0.5s;
   }
   
  
