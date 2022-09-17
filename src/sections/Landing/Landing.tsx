@@ -1,4 +1,11 @@
-import { Button, Flex, ArrowButton, Shadow, Text } from '@/components'
+import {
+  Button,
+  Flex,
+  ArrowButton,
+  Shadow,
+  Text,
+  TextTransitionEffect,
+} from '@/components'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { theme } from '@/styles'
@@ -27,13 +34,13 @@ const Content = styled.div`
   }
 `
 
-const options = [
+const smookesMock = [
   {
-    title: 'Hand Crafted',
+    name: 'Hand Crafted',
     description: 'we aimed for handcrafted and polish products',
   },
-  { title: 'Detail Oriented', description: 'obsed with tiny pixels' },
-  { title: 'Making Experiences', description: 'uniques design pieces' },
+  { name: 'Detail Oriented', description: 'obsed with tiny pixels' },
+  { name: 'Making Experiences', description: 'uniques design pieces' },
 ]
 
 const Landing = () => {
@@ -41,13 +48,23 @@ const Landing = () => {
   const scrollPercentage = useScroll(scroll)
   const scrollTo = useStore((state) => state.scrollTo)
   const [buttonEffect, setButtonEffect] = useState(false)
-  const { title, description } = useChangeDescription({
-    time: 4000,
-    options,
-    onChange: ({ title }) => {
-      scrollPercentage <= 20 && useStore.setState({ letter: title[0] })
-    },
-  })
+  // const { title, description } = useChangeDescription({
+  //   time: 4000,
+  //   options,
+  //   onChange: ({ title }) => {
+  //     scrollPercentage <= 20 && useStore.setState({ letter: title[0] })
+  //   },
+  // })
+  const smookes = smookesMock.map(({ name, description }) => (
+    <>
+      <Text fontFamily='LibreFranklin' fontWeight='lighter' fontSize='42px'>
+        {name}
+      </Text>
+      <Text type={theme.fonts.p} fontWeight={'lighter'}>
+        {description}
+      </Text>
+    </>
+  ))
 
   const video = useStore((state) => state?.video)
   const navigationState = useStore((state) => state?.navigationState)
@@ -60,7 +77,6 @@ const Landing = () => {
   return (
     <Container shadow>
       <Flex
-        m={theme.spacing.small}
         flexDirection='column'
         justifyContent={{ _: 'flex-end', md: 'center' }}
         height={'100vh'}
@@ -71,12 +87,21 @@ const Landing = () => {
           <Flex flexDirection='column'>
             <AppearingEffect
               effect={show ? 'bottom' : 'top'}
-              animationProps={{ delay: 2000 }}
+              animationProps={{ delay: 2000, minWidth: '400px' }}
               show={show}
             >
-              <Text type={theme.fonts.h1}>{title}</Text>
+              <TextTransitionEffect
+                texts={smookes}
+                height={110}
+                onChange={(index) => {
+                  console.log(scrollPercentage)
+                  scrollPercentage <= 20 &&
+                    useStore.setState({ letter: smookesMock[index].name[0] })
+                }}
+              ></TextTransitionEffect>
+              {/* <Text type={theme.fonts.h1}>{title}</Text> */}
             </AppearingEffect>
-            <AppearingEffect
+            {/* <AppearingEffect
               animationProps={{ delay: 2200 }}
               effect={show ? 'bottom' : 'top'}
               show={show}
@@ -84,7 +109,7 @@ const Landing = () => {
               <Text type={theme.fonts.p} fontWeight={'lighter'}>
                 {description}
               </Text>
-            </AppearingEffect>
+            </AppearingEffect> */}
             <Flex height='48px' />
             <AppearingEffect
               animationProps={{

@@ -10,6 +10,8 @@ export interface AppearingEffectProps {
   texts: any
   height?: number
   position?: number
+  transitionDelay?: number
+  onChange?: (index: number) => any
 }
 
 const TextTransitionEffect: FC<AppearingEffectProps> = ({
@@ -19,13 +21,16 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
   blendMode = 'normal',
   animationProps,
   height = 200,
-  position = 0,
+  position = null,
+  transitionDelay = 4000,
   texts,
+  onChange = () => {},
 }) => {
   const xEffect =
     effect === 'left' ? '-100%' : effect === 'right' ? '100%' : '0%'
   const yEffect =
     effect === 'top' ? '-100%' : effect === 'bottom' ? '100%' : '0%'
+  const [internalPosition, setInternalPosition] = useState(0)
 
   const [animation, start] = useSpring(() => ({
     from: {
@@ -37,18 +42,46 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
   }))
 
   useEffect(() => {
-    const newPosition =
-      position === null
-        ? texts.length * height
-        : position === 0
-        ? 0
-        : -(position * height)
+    if (typeof position === 'number') {
+      const newPosition =
+        position === null
+          ? texts.length * height
+          : position === 0
+          ? 0
+          : -(position * height)
 
-    start({
-      transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
-      ...animationProps,
-    })
-  }, [position])
+      start({
+        transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
+        ...animationProps,
+      })
+    } else {
+      // auto mode
+      const newIndex =
+        internalPosition >= texts.length - 1
+          ? 0
+          : internalPosition === -1
+          ? texts.length - 1
+          : internalPosition + 1
+
+      const newPosition =
+        newIndex === null
+          ? texts.length * height
+          : newIndex === 0
+          ? 0
+          : -(newIndex * height)
+
+      start({
+        transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
+        ...animationProps,
+      })
+      onChange(newIndex)
+      const timeoutId = setInterval(
+        () => setInternalPosition(newIndex),
+        transitionDelay
+      )
+      return () => clearInterval(timeoutId)
+    }
+  }, [position, internalPosition])
 
   return (
     <animated.div
