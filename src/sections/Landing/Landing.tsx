@@ -101,15 +101,6 @@ const Landing = () => {
               ></TextTransitionEffect>
               {/* <Text type={theme.fonts.h1}>{title}</Text> */}
             </AppearingEffect>
-            {/* <AppearingEffect
-              animationProps={{ delay: 2200 }}
-              effect={show ? 'bottom' : 'top'}
-              show={show}
-            >
-              <Text type={theme.fonts.p} fontWeight={'lighter'}>
-                {description}
-              </Text>
-            </AppearingEffect> */}
             <Flex height='48px' />
             <AppearingEffect
               animationProps={{

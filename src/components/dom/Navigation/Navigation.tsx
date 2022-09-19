@@ -105,6 +105,10 @@ const Lottie = styled.div`
   path {
     transition: all ease-in 0.5s;
   }
+
+  &.black path { 
+    fill: #000;
+  }
   
  
 `}

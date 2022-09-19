@@ -15,13 +15,9 @@ const useLogoAnimation = ({ lottieRef }) => {
     function validateChangeColor() {
       const scrollPosition = window.scrollY
       if (scrollPosition >= 630 && scrollPosition < 1500) {
-        const svgs = lottieRef.current.querySelectorAll('path')
-        console.log(svgs)
-        svgs.forEach((svg) => (svg.style.fill = 'black'))
+        lottieRef.current.classList.add('black')
       } else {
-        const svgs = lottieRef.current.querySelectorAll('path')
-        console.log(svgs)
-        svgs.forEach((svg) => (svg.style.fill = 'white'))
+        lottieRef.current.classList.remove('black')
       }
     }
 
