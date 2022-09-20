@@ -35,14 +35,16 @@ const Contact = () => {
   const submit = () => {}
 
   return (
-    <div style={{ height: '100%' }}>
+    <div>
       <Container
         bg='#1A1D22'
         minHeight='1000px'
         pt={'110px'}
-        pb={'100px'}
+        pb={'300px'}
         display='block'
-        height={{ _: 'auto', md: '100%' }}
+        id='contact'
+        data-scroll
+        data-scroll-sticky
       >
         <Flex>
           <Flex width={{ md: '50%' }}>

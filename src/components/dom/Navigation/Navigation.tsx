@@ -17,6 +17,7 @@ import {
 } from '@/helpers/hooks'
 import AppearingEffect from '../AppearingEffect'
 import animationLogo from 'public/marplacodeanimation.json'
+import { useLocomotiveScroll } from 'react-locomotive-scroll'
 
 import { Shadow } from '@/components'
 
@@ -120,11 +121,14 @@ const Navigation = () => {
   const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
   const isMobile = useIsMobile()
-  const scrollPercentage = useScroll(scroll)
+  const scrollPercentage = useScroll()
   const whiteSection = scrollPercentage >= 20.5 && scrollPercentage <= 41
   const lottieRef = useRef()
   useLogoAnimation({ lottieRef })
 
+  const a = useLocomotiveScroll()
+
+  console.log(scrollPercentage)
   const openHandler = () => {
     const navigationState = !open
     setOpen(navigationState)

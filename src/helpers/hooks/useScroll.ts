@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useScroll = (ref) => {
+const useScroll = (ref: any) => {
   const [scroll, setScroll] = useState(0)
   useEffect(() => {
     if (ref) {

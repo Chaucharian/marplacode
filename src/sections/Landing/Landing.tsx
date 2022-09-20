@@ -75,85 +75,95 @@ const Landing = () => {
   }
 
   return (
-    <Container shadow>
-      <Flex
-        flexDirection='column'
-        justifyContent={{ _: 'flex-end', md: 'center' }}
-        height={'100vh'}
-        position='relative'
-        zIndex={1}
+    <>
+      <Container
+        shadow
+        id='landing'
+        data-scroll
+        data-scroll-sticky
+        data-scroll-speed='3'
       >
-        <Flex>
-          <Flex flexDirection='column'>
-            <AppearingEffect
-              effect={show ? 'bottom' : 'top'}
-              animationProps={{ delay: 2000, minWidth: '400px' }}
-              show={show}
-            >
-              <TextTransitionEffect
-                texts={smookes}
-                height={110}
-                onChange={(index) => {
-                  console.log(scrollPercentage)
-                  scrollPercentage <= 20 &&
-                    useStore.setState({ letter: smookesMock[index].name[0] })
-                }}
-              ></TextTransitionEffect>
-              {/* <Text type={theme.fonts.h1}>{title}</Text> */}
-            </AppearingEffect>
-            <Flex height='48px' />
-            <AppearingEffect
-              animationProps={{
-                delay: 2400,
-                onResolve: () => setButtonEffect(true),
-              }}
-              // containerProps={{
-              //   style: { overflow: buttonEffect ? 'visible' : 'hidden' },
-              // }}
-              effect={show ? 'top' : 'top'}
-              show={show}
-            >
-              <Flex p={{ md: 10 }}>
-                <Button
-                  fontSize='20px'
-                  onClick={() => {
-                    scrollTo(3.5)
-                  }}
-                >
-                  Start project
-                </Button>
-              </Flex>
-            </AppearingEffect>
-            <Flex height='48px' />
-          </Flex>
-
-          <IndicatorContainer>
-            <Flex
-              justifyContent={{ _: 'flex-end', md: 'center' }}
-              pr={{ _: theme.spacing.small }}
-              pb={{ _: '20%', md: '10%' }}
-            >
+        <Flex
+          flexDirection='column'
+          justifyContent={{ _: 'flex-end', md: 'center' }}
+          height={'100vh'}
+          position='relative'
+          zIndex={1}
+        >
+          <Flex>
+            <Flex flexDirection='column' data-scroll data-scroll-speed='3'>
               <AppearingEffect
-                animationProps={{
-                  from: { opacity: 0, transform: `translate(0,-100%)` },
-                  to: { opacity: 1, transform: `translate(0,0%)` },
-                  delay: show ? 2600 : 600,
-                  onResolve: () => domReady(),
-                }}
-                effect={show ? 'top' : 'bottom'}
+                effect={show ? 'bottom' : 'top'}
+                animationProps={{ delay: 2000, minWidth: '400px' }}
                 show={show}
               >
-                <ArrowButton
-                  height={55}
-                  width={55}
-                  onClick={() => scrollTo(1)}
-                />
+                <TextTransitionEffect
+                  texts={smookes}
+                  height={110}
+                  onChange={(index) => {
+                    console.log(scrollPercentage)
+                    scrollPercentage <= 20 &&
+                      useStore.setState({ letter: smookesMock[index].name[0] })
+                  }}
+                ></TextTransitionEffect>
+                {/* <Text type={theme.fonts.h1}>{title}</Text> */}
               </AppearingEffect>
+              <Flex height='48px' />
+              <AppearingEffect
+                animationProps={{
+                  delay: 2400,
+                  onResolve: () => setButtonEffect(true),
+                }}
+                containerProps={{
+                  'data-scroll': 'true',
+                }}
+                effect={show ? 'top' : 'top'}
+                show={show}
+              >
+                <Flex p={{ md: 10 }}>
+                  <Button
+                    fontSize='20px'
+                    onClick={() => {
+                      scrollTo(3.5)
+                    }}
+                  >
+                    Start project
+                  </Button>
+                </Flex>
+              </AppearingEffect>
+              <Flex height='48px' />
             </Flex>
-          </IndicatorContainer>
+
+            <IndicatorContainer>
+              <Flex
+                justifyContent={{ _: 'flex-end', md: 'center' }}
+                pr={{ _: theme.spacing.small }}
+                pb={{ _: '20%', md: '10%' }}
+              >
+                <AppearingEffect
+                  animationProps={{
+                    from: { opacity: 0, transform: `translate(0,-100%)` },
+                    to: { opacity: 1, transform: `translate(0,0%)` },
+                    delay: show ? 2600 : 600,
+                    onResolve: () => domReady(),
+                  }}
+                  effect={show ? 'top' : 'bottom'}
+                  show={show}
+                >
+                  <ArrowButton
+                    height={55}
+                    width={55}
+                    onClick={() => scrollTo(1)}
+                    data-scroll-speed='3'
+                    data-scroll-delay='0.5'
+                  />
+                </AppearingEffect>
+              </Flex>
+            </IndicatorContainer>
+          </Flex>
         </Flex>
-      </Flex>
-    </Container>
+      </Container>
+    </>
   )
 }
 export default Landing

@@ -11,7 +11,21 @@ import { useIsMobile } from '@/helpers/hooks'
 import { useWindowSize } from 'usehooks-ts'
 import styled from 'styled-components'
 import ColorLoader from '@/components/dom/ColorLoader'
+import {
+  LocomotiveScrollProvider,
+  LocomotiveScrollOptions,
+} from 'react-locomotive-scroll'
+import 'locomotive-scroll/dist/locomotive-scroll.css'
 
+// const LocomotiveScrollProvider = dynamic(
+//   async () => {
+//     const { LocomotiveScrollProvider } = await import('react-locomotive-scroll')
+//     return LocomotiveScrollProvider
+//   },
+//   {
+//     ssr: false,
+//   }
+// )
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
@@ -38,6 +52,7 @@ const Page = (props) => {
   const scroll = useRef(null)
   const isMobile = useIsMobile()
   const videoUrl = useStore((state) => state.videoUrl)
+  const containerRef = useRef(null)
 
   useEffect(() => {
     // if (scroll.current?.container) {
@@ -47,10 +62,10 @@ const Page = (props) => {
     //     scrollTo: scroll.current.scrollTo,
     //   })
     // }
-    if (scroll.current) {
+    if (containerRef.current) {
       useStore.setState({
         video,
-        scroll: scroll.current,
+        scroll: containerRef.current,
         scrollTo: (page) =>
           window.scrollTo({
             top: page * 1000,
@@ -58,24 +73,41 @@ const Page = (props) => {
           }),
       })
     }
-  }, [scroll])
+  }, [containerRef])
 
   return (
-    <PageContainer ref={scroll}>
+    <>
       <ColorLoader isLoading={false} />
-      <Navigation />
-      <Section>
-        <Landing />
-      </Section>
-      <Section>
-        <Whyus />
-      </Section>
-      <Section>
-        <Works />
-      </Section>
-      <Section>
-        <Contact />
-      </Section>
+      <LocomotiveScrollProvider
+        options={{
+          smooth: true,
+          tablet: {
+            smooth: true,
+          },
+          smartphone: {
+            smooth: true,
+          },
+          // ... all available Locomotive Scroll instance options
+        }}
+        containerRef={containerRef}
+      >
+        <main data-scroll-container ref={containerRef}>
+          <Navigation />
+          <Section data-scroll-section>
+            <Landing />
+          </Section>
+          <Section data-scroll-section>
+            <Whyus />
+          </Section>
+          <Section data-scroll-section>
+            <Works />
+          </Section>
+          <Section data-scroll-section style={{ background: 'white' }}>
+            <Contact />
+          </Section>
+        </main>
+      </LocomotiveScrollProvider>
+
       <video
         loop
         autoPlay
@@ -86,7 +118,7 @@ const Page = (props) => {
         ref={video}
         src={videoUrl}
       ></video>
-    </PageContainer>
+    </>
   )
 }
 

@@ -7,6 +7,7 @@ import { Props as CanvasProps } from '@react-three/fiber/dist/declarations/src/w
 import { GlobalCSS, theme } from '@/styles'
 import { ThemeProvider } from 'styled-components'
 import Head from 'next/head'
+import { styledConsoleMessage } from '@/helpers/console'
 
 const defaultTitle = 'Marplacode - beauty experiences'
 const url = 'https://marplacode.com'
@@ -123,6 +124,7 @@ const App: FC<AppProps> = ({
 
   useEffect(() => {
     useStore.setState({ router })
+    styledConsoleMessage('Hi! 👋  We enjoy crafting 🔨 things on Marplacode;')
   }, [router])
 
   return (

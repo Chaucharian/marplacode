@@ -25,6 +25,7 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
   transitionDelay = 4000,
   texts,
   onChange = () => {},
+  ...props
 }) => {
   const xEffect =
     effect === 'left' ? '-100%' : effect === 'right' ? '100%' : '0%'
@@ -93,6 +94,7 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
         height: `${height}px`,
         width: '100%',
       }}
+      {...props}
     >
       <animated.div style={{ ...animation, position: 'absolute' }}>
         {texts.map((text, index) => (

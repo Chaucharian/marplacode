@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, Spacer, Text, Link } from '@/components/dom'
+import { Flex, Spacer, Text, Link, TextSplitterScroll } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
 import React from 'react'
@@ -37,25 +37,35 @@ const Footer = () => {
       pt={theme.spacing.medium}
       pb={theme.spacing.medium}
       position='relative'
+      data-scroll
+      data-scroll-delay='.5'
+      data-scroll-speed='2'
+      data-scroll-target='#contact'
     >
       <Flex flexDirection='column' alignItems='center'>
-        <Text type={theme.fonts.span} fontSize='30px' color='#000'>
-          Have an idea?
-        </Text>
+        {/* <TextSplitterScroll text='Have an idea?' /> */}
+        <div data-scroll data-scroll-speed='2'>
+          <Text type={theme.fonts.span} fontSize='30px' color='#000'>
+            Have an idea?
+          </Text>
+        </div>
         <Spacer vertical={theme.spacing.tiny} />
 
-        <Link
-          show={show}
-          href='mailto:hello@marplacode.com'
-          color1='grey'
-          color2='black'
-        >
-          <Text type={theme.fonts.span} color='#000' fontSize={'16px'}>
-            hello@marplacode.com
-          </Text>
-        </Link>
+        <div data-scroll data-scroll-speed='2' data-scroll-delay='0.5'>
+          <Link
+            show={show}
+            href='mailto:hello@marplacode.com'
+            color1='grey'
+            color2='black'
+          >
+            <Text type={theme.fonts.span} color='#000' fontSize={'16px'}>
+              hello@marplacode.com
+            </Text>
+          </Link>
+        </div>
         <Spacer vertical={theme.spacing.large} />
-        <MadeWithLove>
+
+        <MadeWithLove data-scroll data-scroll-speed='3' data-scroll-delay='0.8'>
           <AiFillHeartIcon />
           <Link show={show} color1='grey' color2='black' onClick={marplaClick}>
             <Text type={theme.fonts.span} color='#000' fontSize={'16px'}>

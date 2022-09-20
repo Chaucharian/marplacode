@@ -7,7 +7,7 @@ const useStore = create((set): any => {
     router: null,
     dom: null,
     video: null,
-    videoUrl: '/videos/marplacode.mp4',
+    videoUrl: '/videos/liquid.mp4',
     domReady: false,
     scroll: null,
     scrollTo: () => {},

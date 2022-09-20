@@ -48,7 +48,12 @@ const WhyUs = () => {
   // const animate = scroll >= 0.15
 
   return (
-    <Container bg='white'>
+    <Container
+      bg='white'
+      data-scroll
+      data-scroll-speed='2'
+      data-scroll-target='#landing'
+    >
       <Flex
         flexDirection={{ _: 'column', md: 'row' }}
         // justifyContent='space-between'
