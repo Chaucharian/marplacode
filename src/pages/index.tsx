@@ -52,7 +52,7 @@ const Page = (props) => {
             smooth: true,
           },
           smartphone: {
-            smooth: true,
+            smooth: false,
           },
         }}
         // watch={[path]}

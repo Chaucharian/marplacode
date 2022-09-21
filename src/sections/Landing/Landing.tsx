@@ -12,7 +12,6 @@ import { theme } from '@/styles'
 import useStore from '@/helpers/store'
 import { device, fonts } from '@/styles/theme'
 import AppearingEffect from '@/components/dom/AppearingEffect'
-import { useChangeDescription } from './hooks/useChangeDescription'
 import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
 import { SECTIONS } from '@/pages'
@@ -27,12 +26,6 @@ const IndicatorContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-`
-
-const Content = styled.div`
-  @media ${device.desktop} {
-    min-width: ${theme.sizes.desktop.contentWidth};
-  }
 `
 
 const smookesMock = [
@@ -53,9 +46,7 @@ const Landing = () => {
       })
     }
   }, [])
-  const { progress, locomotiveScroll } = useScroll({
-    onScroll,
-  })
+  const { progress, locomotiveScroll } = useScroll({})
   const [buttonEffect, setButtonEffect] = useState(false)
 
   const smookes = smookesMock.map(({ name, description }) => (
