@@ -8,6 +8,7 @@ import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
 import GlowText from '@/components/dom/GlowText'
 import { Container } from '../components'
+import { SECTIONS } from '@/pages'
 
 const servicesData = [
   // {
@@ -53,6 +54,7 @@ const WhyUs = () => {
       data-scroll
       data-scroll-speed='2'
       data-scroll-target='#landing'
+      id={SECTIONS.whyus}
     >
       <Flex
         flexDirection={{ _: 'column', md: 'row' }}

@@ -5,75 +5,42 @@ import { canvasProps } from '@/scenes/MarplaJourney'
 import Navigation from '@/components/dom/Navigation/Navigation'
 import { Contact, Landing, Works } from '@/sections'
 import Whyus from '@/sections/Whyus/Whyus'
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
-import Footer from '@/sections/Footer/Footer'
-import { useIsMobile } from '@/helpers/hooks'
-import { useWindowSize } from 'usehooks-ts'
 import styled from 'styled-components'
 import ColorLoader from '@/components/dom/ColorLoader'
-import {
-  LocomotiveScrollProvider,
-  LocomotiveScrollOptions,
-} from 'react-locomotive-scroll'
+import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import 'locomotive-scroll/dist/locomotive-scroll.css'
+import { useRouter } from 'next/router'
 
-// const LocomotiveScrollProvider = dynamic(
-//   async () => {
-//     const { LocomotiveScrollProvider } = await import('react-locomotive-scroll')
-//     return LocomotiveScrollProvider
-//   },
-//   {
-//     ssr: false,
-//   }
-// )
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
 })
-
-// const Wrapper = styled.main`
-//   ${({ height = '100vh' }) => `
-//     overflow: hidden;
-//     display:block;
-// `}
-// `
 
 const Section = styled.section`
   ${({ height = '100vh' }) => `
 `}
 `
-const PageContainer = styled.div`
-  ${({ height = '100vh' }) => `
-`}
-`
 
-//min-height: calc(100vh - 4.1666666667vw);
+export enum SECTIONS {
+  landing = 'landing',
+  whyus = 'whyus',
+  works = 'works',
+  contact = 'contact',
+}
+
 const Page = (props) => {
   const video = useRef(null)
-  const scroll = useRef(null)
-  const isMobile = useIsMobile()
   const videoUrl = useStore((state) => state.videoUrl)
   const containerRef = useRef(null)
+  // const { pathname } = useRouter()
+  // const path = pathname.split('?')[0]
 
   useEffect(() => {
-    // if (scroll.current?.container) {
-    //   useStore.setState({
-    //     video,
-    //     scroll: scroll.current.container.current,
-    //     scrollTo: scroll.current.scrollTo,
-    //   })
-    // }
-    if (containerRef.current) {
+    if (video.current) {
       useStore.setState({
         video,
-        scroll: containerRef.current,
-        scrollTo: (page) =>
-          window.scrollTo({
-            top: page * 1000,
-            behavior: 'smooth',
-          }),
       })
     }
-  }, [containerRef])
+  }, [video])
 
   return (
     <>
@@ -87,9 +54,13 @@ const Page = (props) => {
           smartphone: {
             smooth: true,
           },
-          // ... all available Locomotive Scroll instance options
         }}
+        // watch={[path]}
+        // location={path}
         containerRef={containerRef}
+        // onLocationChange={(scroll) => {
+        //   scroll.scrollTo(0, { duration: 0, disableLerp: true })
+        // }}
       >
         <main data-scroll-container ref={containerRef}>
           <Navigation />

@@ -19,6 +19,7 @@ import { title } from 'process'
 import { Container } from '../components'
 import { useWindowSize } from 'usehooks-ts'
 import { useIsMobile, useScroll } from '@/helpers/hooks'
+import { SECTIONS } from '@/pages'
 
 const list = [
   {
@@ -116,6 +117,7 @@ const Works = () => {
       shadow
       blur={0}
       position='relative'
+      id={SECTIONS.works}
     >
       <Flex
         position='absolute'

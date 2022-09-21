@@ -6,31 +6,12 @@ import Line from '@/components/dom/Line'
 import { FormTextField } from '@/components/dom/Form'
 import { useForm } from 'react-hook-form'
 import { Container } from '../components'
-import { useIsMobile, useScroll } from '@/helpers/hooks'
-import Grid from '@/components/dom/Grid'
 import { FormCheckbox, FormRadio } from '@/components/dom/Form'
 import Footer from '../Footer/Footer'
-
-// if ('virtualKeyboard' in navigator) {
-//   navigator.virtualKeyboard.overlaysContent = true
-//   navigator.virtualKeyboard?.addEventListener('geometrychange', (event) => {
-//     const { x, y, width, height } = event.target.boundingRect
-//     console.log('Virtual keyboard geometry changed:', x, y, width, height)
-//   })
-// }
+import { SECTIONS } from '@/pages'
 
 const Contact = () => {
   const { control, handleSubmit, formState, getValues } = useForm({})
-
-  // useEffect(() => {
-  //   if (focus) {
-  //     console.log({ scroll })
-  //     scroll.style.bottom = 270
-  //     // scroll.scrollTop = scroll.scrollHeight - scroll.clientHeight
-  //   } else {
-  //     scroll.style.bottom = 0
-  //   }
-  // }, [focus])
 
   const submit = () => {}
 
@@ -42,7 +23,7 @@ const Contact = () => {
         pt={'110px'}
         pb={'300px'}
         display='block'
-        id='contact'
+        id={SECTIONS.contact}
         data-scroll
         data-scroll-sticky
       >

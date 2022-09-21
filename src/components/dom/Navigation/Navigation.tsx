@@ -20,6 +20,7 @@ import animationLogo from 'public/marplacodeanimation.json'
 import { useLocomotiveScroll } from 'react-locomotive-scroll'
 
 import { Shadow } from '@/components'
+import { SECTIONS } from '@/pages'
 
 const NavigationContainer = styled.header`
   ${({ show, open }) => `
@@ -117,18 +118,16 @@ const Lottie = styled.div`
 
 const Navigation = () => {
   const [open, setOpen] = useState(false)
-  const scroll = useStore((state) => state.scroll)
   const scrollTo = useStore((state) => state.scrollTo)
   const domReady = useStore((state) => state.domReady)
   const isMobile = useIsMobile()
-  const scrollPercentage = useScroll()
-  const whiteSection = scrollPercentage >= 20.5 && scrollPercentage <= 41
   const lottieRef = useRef()
-  useLogoAnimation({ lottieRef })
+  const animate = useLogoAnimation({ lottieRef })
+  const { locomotiveScroll, progress } = useScroll({
+    onScroll: animate,
+  })
+  const whiteSection = progress >= 12 && progress <= 31
 
-  const a = useLocomotiveScroll()
-
-  console.log(scrollPercentage)
   const openHandler = () => {
     const navigationState = !open
     setOpen(navigationState)
@@ -137,7 +136,7 @@ const Navigation = () => {
 
   const onMenuClick = (page) => {
     openHandler()
-    scrollTo(page > 0 ? page + 0.3 : page)
+    locomotiveScroll.scrollTo(`#${Object.keys(SECTIONS)[page]}`)
   }
 
   return (

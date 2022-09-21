@@ -7,7 +7,7 @@ import {
   TextTransitionEffect,
 } from '@/components'
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { theme } from '@/styles'
 import useStore from '@/helpers/store'
 import { device, fonts } from '@/styles/theme'
@@ -15,6 +15,7 @@ import AppearingEffect from '@/components/dom/AppearingEffect'
 import { useChangeDescription } from './hooks/useChangeDescription'
 import { Container } from '../components'
 import { useScroll } from '@/helpers/hooks'
+import { SECTIONS } from '@/pages'
 
 const IndicatorContainer = styled.div`
   width: 100%;
@@ -44,17 +45,19 @@ const smookesMock = [
 ]
 
 const Landing = () => {
-  const scroll = useStore((state) => state.scroll)
-  const scrollPercentage = useScroll(scroll)
-  const scrollTo = useStore((state) => state.scrollTo)
+  const onScroll = useCallback((progress) => {
+    // set intro video on landing
+    if (progress < 12) {
+      useStore.setState({
+        videoUrl: '/videos/liquid.mp4',
+      })
+    }
+  }, [])
+  const { progress, locomotiveScroll } = useScroll({
+    onScroll,
+  })
   const [buttonEffect, setButtonEffect] = useState(false)
-  // const { title, description } = useChangeDescription({
-  //   time: 4000,
-  //   options,
-  //   onChange: ({ title }) => {
-  //     scrollPercentage <= 20 && useStore.setState({ letter: title[0] })
-  //   },
-  // })
+
   const smookes = smookesMock.map(({ name, description }) => (
     <>
       <Text fontFamily='LibreFranklin' fontWeight='lighter' fontSize='42px'>
@@ -66,8 +69,6 @@ const Landing = () => {
     </>
   ))
 
-  const video = useStore((state) => state?.video)
-  const navigationState = useStore((state) => state?.navigationState)
   const show = true
 
   const domReady = () => {
@@ -78,7 +79,7 @@ const Landing = () => {
     <>
       <Container
         shadow
-        id='landing'
+        id={SECTIONS.landing}
         data-scroll
         data-scroll-sticky
         data-scroll-speed='3'
@@ -102,8 +103,7 @@ const Landing = () => {
                   texts={smookes}
                   height={110}
                   onChange={(index) => {
-                    console.log(scrollPercentage)
-                    scrollPercentage <= 20 &&
+                    progress <= 15 &&
                       useStore.setState({ letter: smookesMock[index].name[0] })
                   }}
                 ></TextTransitionEffect>
@@ -125,7 +125,7 @@ const Landing = () => {
                   <Button
                     fontSize='20px'
                     onClick={() => {
-                      scrollTo(3.5)
+                      locomotiveScroll?.scrollTo(`#${SECTIONS.contact}`)
                     }}
                   >
                     Start project
@@ -154,7 +154,9 @@ const Landing = () => {
                     <ArrowButton
                       height={55}
                       width={55}
-                      onClick={() => scrollTo(1)}
+                      onClick={() =>
+                        locomotiveScroll?.scrollTo(`#${SECTIONS.whyus}`)
+                      }
                       data-scroll-speed='3'
                       data-scroll-delay='0.5'
                     />
