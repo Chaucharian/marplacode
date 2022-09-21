@@ -1,7 +1,7 @@
 import React, { useRef, forwardRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { distance } from '@/helpers/math'
-import { useHover, useIsMobile } from '@/helpers/hooks'
+import { useHover, useIsMobile, useMagneticEffect } from '@/helpers/hooks'
 import { theme } from '@/styles'
 
 const Text = styled.span`
@@ -100,6 +100,16 @@ const Link = styled.a`
         transform: translate3d(-50%, -50%, 0);
       }
     }
+
+     &:hover {
+
+    ${Text} {
+   
+      &::after {
+        color: ${selectedTextColor};
+      }
+    }
+  }
   `
       : ``
   }
@@ -143,9 +153,7 @@ const Button = forwardRef(
   ) => {
     const textRef: any = useRef()
     const buttonRef: any = useRef()
-    // const [buttonRef, isHover] = useHover()
     const backdropRef: any = useRef()
-    const isDesktop = !useIsMobile()
     const checkboxMode = typeof selected === 'boolean'
 
     const handleMouseEnter = () => {
@@ -157,56 +165,12 @@ const Button = forwardRef(
       backdropRef.current.style.transform = `translate3d(0, -100%, 0)`
     }
 
-    const magneticEffect = ({ containerRef, textRef, mouseX, mouseY }) => {
-      let x = 0
-      let y = 0
-      // New values for the translations
-      const rect = containerRef.getBoundingClientRect()
-      const distanceToTrigger = rect.width * 0.6
-      const distanceMouseButton = distance(
-        mouseX + window.scrollX,
-        mouseY + window.scrollY,
-        rect.left + rect.width / 2,
-        rect.top + rect.height / 2
-      )
-      console.log(window.scrollY)
-      // Handle magnetic effect
-      if (distanceMouseButton < distanceToTrigger) {
-        // Translate button position on hover
-        x = (mouseX + window.scrollX - (rect.left + rect.width / 2)) * 0.2
-        y = (mouseY + window.scrollY - (rect.top + rect.height / 2)) * 0.2
-        containerRef.style.transform = `translate3d(${x}px, ${y}px, 0)`
-        textRef.current.style.transform = `translate3d(${x / 4}px, ${
-          y / 4
-        }px, 0)`
-      } else {
-        // Restore initial position
-        containerRef.style.transform = `translate3d(0, 0, 0)`
-        textRef.current.style.transform = `translate3d(0, 0, 0)`
-      }
-    }
-
-    useEffect(() => {
-      const node = buttonRef.current
-
-      const updateMousePosition = ({ clientX: mouseX, clientY: mouseY }) => {
-        magneticEffect({ containerRef: node, textRef, mouseX, mouseY })
-      }
-
-      if (node) {
-        !checkboxMode && node?.addEventListener('mouseenter', handleMouseEnter)
-        !checkboxMode && node?.addEventListener('mouseleave', handleMouseLeave)
-        // magnetic effect only in Desktop
-        isDesktop && node?.addEventListener('mousemove', updateMousePosition)
-
-        return () => {
-          isDesktop &&
-            node?.removeEventListener('mousemove', updateMousePosition)
-          node?.removeEventListener('mouseenter', handleMouseEnter)
-          node?.removeEventListener('mouseleave', handleMouseLeave)
-        }
-      }
-    }, [buttonRef, textRef, isDesktop])
+    useHover({
+      ref: buttonRef,
+      onMouseOver: (event) => !checkboxMode && handleMouseEnter(event),
+      onMouseOut: (event) => !checkboxMode && handleMouseLeave(event),
+    })
+    useMagneticEffect({ containerRef: buttonRef, contentRef: textRef })
 
     return (
       <Link
@@ -215,7 +179,6 @@ const Button = forwardRef(
         primaryColor={primaryColor}
         secondaryColor={secondaryColor}
         selectedTextColor={selectedTextColor}
-        // isHover={isHover}
         isActive={selected}
         fontSize={fontSize}
         checkboxMode={checkboxMode}

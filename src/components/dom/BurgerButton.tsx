@@ -1,3 +1,4 @@
+import { useMagneticEffect } from '@/helpers/hooks'
 import React, { forwardRef, useRef, useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components'
@@ -49,6 +50,8 @@ const Burger = forwardRef(
     }: any,
     ref
   ) => {
+    const svgRef = useRef()
+    useMagneticEffect({ containerRef: svgRef })
     const animation = useAnimation({ play: show, animationProps })
     const second = useSpring({
       transform: open
@@ -68,6 +71,7 @@ const Burger = forwardRef(
           viewBox='0 0 44 44'
           fill={color}
           xmlns='http://www.w3.org/2000/svg'
+          ref={svgRef}
         >
           <animated.rect
             height='4'

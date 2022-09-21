@@ -88,6 +88,7 @@ const Landing = () => {
           justifyContent={{ _: 'flex-end', md: 'center' }}
           height={'100vh'}
           position='relative'
+          pb={{ _: '100px' }}
           zIndex={1}
         >
           <Flex>
@@ -131,7 +132,6 @@ const Landing = () => {
                   </Button>
                 </Flex>
               </AppearingEffect>
-              <Flex height='48px' />
             </Flex>
 
             <IndicatorContainer>
@@ -150,13 +150,15 @@ const Landing = () => {
                   effect={show ? 'top' : 'bottom'}
                   show={show}
                 >
-                  <ArrowButton
-                    height={55}
-                    width={55}
-                    onClick={() => scrollTo(1)}
-                    data-scroll-speed='3'
-                    data-scroll-delay='0.5'
-                  />
+                  <Flex p={{ md: '20px' }}>
+                    <ArrowButton
+                      height={55}
+                      width={55}
+                      onClick={() => scrollTo(1)}
+                      data-scroll-speed='3'
+                      data-scroll-delay='0.5'
+                    />
+                  </Flex>
                 </AppearingEffect>
               </Flex>
             </IndicatorContainer>

@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { FiChevronDown } from 'react-icons/fi'
 import { useSpring } from '@react-spring/core'
 import { animated } from '@react-spring/web'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
+import { useMagneticEffect } from '@/helpers/hooks'
 
 const Container = styled(animated.div)`
   ${({ rotation = 0, width = 72, height = 72 }) => `
@@ -16,8 +17,9 @@ const Container = styled(animated.div)`
   display: flex;
   justify-content: center;
   mix-blend-mode: difference;
+  justify-content: center;
+  align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  transform: rotate(${rotation}deg);
 `}
 `
 
@@ -26,11 +28,12 @@ const Arrow = styled(animated(FiChevronDown))``
 const ArrowButton: FC<any> = ({
   arrowAnimationProps,
   circleAnimationProps,
+  rotation,
   ...props
 }) => {
   const arrowAnimation = useSpring({
-    from: { position: 'absolute', top: 0 },
-    to: { position: 'absolute', top: 20 },
+    from: { transform: `translateX(0) rotate(${rotation}deg)` },
+    to: { transform: `translateX(90%) rotate(${rotation}deg)` },
     loop: true,
     delay: 600,
     config: {
@@ -42,8 +45,13 @@ const ArrowButton: FC<any> = ({
   const circleAnimation = useSpring({
     from: {
       border: '1px solid rgba(255, 255, 255, 0.25)',
+      transform: `rotate(${rotation}deg)`,
     },
-    to: { border: '1px solid rgba(255, 255, 255, 0.99)' },
+    to: {
+      border: '1px solid rgba(255, 255, 255, 0.99)',
+      transform: `rotate(${rotation}deg)`,
+    },
+
     loop: true,
     delay: 600,
     config: {
@@ -52,9 +60,11 @@ const ArrowButton: FC<any> = ({
     },
     ...circleAnimationProps,
   })
+  const ref = useRef()
+  useMagneticEffect({ containerRef: ref })
 
   return (
-    <Container style={circleAnimation} {...props}>
+    <Container style={circleAnimation} {...props} ref={ref}>
       <Arrow color='white' size={15} style={arrowAnimation} />
     </Container>
   )
