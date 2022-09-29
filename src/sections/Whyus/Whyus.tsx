@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Flex, Spacer, Text } from '@/components/dom'
 import theme, { device, fonts } from '@/styles/theme'
 import useStore from '@/helpers/store'
-import React from 'react'
+import React, { useState } from 'react'
 import Line from '@/components/dom/Line'
 import { lineGrow } from '@/helpers/animations'
 import { ServicesList } from './components'
@@ -47,6 +47,7 @@ const WhyUs = () => {
   const scroll = useStore((state) => state.scroll)
   const show = useStore((state) => state.domReady)
   // const animate = scroll >= 0.15
+  const [listOpen, setListOpen] = useState(false)
 
   return (
     <Container
@@ -90,7 +91,11 @@ const WhyUs = () => {
           flexDirection='column'
           justifyContent='center'
         >
-          <ServicesList play={true} services={servicesData} />
+          <ServicesList
+            play={true}
+            services={servicesData}
+            onChange={() => setListOpen(!listOpen)}
+          />
         </Flex>
       </Flex>
     </Container>

@@ -33,14 +33,14 @@ const list = [
     name: 'beton',
     videoUrl: '/videos/marplacode.mp4',
     description: 'web portfolio for contruction company',
-    url: 'beton.marplacode.com',
+    url: 'https://beton.marplacode.com',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
     videoUrl: '/videos/firpo.mp4',
     description: 'drawing portfolio web page using custom design system',
-    url: 'firpodrawings.marplacode.com',
+    url: 'https://firpodrawings.marplacode.com',
     isSelected: false,
   },
   {
@@ -48,7 +48,7 @@ const list = [
     videoUrl: '/videos/cuberto.mp4',
     description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
     in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
-    url: 'audiojourney.marplacode.com',
+    url: 'https://audiojourney.marplacode.com',
     isSelected: false,
   },
   {
