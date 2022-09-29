@@ -22,23 +22,25 @@ import { useIsMobile, useScroll } from '@/helpers/hooks'
 import { SECTIONS } from '@/pages'
 
 const list = [
+  // {
+  //   name: 'turnate',
+  //   videoUrl: '',
+  //   description:
+  //     'booking platform aimed to improve daily customer experience making the whole process fast and easy',
+  //   isSelected: false,
+  // },
   {
-    name: 'turnate',
-    videoUrl: '',
-    description:
-      'booking platform aimed to improve daily customer experience making the whole process fast and easy',
-    isSelected: false,
-  },
-  {
-    name: 'abrirchat',
+    name: 'beton',
     videoUrl: '/videos/marplacode.mp4',
-    description: 'mobile application to open whatsapp conversations fast',
+    description: 'web portfolio for contruction company',
+    url: 'beton.marplacode.com',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
     videoUrl: '/videos/firpo.mp4',
     description: 'drawing portfolio web page using custom design system',
+    url: 'firpodrawings.marplacode.com',
     isSelected: false,
   },
   {
@@ -46,6 +48,7 @@ const list = [
     videoUrl: '/videos/cuberto.mp4',
     description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
     in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
+    url: 'audiojourney.marplacode.com',
     isSelected: false,
   },
   {
@@ -78,7 +81,7 @@ const Works = () => {
           fontSize={'16px'}
           transition='all .5s cubic-bezier(0.45, 0.05, 0.55, 0.95)'
         >
-          Ver sitio
+          View more
         </Text>
       </Link>
     </>
