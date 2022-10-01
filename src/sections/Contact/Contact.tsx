@@ -168,7 +168,7 @@ const Contact = () => {
             </Flex>
             <Spacer vertical={theme.spacing.medium} />
           </Flex>
-          <Flex width='50%' height='100%'>
+          <Flex width='50%' height='100%' display={{ _: 'none', md: 'block' }}>
             <Flex
               width='100%'
               height='100%'
