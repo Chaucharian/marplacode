@@ -64,18 +64,6 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
           ? texts.length - 1
           : internalPosition + 1
 
-      const newPosition =
-        newIndex === null
-          ? texts.length * height
-          : newIndex === 0
-          ? 0
-          : -(newIndex * height)
-
-      start({
-        transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
-        ...animationProps,
-      })
-      onChange(newIndex)
       const timeoutId = setInterval(
         () => setInternalPosition(newIndex),
         transitionDelay
@@ -83,6 +71,22 @@ const TextTransitionEffect: FC<AppearingEffectProps> = ({
       return () => clearInterval(timeoutId)
     }
   }, [position, internalPosition])
+
+  useEffect(() => {
+    // animate auto mode
+    const newPosition =
+      internalPosition === null
+        ? texts.length * height
+        : internalPosition === 0
+        ? 0
+        : -(internalPosition * height)
+
+    start({
+      transform: `translate(0px, ${newPosition}px)  rotate(0deg)`,
+      ...animationProps,
+    })
+    onChange(internalPosition)
+  }, [internalPosition])
 
   return (
     <animated.div

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import useStore from '@/helpers/store'
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useLayoutEffect } from 'react'
 import Dom from '@/components/layout/dom'
 import dynamic from 'next/dynamic'
 import { Props as CanvasProps } from '@react-three/fiber/dist/declarations/src/web/Canvas'
@@ -124,8 +124,11 @@ const App: FC<AppProps> = ({
 
   useEffect(() => {
     useStore.setState({ router })
-    styledConsoleMessage('Hi! 👋  We enjoy crafting 🔨 things on Marplacode;')
   }, [router])
+
+  useLayoutEffect(() => {
+    styledConsoleMessage('Hi! 👋  We enjoy crafting 🔨 things on Marplacode;')
+  }, [])
 
   return (
     <>

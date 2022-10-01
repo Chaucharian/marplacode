@@ -168,7 +168,69 @@ const Contact = () => {
             </Flex>
             <Spacer vertical={theme.spacing.medium} />
           </Flex>
-          {/* <Flex bg='white' width='50%' height='100%'></Flex> */}
+          <Flex width='50%' height='100%'>
+            <Flex
+              width='100%'
+              height='100%'
+              alignItems='center'
+              justifyContent='center'
+              alignContent='center'
+            >
+              <Flex position='relative'>
+                <Flex position='absolute' left='50%' top='50%'>
+                  <Text
+                    type={theme.fonts.h1}
+                    fontWeight='lighter'
+                    fontFamily={'Akira'}
+                    data-scroll
+                    data-scroll-speed='2'
+                    // data-scroll-delay='0.2'
+                  >
+                    M;
+                  </Text>
+                </Flex>
+                <Flex position='absolute' left='50%' top='50%'>
+                  <Text
+                    type={theme.fonts.h1}
+                    fontWeight='lighter'
+                    fontFamily={'Akira'}
+                    color='#bfbfbf'
+                    data-scroll
+                    data-scroll-speed='2'
+                    data-scroll-delay='0.04'
+                  >
+                    M;
+                  </Text>
+                </Flex>
+                <Flex position='absolute' left='50%' top='50%'>
+                  <Text
+                    type={theme.fonts.h1}
+                    fontWeight='lighter'
+                    fontFamily={'Akira'}
+                    color='#626262'
+                    data-scroll
+                    data-scroll-speed='2'
+                    data-scroll-delay='0.08'
+                  >
+                    M;
+                  </Text>
+                </Flex>
+                <Flex position='absolute' left='50%' top='50%'>
+                  <Text
+                    type={theme.fonts.h1}
+                    fontWeight='lighter'
+                    fontFamily={'Akira'}
+                    color='#646464'
+                    data-scroll
+                    data-scroll-speed='2'
+                    data-scroll-delay='0.09'
+                  >
+                    M;
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
         </Flex>
       </Container>
       <Footer />

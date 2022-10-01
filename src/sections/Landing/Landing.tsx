@@ -30,11 +30,11 @@ const IndicatorContainer = styled.div`
 
 const smookesMock = [
   {
-    name: 'Hand Crafted',
-    description: 'we aimed for handcrafted and polish products',
+    name: 'Digital Studio',
+    description: 'creating next gen web/mobile',
   },
-  { name: 'Detail Oriented', description: 'obsed with tiny pixels' },
-  { name: 'Making Experiences', description: 'uniques design pieces' },
+  { name: 'Experiences', description: 'that make your brand take flight' },
+  { name: 'Using latest', description: 'design & development techniques' },
 ]
 
 const Landing = () => {
@@ -93,12 +93,12 @@ const Landing = () => {
                 <TextTransitionEffect
                   texts={smookes}
                   height={110}
+                  transitionDelay={5000}
                   onChange={(index) => {
                     progress <= 15 &&
                       useStore.setState({ letter: smookesMock[index].name[0] })
                   }}
                 ></TextTransitionEffect>
-                {/* <Text type={theme.fonts.h1}>{title}</Text> */}
               </AppearingEffect>
               <Flex height='48px' />
               <AppearingEffect
