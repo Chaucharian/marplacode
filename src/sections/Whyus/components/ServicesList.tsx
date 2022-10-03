@@ -6,6 +6,7 @@ import {
   OpenButton,
   Button,
   Chip,
+  Box,
 } from '@/components/dom'
 import { theme } from '@/styles'
 import { lineGrow } from '@/helpers/animations'
@@ -78,7 +79,12 @@ const ServicesList = ({
           <Spacer vertical={theme.spacing.tiny} />
           <Line delay={500} play={play} />
           <Content open={open}>
-            <Flex p={theme.spacing.small} height='100%' flexWrap='wrap'>
+            <Flex
+              p={theme.spacing.small}
+              flexDirection='column'
+              height='100%'
+              justifyContent='space-between'
+            >
               <div>
                 <Text
                   fontSize='16px'
@@ -89,17 +95,16 @@ const ServicesList = ({
                   {description}
                 </Text>
                 {/* </AppearingEffect> */}
-                <Spacer vertical={theme.spacing.small} />
               </div>
-              {content.map((item, index) => (
-                <>
-                  <ItemContent open={open} delay={100 * index}>
-                    <Chip>{item}</Chip>
-                    <Spacer vertical={theme.spacing.small} />
-                  </ItemContent>
-                  <Spacer horizontal={theme.spacing.small} />
-                </>
-              ))}
+              <Box>
+                {content.map((item, index) => (
+                  <Box display='inline-block' p={theme.spacing.small}>
+                    <ItemContent open={open} delay={100 * index}>
+                      <Chip>{item}</Chip>
+                    </ItemContent>
+                  </Box>
+                ))}
+              </Box>
             </Flex>
           </Content>
           <Spacer vertical={theme.spacing.small} />

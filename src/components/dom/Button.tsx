@@ -28,7 +28,7 @@ const Text = styled.span`
 `}
 `
 
-const Link = styled.a`
+const Link = styled.button`
   ${({
     primaryColor,
     secondaryColor,

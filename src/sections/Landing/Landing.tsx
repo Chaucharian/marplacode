@@ -33,7 +33,7 @@ const smookesMock = [
     name: 'Digital Studio',
     description: 'creating next gen web/mobile',
   },
-  { name: 'Experiences', description: 'that make your brand take flight' },
+  { name: 'best-in-class', description: 'experiences and technologies' },
   { name: 'Using latest', description: 'design & development techniques' },
 ]
 

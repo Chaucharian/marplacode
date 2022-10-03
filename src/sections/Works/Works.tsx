@@ -31,21 +31,21 @@ const list = [
   // },
   {
     name: 'beton',
-    videoUrl: '/videos/marplacode.mp4',
+    videoUrl: '/videos/blue.mp4',
     description: 'web portfolio for contruction company',
     url: 'https://beton.marplacode.com',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
-    videoUrl: '/videos/firpo.mp4',
+    videoUrl: '/videos/wave2.mp4',
     description: 'drawing portfolio web page using custom design system',
     url: 'https://firpodrawings.marplacode.com',
     isSelected: false,
   },
   {
     name: 'audiojourney',
-    videoUrl: '/videos/cuberto.mp4',
+    videoUrl: '/videos/wave.mp4',
     description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
     in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
     url: 'https://audiojourney.marplacode.com',
@@ -53,7 +53,7 @@ const list = [
   },
   {
     name: 'clean-app',
-    videoUrl: '/videos/dreii.mp4',
+    videoUrl: '/videos/liquidd.mp4',
     url: 'https://www.behance.net/gallery/126504683/Cleanapp-UX-UI-Case-Study',
     description: `Design and development of Mobile/Web digital platform`,
     isSelected: false,

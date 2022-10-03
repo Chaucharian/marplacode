@@ -37,7 +37,7 @@ With that data in mind, we’re able to design a structurally, visually and tech
   {
     title: 'Consulting',
     description:
-      'diving into your business is what we best know about how to generate the best strategy for your optimal grow',
+      'Driven by innovation and human behavior, our web design agency is changing the way brands connect with audiences in a digital world. Discover why market leaders choose our enterprise solutions.',
     content: ['Creative strategy', 'MVP validation', 'Business strategy'],
     open: false,
   },
