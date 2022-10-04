@@ -20,25 +20,26 @@ const servicesData = [
     title: 'Product design',
     description: `Once we have an idea of your needs, a research and design process begins to gain deep knowledge about the business, users and world context.
 With that data in mind, we’re able to design a structurally, visually and technically better solution.`,
-    content: ['Research', 'Ideation', 'Prototyping'],
+    content: ['research', 'UI/UX', 'prototyping', 'ux copywriting'],
     open: false,
   },
   {
     title: 'Web/Mobile',
-    description: `Once your digital product is designed and validated, in example, a website, we move forward with the development process using the newest and most optimized technologies.`,
-    content: [
-      'Next gen SEO',
-      'Creative development',
-      'NextJS, Vercel',
-      'Cutting edge UI/UX',
-    ],
+    description: `Our development process is not only about producing a high quality product at the end but also about creating something which will make the user want to come back for more. 
+    Through our work we have found that a really good experience knows how to tell a story but an awesome one lets the user fully immerse themselves in it and experience it.`,
+    content: ['SEO', 'creative development', 'Nextjs, React/Native', 'Vercel'],
     open: false,
   },
   {
     title: 'Consulting',
     description:
-      'Driven by innovation and human behavior, our web design agency is changing the way brands connect with audiences in a digital world. Discover why market leaders choose our enterprise solutions.',
-    content: ['Creative strategy', 'MVP validation', 'Business strategy'],
+      'Driven by innovation and human behavior, our agency is changing the way brands connect with audiences in a digital world. Discover why market leaders choose our solutions.',
+    content: [
+      'creative strategy',
+      'digital strategy',
+      'MVP validation',
+      'brand identity',
+    ],
     open: false,
   },
 ]

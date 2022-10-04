@@ -32,22 +32,23 @@ const list = [
   {
     name: 'beton',
     videoUrl: '/videos/blue.mp4',
-    description: 'web portfolio for contruction company',
+    description: `Beton is an Argentinian construction firm making buildings possible since 1960s. Its mission is to provide the best value with quality and flexibility in an offer that meets the needs of their
+     clients, thats why we developed this creative landing experience showing the whole contruction process from beginning to end`,
     url: 'https://beton.marplacode.com',
     isSelected: false,
   },
   {
     name: 'firpodrawing',
     videoUrl: '/videos/wave2.mp4',
-    description: 'drawing portfolio web page using custom design system',
+    description: `Creative landing development aimed to showcase the artist's talen throug best-in-class design and motion animations`,
     url: 'https://firpodrawings.marplacode.com',
     isSelected: false,
   },
   {
     name: 'audiojourney',
     videoUrl: '/videos/wave.mp4',
-    description: `Here we explore the boundaries of web technologies (react/webGL/node)  creating an audio journey 
-    in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope`,
+    description: `Here we explore the boundaries of web technologies (react/webGL/node) creating an audio journey 
+    in wich the user is able to create a 3D sound enviroment and move throught it using mobile gyroscope, its a mobile only experience best suited for headphones, allowing to generate sounds and play with them`,
     url: 'https://audiojourney.marplacode.com',
     isSelected: false,
   },
@@ -55,7 +56,9 @@ const list = [
     name: 'clean-app',
     videoUrl: '/videos/liquidd.mp4',
     url: 'https://www.behance.net/gallery/126504683/Cleanapp-UX-UI-Case-Study',
-    description: `Design and development of Mobile/Web digital platform`,
+    description: `With clean-app we want to create a platform that reinterprets and therefore disrupts the whole laundry industry, Our goal is to create a friendly yet professional Mobile app for user
+     - Design & development
+    `,
     isSelected: false,
   },
 ]

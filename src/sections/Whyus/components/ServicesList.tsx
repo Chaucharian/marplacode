@@ -83,7 +83,7 @@ const ServicesList = ({
               p={theme.spacing.small}
               flexDirection='column'
               height='100%'
-              justifyContent='space-between'
+              // justifyContent='space-between'
             >
               <div>
                 <Text
@@ -96,7 +96,7 @@ const ServicesList = ({
                 </Text>
                 {/* </AppearingEffect> */}
               </div>
-              <Box>
+              <Box pt={theme.spacing.small}>
                 {content.map((item, index) => (
                   <Box display='inline-block' p={theme.spacing.small}>
                     <ItemContent open={open} delay={100 * index}>
