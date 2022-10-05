@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { FormCheckbox, FormRadio } from '@/components/dom/Form'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import { ref } from 'valtio'
 
 const Message = ({ show, message, error = true }) => (
   <Box
@@ -33,6 +34,7 @@ const Message = ({ show, message, error = true }) => (
 
 const ContactForm = () => {
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -47,9 +49,12 @@ const ContactForm = () => {
     },
   })
 
-  const submitForm: any = useMutation((payload) => {
-    return axios.post('/api/email/send', payload)
-  })
+  const submitForm: any = useMutation(
+    (payload) => {
+      return axios.post('/api/email/send', payload)
+    },
+    { onSuccess: () => reset() }
+  )
 
   const submit = (form) => {
     submitForm.mutate({
@@ -67,7 +72,11 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+      }}
+    >
       <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
         <Text type={theme.fonts.span}>Name*</Text>
         <FormTextField
