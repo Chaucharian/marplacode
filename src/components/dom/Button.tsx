@@ -28,7 +28,7 @@ const Text = styled.span`
 `}
 `
 
-const Link = styled.button`
+const StyledButton = styled.button`
   ${({
     primaryColor,
     secondaryColor,
@@ -173,7 +173,7 @@ const Button = forwardRef(
     useMagneticEffect({ containerRef: buttonRef, contentRef: textRef })
 
     return (
-      <Link
+      <StyledButton
         ref={buttonRef}
         href={href}
         primaryColor={primaryColor}
@@ -193,7 +193,7 @@ const Button = forwardRef(
           isActive={selected}
           primaryColor={primaryColor}
         />
-      </Link>
+      </StyledButton>
     )
   }
 )

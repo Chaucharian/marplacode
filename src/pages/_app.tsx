@@ -8,12 +8,19 @@ import { GlobalCSS, theme } from '@/styles'
 import { ThemeProvider } from 'styled-components'
 import Head from 'next/head'
 import { styledConsoleMessage } from '@/helpers/console'
+import {
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 const defaultTitle = 'Marplacode - beauty experiences'
 const url = 'https://marplacode.com'
 const description =
   'Digital agency focused on building high quality digital products. We develop handcrafted websites, IOS/Android mobile applications'
 const author = 'Marplacode'
+
+const queryClient = new QueryClient()
 
 const Header = ({ title = defaultTitle }) => {
   return (
@@ -135,13 +142,16 @@ const App: FC<AppProps> = ({
       <Header title={pageProps.title} />
       {/* theme not work inside canvas */}
       <ThemeProvider theme={theme}>
-        {/* @ts-ignore */}
-        <Component {...pageProps} />
-        {Component?.r3f && (
-          <LCanvas {...Component?.canvasProps}>
-            {Component.r3f(pageProps)}
-          </LCanvas>
-        )}
+        <QueryClientProvider client={queryClient}>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+          {Component?.r3f && (
+            <LCanvas {...Component?.canvasProps}>
+              {Component.r3f(pageProps)}
+            </LCanvas>
+          )}
+        </QueryClientProvider>
+
         <GlobalCSS />
       </ThemeProvider>
     </>
