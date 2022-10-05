@@ -50,7 +50,6 @@ const ContactForm = () => {
   const submitForm: any = useMutation((payload) => {
     return axios.post('/api/email/send', payload)
   })
-  console.log('PROCES', process.env.SENDER_PASSWORD_FORM)
 
   const submit = (form) => {
     submitForm.mutate({

@@ -6,6 +6,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withOffline = require('next-offline')
 
 const nextConfig = {
+  env: {
+    SENDER_PASSWORD_FORM: process.env.SENDER_PASSWORD_FORM,
+  },
   webpack(config, { isServer }) {
     // audio support
     config.module.rules.push({
