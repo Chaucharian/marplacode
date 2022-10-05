@@ -102,7 +102,7 @@ export default Page
 export async function getStaticProps() {
   return {
     props: {
-      title: 'Marplacode - visual experiences',
+      title: 'Marplacode -- Creative Agency',
     },
   }
 }

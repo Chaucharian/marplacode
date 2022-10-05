@@ -22,13 +22,6 @@ import { useIsMobile, useScroll } from '@/helpers/hooks'
 import { SECTIONS } from '@/pages'
 
 const list = [
-  // {
-  //   name: 'turnate',
-  //   videoUrl: '',
-  //   description:
-  //     'booking platform aimed to improve daily customer experience making the whole process fast and easy',
-  //   isSelected: false,
-  // },
   {
     name: 'beton',
     videoUrl: '/videos/blue.mp4',
