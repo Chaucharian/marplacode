@@ -53,6 +53,7 @@ workflows:
   build-and-deploy:
     jobs:
       - build:
+          context: 'DigitalOcean'
           filters:
             branches:
               only:
