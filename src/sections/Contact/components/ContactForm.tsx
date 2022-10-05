@@ -209,15 +209,17 @@ const ContactForm = () => {
         <Spacer vertical={theme.spacing.medium} />
         <Flex width='100%' justifyContent='flex-end'>
           <Box p={{ md: 10 }}>
-            <Button
-              fontSize='20px'
-              secondaryColor='rgba(255, 255, 255, 0.06)'
-              selectedTextColor='black'
-              type='submit'
-              onClick={handleSubmit(submit)}
-            >
-              Submit
-            </Button>
+            <Flex justifyContent='flex-end'>
+              <Button
+                fontSize='20px'
+                secondaryColor='rgba(255, 255, 255, 0.06)'
+                selectedTextColor='black'
+                type='submit'
+                onClick={handleSubmit(submit)}
+              >
+                Submit
+              </Button>
+            </Flex>
             <Message
               error={false}
               show={submitForm.isSuccess}
