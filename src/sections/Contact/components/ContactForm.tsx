@@ -47,12 +47,23 @@ const ContactForm = () => {
     },
   })
 
-  const submitForm = useMutation((payload) => {
+  const submitForm: any = useMutation((payload) => {
     return axios.post('/api/email/send', payload)
   })
 
   const submit = (form) => {
-    submitForm.mutate(form)
+    submitForm.mutate({
+      sender: {
+        name: 'contact form',
+        email: 'marplacode@gmail.com',
+        password: process.env.SENDER_PASSWORD_FORM,
+      },
+      recipient: {
+        email: 'hello@marplacode.com',
+      },
+      subject: 'New work',
+      content: JSON.stringify(form),
+    })
   }
 
   return (
