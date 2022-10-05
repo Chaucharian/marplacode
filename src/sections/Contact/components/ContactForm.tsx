@@ -212,7 +212,7 @@ const ContactForm = () => {
             <Message
               error={false}
               show={submitForm.isSuccess}
-              message={'how much are you willing to pay?'}
+              message={`Message sent! We'll contact you soon 🙌`}
             />
           </Box>
         </Flex>
