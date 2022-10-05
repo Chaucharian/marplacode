@@ -13,21 +13,30 @@ import React, { useEffect, useState } from 'react'
 import Line from '@/components/dom/Line'
 import { FormTextField } from '@/components/dom/Form'
 import { useForm } from 'react-hook-form'
-import { Container } from '@/sections/components'
 import { FormCheckbox, FormRadio } from '@/components/dom/Form'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 
-const ErrorMessage = ({ message }) => (
-  <Box pl={theme.spacing.small} pt={theme.spacing.small} minHeight='35px'>
-    <Text type={theme.fonts.span} color='#e73c3c'>
-      {message}
-    </Text>
+const Message = ({ show, message, error = true }) => (
+  <Box
+    style={{ overflow: 'hidden' }}
+    pt={theme.spacing.small}
+    pl={theme.spacing.small}
+  >
+    <Box animate={{ y: show ? '0%' : '-200%' }}>
+      <Text type={theme.fonts.span} color={error ? '#e73c3c' : '#3ce78c'}>
+        {message}
+      </Text>
+    </Box>
   </Box>
 )
 
 const ContactForm = () => {
-  const { control, handleSubmit, formState, getValues } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       budget: '',
       company: '',
@@ -41,9 +50,8 @@ const ContactForm = () => {
   const submitForm = useMutation((payload) => {
     return axios.post('/api/email/send', payload)
   })
-  console.log('RE', { formState })
+
   const submit = (form) => {
-    console.log('EEEEE', form)
     submitForm.mutate(form)
   }
 
@@ -60,7 +68,7 @@ const ContactForm = () => {
             required: `what's your name?`,
           }}
         />
-        <ErrorMessage message={formState.errors?.name?.message} />
+        <Message show={errors?.name?.message} message="what's your name?" />
         <Spacer vertical={'62px'} />
         <Text type={theme.fonts.span}>Company name</Text>
         <FormTextField
@@ -69,7 +77,6 @@ const ContactForm = () => {
           placeholder='or website?'
           enterkeyhint='next'
         />
-        <ErrorMessage message={formState.errors?.company?.message} />
         <Spacer vertical={'62px'} />
         <Text type={theme.fonts.span}>Email*</Text>
         <FormTextField
@@ -87,7 +94,10 @@ const ContactForm = () => {
             },
           }}
         />
-        <ErrorMessage message={formState.errors?.email?.message} />
+        <Message
+          show={errors?.email?.message}
+          message='email format is not valid'
+        />
         <Spacer vertical={'62px'} />
         <Flex flexDirection='column'>
           <Text type={theme.fonts.span}> What's in your mind?</Text>
@@ -156,7 +166,10 @@ const ContactForm = () => {
         </div>
         <Spacer vertical={'16px'} />
         <Line play={true} />
-        <ErrorMessage message={formState.errors?.budget?.message} />
+        <Message
+          show={errors.budget?.message}
+          message={'how much are you willing to pay?'}
+        />
         <Spacer vertical={'62px'} />
         <Text type={theme.fonts.span}>Message*</Text>
         <FormTextField
@@ -169,10 +182,13 @@ const ContactForm = () => {
           }}
           type='textarea'
         />
-        <ErrorMessage message={formState.errors?.message?.message} />
+        <Message
+          show={errors?.message?.message}
+          message={`tell us something about your idea 🤘`}
+        />
         <Spacer vertical={theme.spacing.medium} />
         <Flex width='100%' justifyContent='flex-end'>
-          <Flex p={{ md: 10 }}>
+          <Box p={{ md: 10 }}>
             <Button
               fontSize='20px'
               secondaryColor='rgba(255, 255, 255, 0.06)'
@@ -182,7 +198,12 @@ const ContactForm = () => {
             >
               Submit
             </Button>
-          </Flex>
+            <Message
+              error={false}
+              show={submitForm.isSuccess}
+              message={'how much are you willing to pay?'}
+            />
+          </Box>
         </Flex>
       </Flex>
     </form>

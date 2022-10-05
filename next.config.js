@@ -69,10 +69,10 @@ module.exports = plugins(
         },
         async rewrites() {
           return [
-            // {
-            //   source: '/api',
-            //   destination: 'https://youtu.be/MLeIBFYY6UY',
-            // },
+            {
+              source: '/api/email',
+              destination: 'http://email-service.marplacode.com/email/send',
+            },
             {
               source: '/service-worker.js',
               destination: '/_next/static/service-worker.js',
