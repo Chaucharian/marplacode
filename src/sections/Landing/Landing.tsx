@@ -54,7 +54,7 @@ const Landing = () => {
       <Text fontFamily='LibreFranklin' fontWeight='lighter' fontSize='42px'>
         {name}
       </Text>
-      <Text type={theme.fonts.p} fontWeight={'lighter'}>
+      <Text type={theme.fonts.p} color='grey' fontWeight={'lighter'}>
         {description}
       </Text>
     </>
