@@ -9,7 +9,6 @@ import styled from 'styled-components'
 import ColorLoader from '@/components/dom/ColorLoader'
 import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import 'locomotive-scroll/dist/locomotive-scroll.css'
-import { useRouter } from 'next/router'
 
 const MarplaJourney = dynamic(() => import('@/scenes/MarplaJourney'), {
   ssr: false,
@@ -102,7 +101,7 @@ export default Page
 export async function getStaticProps() {
   return {
     props: {
-      title: 'Marplacode -- Creative Agency',
+      title: 'Marplacode | Creative Agency',
     },
   }
 }
