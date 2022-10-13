@@ -67,7 +67,15 @@ const ContactForm = () => {
         email: 'hello@marplacode.com',
       },
       subject: 'Work inquiry!',
-      content: JSON.stringify(form),
+      content: `Name: ${form.name}
+                Company: ${form.company}
+                Email: ${form.email}
+                Budget: ${form.budget}
+                Ideas: ${Object.keys(form.ideas)
+                  .map((key) => (form.ideas[key] ? key : false))
+                  .filter((value) => value)}
+                Message: ${form.message}
+      `,
     })
   }
 
@@ -85,10 +93,10 @@ const ContactForm = () => {
           placeholder='Hello...'
           enterkeyhint='next'
           rules={{
-            required: `what's your name?`,
+            required: `What's your name?`,
           }}
         />
-        <Message show={errors?.name?.message} message="what's your name?" />
+        <Message show={errors?.name?.message} message="What's your name?" />
         <Spacer vertical={'62px'} />
         <Text type={theme.fonts.span}>Company name</Text>
         <FormTextField
@@ -106,9 +114,9 @@ const ContactForm = () => {
           placeholder='Where can we reply?'
           enterkeyhint='next'
           rules={{
-            required: 'we need your email to reach out to you 🙏',
+            required: 'We need your email to reach out to you 🙏',
             pattern: {
-              message: 'email format is not valid',
+              message: 'Email format is not valid',
               value:
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             },
@@ -116,7 +124,7 @@ const ContactForm = () => {
         />
         <Message
           show={errors?.email?.message}
-          message='email format is not valid'
+          message='We need your email to reach out to you 🙏'
         />
         <Spacer vertical={'62px'} />
         <Flex flexDirection='column'>
@@ -155,7 +163,7 @@ const ContactForm = () => {
             name='budget'
             label='5k'
             rules={{
-              required: `how much are you willing to pay?`,
+              required: `How much are you willing to pay?`,
             }}
             control={control}
           />
@@ -163,7 +171,7 @@ const ContactForm = () => {
             name='budget'
             label='10k'
             rules={{
-              required: `how much are you willing to pay?`,
+              required: `How much are you willing to pay?`,
             }}
             control={control}
           />
@@ -171,7 +179,7 @@ const ContactForm = () => {
             name='budget'
             label='20k'
             rules={{
-              required: `how much are you willing to pay?`,
+              required: `How much are you willing to pay?`,
             }}
             control={control}
           />
@@ -179,7 +187,7 @@ const ContactForm = () => {
             name='budget'
             label='>30k'
             rules={{
-              required: `how much are you willing to pay?`,
+              required: `How much are you willing to pay?`,
             }}
             control={control}
           />
@@ -188,14 +196,14 @@ const ContactForm = () => {
         <Line play={true} />
         <Message
           show={errors.budget?.message}
-          message={'how much are you willing to pay?'}
+          message={'How much are you willing to pay?'}
         />
         <Spacer vertical={'62px'} />
         <Text type={theme.fonts.span}>Message*</Text>
         <FormTextField
           control={control}
           name='message'
-          placeholder='I want to build something something beatiful'
+          placeholder='I want to build something beautiful'
           enterkeyhint='next'
           rules={{
             required: `tell us something about your idea 🤘`,
