@@ -163,8 +163,8 @@ const Navigation = () => {
             <Lottie
               ref={lottieRef}
               style={{
-                width: isMobile ? 100 : 400,
-                height: isMobile ? 30 : 300,
+                width: isMobile ? 100 : 150,
+                height: isMobile ? 30 : 100,
                 color: '#000',
               }}
             />
