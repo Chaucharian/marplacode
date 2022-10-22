@@ -74,8 +74,7 @@ const ContactForm = () => {
                 Ideas: ${Object.keys(form.ideas)
                   .map((key) => (form.ideas[key] ? key : false))
                   .filter((value) => value)}
-                Message: ${form.message}
-      `,
+                Message: ${form.message}`,
     })
   }
 
@@ -85,7 +84,7 @@ const ContactForm = () => {
         e.preventDefault()
       }}
     >
-      <Flex flexDirection='column' pl={'10px'} pr={'10px'}>
+      <Flex flexDirection='column'>
         <Text type={theme.fonts.span}>Name*</Text>
         <FormTextField
           control={control}
