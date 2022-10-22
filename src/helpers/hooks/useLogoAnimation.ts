@@ -1,12 +1,14 @@
 import lottie from 'lottie-web'
 import { useEffect, useRef } from 'react'
+import { useColorChange } from './useColorChange'
 
 const useLogoAnimation = ({ lottieRef }) => {
   const animDuration = 1000
   const animation: any = useRef()
+  const whiteSecction: any = useColorChange()
 
   function validateChangeColor({ scroll }) {
-    if (scroll >= 12 && scroll < 31) {
+    if (whiteSecction(scroll)) {
       lottieRef.current.classList.add('black')
     } else {
       lottieRef.current.classList.remove('black')

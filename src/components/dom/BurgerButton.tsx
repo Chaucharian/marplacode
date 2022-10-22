@@ -12,11 +12,11 @@ const Button = styled.button`
   border: none;
   padding: 0;
   margin: 0;
-  transition: all ease-in-out 1s;
+  transition: all ease-in 0.5s;
 `
 
 const Svg = styled.svg`
-  transition: all ease-in-out 1s;
+  transition: all ease-in 0.5s;
 
   // &:hover {
   //   fill: #000;

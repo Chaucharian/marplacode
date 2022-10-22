@@ -21,6 +21,7 @@ import { useLocomotiveScroll } from 'react-locomotive-scroll'
 
 import { Shadow } from '@/components'
 import { SECTIONS } from '@/pages'
+import { useColorChange } from '@/helpers/hooks/useColorChange'
 
 const NavigationContainer = styled.header`
   ${({ show, open }) => `
@@ -39,22 +40,6 @@ const NavigationContainer = styled.header`
       // width: ${open ? '50vh' : '0px'}; 
     }
 
-`}
-`
-
-const Content = styled.div`
-  ${({ open }) => `
-  transition: all ease-in 0.5s;
-  @media ${device.mobile} {
-  width: 100%;
-   height: ${open ? '100vh' : '0px'}; 
-  }
-  visibility:  ${open ? 'visible' : 'hidden'};
-
-  @media ${device.desktop} {
-   width: ${open ? '50vh' : '0px'}; 
-   height: ${open ? '100vh' : '0px'}; 
-  }
 `}
 `
 
@@ -94,21 +79,15 @@ const ProgressLine = animated(styled.div`
     `}
 `)
 
-const Svg = styled.svg`
-  transition: all ease-in-out 1s;
-`
-const Path = styled.path`
-  transition: all ease-in-out 1s;
-`
-
 const Lottie = styled.div`
   ${({ open }) => `
 
   path {
-    transition: all ease-in 0.5s;
+    transition: color ease-in 0.5s;
   }
 
   &.black path { 
+    transition: fill ease-in 0.5s;
     fill: #000;
   }
   
@@ -122,11 +101,12 @@ const Navigation = () => {
   const domReady = useStore((state) => state.domReady)
   const isMobile = useIsMobile()
   const lottieRef = useRef()
+
   const animate = useLogoAnimation({ lottieRef })
   const { locomotiveScroll, progress } = useScroll({
     onScroll: animate,
   })
-  const whiteSection = progress >= 12 && progress <= 31
+  const whiteSection = useColorChange(progress)
 
   const openHandler = () => {
     const navigationState = !open
@@ -139,6 +119,7 @@ const Navigation = () => {
     locomotiveScroll.scrollTo(`#${Object.keys(SECTIONS)[page]}`)
   }
 
+  console.log(whiteSection)
   return (
     <NavigationContainer open={open} showFull={true}>
       <Backdrop open={open}>
