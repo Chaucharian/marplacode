@@ -34,7 +34,7 @@ const smookesMock = [
     description: 'creating next gen web/mobile',
   },
   { name: 'best-in-class', description: 'experiences and technologies' },
-  { name: 'hand-crafted', description: 'building refined visual outputs' },
+  { name: 'Hand Crafted', description: 'building refined visual outputs' },
 ]
 
 const Landing = () => {
