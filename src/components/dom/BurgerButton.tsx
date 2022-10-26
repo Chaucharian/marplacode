@@ -51,7 +51,7 @@ const Burger = forwardRef(
     ref
   ) => {
     const svgRef = useRef()
-    useMagneticEffect({ containerRef: svgRef })
+    // useMagneticEffect({ containerRef: svgRef })
     const animation = useAnimation({ play: show, animationProps })
     const second = useSpring({
       transform: open

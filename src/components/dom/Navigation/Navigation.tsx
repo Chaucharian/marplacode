@@ -146,6 +146,7 @@ const Navigation = () => {
                 width: isMobile ? 100 : 150,
                 height: isMobile ? 30 : 100,
                 color: '#000',
+                visibility: isMobile && open ? 'hidden' : 'visible',
               }}
             />
           </AppearingEffect>
