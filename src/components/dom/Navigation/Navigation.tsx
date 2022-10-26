@@ -119,7 +119,6 @@ const Navigation = () => {
     locomotiveScroll.scrollTo(`#${Object.keys(SECTIONS)[page]}`)
   }
 
-  console.log(whiteSection)
   return (
     <NavigationContainer open={open} showFull={true}>
       <Backdrop open={open}>
