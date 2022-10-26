@@ -34,12 +34,7 @@ With that data in mind, we’re able to design a structurally, visually and tech
     title: 'Consulting',
     description:
       'Driven by innovation and human behavior, our agency is changing the way brands connect with audiences in a digital world. Discover why market leaders choose our solutions.',
-    content: [
-      'creative strategy',
-      'digital strategy',
-      'MVP validation',
-      'brand identity',
-    ],
+    content: ['creative', 'digital strategy', 'MVP', 'integrations'],
     open: false,
   },
 ]
