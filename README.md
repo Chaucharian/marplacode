@@ -1,3 +1,20 @@
-# my-app
+# Marplacode landing
 
-This project was bootstrapped with [`create-r3f-app`](https://github.com/utsuboco/create-r3f-app)
+Landing page for Marplacode, using ThreeJS, GLSL, R3F, NextJS, Static Rendering.
+The webpage should elegantly showcase a portfolio of professional work that effectively emphasizes the distinctive signature of the agency.
+
+## Installation
+
+Run the following command
+
+```
+yarn install
+```
+
+## Run
+
+Run the following command
+
+```
+yarn dev
+```
