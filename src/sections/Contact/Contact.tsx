@@ -45,25 +45,6 @@ const Contact = () => {
             </Flex>
             <Spacer vertical={theme.spacing.medium} />
           </Flex>
-          {/* <Flex width='50%' height='100%' display={{ _: 'none', md: 'block' }}>
-            <Flex justifyContent='center' width='100%'>
-              <Link
-                show={true}
-                color1='grey'
-                color2='white'
-                onClick={startAnimation}
-              >
-                <Text
-                  type={theme.fonts.span}
-                  color='#FFF'
-                  color2='#FFF'
-                  fontSize={'16px'}
-                >
-                  Click here
-                </Text>
-              </Link>
-            </Flex>
-          </Flex> */}
         </Flex>
       </Container>
       <Footer />

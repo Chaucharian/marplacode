@@ -30,8 +30,6 @@ const Page = (props) => {
   const video = useRef(null)
   const videoUrl = useStore((state) => state.videoUrl)
   const containerRef = useRef(null)
-  // const { pathname } = useRouter()
-  // const path = pathname.split('?')[0]
 
   useEffect(() => {
     if (video.current) {
@@ -54,12 +52,7 @@ const Page = (props) => {
             smooth: false,
           },
         }}
-        // watch={[path]}
-        // location={path}
         containerRef={containerRef}
-        // onLocationChange={(scroll) => {
-        //   scroll.scrollTo(0, { duration: 0, disableLerp: true })
-        // }}
       >
         <main data-scroll-container ref={containerRef}>
           <Navigation />
